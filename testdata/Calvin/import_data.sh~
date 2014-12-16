@@ -1,0 +1,2 @@
+#!/bin/bash
+python -m cProfile -o import_profile ~/git/live/HYDRA/HydraPlugins/CSVplugin/trunk/ImportCSV.py -t EBSD_network.csv -n EBSD_nodes.csv -l EBSD_links.csv -g EBSD_groups.csv -k EBSD_group_members.csv -x -m ebsd_template_v17.xml
