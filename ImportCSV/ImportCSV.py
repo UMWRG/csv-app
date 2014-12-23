@@ -175,6 +175,7 @@ import pytz
 from HydraLib import PluginLib
 from HydraLib.PluginLib import JsonConnection, write_progress, write_output, validate_plugin_xml
 from HydraLib import config, util, dateutil
+from HydraLib.units import validate_resource_attributes
 
 from HydraLib.HydraException import HydraPluginError,HydraError
 
@@ -475,6 +476,7 @@ class ImportCSV(object):
                     scenarios = [],
                     resourcegroups = [],
                     attributes = [],
+                    type=data[field_idx['type']].strip(),
                 )
 
             # Everything that is not name or description is an attribute
@@ -638,6 +640,7 @@ class ImportCSV(object):
                                      % node['name'])
             if field_idx['type'] is not None:
                 node_type = linedata[field_idx['type']].strip()
+                node['type'] = node_type
 
                 if len(self.Templates):
                     if node_type not in self.Templates['resources'].get('NODE', {}).keys():
@@ -746,6 +749,7 @@ class ImportCSV(object):
 
             if field_idx['type'] is not None:
                 link_type = linedata[field_idx['type']].strip()
+                link['type'] = link_type
                 if len(self.Templates):
                     if link_type not in self.Templates['resources'].get('LINK', {}).keys():
                         raise HydraPluginError(
@@ -841,13 +845,17 @@ class ImportCSV(object):
             )
 
             if field_idx['type'] is not None:
+
                 group_type = group_data[field_idx['type']].strip()
+                group['type'] = group_type
+
                 if len(self.Templates):
                     if group_type not in self.Templates['resources'].get('GROUP', {}).keys():
                         raise HydraPluginError(
                             "Group type %s not specified in the template."
                             %(group_type))
                     restrictions = self.Templates['resources']['GROUP'][group_type]['attributes']
+
                 if group_type not in self.grouptype_dict.keys():
                     self.grouptype_dict.update({group_type: (group_name,)})
                 else:
@@ -1054,8 +1062,13 @@ class ImportCSV(object):
 
                     if dataset is not None:
                         self.Scenario['resourcescenarios'].append(dataset)
-
+        
+        if len(self.Templates):
+            errors = validate_resource_attributes(resource, self.Attributes, self.Templates)
         #resource.attributes = res_attr_array
+
+        if len(errors) > 0:
+            raise HydraPluginError("Errors validating resource: %s"% errors)
 
         return resource
 

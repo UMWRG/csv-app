@@ -379,13 +379,7 @@
             <type>GROUP</type>
             <name>grptyp</name>
             <attribute>
-                <name>groupattr1</name>
-                <dimension/>
-                <is_var>N</is_var>
-                <data_type>descriptor</data_type>
-            </attribute>
-            <attribute>
-                <name>groupattr2</name>
+                <name>totalCap</name>
                 <dimension>Volume</dimension>
                 <is_var>N</is_var>
                 <data_type>scalar</data_type>
