@@ -3,7 +3,8 @@ a = Analysis(['ExportCSV.py'],
              pathex=['C:\\Users\\steve\\Documents\\svn\\HYDRA\\HydraPlugins\\CSVplugin\\trunk\\ExportCSV'],
              hiddenimports=[],
              hookspath=None,
-             runtime_hooks=None)
+             runtime_hooks=None,
+             excludes=['_tkinter'])
 pyz = PYZ(a.pure)
 exe = EXE(pyz,
           a.scripts,
