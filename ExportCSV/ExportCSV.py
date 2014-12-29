@@ -173,14 +173,14 @@ class ExportCSV(object):
         if len(network_attributes) > 0:
             network_attributes_string = ',%s'%(','.join(network_attributes.values()))
 
-        network_heading   = "ID, Description, Name %s\n" % (network_attributes_string)
+        network_heading   = "ID, Description, Type, Name %s\n" % (network_attributes_string)
         metadata_heading   = "Name %s\n"%(network_attributes_string)
 
         network_attr_units = []
         for attr_id in network_attributes.keys():
             network_attr_units.append(self.get_attr_unit(scenario, attr_id))
 
-        network_units_heading  = "Units,,,%s\n"%(','.join(network_attr_units))
+        network_units_heading  = "Units,,,,%s\n"%(','.join(network_attr_units))
 
         values = ["" for attr_id in network_attributes.keys()]
         metadata_placeholder = ["" for attr_id in network_attributes.keys()]
@@ -192,9 +192,15 @@ class ExportCSV(object):
                 values[network_attributes.keys().index(r_attr.attr_id)] = value
                 metadata_placeholder[network_attributes.keys().index(r_attr.attr_id)] = metadata
 
-        network_entry = "%(id)s,%(description)s,%(name)s,%(values)s\n"%{
+        if network.types is not None and len(network.types.TypeSummary) > 0:
+            net_type = network.types.TypeSummary[0]['name']
+        else:
+            net_type = ""
+
+        network_entry = "%(id)s,%(description)s,%(type)s,%(name)s,%(values)s\n"%{
             "id"          : network.id,
             "description" : network.description,
+            "type"        : net_type,
             "name"        : network.name,
             "values"      : ",%s"%(",".join(values)) if len(values) > 0 else "",
         }
@@ -244,14 +250,14 @@ class ExportCSV(object):
         if len(node_attributes) > 0:
             node_attributes_string = ',%s'%(','.join(node_attributes.values()))
 
-        node_heading       = "Name, x, y %s, description\n"%(node_attributes_string)
+        node_heading       = "Name, x, y, Type%s, description\n"%(node_attributes_string)
         metadata_heading   = "Name %s\n"%(node_attributes_string)
 
         node_attr_units = []
         for attr_id in node_attributes.keys():
             node_attr_units.append(self.get_attr_unit(scenario, attr_id))
 
-        node_units_heading  = "Units,,,%s\n"%(','.join(node_attr_units) if node_attr_units else ',')
+        node_units_heading  = "Units,,,,%s\n"%(','.join(node_attr_units) if node_attr_units else ',')
 
         node_entries = []
         metadata_entries = []
@@ -269,10 +275,16 @@ class ExportCSV(object):
                     values[idx] = value
                     metadata_placeholder[idx] = metadata
             
-            node_entry = "%(name)s,%(x)s,%(y)s%(values)s,%(description)s\n"%{
+            if node.types is not None and len(node.types.TypeSummary) > 0:
+                node_type = node.types.TypeSummary[0]['name']
+            else:
+                node_type = ""
+
+            node_entry = "%(name)s,%(x)s,%(y)s,%(type)s%(values)s,%(description)s\n"%{
                 "name"        : node.name,
                 "x"           : node.x,
                 "y"           : node.y,
+                "type"        : node_type,
                 "values"      : ",%s"%(",".join(values)) if len(values) > 0 else "",
                 "description" : node.description if node.description is not None else "",
             }
@@ -307,7 +319,7 @@ class ExportCSV(object):
         if len(link_attributes) > 0:
             link_attributes_string = ',%s'%(','.join(link_attributes.values()))
 
-        link_heading   = "Name, from, to %s, description\n" % (link_attributes_string)
+        link_heading   = "Name, from, to, Type%s, description\n" % (link_attributes_string)
         metadata_heading   = "Name %s\n"%(link_attributes_string)
 
 
@@ -315,7 +327,7 @@ class ExportCSV(object):
         for attr_id in link_attributes.keys():
             link_attr_units.append(self.get_attr_unit(scenario, attr_id))
 
-        link_units_heading  = "Units,,,%s\n"%(','.join(link_attr_units) if link_attr_units else ',')
+        link_units_heading  = "Units,,,,%s\n"%(','.join(link_attr_units) if link_attr_units else ',')
 
         link_entries = []
         metadata_entries = []
@@ -331,11 +343,16 @@ class ExportCSV(object):
                     value, metadata = self.get_attr_value(scenario, r_attr, attr_name, link.name)
                     values[link_attributes.keys().index(r_attr.attr_id)] = value
                     metadata_placeholder[link_attributes.keys().index(r_attr.attr_id)] = metadata
+            if link.types is not None and len(link.types.TypeSummary) > 0:
+                link_type = link.types.TypeSummary[0]['name']
+            else:
+                link_type = ""
 
-            link_entry = "%(name)s,%(from)s,%(to)s%(values)s,%(description)s\n"%{
+            link_entry = "%(name)s,%(from)s,%(to)s,%(type)s%(values)s,%(description)s\n"%{
                 "name"        : link.name,
                 "from"        : node_map[link.node_1_id],
                 "to"          : node_map[link.node_2_id],
+                "type"        : link_type,
                 "values"      : ",%s"%(",".join(values)) if len(values) > 0 else "",
                 "description" : link.description if link.description is not None else "",
             }
@@ -371,8 +388,8 @@ class ExportCSV(object):
         for attr_id in group_attributes.keys():
             group_attr_units.append(self.get_attr_unit(scenario, attr_id))
 
-        group_heading   = "Name %s, description\n" % (group_attributes_string)
-        group_units_heading  = "Units,%s\n"%(','.join(group_attr_units) if group_attr_units else ',')
+        group_heading   = "Name, Type, %s, description\n" % (group_attributes_string)
+        group_units_heading  = "Units,,%s\n"%(','.join(group_attr_units) if group_attr_units else ',')
         metadata_heading   = "Name %s\n"%(group_attributes_string)
 
         group_entries = []
@@ -390,8 +407,14 @@ class ExportCSV(object):
                     values[group_attributes.keys().index(r_attr.attr_id)] = value
                     metadata_placeholder[group_attributes.keys().index(r_attr.attr_id)] = metadata
 
-            group_entry = "%(name)s,%(values)s,%(description)s\n"%{
+            if group.types is not None and len(group.types.TypeSummary) > 0:
+                group_type = group.types.TypeSummary[0]['name']
+            else:
+                group_type = ""
+
+            group_entry = "%(name)s,%(type)s,%(values)s,%(description)s\n"%{
                 "name"        : group.name,
+                "type"        : group_type,
                 "values"      : "%s"%(",".join(values)) if len(values) > 0 else "",
                 "description" : group.description,
             }

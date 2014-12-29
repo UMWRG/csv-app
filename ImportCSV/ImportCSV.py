@@ -1070,7 +1070,7 @@ class ImportCSV(object):
 
                     if dataset is not None:
                         self.Scenario['resourcescenarios'].append(dataset)
-        
+        errors = [] 
         if len(self.Templates):
             errors = validate_resource_attributes(resource, self.Attributes, self.Templates)
         #resource.attributes = res_attr_array
