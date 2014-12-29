@@ -78,6 +78,7 @@
             <attribute>
                 <name>Cost</name>
                 <dimension>Monetary value</dimension>
+                <unit>USD</unit>
                 <is_var>N</is_var>
             </attribute>
             <attribute>
@@ -347,6 +348,7 @@
             <attribute>
                 <name>Cost</name>
                 <dimension>Monetary value</dimension>
+                <unit>USD</unit>
                 <is_var>N</is_var>
             </attribute>
             <attribute>
@@ -367,6 +369,7 @@
             <attribute>
                 <name>linkCost</name>
                 <dimension>Monetary value</dimension>
+                <unit>USD</unit>
                 <is_var>Y</is_var>
             </attribute>
             <attribute>

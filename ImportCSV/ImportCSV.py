@@ -964,6 +964,9 @@ class ImportCSV(object):
                 name = name.strip(),
             )
             if unit is not None and len(unit.strip()) > 0:
+                #Unit added to attribute definition for validation only. Not saved in DB
+                attribute['unit'] = unit.strip()
+                #Dimension is saved in DB.
                 attribute['dimen'] = self.connection.call('get_dimension', {'unit1':unit.strip()})
         except Exception,e:
             raise HydraPluginError("Invalid attribute %s %s: error was: %s"%(name,unit,e))
@@ -989,6 +992,11 @@ class ImportCSV(object):
         for i in attrs.keys():
             if attrs[i] in self.Attributes.keys():
                 attribute = self.Attributes[attrs[i]]
+                if units is not None:
+                    if attribute.get('unit', '') != units[i]:
+                        raise HydraPluginError("Mismatch of units for attribute %s."
+                              " Elsewhere units are defined with unit %s, but here units "
+                              "are %s"%(attrs[i], attribute.get('unit'), units[i]))
                 #attribute = self.create_attribute(attrs[i])
             else:
                 if units is not None:
@@ -1005,7 +1013,7 @@ class ImportCSV(object):
             attributes = self.connection.call('add_attributes', {'attrs':attributes})
             self.add_attrs = False
             for attr in attributes:
-                self.Attributes.update({attr['name']: attr})
+                self.Attributes[attr['name']]['id'] = attr['id']
 
         # Add data to each attribute
         for i in attrs.keys():
@@ -1483,6 +1491,8 @@ class ImportCSV(object):
                 attr_dict['name'] = attr_name
                 if attr.find('dimension') is not None:
                     attr_dict['dimension'] = attr.find('dimension').text
+                if attr.find('unit') is not None:
+                    attr_dict['unit'] = attr.find('unit').text
                 if attr.find('is_var') is not None:
                     attr_dict['is_var'] = attr.find('is_var').text
                 if attr.find('data_type') is not None:

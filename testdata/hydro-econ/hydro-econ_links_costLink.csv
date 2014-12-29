@@ -1,6 +1,6 @@
 # Hydro-econ cost links
-Name       , From   , To    , Type, Cost, minFlow    , maxFlow    , lossCoeff, linkCost, Q   , Description
-Units      ,        ,       ,     ,    $, hm^3 mon^-1, hm^3 mon^-1,        % ,       $ , hm^3 mon^-1 , 
+Name       , From   , To    , Type    , Cost, minFlow    , maxFlow    , lossCoeff, linkCost, Q   , Description
+Units      ,        ,       ,         ,  USD, hm^3 mon^-1, hm^3 mon^-1,        % ,     USD , hm^3 mon^-1 , 
 GW1_Urb1   , GW1    , Urb1  , costLink, 10.0,        0.0 ,       80.0 ,      1.0 , NULL    , NULL,
 Desal1_Urb2, Desal1 , Urb2  , costLink, 60.0,        0.0 ,       80.0 ,      1.0 , NULL    , NULL,
 WWTP1_Urb2 , WWTP1  , Urb2  , costLink, 50.0,        0.0 ,       80.0 ,      1.0 , NULL    , NULL,
