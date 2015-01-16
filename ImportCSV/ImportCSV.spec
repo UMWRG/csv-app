@@ -4,7 +4,7 @@ a = Analysis(['ImportCSV.py'],
              hiddenimports=[],
              hookspath=None,
              runtime_hooks=None,
-             excludes=['_tkinter'])
+             excludes=['_tkinter', 'IPython'])
 pyz = PYZ(a.pure)
 exe = EXE(pyz,
           a.scripts,
