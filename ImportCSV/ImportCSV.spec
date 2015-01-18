@@ -1,6 +1,6 @@
 # -*- mode: python -*-
 a = Analysis(['ImportCSV.py'],
-             pathex=['C:\\Users\\steve\\Documents\\svn\\HYDRA\\HydraPlugins\\CSVplugin\\trunk\\ImportCSV'],
+             pathex=[],
              hiddenimports=[],
              hookspath=None,
              runtime_hooks=None,

@@ -7,8 +7,8 @@
         (c) Copyright 2013, University College London.
         For more information visit www.hydra-network.com
     </plugin_epilog>
-    <smallicon>icon.png</smallicon>
-    <largeicon>icon.png</largeicon>
+    <smallicon>icon16.png</smallicon>
+    <largeicon>icon32.png</largeicon>
     <mandatory_args>
         <arg>
             <name>network</name>
