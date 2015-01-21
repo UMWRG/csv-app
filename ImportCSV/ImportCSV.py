@@ -183,7 +183,6 @@ from suds import WebFault
 from numpy import array, reshape
 
 from lxml import etree
-import traceback
 
 log = logging.getLogger(__name__)
 
@@ -256,6 +255,7 @@ class ImportCSV(object):
         try:
             util.validate_value(restriction_dict, value)
         except HydraError, e:
+            log.exception(e)
             raise HydraPluginError(e.message)
 
     def get_file_data(self, file):
@@ -487,7 +487,7 @@ class ImportCSV(object):
                     attrs.update({i: key.strip()})
 
             if len(attrs.keys()) > 0:
-                self.Network = self.add_data(self.Network, attrs, data, metadata)
+                self.Network = self.add_data(self.Network, attrs, data, metadata, units=units)
 
         else:
             # Create a new network
@@ -515,10 +515,11 @@ class ImportCSV(object):
         metadata_dict = {}
         for line_num, data_line in enumerate(data):
             try:
+                data_line = data_line.replace('\r', '')
                 split_data = data_line.split(',')
                 metadata_dict[split_data[0].strip()] = self.get_metadata_as_dict(keys[1:], split_data[1:])
             except Exception, e:
-                raise HydraPluginError("Malformed metadata on line %s in file %s"%(line_num+2, filename))
+                raise HydraPluginError("Malformed metadata for %s, line %s of %s"%(e.message, line_num+2, filename))
         return metadata_dict
 
     def get_metadata_as_dict(self, keys, metadata):
@@ -532,19 +533,22 @@ class ImportCSV(object):
         """
         metadata_dict = {}
         for i, attr in enumerate(keys):
-            metadata_dict[attr.strip()] = {}
-            if metadata[i].strip() != '':
-                attr_metadata = metadata[i].split(")")
-                for attr_meta in attr_metadata:
-                    if attr_meta == '':
-                        continue
-                    attr_meta = attr_meta.replace('(', '')
-                    keyval = attr_meta.split(';')
-                    key = keyval[0].strip()
-                    if key.lower() in ('name', 'dataset_name', 'dataset name'):
-                        key = 'name'
-                    val = keyval[1].strip()
-                    metadata_dict[attr.strip()][key] = val
+            try:
+                metadata_dict[attr.strip()] = {}
+                if metadata[i].strip() != '':
+                    attr_metadata = metadata[i].split(")")
+                    for attr_meta in attr_metadata:
+                        if attr_meta == '':
+                            continue
+                        attr_meta = attr_meta.replace('(', '')
+                        keyval = attr_meta.split(';')
+                        key = keyval[0].strip()
+                        if key.lower() in ('name', 'dataset_name', 'dataset name'):
+                            key = 'name'
+                        val = keyval[1].strip()
+                        metadata_dict[attr.strip()][key] = val
+            except Exception, e:
+                raise Exception(attr)
 
         return metadata_dict
 
@@ -595,6 +599,7 @@ class ImportCSV(object):
             try:
                 node = self.read_node_line(line, attrs, field_idx, metadata, units)
             except Exception, e:
+                log.exception(e)
                 raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(file, line_num+3, e))
 
             self.Nodes.update({node['name']: node})
@@ -620,39 +625,39 @@ class ImportCSV(object):
                 description = linedata[field_idx['description']].strip(),
                 attributes = [],
             )
-            try:
-                float(linedata[field_idx['x']].strip())
-                node['x'] = linedata[field_idx['x']].strip()
-            except ValueError:
-                node['x'] = None
-                log.info('X coordinate of node %s is not a number.'
-                             % node['name'])
-                self.warnings.append('X coordinate of node %s is not a number.'
-                                     % node['name'])
-            try:
-                float(linedata[field_idx['y']].strip())
-                node['y'] = linedata[field_idx['y']].strip()
-            except ValueError:
-                node['y'] = None
-                log.info('Y coordinate of node %s is not a number.'
-                             % node['name'])
-                self.warnings.append('Y coordinate of node %s is not a number.'
-                                     % node['name'])
-            if field_idx['type'] is not None:
-                node_type = linedata[field_idx['type']].strip()
-                node['type'] = node_type
+        try:
+            float(linedata[field_idx['x']].strip())
+            node['x'] = linedata[field_idx['x']].strip()
+        except ValueError:
+            node['x'] = None
+            log.info('X coordinate of node %s is not a number.'
+                         % node['name'])
+            self.warnings.append('X coordinate of node %s is not a number.'
+                                 % node['name'])
+        try:
+            float(linedata[field_idx['y']].strip())
+            node['y'] = linedata[field_idx['y']].strip()
+        except ValueError:
+            node['y'] = None
+            log.info('Y coordinate of node %s is not a number.'
+                         % node['name'])
+            self.warnings.append('Y coordinate of node %s is not a number.'
+                                 % node['name'])
+        if field_idx['type'] is not None:
+            node_type = linedata[field_idx['type']].strip()
+            node['type'] = node_type
 
-                if len(self.Templates):
-                    if node_type not in self.Templates['resources'].get('NODE', {}).keys():
-                        raise HydraPluginError(
-                            "Node type %s not specified in the template."%
-                            (node_type))
-                
-                    restrictions = self.Templates['resources']['NODE'][node_type]['attributes']
-                if node_type not in self.nodetype_dict.keys():
-                    self.nodetype_dict.update({node_type: (nodename,)})
-                else:
-                    self.nodetype_dict[node_type] += (nodename,)
+            if len(self.Templates):
+                if node_type not in self.Templates['resources'].get('NODE', {}).keys():
+                    raise HydraPluginError(
+                        "Node type %s not specified in the template."%
+                        (node_type))
+            
+                restrictions = self.Templates['resources']['NODE'][node_type]['attributes']
+            if node_type not in self.nodetype_dict.keys():
+                self.nodetype_dict.update({node_type: (nodename,)})
+            else:
+                self.nodetype_dict[node_type] += (nodename,)
 
         if len(attrs) > 0:
             node = self.add_data(node, attrs, linedata, metadata, units=units, restrictions=restrictions)
@@ -705,6 +710,7 @@ class ImportCSV(object):
             try:
                 link = self.read_link_line(line, attrs, field_idx, metadata, units)
             except Exception, e:
+                log.exception(e)
                 raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(file, line_num+3, e))
 
             self.Links.update({link['name']: link})
@@ -731,36 +737,36 @@ class ImportCSV(object):
                 attributes = [], 
             )
 
-            try:
-                fromnode = self.Nodes[linedata[field_idx['from']].strip()]
-                tonode = self.Nodes[linedata[field_idx['to']].strip()]
-                link['node_1_id'] = fromnode['id']
-                link['node_2_id'] = tonode['id']
+        try:
+            fromnode = self.Nodes[linedata[field_idx['from']].strip()]
+            tonode = self.Nodes[linedata[field_idx['to']].strip()]
+            link['node_1_id'] = fromnode['id']
+            link['node_2_id'] = tonode['id']
 
-            except KeyError:
-                log.info(('Start or end node not found (%s -- %s).' +
-                              ' No link created.') %
-                             (linedata[field_idx['from']].strip(),
-                              linedata[field_idx['to']].strip()))
-                self.warnings.append(('Start or end node not found (%s -- %s).' +
-                              ' No link created.') %
-                             (linedata[field_idx['from']].strip(),
-                              linedata[field_idx['to']].strip()))
+        except KeyError:
+            log.info(('Start or end node not found (%s -- %s).' +
+                          ' No link created.') %
+                         (linedata[field_idx['from']].strip(),
+                          linedata[field_idx['to']].strip()))
+            self.warnings.append(('Start or end node not found (%s -- %s).' +
+                          ' No link created.') %
+                         (linedata[field_idx['from']].strip(),
+                          linedata[field_idx['to']].strip()))
 
-            if field_idx['type'] is not None:
-                link_type = linedata[field_idx['type']].strip()
-                link['type'] = link_type
-                if len(self.Templates):
-                    if link_type not in self.Templates['resources'].get('LINK', {}).keys():
-                        raise HydraPluginError(
-                            "Link type %s not specified in the template."
-                            %(link_type))
-                
-                    restrictions = self.Templates['resources']['LINK'][link_type]['attributes']
-                if link_type not in self.linktype_dict.keys():
-                    self.linktype_dict.update({link_type: (linkname,)})
-                else:
-                    self.linktype_dict[link_type] += (linkname,)
+        if field_idx['type'] is not None:
+            link_type = linedata[field_idx['type']].strip()
+            link['type'] = link_type
+            if len(self.Templates):
+                if link_type not in self.Templates['resources'].get('LINK', {}).keys():
+                    raise HydraPluginError(
+                        "Link type %s not specified in the template."
+                        %(link_type))
+            
+                restrictions = self.Templates['resources']['LINK'][link_type]['attributes']
+            if link_type not in self.linktype_dict.keys():
+                self.linktype_dict.update({link_type: (linkname,)})
+            else:
+                self.linktype_dict[link_type] += (linkname,)
         if len(attrs) > 0:
             link = self.add_data(link, attrs, linedata, metadata, units=units, restrictions=restrictions)
         
@@ -816,6 +822,7 @@ class ImportCSV(object):
             try: 
                 group = self.read_group_line(line, attrs, field_idx, metadata, units)
             except Exception, e:
+                log.exception(e)
                 raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(file, line_num+3, e))
             
             self.Groups.update({group['name']: group})
@@ -844,22 +851,22 @@ class ImportCSV(object):
                 attributes = [],
             )
 
-            if field_idx['type'] is not None:
+        if field_idx['type'] is not None:
 
-                group_type = group_data[field_idx['type']].strip()
-                group['type'] = group_type
+            group_type = group_data[field_idx['type']].strip()
+            group['type'] = group_type
 
-                if len(self.Templates):
-                    if group_type not in self.Templates['resources'].get('GROUP', {}).keys():
-                        raise HydraPluginError(
-                            "Group type %s not specified in the template."
-                            %(group_type))
-                    restrictions = self.Templates['resources']['GROUP'][group_type]['attributes']
+            if len(self.Templates):
+                if group_type not in self.Templates['resources'].get('GROUP', {}).keys():
+                    raise HydraPluginError(
+                        "Group type %s not specified in the template."
+                        %(group_type))
+                restrictions = self.Templates['resources']['GROUP'][group_type]['attributes']
 
-                if group_type not in self.grouptype_dict.keys():
-                    self.grouptype_dict.update({group_type: (group_name,)})
-                else:
-                    self.grouptype_dict[group_type] += (group_name,)
+            if group_type not in self.grouptype_dict.keys():
+                self.grouptype_dict.update({group_type: (group_name,)})
+            else:
+                self.grouptype_dict[group_type] += (group_name,)
 
 
         if len(attrs) > 0:
@@ -908,6 +915,7 @@ class ImportCSV(object):
                 if item is None:
                     continue
             except Exception, e:
+                log.exception(e)
                 raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(file, line_num+3, e))
 
 
@@ -967,7 +975,11 @@ class ImportCSV(object):
                 #Unit added to attribute definition for validation only. Not saved in DB
                 attribute['unit'] = unit.strip()
                 #Dimension is saved in DB.
-                attribute['dimen'] = self.connection.call('get_dimension', {'unit1':unit.strip()})
+                if unit.strip() == '-' or unit.strip() == '':
+                    attribute['dimen'] = 'Dimensionless'
+                else:
+                    attribute['dimen'] = self.connection.call('get_dimension', {'unit1':unit.strip()})
+
         except Exception,e:
             raise HydraPluginError("Invalid attribute %s %s: error was: %s"%(name,unit,e))
 
@@ -1020,7 +1032,7 @@ class ImportCSV(object):
             attr = self.Attributes[attrs[i]]
             # Attribute might already exist for resource, use it if it does
             if attr['id'] in resource_attrs.keys():
-                res_attr = resource_attrs[attr.id]
+                res_attr = resource_attrs[attr['id']]
             else:
                 res_attr = dict(
                     id = self.attr_id.next(),
@@ -1498,6 +1510,15 @@ class ImportCSV(object):
                 if attr.find('data_type') is not None:
                     attr_dict['data_type'] = attr.find('data_type').text
 
+                try:
+                    stored_attr = self.connection.call('get_attribute', 
+                                                       {'name':attr_name, 
+                                                        'dimension': attr_dict.get('dimension')})
+                    attr_dict['id'] = stored_attr['id']
+                    log.info("Attribute %s retrieved!", attr_name)
+                except Exception, e:
+                    log.info("Attribute %s (%s) is not on the server", attr_name, attr_dict.get('dimension'))
+
                 restction_xml = attr.find("restrictions")
                 attr_dict['restrictions'] = util.get_restriction_as_dict(restction_xml)
                 resource_dict['attributes'][attr_name] = attr_dict
@@ -1606,6 +1627,7 @@ if __name__ == '__main__':
                         raise Exception("The template name is empty.")
                     csv.validate_template(args.template)
                 except Exception, e:
+                    log.exception(e)
                     raise HydraPluginError("An error has occurred with the template. (%s)"%(e))
 
             # Create project and network only when there is actual data to
@@ -1665,9 +1687,9 @@ if __name__ == '__main__':
 	errors = []
     except HydraPluginError as e:
         errors = [e.message]
+        log.exception(e)
     except Exception, e:
-        log.critical(e)
-        traceback.print_exc(file=sys.stdout)
+        log.exception(e)
         errors = [e]
 
     xml_response = PluginLib.create_xml_response('ImportCSV',

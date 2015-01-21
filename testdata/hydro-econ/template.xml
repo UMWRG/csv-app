@@ -7,27 +7,27 @@
             <name>hydro-econ</name>
             <attribute>
                 <name>infeasCost</name>
-                <dimension/>
+                <dimension>Monetary value</dimension>
                 <is_var>Y</is_var>
             </attribute>
             <attribute>
                 <name>urTotalBenefits</name>
-                <dimension/>
+                <dimension>Monetary value</dimension>
                 <is_var>Y</is_var>
             </attribute>
             <attribute>
                 <name>agTotalBenefits</name>
-                <dimension/>
+                <dimension>Monetary value</dimension>
                 <is_var>Y</is_var>
             </attribute>
             <attribute>
                 <name>totalCost</name>
-                <dimension/>
+                <dimension>Monetary value</dimension>
                 <is_var>Y</is_var>
             </attribute>
             <attribute>
                 <name>totalNetBenefits</name>
-                <dimension/>
+                <dimension>Monetary value</dimension>
                 <is_var>Y</is_var>
             </attribute>
         </resource>
