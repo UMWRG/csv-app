@@ -1049,6 +1049,8 @@ class ImportCSV(object):
 
                     res_attr['attr_is_var'] = 'Y'
 
+                elif data[i].strip() == '-':
+                    continue
                 else:
                     if metadata:
                         resource_metadata = metadata.get(resource['name'], {})
