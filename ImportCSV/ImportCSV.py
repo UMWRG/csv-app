@@ -1402,16 +1402,23 @@ class ImportCSV(object):
         #First column is always the array dimensions
         arr_shape = dataset[0]
         #The actual data is everything after column 0
-        dataset = [eval(d) for d in dataset[1:]]
+        eval_dataset = []
+        for d in dataset[1:]:
+            try:
+                d = eval(d)
+            except:
+                d = str(d)
+            eval_dataset.append(d)
+            #dataset = [eval(d) for d in dataset[1:]]
 
         #If the dimensions are not set, we assume the array is 1D
         if arr_shape != '':
             array_shape = tuple([int(a) for a in arr_shape.strip().split(" ")])
         else:
-            array_shape = (len(dataset),)
+            array_shape = (len(eval_dataset),)
 
         #Reshape the array back to its correct dimensions
-        arr = array(dataset)
+        arr = array(eval_dataset)
         try:
             arr = reshape(arr, array_shape)
         except:
