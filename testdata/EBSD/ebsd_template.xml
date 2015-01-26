@@ -1,5 +1,5 @@
 <template_definition>
-    <template_name>EBSD Template</template_name>
+    <template_name>EBSD Model</template_name>
 	<layout>	    
         <item>
             <name>grouping</name>
@@ -16,73 +16,73 @@
 								<name>ASR</name>
 								<description>Aquifer storage and recovery</description>
 								<displayname>ASR</displayname>
-								<image>AquiferStorageRecovery16.png</image>
+								<image>images\AquiferStorageRecovery16.png</image>
 							</group>
 							<group>
 								<name>CON</name>
 								<description>Conjunctive use</description>
 								<displayname>CON</displayname>
-								<image>ConjunctiveUseSite16.png</image>
+								<image>images\ConjunctiveUseSite16.png</image>
 							</group>
 							<group>
 								<name>DES</name>
 								<description>Desalination</description>
 								<displayname>DES</displayname>		
-								<image>Desalination16.png</image>
+								<image>images\Desalination16.png</image>
 							</group>
 							<group>
 								<name>EFF</name>
 								<description>Effluent reuse</description>
 								<displayname>EFF</displayname>
-								<image>EffluentReuse16.png</image>
+								<image>images\EffluentReuse16.png</image>
 							</group>
 							<group>
 								<name>EGW</name>
 								<description>EGW</description>
 								<displayname>EGW</displayname>
-								<image>Groundwater16.png</image>								
+								<image>images\Groundwater16.png</image>								
 							</group>
 							<group>
 								<name>ESW</name>
 								<description>ESW</description>
 								<displayname>ESW</displayname>
-								<image>Abstraction16.png</image>								
+								<image>images\Abstraction16.png</image>								
 							</group>
 							<group>
 								<name>NGW</name>
 								<description>New groundwater</description>
 								<displayname>NGW</displayname>
-								<image>GroundwaterNew16.png</image>								
+								<image>images\GroundwaterNew16.png</image>								
 							</group>
 							<group>
 								<name>NSW</name>
 								<description>New surface water</description>
 								<displayname>NSW</displayname>
-								<image>AbstractionNew16.png</image>								
+								<image>images\AbstractionNew16.png</image>								
 							</group>
 							<group>
 								<name>RES</name>
 								<description>Reservoir</description>
 								<displayname>RES</displayname>
-								<image>Reservoir16.png</image>								
+								<image>images\Reservoir16.png</image>								
 							</group>
 							<group>
 								<name>RNC</name>
 								<description>Network improvements</description>
 								<displayname>RNC</displayname>
-								<image>NetworkUpgrades16.png</image>								
+								<image>images\NetworkUpgrades16.png</image>								
 							</group>
 							<group>
 								<name>WTW</name>
 								<description>Water treatment works</description>
 								<displayname>WTW</displayname>
-								<image>WaterTreatmentPlant16.png</image>
+								<image>images\WaterTreatmentPlant16.png</image>
 							</group>
 							<group>
 								<name>TSW</name>
 								<description>Transfer as source</description>
 								<displayname>TSW</displayname>		
-								<image>TransferAsSource16.png</image>
+								<image>images\TransferAsSource16.png</image>
 							</group>
 						</groups>				
 				    </category>	
@@ -95,19 +95,19 @@
 								<name>WEF</name>
 								<description>Water efficiency</description>
 								<displayname>WEF</displayname>
-								<image>WaterEfficiency16.png</image>
+								<image>images\WaterEfficiency16.png</image>
 							</group>
 							<group>
 								<name>MET</name>
 								<description>Metering</description>
 								<displayname>MET</displayname>
-								<image>Metering16.png</image>
+								<image>images\Metering16.png</image>
 							</group>
 							<group>
 								<name>LEA</name>
 								<description>Leakage reduction</description>
 								<displayname>LEA</displayname>		
-								<image>LeakageReduction16.png</image>
+								<image>images\LeakageReduction16.png</image>
 							</group>
 						</groups>				
 				    </category>	
@@ -120,13 +120,13 @@
 								<name>WRZ</name>
 								<description>Water resource zone</description>
 								<displayname>WRZ</displayname>
-								<image>WaterResourceZone16.png</image>
+								<image>images\WaterResourceZone16.png</image>
 							</group>
 							<group>
 								<name>Junction</name>
 								<description>Junction</description>
 								<displayname>Junction</displayname>
-								<image>Split16.png</image>
+								<image>images\Split16.png</image>
 							</group>
 						</groups>				
 				    </category>	
@@ -139,25 +139,25 @@
 								<name>ETR</name>
 								<description>Existing transfer</description>
 								<displayname>ETR</displayname>
-								<image>Blackline16.png</image>
+								<image>images\BlackSolidLine16.png</image>
 							</group>
 							<group>
 								<name>RTR</name>
 								<description>Inter-company transfer</description>
 								<displayname>RTR</displayname>
-								<image>Redline16.png</image>
+								<image>images\RedSolidLine16.png</image>
 							</group>
 							<group>
 								<name>CTR</name>
 								<description>Intra-company transfer</description>
 								<displayname>CTR</displayname>
-								<image>Blueline.png</image>
+								<image>images\BlueSolidLine.png</image>
 							</group>
 							<group>
 								<name>OTR</name>
 								<description>Option link</description>
 								<displayname>OTR</displayname>
-								<image>Greyline16.png</image>
+								<image>images\GreySolidLine16.png</image>
 							</group>
 						</groups>				
 				    </category>	
@@ -173,6 +173,55 @@
                 <name>Model</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon shadow price</name>
+                <dimension>Unit price (mass)</dimension>
+                <is_var>N</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>ExDO cost</name>
+                <dimension>Monetary value</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Option cost</name>
+                <dimension>Monetary value</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>DM</name>
+                <dimension>Monetary value</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Source</name>
+                <dimension>Monetary value</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Transfer</name>
+                <dimension>Monetary value</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Total</name>
+                <dimension>Monetary value</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Max utilised</name>
+                <dimension>Volumetric flow rate</dimension>
+                <is_var>Y</is_var>
+				<data_type>array</data_type>
             </attribute>
         </resource>
 		<resource>
@@ -181,7 +230,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>Capacity.png</value>
+					<value>images\Capacity.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -209,7 +258,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>Capacity.png</value>
+					<value>images\CapacityRight.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -231,7 +280,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>Capacity.png</value>
+					<value>images\CapacityLeft.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -253,7 +302,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>Phasing16.png</value>
+					<value>images\Phasing16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -277,7 +326,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>Phasing16.png</value>
+					<value>images\PhasingFirst16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -295,7 +344,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>Phasing16.png</value>
+					<value>images\PhasingSecond16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -319,7 +368,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>MutuallyDependent16.png</value>
+					<value>images\MutuallyDependent16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -337,7 +386,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>MutuallyExclusive16.png</value>
+					<value>images\MutuallyExclusive16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -351,11 +400,11 @@
 		</resource>
         <resource>
             <type>NODE</type>
-            <name>Water resource zone</name>
+            <name>WRZ</name>
 			<layout>
 				<item>
 					<name>image</name>
-					<value>WaterResourceZone16.png</value>
+					<value>images\WaterResourceZone16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -374,66 +423,115 @@
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>
+			<attribute>
+                <name>Zonal cost</name>
+                <dimension>Monetary value</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Baseline SDB</name>
+                <dimension>Volumetric flow rate</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Opt SDB</name>
+                <dimension>Volumetric flow rate</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>New supply</name>
+                <dimension>Volumetric flow rate</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Net transfer</name>
+                <dimension>Volumetric flow rate</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Demand reduction</name>
+                <dimension>Volumetric flow rate</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-TS</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>DI</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>THR</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Loss</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
-                <name>ExDO VOPEX (p/m3)</name>
+                <name>ExDO VOPEX (p/Ml)</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Specific cost (time)</dimension>
+                <dimension>Monetary value</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Percentage of ExDO VOPEX (calc)</name>
                 <dimension>Dimensionless</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Percentage of ExDO VOPEX (round upto 5%)</name>
                 <dimension>Dimensionless</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
         </resource>
         <resource>
@@ -442,7 +540,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>Split16.png</value>
+					<value>images\Split16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -461,16 +559,31 @@
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>
+			<attribute>
+                <name>Demand flow</name>
+                <dimension>Volumetric flow rate</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Demand+THR flow</name>
+                <dimension>Volumetric flow rate</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
         </resource>
         <resource>
@@ -479,7 +592,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>Leakage16.png</value>
+					<value>images\LeakageReduction16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -498,116 +611,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Ratchet</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
         <resource>
@@ -616,7 +764,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>AquiferStorageRecovery16.png</value>
+					<value>images\AquiferStorageRecovery16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -635,121 +783,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
 		<resource>
@@ -758,7 +936,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>ConjunctiveUse16.png</value>
+					<value>images\ConjunctiveUseSite16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -777,121 +955,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
 		<resource>
@@ -900,7 +1108,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>Desalination16.png</value>
+					<value>images\Desalination16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -919,121 +1127,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
-            </attribute>			
+				<data_type>scalar</data_type>
+            </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
 		<resource>
@@ -1042,7 +1280,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>EffluentReuse16.png</value>
+					<value>images\EffluentReuse16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -1061,91 +1299,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Financial cost spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+            <attribute>
+                <name>Financial vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+            <attribute>
+                <name>EnvSoc cost spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+            <attribute>
+                <name>EnvSoc vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
 		<resource>
@@ -1154,7 +1452,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>Groundwater16.png</value>
+					<value>images\Groundwater16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -1173,121 +1471,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
 		<resource>
@@ -1296,7 +1624,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>Abstraction16.png</value>
+					<value>images\Abstraction16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -1315,116 +1643,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Year activated</name>
+                <dimension/>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
 		<resource>
@@ -1433,7 +1796,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>AbstractionNew16.png</value>
+					<value>images\AbstractionNew16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -1452,116 +1815,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Year activated</name>
+                <dimension/>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
 		<resource>
@@ -1570,7 +1968,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>Metering16.png</value>
+					<value>images\Metering16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -1589,121 +1987,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
 		<resource>
@@ -1712,7 +2140,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>GroundwaterNew16.png</value>
+					<value>images\GroundwaterNew16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -1731,121 +2159,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
 		<resource>
@@ -1854,7 +2312,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>Reservoir16.png</value>
+					<value>images\Reservoir16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -1873,121 +2331,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
 		<resource>
@@ -1996,7 +2484,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>NetworkUpgrades16.png</value>
+					<value>images\NetworkUpgrades16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -2015,121 +2503,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
 		<resource>
@@ -2138,7 +2656,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>WaterTreatmentPlant16.png</value>
+					<value>images\WaterTreatmentPlant16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -2157,121 +2675,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
 		<resource>
@@ -2280,7 +2828,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>TransferAsSource16.png</value>
+					<value>images\TransferAsSource16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -2299,121 +2847,151 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
         <resource>
@@ -2422,7 +3000,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>WaterEfficiency16.png</value>
+					<value>images\WaterEfficiency16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -2441,141 +3019,103 @@
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Financial cost</name>
-                <dimension>Specific cost (time)</dimension>
-                <is_var>N</is_var>
-            </attribute>
-            <attribute>
-                <name>Financial vopex</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>N</is_var>
-            </attribute>
-            <attribute>
-                <name>EnvSoc cost</name>
-                <dimension>Specific cost (time)</dimension>
-                <is_var>N</is_var>
-            </attribute>
-            <attribute>
-                <name>EnvSoc vopex</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>N</is_var>
-            </attribute>
-			<attribute>
-                <name>Financial cost spent</name>
-                <dimension>Specific cost (time)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>EnvSoc cost spent</name>
-                <dimension>Specific cost (time)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>OneOff cost</name>
-                <dimension>Monetary value</dimension>
-                <is_var>N</is_var>
-            </attribute>
-			<attribute>
-                <name>OneOff cost spent</name>
-                <dimension>Monetary value</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
-                <dimension>Specific cost (time)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon const</name>
-                <dimension>Mass</dimension>
-                <is_var>N</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
-            <attribute>
+			<attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Carbon vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>OneOff cost spent</name>
+                <dimension>Monetary value</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>OneOff carbon</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>OneOff carbon spent</name>
-                <dimension>Mass</dimension>
+                <dimension>Unit price (volume)</dimension>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Ratchet</name>
-                <dimension/>
-                <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
         </resource>
         <resource>
@@ -2584,7 +3124,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>BlackSolidLine16.png</value>
+					<value>images\BlackSolidLine16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -2607,81 +3147,103 @@
                 <name>WRSE Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Co. From</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Co. to</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone from</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone to</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>
+			<attribute>
+                <name>Company</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>End year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
-                <name>Demand+THR flow</name>
+                <name>Demand + THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Transfer type</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Full capacity</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
         </resource>
         <resource>
@@ -2690,7 +3252,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>RedSolidLine16.png</value>
+					<value>images\RedSolidLine16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -2713,61 +3275,73 @@
                 <name>WRSE Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Co. From</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Co. to</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone from</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone to</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
@@ -2778,91 +3352,139 @@
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
+            </attribute>
+			<attribute>
+                <name>Financial fopex</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
+            </attribute>
+			<attribute>
+                <name>EnvSoc cost fopex</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Financial fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>EnvSoc fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
-                <name>Carbon cost spent</name>
+                <name>Carbon const spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Transfer type</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Full capacity</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Bi-directional</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
         <resource>
@@ -2871,7 +3493,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>BlueSolidLine16.png</value>
+					<value>images\BlueSolidLine16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -2894,61 +3516,73 @@
                 <name>WRSE Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Co. From</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Co. to</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone from</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone to</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Asset life</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
-                <name>DO</name>
+                <name>DO-static</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
 			<attribute>
                 <name>Demand flow</name>
@@ -2959,81 +3593,139 @@
                 <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
+            </attribute>
+			<attribute>
+                <name>Financial fopex</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>N</is_var>
+				<data_type>array</data_type>
+            </attribute>
+			<attribute>
+                <name>EnvSoc cost fopex</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>N</is_var>
+				<data_type>array</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Financial cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Financial fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc cost spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>EnvSoc fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
                 <dimension>Unit price (volume)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
-                <name>Carbon cost spent</name>
+                <name>Carbon const spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon fopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon const</name>
                 <dimension>Mass</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon fopex</name>
                 <dimension>Mass flow rate</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Carbon vopex</name>
                 <dimension>Density</dimension>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
             <attribute>
                 <name>Transfer type</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Ratchet</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>
+            <attribute>
+                <name>Full capacity</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>Bi-directional</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
         </resource>
 		 <resource>
@@ -3042,7 +3734,7 @@
 			<layout>
 				<item>
 					<name>image</name>
-					<value>GreySolidLine16.png</value>
+					<value>images\GreySolidLine16.png</value>
 				</item>
 				<item>
 					<name>symbol</name>
@@ -3065,136 +3757,61 @@
                 <name>WRSE Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Co. From</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Co. to</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone from</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Zone to</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Company</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>WRZ</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
                 <name>Earliest Start Year</name>
                 <dimension/>
                 <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
                 <dimension/>
                 <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Asset life</name>
-                <dimension/>
-                <is_var>N</is_var>
-            </attribute>
-            <attribute>
-                <name>DO</name>
-                <dimension>Volumetric flow rate</dimension>
-                <is_var>N</is_var>
-            </attribute>
-            <attribute>
-                <name>Financial cost</name>
-                <dimension>Specific cost (time)</dimension>
-                <is_var>N</is_var>
-            </attribute>
-            <attribute>
-                <name>Financial vopex</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>N</is_var>
-            </attribute>
-            <attribute>
-                <name>EnvSoc cost</name>
-                <dimension>Specific cost (time)</dimension>
-                <is_var>N</is_var>
-            </attribute>
-            <attribute>
-                <name>EnvSoc vopex</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>N</is_var>
-            </attribute>
-			<attribute>
-                <name>Financial cost spent</name>
-                <dimension>Specific cost (time)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>EnvSoc cost spent</name>
-                <dimension>Specific cost (time)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-			<attribute>
-                <name>Carbon cost spent</name>
-                <dimension>Specific cost (time)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
-                <is_var>Y</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon const</name>
-                <dimension>Mass</dimension>
-                <is_var>N</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon fopex</name>
-                <dimension>Mass flow rate</dimension>
-                <is_var>N</is_var>
-            </attribute>
-            <attribute>
-                <name>Carbon vopex</name>
-                <dimension>Density</dimension>
-                <is_var>N</is_var>
-            </attribute>
-            <attribute>
-                <name>Transfer type</name>
-                <dimension/>
-                <is_var>N</is_var>
-            </attribute>
-            <attribute>
-                <name>Ratchet</name>
-                <dimension/>
-                <is_var>N</is_var>
+				<data_type>scalar</data_type>
             </attribute>
         </resource>
     </resources>
