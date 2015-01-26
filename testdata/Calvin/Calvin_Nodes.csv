@@ -1,0 +1,977 @@
+PRMName,Name,x,y,Type,Type_ID,InitialStorage,InitialStorageMID,InitialStorageMID_text,AreaCapFactor,AreaCapFactorMID,AreaCapFactorMID_text,EndingStorage,EndingStorageMID,EndingStorageMID_text,EndingStorageMethod,EvaporationRatePathname,EvaporationRatePathnameMID,EvaporationRatePathnameMID_text,ElevationAreaCapacityPathname,ElevationAreaCapacityPathnameMID,ElevationAreaCapacityPathnameMID_text,AuthorID,AuthorName_text,Categories,Categories_text,Description
+,Units,,,,,1000 ac-ft,,,,,,1000 ac-ft,,,,,,,,,,,,,,
+AgG: Antelope,AGG AV,-13134434.29,4184094.204,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Antelope Valley Ag supplied by GW
+AgG: Coachella,AGG COACH,-12951938.07,3999192.863,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Coachella Groundwater demand
+AgG: E&W MWD,AGG EW,-13061435.97,4018275.74,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,
+AgG: San Diego,AGG SD,-13022290.19,3913977.089,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,
+AgG: Ventura,AGG VENT,-13251608.23,4086189.607,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Ventura Ag supplied by Groundwater
+AgS: Antelope,AGS AV,-13134434.29,4184094.204,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Agricultural demand for Antelope Valley
+AgS: Coachella,AGS COACH,-12951938.07,3999192.863,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Coachella ag supplied by surface water
+AgS: E&W MWD,AGS EW,-13061435.97,4018275.74,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,
+AgS: Imperial,AGS IMP,-12855709.04,3894027.655,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Imperial Valley Ag supplied by surface water
+AgS: Palo Verde,AGS PV,-12770726.33,3977028.737,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Palo Verde Ag supplied by surface water
+AgS: San Diego,AGS SD,-13022290.19,3913977.089,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,
+AgS: Ventura,AGS VENT,-13251608.23,4086189.607,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,
+Alamo Power Plant,Alamo PWP,-13213169.75,4139443.7,Power Plant Node,15,,,,,,,,,,,,,,,,,7,Brad Newlin,,,East Branch SWP Power Plant
+All American Canal Power Plant,AAC PWP,-13060451.56,4070430.51,Power Plant Node,15,,,,,,,,,,,,,,,,,7,Brad Newlin,,,Imperial System Power Plant
+BadgerHillPMP,BadgerPMP,-13352039.65,4278148.625,Pump Plant Node,14,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Badger Hill Pumping Plant
+Banks PMP,Banks PMP,-13539128.58,4550918.929,Pump Plant Node,14,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Banks Pumping Plant
+BuenaVistaPMP,BuenaPMP,-13285418.82,4185505.071,Pump Plant Node,14,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Buena Vista Pumping Plant
+C100,C100,-13290606.3,4203216.231,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,CVPM 19 farm gate
+C103,C103,-13223396.58,4152168.108,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,California Aqueduct d/s of Edmonston pumping plant
+C104,C104,-13526273.21,4646664.363,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Sacramento River at Freeport
+C105,C105,-13504963.96,4647946.392,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Freeport Project Pipeline bifurcation point
+C106,C106,-13223096.03,4082772.305,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,West Branch SWP diversion to Ventura Co.
+C107,C107,-13496939.67,4648254.598,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Folsom South Canal Extension from the Freeport Project
+C10,C10,-13400348.92,4412723.989,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,San Joaquin River riparian delivery to CVPM-10
+C116,C116,-13194673.09,4496072.224,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,LAA System
+C11,C11,-13597030.99,4867445.737,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Tehama Colusa California Aqueductnal
+C120,C120,-13140342.65,4216018.055,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,LAA System
+C122,C122,-13158561.49,4435892.887,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,LAA System
+C124,C124,-13120713.2,4093434.504,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,East Branch SWP diversion to GW-MJ - Morongo & Mojave Pipelines
+C129,C129,-13061500.47,4054992.197,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,East Branch SWP diversion to MWD Inland Feeder
+C12,C12,-13618070.73,4839108.572,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Stony Creek diversion to CVPM 3
+C131,C131,-13059167.57,4029775.866,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,East Branch SWP Santa Ana Pipeline diversion to SBV Urban
+C134,C134,-12708083.87,4071396.572,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,Colorado River diversion to Colorado River Aqueduct
+C136,C136,-12915188.1,3990808.597,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,Colorado River Aqueduct
+C138,C138,-13029575.59,3990604.141,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,Colorado River Aqueduct
+C13,C13,-13582581.16,4821606.914,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Glenn Colusa California Aqueductnal
+C141,C141,-12747462.31,3993086.347,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,Colorado River diversion to Palo Verde Ag
+C142,C142,-12771305.42,3949508.096,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,Colorado River return from Palo Verde Ag
+C143,C143,-12743067.33,3878893.27,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,Colorado River diversion to All American Canal
+C145,C145,-12985847.24,4018416.671,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,Coachella Urban GW recharge junction node
+C146,C146,-12921692.17,3965161.608,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,Imperial System - Whitewater River inflow to Coachella Urban recharge and Salton Sea
+C147,C147,-12943994.97,3979762.973,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,End of Coachella Canal and farm gate to Coachella Ag
+C148,C148,-12868190.63,3921739.629,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,Imperial System node - New River Inflow to Salton Sea
+C149,C149,-12795442.04,3857397.142,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,All American Canal diversion to Coachella Canal
+C14,C14,-13564259.03,4727721.017,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,CVPM 4 Delivery
+C150,C150,-13607592.81,4705912.77,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Cache Creek Consumptive Use
+C151,C151,-12815217.38,3856214.802,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,All Amercian Canal diversion to artificial recharge for GW-IM
+C152,C152,-12833264.74,3855070.497,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,All American Canal into East Highline; Central; Main and Westside Canals - farm gate to Imperial Valley Ag
+C153,C153,-13037706.33,3973249.784,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,MWD San Diego Pipelines 1; 2; 4 &6 (treated water;except 6)
+C154,C154,-13037706.33,3973249.784,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,MWD E&W supply junction node
+C155,C155,-13590115.26,4652422.467,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Putah Creek Consumptive Use
+C156,C156,-13038324,3957297.701,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,MWD San Diego Pipelines 1; 2; & 4 (treated water)
+C157,C157,-12931860.13,3977725.938,Junction Node,9,,,,,,,,,,,,,,,,,14,Randy Ritzema,,,Diversion for Coachella Desalting Facility
+C158,C158,-12947022.49,3995603.498,Junction Node,9,,,,,,,,,,,,,,,,,14,Randy Ritzema,,,Artificial recharge on Coachella Lower Valley (Martinez and La Quinta)
+C15,C15,-13587777.78,4749626.531,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Colusa Basin Drain
+C161,C161,-13182492.32,4123969.562,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,MWD Central supply junction node
+C16,C16,-13590547.62,4680885.24,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Capay Diversion Dam
+C172,C172,-13468068.05,4541223.069,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,CVPM 11 farm gate
+C173,C173,-13498940.31,4664190.25,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Fols. S. California Aqueductn. Diversion to Mok. River Aqu.
+C17,C17,-13569551.52,4660403.205,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,CVPM 6 delivery
+C18,C18,-13541375.54,4652527.647,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,CVPM 6 return to Yolo BP
+C19,C19,-13581617.71,4649553.455,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Putah CRiver Diversion To Putah S. California Aqueductnal
+C1,C1,-13603026.76,4888260.114,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Sacramento River Diversion To CVPM 2
+C201,C201,-13483730.14,4593778.132,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Mokelumne River Aqueduct
+C20,C20,-13535121.82,4646733.307,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Putah Creek Inflow to Yolo BP
+C21,C21,-13575949.83,4649078.429,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Putah S. California Aqueductnal Diversion To CVPM6
+C22,C22,-13568351.96,4622219.177,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,NB Aqu. Delivery to Sacramento Urban
+C23,C23,-13530639.49,4797562.488,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Feather River Diversion to Therm. FB
+C25,C25,-13540748.23,4787556.414,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Thermalito FB return to Feather River
+C26,C26,-13563287.17,4742878.005,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,CVPM 5 Delivery
+C27,C27,-13500167.73,4755374.05,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Confluence of Yuba River forks
+C28,C28,-13499611.09,4753793.284,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Dry Creek Inflow to Feather River
+C29,C29,-13528109.56,4746897.969,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Deer Creek Inflow to Feather River
+C2,C2,-13607707.01,4922030.016,Junction Node,9,,,,,,,,,,,,,,,,,5,Ken Kirby,1,,Cottonwood Creek Inflow
+C301,C301,-13550184.86,4693527.45,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Colusa Basin Drain inflow to Sacramento River
+C302,C302,-13602447.87,4775960.98,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Diversion to Sacramento West Refuges
+C303,C303,-13594970.53,4764786.608,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,CVPM 3 delivery
+C304,C304,-13587777.78,4749626.531,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,DA12 loCalifornia Aqueductl inflow
+C305,C305,-13583153.29,4738376.058,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Sacramento West Refuges return
+C306,C306,-13541356.05,4675638.533,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Knights Landing Ridge Cut
+C307,C307,-13547205.68,4728561.061,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,CVPM 5 return
+C308,C308,-13514973.02,4721799.767,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Accretion to Bear River
+C309,C309,-13534128.43,4562012.106,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Old River diversion to Contra Costa Urban
+C30,C30,-13495858.43,4523015.158,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Delta Mendota Canal delivery to CVPM-10
+C310,C310,-13540111.21,4563043.748,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Diversion to Los Vaqueros Reservoir
+C311,C311,-13550662.14,4730787.304,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Delivery to Sacramento East Refuges
+C313,C313,-13549371.47,4693478.086,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Knights Landing diversion to CVPM8
+C314,C314,-13457430.79,4594164.002,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,CVPM 8 delivery
+C315,C315,-13562055.33,4481143.487,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,SR-SCV release
+C316,C316,-13581087.18,4534380.153,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Return to GW-SC
+C318,C318,-13421570.64,4457653.739,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,DA42
+C31,C31,-12815217.38,3856214.802,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Yuba River inflow to Feather River
+C321,C321,-12871585.42,3987462.521,Junction Node,9,,,,,,,,,,,,,,,,,14,Randy Ritzema,,,Hayfield recharge ponds
+C322,C322,-13205403.6,4154569.046,Junction Node,9,,,,,,,,,,,,,,,,,14,Randy Ritzema,,,Recharge facilite for aggregated Kern-Semitropic-Arvin/Adison groundwater basins
+C323,C323,-13591634.08,4566139.01,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Mokelumne Aqueduct and Los Vacqueros Pipeline crossover
+C32,C32,-13537014.75,4706055.627,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Feather River Diversion to CVPM5
+C33,C33,-13510242.52,4724326.826,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Bear River release to CVPM7
+C34,C34,-13517123.6,4681403.864,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,CVPM7 delivery
+C35,C35,-13464543.73,4740725.729,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Bear River upstream of CFW Reservoir
+C36,C36,-13457430.79,4594164.002,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,CVPM8 delivery
+C37,C37,-13473449.28,4650288.812,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Cosumnes River inflow
+C38,C38,-13518645.94,4615641.324,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Cosumnes River inflow to Mokel. River
+C39,C39,-13470801.69,4603254.578,Junction Node,9,0,,,0,,,0,,,0,,,,,,,13,Stacy Tanaka,2,,Folsom South Canal inflow to Mokelumne River Aqueduct
+C3,C3,-13615681.41,4939965.752,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,1,,CVPM 1 delivery
+C40,C40,-13454371.33,4592082.453,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,California Aqueductlaveras River
+C41,C41,-13470896.17,4587167.547,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,California Aqueductla. River Diversion to CVPM8
+C42,C42,-13510757.84,4574904.243,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,California Aqueductlav. River inflow to S. Joaq. River
+C43,C43,-13427420.97,4575753.916,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Stan. River diversion to Stockton Urban
+C44,C44,-13352600.56,4564481.345,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Lower Cherry Creek Aqueduct inflow to Hetch Hetchy Aqueduct
+C45,C45,-13457597.26,4510337.253,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,CVPM 12 farm gate
+C46,C46,-13394711.7,4457730.776,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,CVPM 13 farm gate
+C47,C47,-13410805.46,4452419.511,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Chowchilla River Inflow to Chowchilla Bypass
+C48,C48,-13398955.13,4435800.758,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Fresno River Inflow to Chowchilla Bypass
+C49,C49,-13309620.39,4418615.376,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Friant-Kern California Aqueductnal delivery to CVPM-16 and City of Fresno
+C4,C4,-13587160.39,4837797.259,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,CVPM2 return to Sacramento River
+C50,C50,-13338299.65,4404963.805,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,CVPM-16 farm gate
+C51,C51,-13289672.45,4413608.608,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Kings River
+C52,C52,-13339522.43,4347734.344,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Kings River
+C53,C53,-13289672.45,4413608.608,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Kings River
+C54b,C54b,-13343095.2,4389903.964,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Artifical node to preven node C54 from having two sink nodes attached to it; which creates problems when processing the runs because the sink nodes are not considered unique.
+C54,C54,-13378486.71,4390842.117,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Crescent Weir
+C55,C55,-13281653.93,4388015.235,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,CVPM 17 farm gate
+C56,C56,-13252066.33,4354259.205,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Kaweah River
+C57,C57,-13240132.21,4306120.029,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Tule River
+C58,C58,-13240132.21,4306120.029,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Tule River
+C59,C59,-13338923.1,4307742.963,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Inflow to Tulare Lake
+C5,C5,-13602777.25,4920577.741,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,CVPM 1 return to Sacramento River
+C60,C60,-13275246.48,4309770.972,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,CVPM 18 farm gate
+C62,C62,-13274549.68,4240246.41,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Friant-Kern Canal delivery to CVPM-19
+C63,C63,-13276931.47,4252047.495,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,CVPM 20 farm gate
+C64,C64,-13298511.85,4245848.336,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Friant-Kern Canal
+C65,C65,-13241000.52,4222738.448,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Kern River
+C66,C66,-13232514.66,4188939.224,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,CVPM 21 farm gate
+C67,C67,-13536235.29,4689336.442,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Sacramento River Diversion to CVPM6
+C688,C688,-13253656.76,4324202.629,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Friant-Kern Canal
+C689,C689,-13257252.13,4216899.497,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Friant-Kern Canal terminal structure
+C68,C68,-13514948.12,4537260.977,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,CVPM  9 delivery
+C69,C69,-13586726.27,4835712.541,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Glenn Colusa California Aqueductnal
+C6,C6,-13605571.55,4855024.53,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,CVPM 2 delivery
+C70,C70,-13554865.56,4577091.004,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Contra Costa Canal inflow from Los Vaqueros Reservoir
+C71,C71,-13570537.3,4580937.505,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Mallard Slough inflow to Contra Costa Urban
+C72,C72,-13325849.03,4439690.945,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Millerton Lake diversions to Madera Canal
+C73,C73,-13270711.58,4208201.325,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,CVPM-19;20;21 surface return flow
+C74,C74,-13260069.77,4212860.98,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Cross Valley Canal delivery to CVPM-21
+C75,C75,-13349462.27,4289256.904,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,California Aqueduct; aggregation of DWRSIM 841; 842; 843; 844
+C76,C76,-13281000.39,4386571.193,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Friant-Kern Canal delivery to CVPM-17 and CVPM-18
+C77,C77,-13499834.11,4823728.215,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,2,,Feather River above Lake Oroville
+C78b,C78b,-13586128,4527291.45,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,EBMUD to SFPUC via Hayward node
+C78,C78,-13573746.5,4516044.619,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Hayward diversion point from the Hetch-Hetchy Aqueduct for the purpose of the EBMUD intertie
+C79,C79,-13579990.31,4513962.333,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Hetch Hetchy Aqueduct
+C7,C7,-13532264.69,4668930.215,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,CVPM7 return to Sacramento River
+C80,C80,-13538747.95,4690557.108,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,2,,Feather River diversions to CVPM 6
+C81,C81,-13592343.65,4872175.351,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,
+C82,C82,-13580431.42,4829951.696,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,
+C83,C83,-13528109.56,4746897.969,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,2,,Yuba River outflow from DA67
+C84,C84,-13461218.98,4455924.563,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,CVPM 10 farm gate
+C85,C85,-13438147.95,4434742.582,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Diversion to CVPM10
+C86,C86,-13637718.86,4869514.266,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,
+C87,C87,-13601957.77,4903940.558,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Sacramento River; confluence with Paynes Creek
+C88,C88,-13392204,4552850.765,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Hetch Hetchy Aqueduct
+C89,C89,-13252066.33,4354259.205,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Kaweah River
+C8,C8,-13525882.14,4662955.65,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,American River inflow to Sacramento River
+C90,C90,-13338271.68,4320221.824,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,CVPM 15 farm gate
+C91,C91,-13384845,4357561.199,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,CVPM 14 farm gate
+C92,C92,-13442671.67,4418513.058,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,4,,California Aqueduct; aggregation of DWRSIM 754; 746; & 748
+C95,C95,-13288020.98,4205703.886,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,California Aqueduct
+C97,C97,-13241000.52,4222738.448,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Kern River
+C98,C98,-13233434.33,4170303.644,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,SWP deliveries to CVPM 21
+C9,C9,-13606125.33,4834419.28,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,
+Castaic Power Plant,Cast PWP,-13208757.82,4107903.238,Power Plant Node,15,,,,,,,,,,,,,,,,,7,Brad Newlin,,,West Branch SWP Power Plant
+ChrismanPMP,ChrismPMP,-13244846.31,4166226.595,Pump Plant Node,14,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Chrisman Pumping Plant
+CN1,CN1,-13603390.26,4835155.513,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,1,,Calibration Node
+CN2,CN2,-13526175.61,4655706.907,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,2,,Calibration flow node for Region 2
+CN3,CN3,-13401579.38,4488334.644,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,3,,Calibration node to add or remove water
+CN4,CN4,-13279397.81,4340286.597,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,1,,Calibration Node in Regions 4
+CN5,CN5,-13129103.2,4087431.253,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Calibration Node
+Contra Costa 1 PMP,CC1 PMP,-13547789.6,4578793.234,Pump Plant Node,14,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Contra Costa 1 Pumping Plant
+CVPM10G,CVPM10G,-13454540.91,4455513.446,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,junction node for CVPM 10
+CVPM10S,CVPM10S,-13454540.91,4455513.446,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,junction node for CVPM 10
+CVPM11G,CVPM11G,-13460624.59,4541662.367,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,junction node for CVPM 11
+CVPM11S,CVPM11S,-13460624.59,4541662.367,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,junction node for CVPM 11
+CVPM12G,CVPM12G,-13443370.31,4512372.71,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,junction node for CVPM 12
+CVPM12S,CVPM12S,-13443370.31,4512372.71,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,junction node for CVPM 12
+CVPM13G,CVPM13G,-13394126.75,4457436.457,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,junction node for CVPM 13
+CVPM13S,CVPM13S,-13394126.75,4457436.457,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,junction node for CVPM 13
+CVPM14G,CVPM14G,-13382771.36,4342963.087,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 14
+CVPM14S,CVPM14S,-13382771.36,4342963.087,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 14
+CVPM15G,CVPM15G,-13340875.62,4338746.591,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 15
+CVPM15S,CVPM15S,-13340875.62,4338746.591,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 15
+CVPM16G,CVPM16G,-13335580.14,4406674.287,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 16
+CVPM16S,CVPM16S,-13335580.14,4406674.287,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 16
+CVPM17G,CVPM17G,-13303021.35,4380627.653,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 17
+CVPM17S,CVPM17S,-13303021.35,4380627.653,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 17
+CVPM18G,CVPM18G,-13278063.68,4317690.606,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 18
+CVPM18S,CVPM18S,-13278063.68,4317690.606,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 18
+CVPM19G,CVPM19G,-13316074.81,4232886.193,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 19
+CVPM19S,CVPM19S,-13316074.81,4232886.193,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 19
+CVPM1G,CVPM1G,-13621335.1,4933974.05,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,1,,junction node for CVPM 1
+CVPM1S,CVPM1S,-13621335.1,4933974.05,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,1,,junction node for CVPM 1
+CVPM20G,CVPM20G,-13259618.61,4248736.596,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 20
+CVPM20S,CVPM20S,-13259618.61,4248736.596,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 20
+CVPM21G,CVPM21G,-13252377.37,4190118.178,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 21
+CVPM21S,CVPM21S,-13252377.37,4190118.178,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,junction node for CVPM 21
+CVPM2G,CVPM2G,-13607102.42,4861232.858,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,1,,junction node for CVPM 2
+CVPM2S,CVPM2S,-13607102.42,4861232.858,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,1,,junction node for CVPM 2
+CVPM3G,CVPM3G,-13601833.18,4759079.604,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,1,,junction node for CVPM 3
+CVPM3S,CVPM3S,-13601833.18,4759079.604,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,1,,junction node for CVPM 3
+CVPM4G,CVPM4G,-13568802.78,4742953.183,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,1,,junction node for CVPM 4
+CVPM4S,CVPM4S,-13568802.78,4742953.183,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,1,,junction node for CVPM 4
+CVPM5G,CVPM5G,-13545175.96,4767896.258,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,junction node for CVPM 5
+CVPM5S,CVPM5S,-13545175.96,4767896.258,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,junction node for CVPM 5
+CVPM6G,CVPM6G,-13570646.44,4656086.256,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,junction node for CVPM 6
+CVPM6S,CVPM6S,-13570646.44,4656086.256,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,junction node for CVPM 6
+CVPM7G,CVPM7G,-13513555.09,4689427.819,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,junction node for CVPM 7
+CVPM7S,CVPM7S,-13513555.09,4689427.819,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,junction node for CVPM 7
+CVPM8G,CVPM8G,-13481411.01,4606531.74,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,junction node for CVPM 8
+CVPM8S,CVPM8S,-13481411.01,4606531.74,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,junction node for CVPM 8
+CVPM9G,CVPM9G,-13529379.6,4591964.393,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,junction node for CVPM 9
+CVPM9S,CVPM9S,-13529379.6,4591964.393,Agricultural Demand Node,10,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,junction node for CVPM 9
+D16,D16,-13425579.85,4561772.199,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Stanislaus River diversion to CVPM11
+D17,D17,-13475898.51,4703338.819,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,American River diversion To CVPM 7
+D30,D30,-13581210.49,4817652.017,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Sacramento River diversion to CVPM 4
+D31,D31,-13574196.67,4750632.049,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Sacramento River diversion to RD1500 Drain
+D37,D37,-13537014.75,4706055.627,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Bear River inflow to Feather River
+D42,D42,-13534398.89,4714630.535,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,CVPM 5 return to Feather River
+D43a,D43a,-13570077.76,4746179.941,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Temporary until Reg1 and 2 are linked as this is DA14 inflow to Feather at Sac
+D43,D43,-13536235.29,4689336.442,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Feather River inflow to Sacramento River
+D44,D44,-13527105.25,4641299.528,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Sacramento Urban return to Sacramento River
+D503,D503,-13521661.21,4650754.157,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Sacramento River diversion to Isolated Facility
+D507,D507,-13548359.36,4595109.47,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Sacramento River diversion to CVPM 9
+D509,D509,-13565567.34,4588215.255,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Delta - ?
+D511,D511,-13526641.91,4614598.805,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Sacramento River Diversion to Delta Cross Channel
+D513,D513,-13524477.4,4611788.884,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Delta - ?
+D515,D515,-13525391.32,4596116.135,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Delta - ?
+D517,D517,-13518645.94,4615641.324,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,CVPM 8 return to Mokelumne River
+D521,D521,-13522280.28,4583529.158,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Delta Cross Channel inflow to San Joaquin River
+D522,D522,-13525859.9,4586391.672,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Delta - ?
+D523,D523,-13533009.57,4590344.159,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Delta - ?
+D525,D525,-13534571.88,4588271.256,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Delta - ?
+D528,D528,-13568903.14,4586350.748,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Delta - ?
+D541,D541,-13525391.32,4596116.135,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Delta - ?
+D550,D550,-13534281.32,4576197.484,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Delta - ?
+D55,D55,-13543936.67,4604618.64,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Yolo Bypass inflow to Sacramento River
+D59,D59,-13531212.29,4555649.672,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Old River diversion to California Aqueduct Aqueduct
+D5,D5,-13632977.78,4957606.857,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Keswick Reservoir
+D605,D605,-13376260.87,4410980.543,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Joaquin River depletion
+D606,D606,-13376260.87,4410980.543,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Joaquin River diversion to CVPM13
+D608,D608,-13400083.96,4408200.849,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Mendota Pool
+D609,D609,-13390176.2,4407644.867,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Joaquin River diversion to Chowchilla Bypass
+D612,D612,-13496567.89,4531515.753,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,CVPM 10 return to S Joaquin River
+D613,D613,-13405650.65,4403793.849,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,4,,CVPM 14 return
+D615,D615,-13394881.57,4407368.099,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Mendota Wildlife Area surface return flow
+D616,D616,-13499497.73,4532480.408,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Joaquin River diversion to CVPM 10
+D619,D619,-13434036.33,4460585.313,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Eastside Bypass inflow to San Joaquin River
+D61,D61,-13550064,4693703.717,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,CVPM 4 return to Sacramento River
+D622,D622,-13346048.13,4452698.408,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Madera California Aqueduct inflow to Fresno River
+D624,D624,-13346048.13,4452698.408,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Fresno River diversion to CVPM 13
+D632,D632,-13359151.38,4467013.377,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Madera California Aqueduct inflow to Chowchilla River
+D634,D634,-13359151.38,4467013.377,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Chowchilla River diversion to CVPM 13
+D640,D640,-13429783.84,4451498.614,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Refuge 2 & CVPM14 return to San Joaquin River
+D642,D642,-13388508.84,4518848.924,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Merced River accretion
+D643,D643,-13388508.84,4518848.924,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Merced River depletion
+D645,D645,-13399472.1,4510775.528,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Merced River diversion to North & Main California Aqueduct
+D646,D646,-13408658.26,4509303.114,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Merced River accretion
+D647,D647,-13408658.26,4509303.114,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Merced River depletion
+D649,D649,-13428928.43,4501181.881,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Merced River diversion to CVPM 13
+D64,D64,-13516382.15,4659185.55,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,American River Diversion To Sacramento Urban
+D653a,D653a,-13429031.51,4560038.397,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Stanislaus River (accretion moved MJ)
+D653b,D653b,-13429142.22,4559375.068,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Stanislaus River accretion & depletion
+D662,D662,-13407934.98,4533479.143,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,La Grange Dam
+D663,D663,-13409883.05,4532480.753,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Tuolumne River accretion
+D664,D664,-13409883.05,4532480.753,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Tuolumne River diversion to CVPM 11
+D66,D66,-13581210.49,4817652.017,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Sacramento River DA15 loss
+D670,D670,-13416888.56,4572394.639,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Stanislaus River diversion
+D672,D672,-13432515.31,4554073.74,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Stanislaus River diversion to CVPM 11
+D675,D675,-13493109.99,4535449.669,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,CVPM11 return to Stanislaus River
+D676,D676,-13496596.82,4532041.176,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Stan River inflow to San Joaquin River
+D683,D683,-13489126.09,4524173.647,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Tuolumne River inflow to San Joaquin River
+D687,D687,-13495156.13,4528965.298,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Joaquin River accretion
+D688,D688,-13495156.13,4528965.298,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Joaquin River depletion
+D689,D689,-13495070.05,4530390.933,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Joaquin River diversion to CVPM 10
+D691,D691,-13453186.83,4473723.125,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Mud Slough & Salt Slough inflow to S Joaquin R
+D692,D692,-13415312.69,4455332.336,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Eastside Bypass accretion
+D693,D693,-13421570.64,4457653.739,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Eastside Bypass depletion
+D694,D694,-13453186.83,4473723.125,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Joaquin River diversion to CVPM13
+D695,D695,-13467213.69,4487996.422,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Merced River inflow to San Joaquin River
+D697,D697,-13473719.74,4502120.583,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,CVPM12 return to San Joaquin River
+D698,D698,-13478791.52,4508180.165,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Joaquin River accretion
+D699,D699,-13480112.69,4511025.709,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Joaquin River diversion to CVPM10
+D701,D701,-13505969.94,4524613.932,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Delta Mendota  Canal diversion to CVPM10
+D703,D703,-13503168.3,4521033.399,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Delta Mendota Canal losses
+D710,D710,-13474126.83,4453140.722,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Delta Mendota Canal diversion to California Aqueduct
+D712,D712,-13474126.83,4453140.722,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Delta Mendota Canal inflow from California Aqueduct
+D714,D714,-13499476.51,4444670.003,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Pacheco Tunnel deliveries to South Bay Area
+D722,D722,-13469330.57,4450638.088,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Delta Mendota Canal diversion to CVPM 10
+D723,D723,-13464088.75,4447440.36,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Delta Mendota Canal diversion to Refuge
+D724,D724,-13442053.45,4426559.322,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Delta Mendota Canal
+D731,D731,-13397585.86,4409368.773,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Joaquin River diversion to CVPM 10
+D732,D732,-13398543.1,4409630.849,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Joaquin River diversion to Refuge 2
+D733,D733,-13359629.15,4412732.057,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Joaquin River losses
+D73,D73,-13630417.31,4953647.493,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Clear Creek inflow To Sacramento River
+D742,D742,-13455966.68,4435254.031,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,California Aqueduct diversion to CVPM 10
+D743,D743,-13451948.36,4431891.453,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,California Aqueduct losses
+D744,D744,-13446954.68,4424854.002,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,California Aqueduct diversion to CVPM 10
+D745,D745,-13437145.63,4411761.774,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,4,,California Aqueduct losses R4
+D747,D747,-13391224.79,4359797.591,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,4,,California Aqueduct losses R5
+D749,D749,-13386448.37,4350327.996,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,4,,California Aqueduct losses R6
+D74,D74,-13601762.22,4907951.988,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Sacramento River diversion to CVPM1
+D750,D750,-13384093.14,4345789.06,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,California Aqueduct delivery to the Cities of Huron and Coalinga; CVPM-14 Urban
+D751,D751,-13363934.89,4324096.194,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,California Aqueduct losses R-7
+D752,D752,-13285508.37,4204516.413,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,California Aqueduct
+D75,D75,-13591802.74,4864813.695,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Thomes Creek and Elder Creek inflow to Sacramento River
+D76a,D76a,-13580431.42,4829951.696,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Sacramento River
+D76b,D76b,-13578323.43,4819117.721,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Stony Creek inflow to Sacramento River
+D77,D77,-13603587.57,4888183.02,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Red Bluff Diversion Dam
+D801,D801,-13538851.84,4548315.275,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,California Aqueduct diversion to South Bay Aqueduct
+D803,D803,-13495253.66,4511408.082,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,California Aqueduct diversion to CVPM10
+D804,D804,-13482839.07,4489741.421,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,California Aqueduct losses
+D814,D814,-13476677.11,4454687.236,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,California Aqueduct diversion to San Luis Reservoir
+D816,D816,-13469891.95,4449491.116,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,San Luis Reservoir release to California Aqueduct
+D818,D818,-13459733.43,4439656.943,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,California Aqueduct diversion to Los Banos Grandes Reservoir
+D820,D820,-13459396.01,4439224.135,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Los Banos Grandes Reservoir release to California Aqueduct
+D845,D845,-13346348.66,4280479.972,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,California Aqueduct
+D847,D847,-13358938.97,4261929.105,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,2,,Coastal Aqueduct
+D848,D848,-13416356.06,4140303.819,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Coastal Aqueduct
+D849,D849,-13420256.38,4189392.001,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,California Aqueduct - Coastal Branch
+D850,D850,-13321357.63,4240104.32,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,California Aqueduct
+D851&D852,D851&D852,-13318033.21,4227508.207,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,California Aqueduct
+D853,D853,-13301424.66,4213279.186,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,California Aqueduct
+D855&D857,D855&D857,-13283068.3,4202143.537,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,offtake from California Aqueduct for active recharge of Kern Water Bank
+D859,D859,-13281265.02,4199519.656,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,California Aqueduct
+D85,D85,-13493967.75,4669774.992,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,American River losses
+D860,D860,-13283985.77,4176184.394,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,California Aqueduct
+D861,D861,-13263756.5,4173709.333,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,California Aqueduct
+D862A,D862A,-13247228.62,4167775.663,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,California Aqueduct
+D862B,D862B,-13237209.07,4159112.315,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,California Aqueduct
+D863,D863,-13245467.84,4167157.049,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,California Aqueduct
+D865,D865,-13214476.8,4140292.386,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,West Branch SWP Node Represented in DWRSIM Network D122696
+D868,D868,-13170105.45,4117173.581,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,West Branch SWP Node Represented in DWRSIM Network D122698
+D870,D870,-13155750.1,4106361.002,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,East Branch SWP Node Represented in DWRSIM Network D122698
+D871,D871,-13100636.59,4095034.441,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,East Branch SWP Node Represented in DWRSIM Network D122698
+D872,D872,-13062305.15,4081921.228,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,East Branch SWP Node Represented in DWRSIM Network D122698
+D876,D876,-13061977.9,4047280.219,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,East Branch SWP Node Represented in DWRSIM Network D122698
+D881,D881,-13050936.59,4016196.077,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,East Branch SWP Node Represented in DWRSIM Network D122698
+D884,D884,-13216821.08,4133660.646,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,West Branch SWP Node Represented in DWRSIM Network D122696
+D885,D885,-13224642.51,4128590.292,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,West Branch SWP Node Represented in DWRSIM Network D122696
+D886,D886,-13215859.72,4112621.743,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,West Branch SWP Node Represented in DWRSIM Network D122696
+D887,D887,-13206060.81,4104724.195,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,West Branch SWP Node Represented in DWRSIM Network D122696
+D888,D888,-13203619.62,4098279.209,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,West Branch SWP Node Represented in DWRSIM Network D122697
+D889,D889,-13194916.97,4081677.064,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,,,West Branch SWP Node Represented in DWRSIM Network D122698
+D891,D891,-13555511.19,4528212.961,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,South Bay Aqueduct diversion to Lake Del Valle
+D892,D892,-13552880.37,4525595.734,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Lake Del Valle release to South Bay Aqueduct
+D896,D896,-13563095.07,4532151.935,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,South Bay Aqueduct diversion to South Bay Urban demands
+D897,D897,-13569839.04,4533072.238,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,South Bay Aqueduct losses
+D94&D40,D94&D40,-13670382.32,4970962.778,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Trinity River release to Clear Creek
+D98,D98,-13518645.94,4615641.324,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Mokelumne River Diversion To CVPM 8
+D9,D9,-13493967.75,4669774.992,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Lake Natoma
+Del Valle PMP,DVallePMP,-13553096.6,4525883.042,Pump Plant Node,14,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Del Valle Pumping Plant
+Desalination,Desal,-13034307.02,3850511.299,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Proposed desalination facility for coastal cities
+DesalR5,DesalR5,-13036456.97,3856421.971,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Region 5 Desalination node
+Devils Canyon Power Plant,Devils PWP,-13061730.24,4056676.74,Power Plant Node,15,,,,,,,,,,,,,,,,,7,Brad Newlin,,,East Branch SWP Power Plant
+Dos Amigos PMP,DAmigoPMP,-13450660.09,4428758.107,Pump Plant Node,14,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Dos Amigos Pumping Plant
+Eagle Pumping Plant,Eagle PMP,-12852105.34,4003252.837,Pump Plant Node,14,,,,,,,,,,,,,,,,,14,Randy Ritzema,5,,Formerly part of Colorado Pumping Plant - second pumping station along CRA
+EdmonstonPMP,EdmonsPMP,-13227641.99,4156405.488,Pump Plant Node,14,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Edmonston Pumping Plant
+ERes: Central MWD,ERes: CMWD,-13120418.92,4033419.577,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,DAU's 87 89 90 92 96 114 and part of 100; External residential and landscape use
+ERes: Contra Costa,ERES CC,-13560264.66,4558081.898,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Exterior Urban Residential Part of DAU 46 and all of 192
+ERes: EBMUD,ERES EBMUD,-13594092.16,4553326.765,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,EBMUD exterior urban demand Parts of DAU 46 & 47
+ERES: E&W MWD,ERES EWMWD,-13036848.72,3990956.003,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Exterior residential demand for eastern & western municipal water districts
+ERes: Napa-Solano,ERES NAPA,-13591979.75,4624020.612,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,Exterior Urban Residential includes Napa & Solano Co. M&I surface water demand (DAU 191; 40 ; 41).
+ERes: San Diego,ERes:SDWD,-12987005.62,3901357.811,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 120; & 350-352 Exterior Residential/landscape demand
+ERes: San Francisco,ERES SF,-13616840.23,4524765.279,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,Exterior Urban Residential includes all of DAU 43
+ERes: SBV,ERes: SBV,-13060629.2,4056270.349,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 308 & part of 100 - Urban Demand for Exterior Res/landscape
+ERes: SCV,ERes: SCV,-13564648.51,4503579.613,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Exterior Urban Residential this includes Santa Clara Valley WD; ACWD; and Alameda Zone 7 (All of DAU 44; 45 ; 62; plus part of DAU 47)
+ERes: Ventura,ERes:VENT,-13251608.23,4086189.607,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,DAU 81 - exterior residential/landscape use
+Ext: Antelope,EXT AV,-13122437.78,4198785.944,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 299-307; Exterior Res/Landscape
+Ext: Bakersfield,EXT BAKER,-13261996.9,4203486.53,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 254  exterior urban flows
+Ext: Blythe,EXT Blythe,-12795364.37,4021492.628,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 333-347 Interior Res/Landscape
+Ext: Castaic,EXT CLWA,-13191355.48,4100536.478,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 83 Exterior Res/Landscape demand
+Ext: CityofFresno,EXT FRESN,-13338264.09,4404663.136,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 233  Exterior Urban Residential
+Ext: Coachella,EXT COACH,-12941288.16,3994740.636,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 348; 349 Exterior Res/Landscape
+Ext: CVPM10,EXT CVPM10,-13454540.91,4455513.446,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 216; exterior
+Ext: CVPM11,EXT CVPM11,-13471808.19,4541584.045,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 205 & 206; exterior
+Ext: CVPM12,EXT CVPM12,-13458558.8,4510057.877,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 208; exterior
+Ext: CVPM13,EXT CVPM13,-13397139.42,4459084.67,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 210 & 213; exterior
+Ext: CVPM14,Ext CVPM14,-13384162.82,4345827.526,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 244 & 245; exterior
+Ext: CVPM15,EXT CVPM15,-13340875.62,4338746.591,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 238; 235; 237; 241; & 246; exterior
+Ext: CVPM17,EXT CVPM17,-13303021.35,4380627.653,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 236; 239 & 240; includes cities of Sanger; Selma; Reedley; and Dinuba; exterior
+Ext: CVPM18,EXT CVPM18,-13278063.68,4317690.606,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 242 & 243; includes cities of Visalia and Tulare; exterior
+Ext: CVPM19,Ext CVPM19,-13316074.81,4232886.193,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 255; 259 & 260; exterior
+Ext: CVPM20,EXT CVPM20,-13259618.61,4248736.596,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 256 & 257; includes cities of Delano and Wasco; exterior
+Ext: CVPM21,EXT CVPM21,-13243949.28,4178383,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 258 and 26; exterior
+Ext: CVPM2,EXT CVPM2,-13616899.83,4862990.293,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,Exterior Urban demand node for 100% of DAU 142
+Ext: CVPM3,EXT CVPM3,-13601833.18,4759079.604,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 163; exterior
+Ext: CVPM4,EXT CVPM4,-13572928.68,4735261.576,Agricultural Demand Node,10,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 164; exterior
+Ext: CVPM5,EXT CVPM5,-13543328.5,4768931.045,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,17% of DAU 159 & 168; 100% of 166 & 171; exterior
+Ext: CVPM6,EXT CVPM6,-13586564.06,4639500.04,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 162; 9% of DAU 191; 40 & 41; exterior
+Ext: CVPM8,EXT CVPM8,-13491489.42,4633259.888,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU 180; exterior
+Ext: CVPM9,EXT CVPM9,-13522997.62,4570402.521,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,100% of DAU185; exterior
+Ext: El Centro et al,EXT El Cen,-12852881.96,3896916.773,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 353-357 Exterior Res/Landscape demand
+Ext: Mojave,EXT MR,-12932432.57,4120535.297,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 308-332 Exterior Res/Landscape Demand
+Ext: Redding,EXTRedding,-13621335.1,4933974.05,Urban Demand Node,11,,,,,,,,,,,,,,,,,6,Jay Lund,,,Redding Area demand is a  time series of monthly withdrawals from Shasta for surface water demand (DAU 141; 143.)
+Ext: Sacramento,EXT SAC,-13463828.75,4692369.526,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Includes Placerville and Auburn (DAU 158; 161; 172; 173; 186).
+Ext: SB-SLO,EXT SB-SLO,-13377431.48,4137273.211,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Urban exterior Only the SWP Imports are modeled (DAU 67; 68; 71; 74; 75)
+Ext: Stockton,EXT STOCK,-13485175.91,4587568.623,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Exterior urban return flows
+Ext: Yuba,EXT YUBA,-13541856.8,4765774.234,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Exterior demand for Yuba City et al. Includes Yuba City and parts of Butte Co. but not Plumas Co. surface water demand (DAU 159; 168)
+Gianelli PMP,GianPMP,-13489811.31,4447744.528,Pump Plant Node,14,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Gianelli Pumping Plant
+Gianelli PWP,GianelPWP,-13478115.33,4448641.643,Power Plant Node,15,,,,,,,,,,,,,,,,,13,Stacy Tanaka,3,,Gianelli Power Plant
+GW-10,GW-10,-13454540.91,4455513.446,Groundwater Storage Node,8,90210,824,See groundwater modeling approach in Appendix J of August 1999 CALVIN report.,0,,,87055,825,Ending storage can be set to initial storage for alternative model runs (see source file for initial storage calcs).  Target values were used in early CALVIN runs for debugging infeasibilities.  For A02C11; ending GW storage was set equal to the values in A03C46 (Base Case run) for comparison (RR)..,1,,,,,,,6,Jay Lund,3,,Central Valley groundwater basin
+GW-11,GW-11,-13460624.59,4541662.367,Groundwater Storage Node,8,58838,828,See groundwater modeling approach in Appendix J of August 1999 CALVIN report.,0,,,58246,829,Ending storage can be set to initial storage for alternative model runs (see source file for initial storage calcs).  Target values were used in early CALVIN runs for debugging infeasibilities.  For A02C11; ending GW storage was set equal to the values in A03C46 (Base Case run) for comparison (RR).,1,,,,,,,6,Jay Lund,3,,Central Valley groundwater basin
+GW-12,GW-12,-13443370.31,4512372.71,Groundwater Storage Node,8,42602,832,See groundwater modeling approach in Appendix J of August 1999 CALVIN report.,0,,,40865,833,Ending storage can be set to initial storage for alternative model runs (see source file for initial storage calcs).  Target values were used in early CALVIN runs for debugging infeasibilities.  For A02C11; ending GW storage was set equal to the values in A03C46 (Base Case run) for comparison (RR).,1,,,,,,,6,Jay Lund,3,,Central Valley groundwater basin
+GW-13,GW-13,-13394126.75,4457436.457,Groundwater Storage Node,8,138216,836,See groundwater modeling approach in Appendix J of August 1999 CALVIN report.,0,,,128560,837,Ending storage can be set to initial storage for alternative model runs (see source file for initial storage calcs).  Target values were used in early CALVIN runs for debugging infeasibilities.  For A02C11; ending GW storage was set equal to the values in A03C46 (Base Case run) for comparison (RR).,1,,,,,,,6,Jay Lund,3,,Central Valley groundwater basin
+GW-14,GW-14,-13382771.36,4342963.087,Groundwater Storage Node,8,178840,840,MDDxx,0,,,172009,841,MDDxx,1,,,,,,,6,Jay Lund,4,,Central Valley groundwater basin
+GW-15,GW-15,-13340875.62,4338746.591,Groundwater Storage Node,8,309643,844,MDDxx,0,,,306666,845,MDDxx,1,,,,,,,6,Jay Lund,4,,Central Valley groundwater basin
+GW-16,GW-16,-13335580.14,4406674.287,Groundwater Storage Node,8,64696,848,MDDxx,0,,,64438,849,MDDxx,1,,,,,,,6,Jay Lund,4,,Central Valley groundwater basin
+GW-17,GW-17,-13303021.35,4380627.653,Groundwater Storage Node,8,97214,852,MDDxx,0,,,93653,853,MDDxx,1,,,,,,,6,Jay Lund,4,,Central Valley groundwater basin
+GW-18,GW-18,-13278063.68,4317690.606,Groundwater Storage Node,8,321375,856,MDDxx,0,,,321375,857,MDDxx,1,,,,,,,6,Jay Lund,4,,Central Valley groundwater basin
+GW-19,GW-19,-13316074.81,4232886.193,Groundwater Storage Node,8,141750,860,MDDxx,0,,,128223,861,MDDxx,1,,,,,,,6,Jay Lund,4,,Central Valley groundwater basin
+GW-1,GW-1,-13621335.1,4933974.05,Groundwater Storage Node,8,38447,1,MDDxx,0,,,39437,2,MDDxx,1,,,,,,,6,Jay Lund,1,,Central Valley groundwater basin
+GW-20,GW-20,-13259618.61,4248736.596,Groundwater Storage Node,8,137073,864,MDDxx,0,,,125136,865,MDDxx,1,,,,,,,6,Jay Lund,4,,Central Valley groundwater basin
+GW-21,GW-21,-13252377.37,4190118.178,Groundwater Storage Node,8,341142,868,MDDxx,0,,,324302,869,MDDxx,1,,,,,,,6,Jay Lund,4,,Central Valley groundwater basin
+GW-2,GW-2,-13607102.42,4861232.858,Groundwater Storage Node,8,136494,5,MDDxx,0,,,136494,6,07242012 - changed from original C2VSIM results to reflect no accumulation of groundwater in CVHM (which shows overdraft) and likely actual physical conditions.,1,,,,,,,6,Jay Lund,1,,Central Valley groundwater basin
+GW-3,GW-3,-13601833.18,4759079.604,Groundwater Storage Node,8,132687,9,MDDxx,0,,,131748,10,MDDxx,1,,,,,,,6,Jay Lund,1,,Central Valley groundwater basin
+GW-4,GW-4,-13568802.78,4742953.183,Groundwater Storage Node,8,60728,13,MDDxx,0,,,60508,14,MDDxx,1,,,,,,,6,Jay Lund,1,,Central Valley groundwater basin
+GW-5,GW-5,-13545175.96,4767896.258,Groundwater Storage Node,8,91113,17,MDDxx,0,,,90457,18,Alternative 1a run (A02B22) to see difference that occurs by constraining GW ending storage to ending value from Calibrated base case (A03B27) - MJ 09/28/00,1,,,,,,,6,Jay Lund,2,,Central Valley groundwater basin
+GW-6,GW-6,-13570646.44,4656086.256,Groundwater Storage Node,8,174968,21,MDDxx,0,,,175275,22,Alternative 1a run (A02B22) to see difference that occurs by constraining GW ending storage to ending value from Calibrated base case (A03B27) - MJ 09/28/00,1,,,,,,,6,Jay Lund,2,,Central Valley groundwater basin
+GW-7,GW-7,-13513555.09,4689427.819,Groundwater Storage Node,8,56539,25,MDDxx,0,,,51210,26,Alternative 1a run (A02B22) to see difference that occurs by constraining GW ending storage to ending value from Calibrated base case (A03B27) - MJ 09/28/00,1,,,,,,,6,Jay Lund,2,,Central Valley groundwater basin
+GW-8,GW-8,-13481411.01,4606531.74,Groundwater Storage Node,8,190665,29,MDDxx,0,,,182829,30,Alternative 1a run (A02B22) to see difference that occurs by constraining GW ending storage to ending value from Calibrated base case (A03B27) - MJ 09/28/00,1,,,,,,,6,Jay Lund,2,,Central Valley groundwater basin
+GW-9,GW-9,-13529379.6,4591964.393,Groundwater Storage Node,8,139472,33,MDDxx,0,,,139843,34,Alternative 1a run (A02B22) to see difference that occurs by constraining GW ending storage to ending value from Calibrated base case (A03B27) - MJ 09/28/00,1,,,,,,,6,Jay Lund,2,,Central Valley groundwater basin
+GW-AV,GW-AV,-13146331.27,4137336.354,Groundwater Storage Node,8,20000,872,0,0,,,20000,873,MDDxx,1,,,,,,,6,Jay Lund,,,Antelope Valley Groundwater
+GW-CH,GW-CH,-12949176.66,3994084.85,Groundwater Storage Node,8,3500,879,Initial storage = Ending storage = 3.5 MAF (0.5 MAF of potetial storage capacity for MWD; MWD2002),0,,,3500,880,Initial storage = Ending storage = 3.5 MAF (0.5 MAF of potetial storage capacity for MWD; MWD2002),1,,,,,,,13,Stacy Tanaka,,,Coachella Valley Groundwater
+GW-EW,GW-EW,-13036848.72,3990956.003,Groundwater Storage Node,8,7000,,,0,,,7000,,,1,,,,,,,6,Jay Lund,,,E&W MWD groundwater basin
+GW-HF,GW-HF,-12888250.76,3981768.462,Groundwater Storage Node,8,250,,,0,,,250,883,Ending storage assumed to be equal to 150 TAF/Y; which is the supply capability estimated by MWD for multiple-dry years (and 1993 is one). Set to intial storage for the run where this groundwater basin is not in use.,1,,,,,,,13,Stacy Tanaka,5,,Hayfield Storage Basin
+GW-IM,GW-IM,-12849373.43,3881080.282,Groundwater Storage Node,8,930,885,Imperial County (1996) lists mostly unusable groundwater storage--  the current amount represented is misleading; even though its not used because there is no Imperial groundwater recharge/pumping represented in CALVIN,0,,,930,886,MDDxx,1,,,,,,,6,Jay Lund,,,Imperial Valley Groundwater
+GW-KRN,GW-KRN,-13281175.32,4219864.31,Groundwater Storage Node,8,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,5,,Extra groundwater storage for SWP beyond the Tehachapi mountains - Kern-Delta; Arvin-Edison; & Semitropic Projects
+GW-MJ,GW-MJ,-13038361.97,4121411.188,Groundwater Storage Node,8,2580,890,Available Storage: 1.79 MAF (AGWA; 2000). Initial and ending storage: 4.37 - 1.79 =  2.58 MAF ,0,,,2580,891,Available Storage: 1.79 MAF (AGWA; 2000). Initial and ending storage: 4.37 - 1.79 =  2.58 MAF ,1,,,,,,,6,Jay Lund,,,Mojave River Valley Groundwater
+GW-MWD,GW-MWD,-13094163.95,3994345.339,Groundwater Storage Node,8,750,894,Estimated current conjunctive use storage,0,,,750,895,MDDxx,1,,,,,,,6,Jay Lund,,,Additional empty GW Capacity in MWD Service Area
+GW-OW,GW-OW,-13156681.97,4426883.423,Groundwater Storage Node,8,30000,898,0,0,,,30000,899,equals initial storage,1,,,,,,,1,Matthew Davis,,,Owens Valley
+GW-SBV,GW-SBV,-13075696.66,4039721.184,Groundwater Storage Node,8,2500,,,0,,,2500,,,1,,,,,,,6,Jay Lund,,,SBV groundwater
+GW-SC,GW-SC,-13462045,4355781.669,Groundwater Storage Node,8,425,902,For groundwater modeling approach; refer to Appendix J of the August 1999 CALVIN report.,0,,,425,903,Ending storage can be set to initial storage for alternative model runs.,1,,,,,,,1,Matthew Davis,3,,Santa Clara groundwater basin
+GW-SD,GW-SD,-13017868.11,3876935.575,Groundwater Storage Node,8,7000,,,0,,,7000,,,1,,,,,,,6,Jay Lund,,,San Diego groundwater
+GW-VC,GW-VC,-12995462.97,4158188.259,Groundwater Storage Node,8,275,2499,Made up number,0,,,275,,,1,,,,,,,6,Jay Lund,,,Ventura County Groundwater
+HAR13,HAR13,-13396114.21,4485829.353,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Artificial Recharge to subregion 13 from Chowchilla R riparian
+HAR15,HAR15,-13332605.01,4340469.251,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Artificial recharge node to GW-15
+HAR16,HAR16,-13306573.63,4378180.555,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Artificial recharge node
+HAR17,HAR17,-13302343.42,4375877.552,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Artificial recharge node for subregion 17
+HAR18,HAR18,-13277395.72,4303531.101,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Artificial recharge node
+HAR19,HAR19,-13289849,4236773.049,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Artifical recharge node for subregion 19
+HAR20,HAR20,-13254939.54,4230245.044,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Artificial Recharge node
+HAR21,HAR21,-13256526.24,4238148.772,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Artificial recharge node
+HARUC124,HARUC124,-13009400.62,4112651.257,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Hidden node for artificial groundwater recharge
+HARUC145,HARUC145,-12938742.54,3989536.105,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Hidden node for artifical recharge of groundwater
+HARUC158,HARUC158,-12947445.12,3992833.111,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Hidden node for artificial groundwater recharge
+HGD10,HGD10,-13456024.88,4455605.17,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,Hidden groundwater calibration node
+HGD11,HGD11,-13463983.24,4541570.192,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,3,,Hidden groundwater calibration node
+HGD12,HGD12,-13448826.3,4511576.797,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,3,,Hidden groundwater calibration node
+HGD13,HGD13,-13386240.06,4458157.37,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,3,,Hidden groundwater calibration node
+HGD14,HGD14,-13383760.94,4347950.707,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden groundwater calibration node
+HGD15,HGD15,-13340218.89,4335937.397,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden groundwater calibration node
+HGD16,HGD16,-13328801.65,4407956.182,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden groundwater calibration node
+HGD17,HGD17,-13298073.65,4389197.587,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden groundwater calibration node
+HGD18,HGD18,-13269525.17,4319116.989,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden groundwater calibration node
+HGD19,HGD19,-13306018.23,4227137.515,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden groundwater calibration node
+HGD1,HGD1,-13619922.28,4935471.899,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,1,,Hidden groundwater calibration node
+HGD20,HGD20,-13264644.05,4243453.933,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden groundwater calibration node
+HGD21,HGD21,-13247092.74,4199132.201,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden groundwater calibration node
+HGD2,HGD2,-13611115.48,4860635.093,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,1,,Hidden groundwater calibration node
+HGD3,HGD3,-13600308.78,4760347.925,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,1,,Hidden groundwater calibration node
+HGD4,HGD4,-13569626.14,4736148.707,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,1,,Hidden groundwater calibration node
+HGD5,HGD5,-13547200.49,4763335.925,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden groundwater calibration node
+HGD6,HGD6,-13581115.04,4643255.573,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden groundwater calibration node
+HGD7,HGD7,-13500373.69,4688000.245,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden groundwater calibration node
+HGD8,HGD8,-13473173.44,4624032.732,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden groundwater calibration node
+HGD9,HGD9,-13523326.2,4570207.107,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden groundwater calibration node
+HGP10,HGP10,-13449975.04,4434421.988,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-10
+HGP11,HGP11,-13448191.2,4519121.431,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-11
+HGP12,HGP12,-13435627.66,4493441.71,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-12
+HGP13,HGP13,-13392221.11,4442326.382,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-13
+HGP14,HGP14,-13399917.97,4341211.391,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-14
+HGP15,HGP15,-13348169.31,4337533.999,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-15
+HGP16,HGP16,-13334614.13,4396804.438,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-16
+HGP17,HGP17,-13315057.82,4373771.419,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-17
+HGP18,HGP18,-13280147.21,4318064.993,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-18
+HGP19,HGP19,-13316710.24,4234312.383,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-19
+HGP1,HGP1,-13631189.15,4940047.504,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-1
+HGP20,HGP20,-13275186.4,4241980.999,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-20
+HGP21,HGP21,-13260686.13,4200737.422,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for pumping calibration of GW-21
+HGP2,HGP2,-13619490.57,4875631.278,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden calibration for GW-2
+HGP3,HGP3,-13609948.01,4784704.905,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-3
+HGP4,HGP4,-13589691.17,4777385.663,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-4
+HGP5,HGP5,-13496976.88,4715641.837,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-5
+HGP6,HGP6,-13586455.41,4655066.123,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-6
+HGP7,HGP7,-13504603.87,4692519.353,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-7
+HGP8,HGP8,-13490166.33,4651844.837,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-8
+HGP9,HGP9,-13548328.29,4629846.697,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-9
+HGU10,HGU10,-13456210.38,4455616.62,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-10
+HGU11,HGU11,-13463516.11,4541657.435,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-11
+HGU12,HGU12,-13447425.84,4511768.825,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-12
+HGU13,HGU13,-13388246.82,4458095.805,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-13
+HGU14,HGU14,-13383691.21,4346199.962,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-14
+HGU15,HGU15,-13340169.9,4335159.834,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-15
+HGU16,HGU16,-13337554.41,4407905.018,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-16
+HGU17,HGU17,-13198313.18,4220134.254,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,CVPM17 Return Flow to GW
+HGU18,HGU18,-13189255.75,4196620.627,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Node for RF from urban CVPM18
+HGU19,HGU19,-13307611.72,4226488.787,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-19
+HGU1,HGU1,-13618801.78,4932597.352,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration on GW-1
+HGU20,HGU20,-13185844.02,4164162.818,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Return flow from urban CVPM20 to GW
+HGU21,HGU21,-13252731.06,4195708.533,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-21
+HGU2,HGU2,-13609984.47,4860267.228,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-2
+HGU3,HGU3,-13600118.21,4760506.461,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-3
+HGU4,HGU4,-13569041.35,4736579.899,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-4
+HGU5,HGU5,-13546967.74,4763098.866,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-5
+HGU6,HGU6,-13584692.63,4631391.332,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-6
+HGU7,HGU7,-13486081.51,4666881.699,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-7
+HGU8,HGU8,-13480509.45,4632682.482,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-8
+HGU9,HGU9,-13523632.7,4571080.243,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for calibration of GW-9
+HSD10,HSD10,-13483121.88,4506006.011,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,3,,Hidden surface water calibration node
+HSD11,HSD11,-13464508.45,4542547.988,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,3,,Hidden surface water calibration node
+HSD12,HSD12,-13465499.16,4502512.656,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,3,,Hidden surface water calibration node
+HSD13,HSD13,-13437528.39,4483676.952,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,3,,Hidden surface water calibration node
+HSD14,HSD14,-13351258.04,4355582.972,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden surface water calibration node
+HSD15,HSD15,-13329801.79,4364607.101,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden surface water calibration node
+HSD16,HSD16,-13329799.43,4369593.914,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden surface water calibration node
+HSD17,HSD17,-13326474.25,4368605.144,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden surface water calibration node
+HSD18,HSD18,-13326075.86,4363997.12,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden surface water calibration node
+HSD19,HSD19,-13274748.4,4219186.998,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden surface water calibration node
+HSD1,HSD1,-13607398.87,4916278.781,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,1,,Hidden surface water calibration node
+HSD20,HSD20,-13273941.97,4222056.973,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden surface water calibration node
+HSD21,HSD21,-13271323,4218349.286,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden surface water calibration node
+HSD2,HSD2,-13598684.03,4860679.365,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,1,,Hidden surface water calibration node
+HSD3,HSD3,-13600315.89,4805963.614,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,1,,Hidden surface water calibration node
+HSD4,HSD4,-13563614.1,4726473.25,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,1,,Hidden surface water calibration node
+HSD5,HSD5,-13545574,4734149.923,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden surface water calibration node
+HSD6,HSD6,-13548858.11,4660209.455,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden surface water calibration node
+HSD7,HSD7,-13525817.91,4679232.468,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden surface water calibration node
+HSD8,HSD8,-13509761.52,4634526.622,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden surface water calibration node
+HSD9,HSD9,-13532142.52,4629169.175,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden surface water calibration node
+HSU10C10,HSU10C10,-13465880.07,4460007.609,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU10C30,HSU10C30,-13455098.19,4434261.223,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU10C85,HSU10C85,-13449337.11,4424810.587,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU10D731,HSU10D731,-13435421.56,4423186.019,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU10D803,HSU10D803,-13461247.27,4443388.869,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU11D16,HSU11D16,-13415624.35,4497465.134,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU11D662,HSU11D662,-13416917.2,4497340.051,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU11D664,HSU11D664,-13443100,4503359.281,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU11D672,HSU11D672,-13449942.31,4502109.52,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU11D689,HSU11D689,-13448452.05,4488117.811,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU12D645,HSU12D645,-13426497.45,4481322.642,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU12D649,HSU12D649,-13432763.97,4473724.365,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU12D662,HSU12D662,-13414439.87,4492298.014,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU12D664,HSU12D664,-13437022.61,4491062.029,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU12D699,HSU12D699,-13439329.8,4470847.682,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU13C72,HSU13C72,-13382849.55,4436414.368,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU13D606,HSU13D606,-13390708.78,4424704.479,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU13D624,HSU13D624,-13395922.63,4469712.007,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU13D634,HSU13D634,-13396165.29,4470150.24,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU13D645,HSU13D645,-13403815.9,4454647.007,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU13D649,HSU13D649,-13406525.93,4445382.044,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU13D694,HSU13D694,-13401502.2,4471630.613,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU13D731,HSU13D731,-13399929.35,4427537.756,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Hidden node on surface water conveyance channel
+HSU14C92,HSU14C92,-13379150.73,4352658.514,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU14D608,HSU14D608,-13398777.3,4445202.259,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU15C49,HSU15C49,-13313928.9,4356646.616,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU15C52,HSU15C52,-13341172.65,4340019.492,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU15C56,HSU15C56,-13318008.34,4326755.964,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU15C75,HSU15C75,-13353432.79,4330176.839,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU15D608,HSU15D608,-13384958.69,4432659.259,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU16C49,HSU16C49,-13310652.51,4368600.616,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU16C53,HSU16C53,-13333819.85,4382073.863,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU16D606,HSU16D606,-13365208.42,4390158.278,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU17C53,HSU17C53,-13326459.28,4374777.36,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU17C76,HSU17C76,-13308341.48,4357833.152,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU18C56,HSU18C56,-13293860.32,4312403.774,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU18C58,HSU18C58,-13293149.22,4311375.812,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU18C688,HSU18C688,-13279052.43,4294354.705,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU19C62,HSU19C62,-13314008.39,4245967.173,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU19C65,HSU19C65,-13283236.8,4236034.336,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,4,,Hidden node on surface water conveyance channel
+HSU19C74,HSU19C74,-13288788.25,4230569.554,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU19D847,HSU19D847,-13337912.4,4229205.835,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,4,,Hidden node on surface water conveyance channel
+HSU19D850,HSU19D850,-13316548.63,4246069.346,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Hidden node on surface water conveyance channel
+HSU1D5,HSU1D5,-13635772.07,4946305.427,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Hidden node on surface water conveyance channel
+HSU1D74,HSU1D74,-13632081.46,4938109.371,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Hidden node on surface water conveyance channel
+HSU1SR3,HSU1SR3,-13642111.05,4949712.453,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,1,,Hidden node on surface water conveyance channel
+HSU20C64,HSU20C64,-13282456.04,4236835.887,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU20C65,HSU20C65,-13268460.25,4236076.381,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU20C74,HSU20C63,-13273701.43,4229673.76,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU21C65,HSU21C65,-13262590.17,4218993.038,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,4,,Hidden node on surface water conveyance channel
+HSU21C689,HSU21C689,-13269499.43,4221196.506,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU21C74,HSU21C74,-13266214.29,4212956.207,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Hidden node on surface water conveyance channel
+HSU2C11,HSU2C11,-13621668.69,4876862.188,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Hidden node on surface water conveyance channel
+HSU2C1,HSU2C1,-13615986.05,4873700.836,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Hidden node on surface water conveyance channel
+HSU2C9,HSU2C9,-13623906.36,4873896.811,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Hidden node on surface water conveyance channel
+HSU2D77,HSU2D77,-13609131.73,4867273.144,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Hidden node on surface water conveyance channel
+HSU3C11,HSU3C11,-13597523.33,4830292.503,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Hidden node on surface water conveyance channel
+HSU3C13,HSU3C13,-13599500.08,4820887.746,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Hidden node on surface water conveyance channel
+HSU3C305,HSU3C305,-13609488.77,4808308.604,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Hidden node on surface water conveyance channel
+HSU3D66,HSU3D66,-13598254.76,4808449.702,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Hidden node on surface water conveyance channel
+HSU4D30,HSU4D30,-13596791.99,4796394.767,Junction Node,9,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Hidden node on surface water conveyance channel
+HSU5C35,HSU5C35,-13532131.02,4709166.776,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU5C77,HSU5C77,-13538625.85,4758633.878,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU5C80,HSU5C80,-13537872.26,4758946.285,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU5C83,HSU5C83,-13465749.54,4683403.754,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,Hidden node on surface water conveyance channel
+HSU5D31,HSU5D31,-13541428.93,4757698.377,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU5SR-6,HSU5SR-6,-13533876.86,4768940.041,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU6C16,HSU6C16,-13585277.24,4695735.968,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU6C21,HSU6C21,-13590771.1,4686667.223,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU6C314,HSU6C314,-13586748.31,4706247.782,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU7C33,HSU7C33,-13548105.49,4745362.785,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU7C67,HSU7C67,-13535492.72,4716207.284,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU7D42,HSU7D42,-13549755.99,4737958.679,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU8C173,HSU8C173,-13505626.62,4666334.302,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU8C37,HSU8C37,-13522824.92,4660349.17,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU8C43,HSU8C43,-13503337.37,4658650.372,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU8D98,HSU8D98,-13515377.19,4665508.049,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU9D507,HSU9D507,-13538004.86,4650150.891,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU9D515,HSU9D515,-13548182.82,4639425.543,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU9D521,HSU9D521,-13547373.98,4635105.463,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSU9D523,HSU9D523,-13553307.78,4639860.025,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on surface water conveyance channel
+HSURC26,HSURC26,-13538344.6,4756165.44,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on delivery via CVPM 5 farm gate to Sac E Refuge
+HSURC303,HSURC303,-13612030.59,4794378.132,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,1,,Hidden diversion refuge node
+HSURC307,HSURC307,-13546048.94,4734129.499,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Hidden node on return flow delivery from CVPM 5 to Sac E Refuge
+HSURC311,HSURC311,-13544809.54,4725174.792,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Hidden node for supply into the Sacramento East Refuge
+HSURC60,HSURC60,-13308658.79,4308849.232,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,4,,Hidden node for conveyance loss for deliveries to Pixley NWR
+HSURC95,HSURC95,-13305843.84,4242371.622,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,4,,Hidden node for conveyance loss for deliveries to Kern NWR
+HSURD723,HSURD723,-13437128.5,4470947.351,Junction Node,9,,,,,,,,,,,,,,,,,14,Randy Ritzema,3,,Hidden surface diversion node for San Joaquin refuges
+HSURD732,HSURD732,-13384035.47,4409836.931,Junction Node,9,,,,,,,,,,,,,,,,,14,Randy Ritzema,3,,Hidden surface diversion node for Mendota NWR
+HU10,HU10,-13451163.67,4430193.922,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,Hidden diversion calibration node
+HU11,HU11,-13447250.9,4489819.012,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,3,,Hidden diversion calibration node
+HU12,HU12,-13436744,4467678.29,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,3,,Hidden diversion calibration node
+HU13,HU13,-13400764.04,4431715.964,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,3,,Hidden diversion calibration node
+HU14,HU14,-13412587.1,4348042.667,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden diversion calibration node
+HU15,HU15,-13352369.06,4333489.636,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden diversion calibration node
+HU16,HU16,-13355552.36,4365464.673,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden diversion calibration node
+HU17,HU17,-13336876.89,4346363.062,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden diversion calibration node
+HU18,HU18,-13308425.48,4305876.282,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden diversion calibration node
+HU19,HU19,-13321680.77,4235993.52,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden diversion calibration node
+HU1,HU1,-13638585.35,4940730.563,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,1,,Hidden diversion calibration node
+HU20,HU20,-13302478.21,4239877.24,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden diversion calibration node
+HU21,HU21,-13273486.3,4203822.298,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Hidden diversion calibration node
+HU2,HU2,-13622652.8,4881036.794,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,1,,Hidden diversion calibration node
+HU3,HU3,-13612453.07,4795809.862,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,1,,Hidden diversion calibration node
+HU4,HU4,-13602028.76,4799002.648,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,1,,Hidden diversion calibration node
+HU5,HU5,-13537803.27,4755481.607,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden diversion calibration node
+HU6,HU6,-13588194.23,4701124.577,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden diversion calibration node
+HU7,HU7,-13555836.36,4754716.355,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden diversion calibration node
+HU8,HU8,-13517679.07,4678772.583,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden diversion calibration node
+HU9,HU9,-13563211.39,4654151.573,Junction Node,9,,,,,,,,,,,,,,,,,7,Brad Newlin,2,,Hidden diversion calibration node
+HUDAV,HUDAV,-13125892.52,4184292.535,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Hidden node for Antelope Valley ag supplied by SW
+HUDCH,HUDCH,-12921219.49,3970887.854,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Hidden node for coachella Ag
+HUDEW,HUDEW,-13050017.45,3994050.699,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Hidden node for E&W MWD Ag
+HUDIM,HUDIM,-12889501.17,3905805.461,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for Imperial Ag
+HUDPV,HUDPV,-12750923,4012614.647,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Surface supply to Palo Verde Ag
+HUDSD,HUDSD,-13048558.83,3951278.176,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Hidden Node for San Diego Ag
+HUDVC,HUDVC,-13142093.98,4089651.043,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Hidden node for ventura ag supplied by surface water
+HWTC147,HWTC147,-12930168.71,3979749.976,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,Hidden node for higher cost direct use of Coachella Canal surface water via water treatment plant to Coachella Urban; in parrallel with existing direct use for gold course irrigation from C147; for future scenarios of 2100.
+HWTC310,HWTC310,-13550051.41,4564860.651,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,EBMUD and CCWD intertie
+HWWT10,HWWT10,-13113793.54,4018365.112,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Hidden node for exapanded wastewater recycling for CMWD
+HWWT11,HWWT11,-12935785.05,3991386.317,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Hidden node for exapanded wastewater recycling for Coachella Urban
+HWWT12,HWWT12,-13043632.66,3976031.991,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Hidden node for exapanded wastewater recycling for EMWD
+HWWT13,HWWT13,-13485252.29,4662949.061,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Hidden node for wastewater recycling for Greater Sacramento
+HWWT18,HWWT18,-13565647.23,4559824.092,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Hidden node for wastewater recycling for CCWD
+HWWT19,HWWT19,-13517474.78,4447934.093,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Expanded wastewater treatment for SCV
+HWWT32,HWWT,-12973342.06,4141115.666,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Hidden node for exapanded wastewater recycling for Mojave
+HWWT33,HWWT33,-13112691.27,4206318.653,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Hidden node for exapanded wastewater recycling for Antelope Valley
+HWWT35,HWWT35,-13543499.8,4486598.829,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Hidden node for wastewater recycling for EMBUD
+HWWT8,HWWT8,-13012141.64,3911950.903,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Hidden node for exapanded wastewater recycling for San Diego
+HWWT9,HWWT9,-13093019.58,4070323.418,Junction Node,9,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Hidden node for exapanded wastewater recycling for SBV
+HWWTVC,HWWTVC,-13169930.22,4085431.721,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Expanded Wastwater recycling for Ventura
+HXCMWD,HXCMWD,-13119592.96,4060862.286,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for year type variation in demand; central mwd
+HXEWMWD,HXEWMWD,-13090009.46,4046065.259,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for year type variation in demand; e&w mwd
+HXSD,HXSD,-13073776.34,4010959.051,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Hidden node for year type variation in demand; SAN DIEGO
+Ind: Central MWD,Ind: CMWD,-13120418.92,4033419.577,Urban Demand Node,11,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,DAUs 87;89;90.92;96;114 and part of 100 - Urban Deamnd for Industrial Sector
+Ind: Contra Costa,IND CCWD,-13560264.66,4558081.898,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,Part of DAU 46 and all of 192
+Ind: EBMUD,IND EBMUD,-13594092.16,4553326.765,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,Parts of DAU 46 & 47
+Ind: E&W MWD,Ind: EMWD,-13036848.72,3990956.003,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 98; 104; 110 - Urban Demand for Industrial Sector
+Ind: Napa-Solano,IND NAPA,-13591979.75,4624020.612,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,Includes Napa & Solano Co. M&I surface water demand (DAU 191; 40 ; 41).
+Ind: San Diego,Ind: SDMWD,-13014866.98,3897629.059,Urban Demand Node,11,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,DAU 120 Urban Demand for Industrial Sector
+Ind: San Francisco,IND SFPUC,-13616840.23,4524765.279,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,Includes all of DAU 43
+Ind: SBV,Ind: SBV,-13060629.2,4056270.349,Urban Demand Node,11,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,DAU 308 & part of 100 Urban Demand for Industrial Sector
+Ind: SCV,Ind:SCV,-13564648.51,4503579.613,Urban Demand Node,11,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,This includes Santa Clara Valley WD; ACWD; and Alameda Zone 7 (All of DAU 44; 45 ; 62; plus part of DAU 47)
+Ind: Ventura,IND:VENT,-13251608.23,4086189.607,Urban Demand Node,11,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Fixed SWP Imports to VCFCWCD
+Int: Antelope,INT AV,-13122437.78,4198785.944,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 299-377 Urban demand: Ind/Interior Res/Comm
+Int: Bakersfield,INT BAKER,-13261996.9,4203486.53,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,DAU 254 interior urban flows
+Int: Blythe,INT Blythe,-12795364.37,4021492.628,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 333-347 Ind/Interior Res/Comm
+Int: Castaic,INT CLWA,-13191355.48,4100536.478,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 83 Ind/Interior Res/Comm Demand
+Int: CityofFresno,INT FRESN,-13338264.09,4404663.136,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,DAU 233 interior urban
+Int: Coachella,INT: COACH,-12941288.16,3994740.636,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 348; 349 Ind/Interior Res/Comm Demand
+Int: CVPM10,INT CVPM10,-13454540.91,4455513.446,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,100% of DAU 216; interior
+Int: CVPM11,INT CVPM11,-13471808.19,4541584.045,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,100% of DAU 205 & 206; interior
+Int: CVPM12,INT CVPM12,-13458558.8,4510057.877,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,100% of DAU 208; interior
+Int: CVPM13,INT CVPM13,-13397139.42,4459084.67,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,100% of DAU 210 & 213; Interior
+Int: CVPM14,INT CVPM14,-13384162.82,4345827.526,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,100% of DAU 244 & 245; interior
+Int: CVPM15,INT CVPM15,-13340875.62,4338746.591,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,100% of DAU 238; 235; 237; 241; & 246; interior
+Int: CVPM17,INT CVPM17,-13303021.35,4380627.653,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,100% of DAU 236; 239 & 240; includes cities of Sanger; Selma; Reedley; and Dinuba; interior
+Int: CVPM18,INT CVPM18,-13278063.68,4317690.606,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,100% of DAU 242 & 243; includes cities of Visalia and Tulare; interior
+Int: CVPM19,INT CVPM19,-13316074.81,4232886.193,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,100% of DAU 255; 259 & 260; interior
+Int: CVPM20,INT CVPM20,-13259618.61,4248736.596,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,100% of DAU 256 & 257; includes cities of Delano and Wasco; interior
+Int: CVPM21,INT CVPM21,-13243949.28,4178383,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,100% of DAU 258 and 26; interior
+Int: CVPM2,INT CVPM2,-13616899.83,4862990.293,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Interior Urban demand node for 100% of DAU 142
+Int: CVPM3,INT CVPM3,-13601833.18,4759079.604,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,1,,100% of DAU 163; interior
+Int: CVPM4,INT CVPM4,-13572928.68,4735261.576,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,1,,100% of DAU 164; interior
+Int: CVPM5,INT CVPM5,-13543328.5,4768931.045,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,17% of DAU 159 & 168; 100% of 166 & 171; Interior
+Int: CVPM6,INT CVPM6,-13586564.06,4639500.04,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,100% of DAU 162; 9% of DAU 191; 40 & 41; interior
+Int: CVPM8,INT CVPM8,-13491489.42,4633259.888,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,100% of DAU 180; interior
+Int: CVPM9,INT CVPM9,-13522997.62,4570402.521,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,100% of DAU185; interior
+Int: El Centro et,INT El Cen,-12852881.96,3896916.773,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 353-357 Ind/Interior Res/Comm Demand
+Int: Mojave,INT MR,-12932432.57,4120535.297,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 308-332 Ind/Interior Res/Comm demand
+Int: Redding,INTRedding,-13621335.1,4933974.05,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,1,,Redding Area demand is a  time series of monthly withdrawals from Shasta for surface water demand (DAU 141; 143.)
+Int: Sacramento,INT SAC,-13452235.78,4703071.954,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,Includes Placerville and Auburn (DAU 158; 161; 172; 173; 186).
+Int: SB-SLO,INT SB-SLO,-13377431.48,4137273.211,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,4,,Only the SWP Imports are modeled (DAU 67; 68; 71; 74; 75)
+Int: Stockton,INT STOCK,-13485175.91,4587568.623,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,DAU 182 interior urban flows
+Int: Yuba,INT YUBA,-13541856.8,4765774.234,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Urban demand node for Yuba city et al. Includes Yuba City and parts of Butte Co. but not Plumas Co. surface water demand (DAU 159; 168)
+IRes: Central MWD,IRes CMWD,-13120418.92,4033419.577,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAUs 87;89;90.92;96;114 and part of 100 - Urban Demand for Interior Res/Comm
+IRes: Contra Costa,IRES  CC,-13247019.4,4865942.28,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,Interior urban residential Part of DAU 46 and all of 192
+IRes: EBMUD,IRES EBMUD,-13594092.16,4553326.765,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,EBMUD interior urban demand Parts of DAU 46 & 47
+IRes: E&W MWD,IRes: EMWD,-13036848.72,3990956.003,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 98; 104; 110 - Urban Demand for Interior Res/Comm
+IRes: Napa-Solano,IRES NAPA,-13591979.75,4624020.612,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,Interior urban includes Napa & Solano Co. M&I surface water demand (DAU 191; 40 ; 41).
+IRes: San Diego,IRes: SDWD,-12985866.36,3902775.04,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 120; 350; 351;352 - Urban Demand for Interior Res/Comm
+IRes: San Francisco,IRES SF,-13616840.23,4524765.279,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,Interior Urban Residential includes all of DAU 43
+IRes: SBV,IRes: SBV,-13060629.2,4056270.349,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 308 & part of 100 - Urban Demand for Interior Res/Comm
+IRes: SCV,IRES SCV,-13564648.51,4503579.613,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,Interior Urban Residential This includes Santa Clara Valley WD; ACWD; and Alameda Zone 7 (All of DAU 44; 45 ; 62; plus part of DAU 47)
+IRes: Ventura,IRES:VENT,-13251608.23,4086189.607,Urban Demand Node,11,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,DAU 81 - Interior residential/commercial use
+Iron Pumping Plant,Iron PMP,-12815471.71,4048919.703,Pump Plant Node,14,,,,,,,,,,,,,,,,,14,Randy Ritzema,5,,Formerly part of Colorado Pumping Plant - first pumping station along CRA
+isolated facility PMP,ISOL F PMP,-13545863.15,4601973.235,Pump Plant Node,14,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Isolated Facility Pumping Plant
+Julia Hinds Pumping Plant,JuliaH PMP,-12871708.32,3989502.846,Pump Plant Node,14,,,,,,,,,,,,,,,,,14,Randy Ritzema,5,,Formerly part of Colorado Pumping Plant - third pumping station along CRA
+KernNWR,KernNWR,-13315627.01,4266072.513,Non-Standard Demand Node,13,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Kern NWR
+LasPerillasPMP,LPerilPMP,-13348221.29,4279323.732,Pump Plant Node,14,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Las Perillas Pumping Plant
+LBG PMP,LBGPMP,-13461968.42,4438453.154,Pump Plant Node,14,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Los Banos Grandes Pumping Plant
+Los Vaqueros PMP,L Vaq PMP,-13550545.23,4557129.23,Pump Plant Node,14,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Los Vaqueros Pumping Plant
+Mallard Slough PMP,MallSL PMP,-13573079.64,4584699.851,Pump Plant Node,14,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Mallard Slough Pumping Plant
+Mendota Wildlife Area,MendRef,-13394067.67,4396769.905,Non-Standard Demand Node,13,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,Mendota Wildlife Area
+Mexico,Mexico,-12771051.49,3857386.101,Urban Demand Node,11,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,Colorado River excess
+Mojave Power Plant,Mojave PWP,-13060451.56,4070430.51,Power Plant Node,15,,,,,,,,,,,,,,,,,7,Brad Newlin,,,East Branch SWP Power Plant
+N1,N1,-13047646.26,4033148.542,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Junction node for SBMWD foothill feeder intertie
+N2,N2,-13040474.32,4026127.244,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Junction node for SBVMWD foothill feedeer intertie
+N3,N3,-13046461.2,4010401.354,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Junction near Lake Perris
+N4,N4,-13027870.26,4000957.702,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Inland feeder junction
+N5,N5,-13032645.74,3986390.52,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Node to route inland feeder around pumping plant
+N6,N6,-13032281.79,3986487.936,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Diamond Valley lake forebay
+N7,N7,-13213289.32,4121832.091,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Juntion node for untreated SWP water coming into Antelope Valley
+Old River PMP,Old R PMP,-13533984.32,4563482.809,Pump Plant Node,14,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Old River Pumping Plant
+ONeill PMP,ONeillPMP,-13474269.11,4452891.968,Pump Plant Node,14,,,,,,,,,,,,,,,,,13,Stacy Tanaka,3,,ONeill Pumping Plant
+ONeill PWP,ONeillPWP,-13475081.67,4453102.859,Power Plant Node,15,,,,,,,,,,,,,,,,,13,Stacy Tanaka,3,,ONeill Power Plant
+OSO Pumping Plant,OSO PMP,-13215978.6,4138378.957,Pump Plant Node,14,,,,,,,,,,,,,,,,,7,Brad Newlin,,,West Branch SWP Pumping Plant
+Owens Valley 1 Power Plant,Owens1 PWP,-13197871.38,4500466.937,Power Plant Node,15,,,,,,,,,,,,,,,,,7,Brad Newlin,,,LAA System Power Plant
+Owens Valley 2 Power Plant,Owens2 PWP,-13130616.95,4319517.542,Power Plant Node,15,,,,,,,,,,,,,,,,,7,Brad Newlin,,,LAA System Power Plant
+Owens Valley Ag,OWENS AG,-13166602.1,4448311.219,Agricultural Demand Node,10,,,,,,,,,,,,,,,,,2,Andy Draper,,,Owens Valley Ag
+Pearblossom Pumping Plant,PB PMP,-13126966.74,4097818.895,Pump Plant Node,14,,,,,,,,,,,,,,,,,7,Brad Newlin,,,East Branch SWP Pumping Plant
+PixleyNWR,PixleyNWR,-13289883.95,4290533.397,Non-Standard Demand Node,13,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Pixley NWR
+Required Delta Outflow,Req Delta,-13572871.18,4586517.78,Junction Node,9,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,Required Delta Outflow
+Sac East Refuges,Sac E Ref,-13553035.99,4730683.861,Non-Standard Demand Node,13,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Sacramento East Refuges
+Sac West Refuges,Sac W Ref,-13587308.42,4742778.148,Non-Standard Demand Node,13,,,,,,,,,,,,,,,,,8,Brian Van Lienden,1,,Sacramento West Refuges
+San Joaquin Refuges,SJoaqRef,-13491188.47,4525353.076,Non-Standard Demand Node,13,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,3,,San Joaquin Refuges
+Sink C103,Sink C103,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,California Aqueduct Boundary to Region 5
+Sink C15,Sink C15,-13531675.84,4858504.596,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Local depletion DA12
+Sink C161,Sink C161,-13100990.99,4001874.3,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,LAA sink
+Sink C35,Sink C35,-13531675.84,4858504.596,Sink Node,12,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Sink for M&I diversions from Bear River (Boardman Canal; Bear River Canal minus Sutter Canal Export to DSA 22; Combie Gold Hill Canal)
+Sink C41,Sink C41,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Sink for M&I riparian diversions from Calaveras R. (CVGSM ID41)
+Sink C49,Sink C49,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Sink flow to account for monthly mismatch in deliveries and SWAP demands
+Sink C52,Sink C52,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Depletion from South Fork of Kings River
+Sink C53,Sink C53,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Depletion from Kings River
+Sink C54,Sink C54,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Depletion from Fresno Slough
+Sink C56,Sink C56,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Depletion from Kaweah River
+Sink C58,Sink C58,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Depletion from Tule River
+Sink C689,Sink C689,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,11,Guilherme Marques,4,,Friant Kern Sink
+Sink C97,Sink C97,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Depletion from Kern River
+Sink CN1,Sink CN1,-13607407.36,4854029.573,Sink Node,12,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Calibration Sink for Region 1
+Sink CN2,Sink CN2,-13523266.65,4653064.207,Sink Node,12,,,,,,,,,,,,,,,,,13,Stacy Tanaka,4,,Overflow sink for calibration
+Sink CN3,SinkCN3,-13417521.68,4508104.603,Sink Node,12,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Sink for calibration flows
+Sink CN5,Sink CN5,-13112324.41,4084398.13,Sink Node,12,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Calibration Sink Node for Region 5
+Sink CN,Sink CN,-13300539.79,4343627.317,Sink Node,12,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Calibration Flow Sink Node
+Sink D613,Sink D613,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Evaporation ponds for CVPM 14
+Sink D66,Sink D66,-13531675.84,4858504.596,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Local depletion DA15
+Sink D724,SinkD724,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,Lower Delta Mendota Poll Losses (DWRSIM CP733)
+Sink D745,Sink D745,-13100990.99,4001874.3,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,California Aqueduct losses R4
+Sink D747,Sink D747,-13531675.84,4858504.596,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,California Aqueduct losses R5
+Sink D749,Sink D749,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,California Aqueduct losses R6
+Sink D751,Sink D751,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,4,,California Aqueduct losses R7
+Sink D76a,Sink D76a,-13531675.84,4858504.596,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Local depletion DA10
+Sink D848,Sink D848,-13436938.3,4260441.322,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,4,,Coastal Aqueduct deliveries to Castaic WA
+Sink D849,Sink D849,-13436938.3,4260441.322,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,4,,SB and SLO overflow
+Sink D850,Sink D850,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,11,Guilherme Marques,4,,Additional M&I demands to Taft and Exports out of San Joaquin basin
+Sink D853,Sink D853,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,4,,California Aqueduct losses R8C-13C
+Sink D861,Sink D861,-13436938.3,4260441.322,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,4,,California Aqueduct losses 14A-C
+Sink D863,Sink D863,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,4,,California Aqueduct losses 15A-18A
+Sink D94,Sink D94,-13702897.35,4963554.691,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,1,,Trinity River outflow
+SinkDelta,SinkDelta,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,The outflow from Tracy and Harvey Banks pumping facilities
+Sink G100,SinkG100,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Depletion STANISLAUS GOODWIN TO MOUTH
+Sink G101,SinkG101,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Depletion SJR TUOLOMNE TO STANISLAUS
+Sink G102,SinkG102,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Depletion SJR MILLERTON TO Mendota OTA POOL
+Sink G103,SinkG103,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Depletion EASTSIDE BYPASS
+Sink G104,SinkG104,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Depletion LOWER MERCED RIVER
+Sink G105,SinkG105,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Depletion UPPER MERCED RIVER
+Sink G10,Sink G10,-13100990.99,4001874.3,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,WEST BRANCH LOSSES R29A-29F
+Sink G11,Sink G11,-13100990.99,4001874.3,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,WEST BRANCH LOSSES R29H-29J
+Sink G12,Sink G12,-13056466.52,4285193.948,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,EAST BRANCH LOSSES R24-28J
+Sink G13,Sink G13,-13056466.52,4285193.948,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,EAST BRANCH LOSSES R22A-23
+Sink G14,Sink G14,-13056466.52,4285193.948,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,EAST BRANCH LOSSES R17-21
+Sink G16,SinkG16,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Mendota Pool losses
+Sink G17,SinkG17,-13598423.42,4550870.636,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,South Bay Aqueduct losses R1-9
+Sink G18,SinkG18,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Depletion from Tuolumne River
+Sink G19,Sink G19,-13598423.42,4550870.636,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,NAPA SOLANO
+Sink G1,Sink G1,-13531675.84,4858504.596,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,Depletion American River Folsom to Mouth
+Sink G20,Sink G20,-13598423.42,4550870.636,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,Required Delta Outflow
+Sink G21,Sink G21,-13531675.84,4858504.596,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,Local depletion DA69
+Sink G22,Sink G22,-13598423.42,4550870.636,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,Surplus Delta outflow
+Sink G23,Sink G23,-13598423.42,4550870.636,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,CONTRA COSTA
+Sink G24,Sink G24,-13598423.42,4550870.636,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,EAST BAY MUD
+Sink G25,SinkG25,-13598423.42,4550870.636,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,San Francisco waste water
+Sink G26,SinkG26,-13598423.42,4550870.636,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Santa Clara waste water
+Sink G27,SinkG27,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,San Joaquin Refuges return flow
+Sink G30,Sink G30,-13100990.99,4001874.3,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,VENTURA outflow (to ocean)
+Sink G31,Sink G31,-13531675.84,4858504.596,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,DA16 local demand
+Sink G33,Sink G33,-13056466.52,4285193.948,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,ANTELOPE VALLEY outflow (to salt sink or evap)
+Sink G34,Sink G34,-13100990.99,4001874.3,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,CASTAIC LAKE WA outflow
+Sink G35,Sink G35,-13531675.84,4858504.596,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,DA24 local demand
+Sink G36,Sink G36,-13056466.52,4285193.948,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,OWENS VALLEY
+Sink G37,Sink G37,-13100990.99,4001874.3,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,CENTRAL MWD outflow
+Sink G38,Sink G38,-12864342.47,4012874.927,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,SR-CR1 excess water outlet needed for Policy 1a only
+Sink G39,Sink G39,-13056466.52,4285193.948,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,OWENS VALLEY AG
+Sink G3,SinkG3,-13682617.98,4884660.383,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,California Aqueduct losses R1-2
+Sink G40,Sink G40,-13056466.52,4285193.948,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,MOJAVE outflow
+Sink G42,SinkG42,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Depletion from Chowchilla River
+Sink G43,SinkG43,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Depletion from Fresno River
+Sink G44,Sink G44,-13100990.99,4001874.3,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,SBV outflow
+Sink G45,Sink G45,-12864342.47,4012874.927,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,COACHELLA VALLEY URBAN outflow
+Sink G46,Sink G46,-12864342.47,4012874.927,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,EL CENTRO ET AL outflow
+Sink G47,SinkG47,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Depletion San Joaquin River Bypass to Merced
+Sink G48,Sink G48,-13100990.99,4001874.3,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,EASTERN MWD outflow
+Sink G49,SinkG49,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Depletion San Joaquin River Merced to Tuolumne
+Sink G502,Sink G502,-13531675.84,4858504.596,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,Local depletion DA65
+Sink G503,Sink G503,-13531675.84,4858504.596,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,Local depletion DA55
+Sink G504,Sink G504,-13598423.42,4550870.636,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,Local depletion DA70
+Sink G505,Sink G505,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,Local depletion DA59
+Sink G509,SinkG509,-13598423.42,4550870.636,Sink Node,12,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,CVP diversion to Ag in Central Coast
+Sink G50,Sink G50,-13100990.99,4001874.3,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,SAN DIEGO URBAN outflow
+Sink G51,Sink G51,-12864342.47,4012874.927,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,COLORADO RIVER outflow
+Sink G53,Sink G53,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,CALIFORNIA AQUEDUCT LOSSES R30
+Sink G54,SinkG54,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,California Aqueduct losses R6
+Sink G55,SinkG55,-13531675.84,4858504.596,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,California Aqueduct losses R5
+Sink G56,SinkG56,-13100990.99,4001874.3,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,California Aqueduct losses R4
+Sink G57,Sink G57,-13056466.52,4285193.948,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,,,LOS ANGELES AQUEDUCT LOSSES
+Sink G58,SinkG58,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Depletion San Joaquin River Stanislaus to Calaveras
+Sink G6,SinkG6,-13436938.3,4260441.322,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,California Aqueduct losses R3
+Sink G7,SinkG7,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Upper DMC losses
+Sink G95,Sink G95,-13531675.84,4858504.596,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,2,,DA67 local Ag net diversion
+Sink G99,SinkG99,-13598423.42,4550870.636,Sink Node,12,,,,,,,,,,,,,,,,,2,Andy Draper,3,,Santa Clara local supply
+Sink R1,Sink R1,-13598423.42,4550870.636,Sink Node,12,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Region 1 outflow sink; represents outflows to Region 2
+Sink R2,Sink R2,-13598423.42,4550870.636,Sink Node,12,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Region 2 Sink node to represent boundary outflows from Region 2
+Sink R3,Sink R3,-13436938.3,4260441.322,Sink Node,12,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,
+Sink SB-SLO,Sink SB-SL,-13436938.3,4260441.322,Sink Node,12,,,,,,,,,,,,,,,,,4,Mimi Jenkins,4,,SB-SLO
+Sink SR-12,SinkSR-12,-13399689.53,4535836.851,Sink Node,12,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,Extra evaporation losses for CVP part of San Luis (DWRSIM CP11 Evap)
+Sink T25,Sink T25,-13275616.08,4308927.877,Sink Node,12,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Sink from Fresno
+South Bay PMP,SoBayPMP,-13539352.38,4548283.657,Pump Plant Node,14,,,,,,,,,,,,,,,,,8,Brian Van Lienden,3,,South Bay Pumping Plant
+SR-10,SR-10,-13416228.61,4573201.365,Surface Storage Node,7,1000,909,R1 Card for DWRSIM CP10: Initial storage card,0.004627,910,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in main.dat file,792.5599976,911,Ending storage for Unconstrained Run set equal to final Base Case run (A03C46).  This keeps overall surface water consistent between two runs.,1,/UCD CAP1/SR-10/EVAP_RATE(FT)//1MON/NEW MELONES RES-DWR_514/,912,EV Card for DWRSIM CP10: Monthly evaporation values,/UCD CAP1/SR-10/EL-AR-CAP///NEW MELONES RES-DWR_514/,913,RS;RA;RE Cards for DWRSIM CP10: reservoir storage; area; elevation relationships,13,Stacy Tanaka,3,,New Melones Reservoir
+SR-12,SR-12,-13484579.04,4443699.895,Surface Storage Node,7,525,919,RL1 Card for DWRSIM CP 11 & 12: Sum of the two initial storage values,0.00997,920,Calculated assuming a linear slope between the minimum and maximum storage and area values. Original value of 0.00613 subsequently corrected to 0.00997 after A03C20 because evaporation is still substantially smaller than DWRSIM run 514 combined for SR-11&12. See Source file for correction calculation (MJ),492.6400146,921,Ending storage for Unconstrained Run set equal to final Base Case run (A03C46).  This keeps overall surface water consistent between two runs.,1,/UCD CAP1/SR-12/EVAP_RATE(FT)//1MON/SWP SAN LUIS RES-DWR_514/,922,EV Card for DWRSIM CP 11 & 12: monthly TS of evaporation,/UCD CAP1/SR-12/EL-AR-CAP///SAN LUIS RESERVOIR-DWR_514/,923,RS;RA;RE Cards from DWRSIM CP 11 & 12: Values are combined on \Spiff\ex_hobbes\Report\Software & Data Appendices\H (Infrastructure)\SR-12 EL-AR-CAP Calcs.xls,8,Brian Van Lienden,3,,San Luis Reservoir
+SR-15,SR-15,-13552709.81,4525029.991,Surface Storage Node,7,28,929,R1 Card for DWRSIM CP15: Initial storage card,0.012203,930,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in main.dat file,24.62999916,931,Ending storage for Unconstrained Run set equal to final Base Case run (A03C46).  This keeps overall surface water consistent between two runs.,1,/UCD CAP1/SR-15/EVAP_RATE(FT)//1MON/DEL VALLE RESERVOIR-DWR_514/,932,EV Card for DWRSIM CP15: Monthly time series of evaporation,/UCD CAP1/SR-15/EL-AR-CAP///LAKE DEL VALLE-DWR_514/,933,RS;RA;RE Cards for DWRSIM CP15: reservoir storage; area; elevation relationships,8,Brian Van Lienden,3,,Lake Del Valle
+SR-18,SR-18,-13325608.56,4439239.142,Surface Storage Node,7,176,939,R1 Card for DWRSIM CP18: Initial storage card,0.008752,940,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in main.dat file,213.1499939,941,Ending storage for Unconstrained Run set equal to final Base Case run (A03C46).  This keeps overall surface water consistent between two runs.,1,/UCD CAP1/SR-18/EVAP_RATE(FT)//1MON/MILLERTON LAKE-DWR_514/,942,EV Card for DWRSIM CP18: Monthly time series of evaporation,/UCD CAP1/SR-18/EL-AR-CAP///MILLERTON LAKE-DWR_514/,943,RS;RA;RE Cards for DWRSIM CP15: reservoir storage; area; elevation relationships,8,Brian Van Lienden,3,,Millerton Lake
+SR-1,SR-1,-13665929.52,4983013.917,Surface Storage Node,7,2053,37,R1 Card for DWRSIM CP1: Initial storage card,0.006135,38,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in main.dat file,1774.069946,39,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the inital results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-1/EVAP_RATE(FT)//1MON/CLAIR ENGLE LAKE-PROSIM/,40,The units of the base data are asumed to be in 1/100 feet/month,/UCD CAP1/SR-1/EL-AR-CAP///CLAIR ENGLE LAKE-DWR_514/,41,RS;RA;RE Cards for DWRSIM CP1: reservoir storage; area; elevation relationships,13,Stacy Tanaka,1,,Clair Engle Lake
+SR-20,SR-20,-13388174.89,4520815.305,Surface Storage Node,7,229,950,R1 Card for DWRSIM CP20: Initial Storage,0.00638,951,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in main.dat file,834.5900269,952,Ending storage for Unconstrained Run set equal to final Base Case run (A03C46).  This keeps overall surface water consistent between two runs.,1,/UCD CAP1/SR-20/EVAP_RATE(FT)//1MON/LAKE MCCLURE-DWR_514/,953,EV Card for DWRSIM CP20: Monthly time series of evaporation,/UCD CAP1/SR-20/EL-AR-CAP///LAKE MCCLURE-DWR_514/,954,RS;RA;RE Cards for DWRSIM CP20: reservoir storage; area; elevation relationships,13,Stacy Tanaka,3,,Lake McClure
+SR-22,SR-22,-13461980.28,4438262.992,Surface Storage Node,7,0.01,960,Proposed Reservoir: no initial storage,0.006199,961,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in main.dat file,0.01,962,equals initial storage,1,/UCD CAP1/SR-22/EVAP_RATE(FT)//1MON/LOS BANOS GRANDES RES-DWR_514/,963,EV Card for DWRSIM CP3: monthly TS of evaporation,/UCD CAP1/SR-22/EL-AR-CAP///LOS BANOS GRANDES RES-DWR_514/,964,RS;RA;RE Cards for DWRSIM CP22: Elevation-Area-Capacity relationship for proposed reservoir,8,Brian Van Lienden,3,,Los Banos Grandes Reservoir
+SR-25,SR-25,-13059877.82,4069695.768,Surface Storage Node,7,50,968,R1 Card,0.00558,969,From linear regression of area-capacity data; see Appendix I: Facilities Appendix,45.63999939,970,SWP ending storage levels to CALSIM II benchmark run,1,/UCD CAP1/SR-25/EVAP_RATE(FT)//1MON/SILVERWOOD LAKE-DWR_514/,971,EV Card,/UCD CAP1/SR-25/EL-AR-CAP///SILVERWOOD LAKE-DWR_514/,972,RS;RA;RE Cards,6,Jay Lund,,,Silverwood Lake
+SR-27,SR-27,-13044848.59,4009753.231,Surface Storage Node,7,108,977,R1 Card,0.018300001,978,Linear interpolation between max and min usable storage,108.3799973,979,SWP ending storage levels to CALSIM II benchmark run,1,/UCD CAP1/SR-27/EVAP_RATE(FT)//1MON/LAKE PERRIS-DWR_514/,980,EV Card,/UCD CAP1/SR-27/EL-AR-CAP///LAKE PERRIS-DWR_514/,981,RS;RA;RE Cards,6,Jay Lund,,,Lake Perris
+SR-28,SR-28,-13219292.45,4114116.685,Surface Storage Node,7,170,986,R1 Card,0.00725,987,Linear interpolation between max and min usable storage values,143.9400024,988,SWP ending storage levels to CALSIM II benchmark run,1,/UCD CAP1/SR-28/EVAP_RATE(FT)//1MON/PYRAMID LAKE-DWR_514/,989,EV Card,/UCD CAP1/SR-28/EL-AR-CAP///PYRAMID LAKE LAKE-DWR_514/,990,RS;RA;RE Cards,6,Jay Lund,,,Pyramid Lake
+SR-29,SR-29,-13202594.08,4098434.496,Surface Storage Node,7,294,995,R1 Card,0.00798,996,Linear interpolation between max and min usable storage,299,997,SWP ending storage levels to CALSIM II benchmark run,1,/UCD CAP1/SR-29/EVAP_RATE(FT)//1MON/CASTAIC LAKE-DWR_514/,998,EV Card,/UCD CAP1/SR-29/EL-AR-CAP///CASTAIC LAKE-DWR_514/,999,RS;RA;RE Cards,6,Jay Lund,,,Castaic Lake
+SR-3,SR-3,-13640436.39,4951008.693,Surface Storage Node,7,200,48,R1 Card for DWRSIM CP3: Initial storage card,0.012485,49,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in main.dat file,235,50,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the initial results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-3/EVAP_RATE(FT)//1MON/WHISKEYTOWN LAKE-DWR_514/,51,EV Card for DWRSIM CP3: monthly TS of evaporation,/UCD CAP1/SR-3/EL-AR-CAP///WHISKEYTOWN LAKE-DWR_514/,52,RS;RA;RE Cards for DWRSIM CP3: Storage-Area-Elevation relationship,13,Stacy Tanaka,1,,Whiskeytown Lake
+SR-4,SR-4,-13627522.99,4970669.576,Surface Storage Node,7,2496,59,R1 Card for DWRSIM CP4: Initial storage card,0.00647,60,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in main.dat file,3699.320068,61,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the initial results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-4/EVAP_RATE(FT)//1MON/SHASTA LAKE-DWR_514/,62,EV Card for DWRSIM CP4: Monthly TS of evaporation,/UCD CAP1/SR-4/EL-AR-CAP///SHASTA LAKE-DWR_514/,63,RS;RA;RE Cards for DWRSIM CP4: Storage; area; elevation relationship,13,Stacy Tanaka,1,,Shasta Lake
+SR-52,SR-52,-13349210.04,4467013.473,Surface Storage Node,7,24,1004,R1 Card for DWRSIM CP52: Initial storage card,0.013405,1005,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in main.dat file,39.11999893,1006,Ending storage for Unconstrained Run set equal to final Base Case run (A03C46).  This keeps overall surface water consistent between two runs.,1,/UCD CAP1/SR-52/EVAP_RATE(FT)//1MON/HENSLEY LAKE-DWR_514/,1007,EV Card for DWRSIM CP52: Monthly time series of evaporation,/UCD CAP1/SR-52/EL-AR-CAP///HENSLEY LAKE-DWR_514/,1008,RS;RA;RE Cards for DWRSIM CP52: Storage-Area-Elevation relationship,8,Brian Van Lienden,3,,Hensley Lake
+SR-53,SR-53,-13357370.23,4469193.788,Surface Storage Node,7,58,1014,R1 Card for DWRSIM CP53: Initial Storage card,0.008745,1015,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in main.dat file,39.04000092,1016,Ending storage for Unconstrained Run set equal to final Base Case run (A03C46).  This keeps overall surface water consistent between two runs.,1,/UCD CAP1/SR-53/EVAP_RATE(FT)//1MON/EASTMAN LAKE-DWR_514/,1017,EV Card for DWRSIM CP 53: Monthly time series of evaporation,/UCD CAP1/SR-53/EL-AR-CAP///EASTMAN LAKE-DWR_514/,1018,RS;RA;RE Cards for DWRSIM CP3: Storage-Area-Elevation relationship,8,Brian Van Lienden,3,,Eastman Lake
+SR-6,SR-6,-13527330.81,4798292.957,Surface Storage Node,7,2555,70,R1 Card for DWRSIM CP6: Initial storage card,0.004065,71,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in main.dat,2633.350098,72,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the inital results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage. For Unconstrained runs; set equal to Base Case (DWRSIM 514) ending (A02B20 change MJ 09/24/00),1,/UCD CAP1/SR-6/EVAP_RATE(FT)//1MON/LAKE OROVILLE-DWR_514/,73,EV Card,/UCD CAP1/SR-6/EL-AR-CAP///LAKE OROVILLE-DWR_514/,74,RS;RA;RE Cards for DWRSIM CP6: reservoir storage; area; elevation relationships,13,Stacy Tanaka,2,,Lake Oroville
+SR-7,SR-7,-13540800.79,4787473.808,Surface Storage Node,7,49.40000153,81,Calculated as 50% of maximum operating storage,0.07,82,Calculated as slope between the minimum and maximum points from the area-capacity relationship,10.89000034,83,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the inital results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage. For Unconstrained runs; set equal to Base Case (DWRSIM 514) ending (A02B20 change MJ 09/24/00),1,/UCD CAP1/SR-7/EVAP_RATE(FT)//1MON/THERMALITO FOREBAY-DWR_514/,84,EV Card for DWRSIM CP7: Monthly TS of evaporation,/UCD CAP1/SR-7/EL-AR-CAP///THERM. AFTERBAY-DWR_514/,85,0,13,Stacy Tanaka,2,,Thermalito Afterbay
+SR-81,SR-81,-13405329.98,4537361.627,Surface Storage Node,7,373,1024,R1 Card for DWRSIM CP81: initial storage card,0.005772,1025,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in main.dat file,1695.130005,1026,Ending storage for Unconstrained Run set equal to final Base Case run (A03C46).  This keeps overall surface water consistent between two runs.,1,/UCD CAP1/SR-81/EVAP_RATE(FT)//1MON/DON PEDRO RES-DWR_514/,1027,EV Card for DWRSIM CP81: Monthly time series of evaporation,/UCD CAP1/SR-81/EL-AR-CAP///NEW DON PEDRO RES-DWR_514/,1028,RS;RA;RE Cards for DWRSIM CP3: Storage-Area-Elevation relationship,13,Stacy Tanaka,3,,New Don Pedro Reservoir
+SR-8,SR-8,-13488366.53,4678775.945,Surface Storage Node,7,549,91,R1 Card for DWRSIM CP8: Initial storage card,0.01117,92,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in main.dat,649.75,93,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the initial results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage. For Unconstrained runs; set equal to Base Case (DWRSIM 514) ending (A02B20 change MJ 09/24/00),1,/UCD CAP1/SR-8/EVAP_RATE(FT)//1MON/FOLSOM LAKE-DWR_514/,94,EV Card for DWRSIM CP8: Monthly TS of evaporation,/UCD CAP1/SR-8/EL-AR-CAP///FOLSOM LAKE-DWR_514/,95,RS;RA;RE Cards,13,Stacy Tanaka,2,,Folsom Lake
+SR-ASF,SR-ASF,-13560836.38,4507900.006,Surface Storage Node,7,128,1034,Calculated as 50% of maximum usable storage,0.019123999,1035,Calculated as slope between the minimum and maximum points from the area-capacity relationship.  Extended trendline of SR-ASF to find area elevation capacity for larger Calaveras Reservoir.  SN,128,1036,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the initial results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-LV/EVAP_RATE(FT)//1MON/LOS VAQUEROS RES-CCWD/,1037,Uses Los Vaqueros Reservoir Data,/UCD CAP1/SR-ASF/EL-AR-CAP///SF AGGREGATE RES-SFPUC/,1038,Assumes linear side slopes between maximum storage and area and (0;0),13,Stacy Tanaka,3,,SF aggregate
+SR-BBL,SR-BBL,-13617724.71,4838062.925,Surface Storage Node,7,80.19999695,101,Calculated as 50% of maximum operating storage,0.018526319,102,Calculated as slope between the minimum and maximum points from the area-capacity relationship,80.19999695,103,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the inital results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-BBL/EVAP_RATE(FT)//1MON/BLACK BUTTE LAKE/,104,0,/UCD CAP1/SR-BBL/EL-AR-CAP///BLACK BUTTE LAKE/,105,Assumes linear relationship between maximum storage and area and (0;0),7,Brad Newlin,1,,Black Butte Lake
+SR-BVLB,SR-BVLB,-13276197.71,4194440.884,Surface Storage Node,7,0.001,,,0,,,0,,,0,/UCD CAP1/SR-LI/EVAP_RATE(FT)//1MON/LAKE ISABELLA/,,,,,,4,Mimi Jenkins,4,,Buena Vista Lake Bed
+SR-CFW,SR-CFW,-13505065.43,4728821.131,Surface Storage Node,7,35,112,From R1 Card of HEC-3 Camp Far West Reservoir,0.002602,113,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in the HEC-3 Model input file; Temporarily set at 0 from 0.002602 to re-calibrate in A03B18 with new instream flows mins - obj. to get SR optimized reservoirs to stay full when calibration occurs.,35,114,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the initial results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-CFW/EVAP_RATE(FT)//1MON/CAMP FAR WEST RES-HEC3_BEAR/,115,EV Card for HEC-3 Camp Far West Reservoir: Monthly TS of evaporation,/UCD CAP1/SR-CFW/EL-AR-CAP///CAMP FAR WEST RES-HEC3_BEAR/,116,RS;RA;RE Cards for HEC-3 Camp Far West Reservoir: Storage; area; elevation relationship,13,Stacy Tanaka,2,,Camp Far West Reservoir
+SR-CL-IVR,SR-CL-IVR,-13607592.81,4705912.77,Surface Storage Node,7,306.7000122,122,Calculated as 50% of maximum operating storage,0.032558199,123,Calculated as slope between the minimum and maximum points from the area-capacity relationship; Temporarily set to 0 from 0.0325582 to get optimized reservoirs during calibration to stay full during wet periods.,306.7000122,124,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the inital results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-CL-IVR/EVAP_RATE(FT)//1MON/CLEAR LAKE AND INDIAN  VALLEY/,125,0,/UCD CAP1/SR-CL-IVR/EL-AR-CAP///CLEAR LAKE AND INDIAN VALLEY/,126,0,7,Brad Newlin,2,,Clear Lake & Indian Valley Reservoir
+SR-CR1,SR-CR1,-12707874.76,4071449.18,Surface Storage Node,7,0.01,,,0,,,0.01,,,1,,,,,,,4,Mimi Jenkins,,,First priority Colorado River 4.4 water for Policy 4a (661.43 taf/yr)
+SR-CR2,SR-CR2,-12707874.76,4071449.18,Surface Storage Node,7,0.01,,,0,,,0.01,,,1,,,,,,,4,Mimi Jenkins,,,Second priority Colorado River 4.4 water for Policy 4a (3.55 maf/yr)
+SR-CR3,SR-CR3,-12707874.76,4071449.18,Surface Storage Node,7,0.01,1045,Technical Memo: BDN2,0,,,0,1046,Technical Memo: BDN2,1,,,,,,,7,Brad Newlin,,,Colorado River Storage for MWD (850 taf/yr)
+SR-CR,SR-CR,-13472113.33,4611248.031,Surface Storage Node,7,200,134,From BSTOR value of SANJASM node 175,0.005604,135,Calculated as slope between the minimum and maximum points from the area-capacity relationship as calculated using the function in RES.ND1 for SANJASM node 175,235,136,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the inital results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage. For Unconstrained runs; set equal to Base Case (Sanjasm NAA) ending (A02B20 change MJ 09/24/00),1,/UCD CAP1/SR-CR/EVAP_RATE(FT)//1MON/CAMANCHE RES-SANJASM_92/,137,Monthly evaporation rate for Camanche,/UCD CAP1/SR-CR/EL-AR-CAP///CAMANCHE RES-SANJASM_92/,138,calculated from given equation for SANJASM node 175,8,Brian Van Lienden,2,,Camanche Res
+SR-DV,SR-DV,-13027716.06,3986545.266,Surface Storage Node,7,600,1050,50% of usable storage pool,0.00508,1051,Linear interpolation between max and min usable storage,600,1052,An 800 KAF reservoir with 400 KAF being allocated towards emergency storage,1,/UCD CAP1/SR-ER/EVAP_RATE(FT)//1MON/EASTSIDE/,1053,See Technical Memo BDN6.DOC,/UCD CAP1/SR-ER/EL-AR-CAP///EASTSIDE RESERVOIR/,1054,0,6,Jay Lund,,,Diamond Valley Lake (Formerly Eastside reservoir)
+SR-EBMUD,SR-EBMUD,-13594678.6,4541343.826,Surface Storage Node,7,117.9000015,144,Calculated as 50% of maximum operating storage,0.01073917,145,"Calculated as slope between the minimum and maximum points from the area-capacity relationship; Temporarity set to zero from 1.073917E-02 in A03B18 during re-calibration to get optimized SR""s to stay full during calibration.",117.9000015,146,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the inital results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-EBMUD/EVAP_RATE(FT)//1MON/EBMUD AGGREGATE LOCAL STORAGE/,147,0,/UCD CAP1/SR-EBMUD/EL-AR-CAP///EBMUD AGGREGATE LOCAL STORAGE/,148,0,7,Brad Newlin,2,,EBMUD aggregate
+SR-EL,SR-EL,-13499499.8,4755948.946,Surface Storage Node,7,66,155,R1 Card for HEC-3 Englebright Reservoir: dead storage,0.010196,156,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in the HEC-3 Model input file; Temporarily set to 0 from 0.010196 in re-calibration in A03B17 to let reservoir stay full in wet periods.,66,157,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the inital results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-EL/EVAP_RATE(FT)//1MON/ENGLEBRIGHT LAKE-HEC3_YUBA/,158,EV Card forHEC-3 Englebright Reservoir: Monthly TS of evaporation,/UCD CAP1/SR-EL/EL-AR-CAP///ENGLEBRIGHT LAKE-HEC3_YUBA/,159,RS;RA;RE Cards for HEC-3 Englebright Reservoir: Storage; area; elevation relationship,13,Stacy Tanaka,2,,Englebright Lake
+SR-GL,SR-GL,-13258483.1,4559939.219,Surface Storage Node,7,26,1058,50% of maximum usable storage,0.02246104,1059,linear interpolation between maximum and minimum storage,26,1060,equals initial storage,1,/UCD CAP1/SR-GL/EVAP_RATE(FT)/01JAN1920/1MON/GRANT LAKE/,1061,equal to the evaporation of Lake Isabella,/UCD CAP1/SR-GL/EL-AR-CAP///GRANT LAKE/,1062,includes only maximum and minimum storage points,6,Jay Lund,,,Grant Lake
+SR-HHR,SR-HHR,-13334740.29,4572071.428,Surface Storage Node,7,330.6000061,1065,Calculated as 50% of maximum storage (up to V43).  V44: Large calibration flows in highly constrained SFPUC system were large; indicating that raising the storage to a higher value might be a more accurate representation.  Initial storage was calculated as the average of he storage outputs from V43 which were below capacity (RR).,0.005432507,1066,Calculated as slope between the minimum and maximum points from the area-capacity relationship,330.6000061,1067,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the initial results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-81/EVAP_RATE(FT)//1MON/DON PEDRO RES-DWR_514/,1068,Assumed to be the same as for New Don Pedro Reservoir - EV Card for DWRSIM CP81,/UCD CAP1/SR-HHR/EL-AR-CAP///HETCH HETCHY RES-DWR BULL 17-93/,1069,Assumes linear side slopes between the maximum storage and area and (0;0),13,Stacy Tanaka,3,,Hetch Hetchy Reservoir
+SR-LA,SR-LA,-13130012.83,4319480.753,Surface Storage Node,7,52,1075,assumed to be 50% of maximum usable storage,0.031649999,1076,linear interpolation between  maximum and minimum storage values,52,1077,equals initial storage,1,/UCD CAP1/SR-LA/EVAP_RATE(FT)//1MON/LAA STORAGE/,1078,equals Lake Isabells evaporation,/UCD CAP1/SR-LA/EL-AR-CAP///LAA STORAGE/,1079,includes only maximum and minimum values,7,Brad Newlin,,,LAA Storage
+SR-LB,SR-LB,-13590093,4652465.148,Surface Storage Node,7,806.2999878,166,Calculated as 50% of maximum operating storage,0.009746412,167,Calculated as slope between the minimum and maximum points from the area-capacity relationship; Temporarity set to 0 from 9.746412E-03 in A03B18 to re-calibrate and keep optimized reservoirs full in wet periods.,806.2999878,168,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the inital results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-LB/EVAP_RATE(FT)//1MON/LAKE BERRYESA/,169,0,/UCD CAP1/SR-LB/EL-AR-CAP///LAKE BERRYESA/,170,0,7,Brad Newlin,2,,Lake Berryessa
+SR-LC,SR-LC,-13214509.66,4523624.816,Surface Storage Node,7,92.5,1083,assumed to 50% of maximum usable storage,0.0243,1084,linear interpolation between maximum and minimum values,92.5,1085,equals initial storage,1,/UCD CAP1/SR-LC/EVAP_RATE(FT)//1MON/LAKE CROWLEY/,1086,equals Lake Isabella evaporation,/UCD CAP1/SR-LC/EL-AR-CAP///LAKE CROWLEY/,1087,includes only maximum and minimum values for storage and area,7,Brad Newlin,,,Long Valley Reservoir (Lake Crowley)
+SR-LI,SR-LI,-13180441.09,4252013.766,Surface Storage Node,7,281.8999939,1091,0,0.011412,1092,temorarily removed actual area-cap multiplier of 1.141243E-02 for V11a base case calibration run to get reservoir operations to work better in calibrating infeasibilities. V19; turning evap back on with Storage levels FXCed to V11a.,281.8999939,1093,Ending constrained to match initial - no operational data for Base Case.,1,/UCD CAP1/SR-LI/EVAP_RATE(FT)//1MON/LAKE ISABELLA/,1094,See BDN8.DOC,/UCD CAP1/SR-LI/EL-AR-CAP///LAKE ISABELLA/,1095,0,4,Mimi Jenkins,4,,Lake Isabella
+SR-LK,SR-LK,-13247457.54,4357453.981,Surface Storage Node,7,77.09999847,1100,0,0.005912,1101,Temporarily removed correct value of 5.912026E-03 and replace with zero to turn off evaporation during calibration step to get better reservoir operations in V11a,77.09999847,1102,Ending constrained to match initial - no operational data for Base Case.,1,/UCD CAP1/SR-LK/EVAP_RATE(FT)//1MON/LAKE KAWEAH/,1103,See BDN8.DOC,/UCD CAP1/SR-LK/EL-AR-CAP///LAKE KAWEAH/,1104,0,4,Mimi Jenkins,4,,Lake Kaweah
+SR-LL-LE,SR-LL-LE,-13354221.79,4564451.623,Surface Storage Node,7,216.6000061,1108,Calculated as 50% of maximum storage (up to V43).  V44: Large calibration flows in highly constrained SFPUC system were large; indicating that raising the storage to a higher value might be a more accurate representation.  Initial storage was calculated as the average of the storage outputs from V43 which were below capacity (RR).,0.008240956,1109,Calculated as slope between the minimum and maximum points from the area-capacity relationship,216.6000061,1110,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the initial results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-81/EVAP_RATE(FT)//1MON/DON PEDRO RES-DWR_514/,1111,Assumed to be the same as for New Don Pedro Reservoir - EV Card for DWRSIM CP81,/UCD CAP1/SR-LL-LE/EL-AR-CAP///CHERRY-ELEANOR-DWR BULL 17-93/,1112,Assumes linear relationship between maximum storage and area and (0;0),13,Stacy Tanaka,3,,Lake Lloyd/Lake Eleanor
+SR-LM,SR-LM,-13075685.24,4006402.265,Surface Storage Node,7,100.0999985,1118,Linear Interpolation between max and min usable storage pools,0.0175,1119,Linear interpolation between max and min usable storage,100.0999985,1120,eq. init. storage,1,/UCD CAP1/SR-LM/EVAP_RATE(FT)//1MON/LK MATHEWS/,1121,See Technical Memo BDN6.DOC,/UCD CAP1/SR-LM/EL-AR-CAP///LAKE MATHEWS/,1122,0,6,Jay Lund,,,Lake Mathews of MWDSC
+SR-LSK,SR-LSK,-13038057.57,3972949.01,Surface Storage Node,7,33.79999924,1134,0,0.027899999,1135,Linear interpolation between max and min storage,33.79999924,1136,eq. init. storage,1,/UCD CAP1/SR-LSK/EVAP_RATE(FT)//1MON/LK SKINNER/,1137,0,/UCD CAP1/SR-LSK/EL-AR-CAP///LAKE SKINNER/,1138,Linear interpolation between max and min usable storage,6,Jay Lund,,,Lake Skinner input because of its separation of nodes and wq importance
+SR-LS,SR-LS,-13238440.1,4309011.383,Surface Storage Node,7,41.90000153,1126,0,0.022369999,1127,Temporarily set to zero from correct value of 2.236808E-02 in V11a to re-calibrate reservoir operations,41.90000153,1128,Ending constrained to match initial - no operational data for Base Case.,1,/UCD CAP1/SR-LS/EVAP_RATE(FT)//1MON/LAKE SUCCESS/,1129,See BDN8.DOC,/UCD CAP1/SR-LS/EL-AR-CAP///LAKE SUCCESS/,1130,0,4,Mimi Jenkins,4,,Lake Success
+SR-LV,SR-LV,-13550594.77,4556555.414,Surface Storage Node,7,88.30000305,176,Calculated as 50% of maximum operating storage,0.01013942,177,Calculated as slope between the minimum and maximum points from the area-capacity relationship; Temporarily set to 0 from 1.013942E-02 in A03B18 to re-calibrate,88.30000305,178,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the inital results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-LV/EVAP_RATE(FT)//1MON/LOS VAQUEROS RES-CCWD/,179,0,/UCD CAP1/SR-LV/EL-AR-CAP///LOS VAQUEROS RES-CCWD/,180,0,6,Jay Lund,2,,Los Vaqueros Reservoir
+SR-ML,SR-ML,-13262268.3,4576449.005,Surface Storage Node,7,2939.541016,1142,storage equal to 6;391 ft (the mandated level from SWRCB Decision 1631),0.014,1143,linear regression between maximum and minimum values,2939.541016,,,0,/UCD CAP1/SR-ML/EVAP_RATE(FT)/01JAN1920/1MON/MONO LAKE/,1144,annual figure from Vorster (1985); monthly values mimic Lake Isabella evaporation patterns,/UCD CAP1/SR-ML/EL-AR-CAP///MONO LAKE/,1145,0,6,Jay Lund,,,Mono Lake
+SR-NBB,SR-NBB,-13485361.94,4778107.175,Surface Storage Node,7,600,185,R1 Card for HEC-3 New Bullards Bar Reservoir: initial storage,0.005066,186,Calculated as slope between the minimum and maximum points from the area-capacity relationship found in the HEC-3 model input file; Temporariy set to 0 from 0.005066 in A03B18,600,187,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the inital results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-NBB/EVAP_RATE(FT)//1MON/NEW BULLARDS BAR-HEC3_YUBA/,188,EV Card for HEC-3 New Bullards Bar Reservoir: Monthly TS of evaporation,/UCD CAP1/SR-NBB/EL-AR-CAP///NEW BULLARDS BAR-HEC3_YUBA/,189,RS;RA;RE Cards forHEC-3 New Bullards Bar Reservoir: Storage-Area-Elevation relationship,13,Stacy Tanaka,2,,New Bullards Bar Res
+SR-NHL,SR-NHL,-13449069.52,4601333.98,Surface Storage Node,7,159,196,Initial storage for SANJASM node 130,0.011182,197,Calculated as slope between the minimum and maximum points from the area-capacity relationship as calculated using the function in RES.ND1 for SANJASM node 130,92,198,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the inital results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage. For Unconstrained runs; set equal to Base Case (Sanjasm NAA) ending (A02B20 change MJ 09/24/00),1,/UCD CAP1/SR-NHL/EVAP_RATE(FT)//1MON/NEW HOGAN LAKE-SANJASM_92/,199,From monthly Evaporation data for SANJASM node 130 in RES.ND1,/UCD CAP1/SR-NHL/EL-AR-CAP///NEW HOGAN LAKE-SANJASM_92/,200,calculated from given equation for SANJASM node 130,8,Brian Van Lienden,2,,New Hogan Lake
+SR-OL,SR-OL,-13130188.83,4359635.8,Surface Storage Node,7,0.01,1147,bogus initial storage to meet PRM computational requirements,0,,,3.40E+38,,,0,,,,,,,7,Brad Newlin,,,Owens Lake
+SR-PF,SR-PF,-13283304.72,4415847.523,Surface Storage Node,7,550,1150,0,0.003778,1151,Temporarily set to zero from correct value of 3.778274E-03 in V11a to re-calibrate reservoir operations without impact of minimizing evap on storage levels.,550,1152,Ending constrained to match initial - no operational data for Base Case.,1,/UCD CAP1/SR-PF/EVAP_RATE(FT)//1MON/PINE FLAT RES/,1153,See BDN8.DOC,/UCD CAP1/SR-PF/EL-AR-CAP///PINE FLAT RES/,1154,0,4,Mimi Jenkins,4,,Pine Flat Reservoir
+SR-PR,SR-PR,-13453077.21,4614791.131,Surface Storage Node,7,195,206,Initial Storage for SAMJASM node 170 in RES.ND1,0.007292,207,Calculated as slope between the minimum and maximum points from the area-capacity relationship as calculated using the function in RES.ND1 for SANJASM node 170,203,208,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the initial results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage. For Unconstrained runs; set equal to Base Case (Sanjasm NAA) ending (A02B20 change MJ 09/24/00),1,/UCD CAP1/SR-PR/EVAP_RATE(FT)//1MON/PARDEE RES-SANJASM_92/,209,Monthly evaporation for SANJASM node 170 in RES.ND1,/UCD CAP1/SR-PR/EL-AR-CAP///PARDEE RES-SANJASM_92/,210,Calculated from given equation for SANJASM node 170 in RES.ND1,8,Brian Van Lienden,2,,Pardee Reservoir
+SR-SCV,SR-SCV,-13530539.98,4456054.681,Surface Storage Node,7,94,1159,0,0.020407001,1160,Calculated as slope between the minimum and maximum points from the area-capacity relationship,94,1161,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the initial results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-LV/EVAP_RATE(FT)//1MON/LOS VAQUEROS RES-CCWD/,1162,Uses Los Vaqueros Reservoir Data,/UCD CAP1/SR-SCV/EL-AR-CAP///Santa Clara Agg-SCVWD IWRP/,1163,Assumes linear relationship between maximum storage and area and (0;0).  Maximum storage and area are the sums of all local reservoirs.,8,Brian Van Lienden,3,,Santa Clara Aggregate
+SR-SS,SR-SS,-12892914.35,3936314.57,Surface Storage Node,7,6941,1168,Assuming -230 msl elevation,0.017000001,1169,Linear interpolation between max and min total storage,6941,1170,Assuming -230 msl elevation,0,/UCD CAP1/SR-SS/EVAP_RATE(FT)//1MON/SALTON SEA/,1171,0,/UCD CAP1/SR-SS/EL-AR-CAP///SALTON SEA/,1172,0,7,Brad Newlin,,,Salton Sea
+SR-TLB,SR-TLB,-13330841.9,4309563.087,Surface Storage Node,7,0.001,,,0,,,0,,,0,/UCD CAP1/SR-LI/EVAP_RATE(FT)//1MON/LAKE ISABELLA/,,,,,,4,Mimi Jenkins,4,,Tulare Lake Bed
+SR-TR,SR-TR,-13425779.44,4562209.638,Surface Storage Node,7,65,1174,Initial Storage for SANJASM node 105,0.019224999,1175,Calculated as slope between the minimum and maximum points from the area-capacity relationship,65,1176,Constrained ending storage set to equal initial storage; if setting the ending storage equal to the initial results in an infeasible run; the target persuasion function can be used.  The persuasion function applies a penalty of $1;000;000/AF for ending storages less than the initial storage.,1,/UCD CAP1/SR-TR/EVAP_RATE(FT)//1MON/TULLOCH RES-SANJASM_92/,1177,Monthly evaporation rates for SANJASM node 105 in RES.ND1,/UCD CAP1/SR-TR/EL-AR-CAP///TULLOCH RES-SANJASM_92/,1178,Calculated from equation given for SANJASM node 105 in RES.ND1,8,Brian Van Lienden,3,,Turlock Reservoir
+Surplus Delta Outflow,Surp Delta,-13574004.92,4586565.223,Junction Node,9,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Surplus Delta Outflow
+T10,T10CMWD,-13120418.92,4033419.577,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,Central MWD OUT
+T11,T11COAC,-12941288.16,3994740.636,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,Coachella OUT
+T12,T12EMWD,-13036848.72,3990956.003,Water Treatment Node,16,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,E and W MWD OUT
+T13,T13SAC,-13463828.75,4692369.526,Water Treatment Node,16,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,2,,Sacramento OUT
+T14,T14NAPA,-13591979.75,4624020.612,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Napa-Solano IN
+T15,T15NAPA,-13591979.75,4624020.612,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Napa-Solano OUT
+T16,T16CCWD,-13560264.66,4558081.898,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,CCWD IN
+T17,T17EBMU,-13599316.36,4545979.143,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,EBMUD IN
+T18,T18CCWD,-13560264.66,4558081.898,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,CCWD OUT
+T19,T19SCV,-13551620.24,4487572.177,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,Santa Clara Valley+ OUT
+T20,T20SFPU,-13616840.23,4524765.279,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,SFPUC IN
+T21,T21SPFU,-13616840.23,4524765.279,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,SFPUC OUT
+T24,T24FRES,-13338264.09,4404663.136,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,4,,Fresno IN
+T25,T25FRES,-13338264.09,4404663.136,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,4,,Fresno OUT
+T26,T26STOC,-13485175.91,4587568.623,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Stockton IN
+T27,T27STOC,-13485175.91,4587568.623,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Stockton OUT
+T28,T28BAKE,-13261996.9,4203486.53,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,4,,Bakersfield IN
+T29,T29BAKE,-13261996.9,4203486.53,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,4,,Bakersfield OUT
+T2,T2SBV,-13092484.77,4103665.018,Water Treatment Node,16,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,San Bernadino Valley IN
+T30,T30SDMWD,-12985866.36,3902775.04,Water Treatment Node,16,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,San Diego IN
+T31,T31COAC,-12941288.16,3994740.636,Water Treatment Node,16,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Coachella IN
+T32,T32MOJA,-12928775.93,4119572.898,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,Mojave OUT
+T33,T33AV,-13029771.36,4300687.056,Water Treatment Node,16,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,Antelope OUT
+T34,T34EMWD,-13036848.72,3990956.003,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,E and W MWD IN
+T35,T35EBMU,-13599316.36,4545979.143,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,EBMUD OUT
+T3,T3MOJA,-12928775.93,4119572.898,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,Mojave IN
+T40,T40SDMWD,-12985866.36,3902775.04,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,T30 San Diego IN
+T41,T41RED,-13621335.1,4933974.05,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Water treatment node for the urban areas of Redding
+T42,T42RED,-13621335.1,4933974.05,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Wastewater treatment node for Redding
+T43,T43GALT,-13469321.7,4609948.61,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Water treatment node for all of CVPM 8; representing Galt
+T44,T44GALT,-13469321.7,4609948.61,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Wastewater treatment node for all of CVPM 8; representing the town of Galt
+T45,T45MODEST,-13461023.72,4541768.672,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Modesto/Manteca CVPM11 Urban IN
+T46,T46Modest,-13461023.72,4541768.672,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,WWTP For Modesto (out)
+T47,T47Merced,-13394126.75,4457436.457,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Merced CVPM13 Urban IN
+T48,T48Merced,-13394126.75,4457436.457,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Merced CVPM13 Urban OUT
+T49,T49SANGER,-13303021.35,4380627.653,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,Sanger CVPM17 Urban IN
+T4,T4SAC,-13463828.75,4692369.526,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,2,,Sacramento IN
+T50,T50SANGER,-13303021.35,4380627.653,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,Sanger CVPM17 Urban OUT
+T51,T51VISALIA,-13278063.68,4317690.606,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,Visalia/Tulare CVPM18 Urban IN
+T52,T52VISALIA,-13278063.68,4317690.606,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,Visalia/Tulare CVPM18 Urban OUT
+T53,T53DELANO,-13259618.61,4248736.596,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,Delano/Wasco CVPM20 Urban IN
+T54,T54DELANO,-13259618.61,4248736.596,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,Delano/Wasco CVPM20 Urban OUT
+T55,T55VENT,-13251608.23,4086189.607,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Water Treatment node to Ventura Co
+T56,T56VENT,-13251608.23,4086189.607,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Wastewater treatment node for Ventura Co.
+T57,T57ECEN,-12852881.96,3896916.773,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Urban water treatment node for El Centro
+T58,T58ECEN,-12852881.96,3896916.773,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Wastewater treatment node for El Centro
+T59,T59CLWA,-13191355.48,4100536.478,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Castaic Lake Water Delivery
+T5,T5CMWD,-13120418.92,4033419.577,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,Central MWD IN
+T60,T60CLWA,-13191355.48,4100536.478,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Castaic Lake Water Authority Wastewater
+T61,T61YUBA,-13541856.8,4765774.234,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Water treatment node into Yuba
+T62,T62YUBA,-13541856.8,4765774.234,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Wastewater Treatment node from Yuba
+T63,T63BLY,-12795364.37,4021492.628,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Water Treatment Node for Blythe
+T64,T64BLY,-12795364.37,4021492.628,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Wastewater Treatment node for Blythe
+T65,T65,-12926140.35,3970342.14,Water Treatment Node,16,,,,,,,,,,,,,,,,,14,Randy Ritzema,,,Desalting facility
+T66,T66Turlock,-13443370.31,4512372.71,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Turlock/Ceres CVPM12 Urban IN
+T67,T67Turlock,-13443370.31,4512372.71,Water Treatment Node,16,,,,,,,,,,,,,,,,,13,Stacy Tanaka,,,Turlock/Ceres CVPM12 Urban OUT
+T6,T6AV,-13029771.36,4300687.056,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,Antelope IN
+T71,T71,-13433128.37,4202117.108,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,water supply input node for SB-SLO
+T72,T72,-13447414.36,4206566.461,Junction Node,9,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,wastewater return flow node for SB-SLO
+T7,T7SCV,-13551620.24,4487572.177,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,3,,Santa Clara Valley+ IN
+T8,T8SDMWD,-12985866.36,3902775.04,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,San Diego OUT
+T9,T9SBV,-13092484.77,4103665.018,Water Treatment Node,16,,,,,,,,,,,,,,,,,4,Mimi Jenkins,,,San Bernadino VWD OUT
+Tracy PMP,Tracy PMP,-13534809.3,4550763.992,Pump Plant Node,14,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Tracy Pumping Plant
+Wadsworth PMP,WadsPMP,-13032333.41,3986294.788,Pump Plant Node,14,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,MWD Eastside Reservoir (Diamond Valley Lake) Pumping Plant
+Wadsworth PWP,WadsPWP,-13032067.4,3984555.915,Junction Node,9,,,,,,,,,,,,,,,,,6,Jay Lund,,,Wadsworth Power Plant
+Walnut Creek PMP,WalCk PMP,-13589095.21,4569175.101,Pump Plant Node,14,,,,,,,,,,,,,,,,,8,Brian Van Lienden,2,,Walnut Creek Pumping Plant
+Warne Power Plant,Warne PWP,-13223554.84,4121422.01,Power Plant Node,15,0,,,0,,,0,,,0,,,,,,,6,Jay Lund,,,West Branch SWP Power Plant
+WheelerRidgePMP,WheelrPMP,-13247958.57,4168422.074,Pump Plant Node,14,,,,,,,,,,,,,,,,,7,Brad Newlin,4,,Wheeler Ridge Pumping Plant

@@ -1,0 +1,94 @@
+2014-10-20 17:07:38,099 - INFO - Using logging config at C:\Users\steve/Documents/svn/HYDRA/config/logging.conf
+2014-10-20 17:07:39,546 - INFO - Setting URL http://127.0.0.1:8080/json
+2014-10-20 17:07:39,546 - INFO - Calling: login
+2014-10-20 17:07:39,596 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:39,937 - INFO - Session ID=b15ca1a4affd124e442cc9344ceab6d3
+2014-10-20 17:07:39,937 - INFO - Validating plugin xml file (C:\Users\steve\DOCUME~1\svn\HYDRA\HYDRAP~1\CSVPLU~1\trunk\CSVPLU~1\plugins\IMPORT~1\plugin.xml).
+2014-10-20 17:07:39,937 - INFO - Plugin Input xsd: C:\Users\steve/Documents/svn/HYDRA/HydraPlugins/xml/trunk/plugin_input.xsd
+2014-10-20 17:07:39,954 - INFO - Plugin XML OK
+2014-10-20 17:07:39,954 - INFO - Validating template file (ebsd_template.xml).
+2014-10-20 17:07:39,954 - INFO - Template xsd: C:\Users\steve/Documents/svn/HYDRA/HydraPlugins/xml/trunk/template.xsd
+2014-10-20 17:07:40,006 - INFO - Template OK
+2014-10-20 17:07:40,006 - INFO - Calling: add_project
+2014-10-20 17:07:40,006 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,023 - INFO - Reading metadata from file EBSD_network_metadata.csv
+2014-10-20 17:07:40,023 - INFO - Calling: add_attributes
+2014-10-20 17:07:40,023 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,193 - INFO - Reading metadata from file EBSD_nodes_metadata.csv
+2014-10-20 17:07:40,549 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,549 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,549 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,549 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,566 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,566 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,566 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,566 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,584 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,584 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,584 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,584 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,601 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,601 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,601 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,601 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,618 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,618 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,618 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,634 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,634 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,634 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,651 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,651 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,651 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,668 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,668 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,668 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,686 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,686 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,686 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,703 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,703 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,703 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,720 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,720 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,720 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,736 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,736 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,736 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,753 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,753 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,770 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,770 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,770 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,770 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,788 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,788 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,805 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,805 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,822 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,822 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,822 - INFO - Calling: get_dimension
+2014-10-20 17:07:40,822 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:40,838 - INFO - Calling: add_attributes
+2014-10-20 17:07:40,838 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:48,289 - INFO - Reading metadata from file EBSD_links_metadata.csv
+2014-10-20 17:07:48,601 - INFO - Calling: get_dimension
+2014-10-20 17:07:48,601 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:48,601 - INFO - Calling: add_attributes
+2014-10-20 17:07:48,601 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:51,773 - INFO - Reading metadata from file EBSD_groups_metadata.csv
+2014-10-20 17:07:51,789 - INFO - Calling: get_dimension
+2014-10-20 17:07:51,789 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:51,789 - INFO - Calling: add_attributes
+2014-10-20 17:07:51,789 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:07:51,851 - INFO - Committing Network
+2014-10-20 17:07:51,851 - INFO - Network created for sending
+2014-10-20 17:07:51,851 - INFO - Adding Network
+2014-10-20 17:07:51,851 - INFO - Calling: add_network
+2014-10-20 17:07:52,335 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:08:53,726 - INFO - Network created with 1148 nodes and 1344 links. Network ID is 14
+2014-10-20 17:08:53,726 - INFO - Setting resource types based on ebsd_template.xml.
+2014-10-20 17:08:53,726 - INFO - Calling: upload_template_xml
+2014-10-20 17:08:53,726 - INFO - Starting new HTTP connection (1): 127.0.0.1
+2014-10-20 17:08:56,914 - INFO - Calling: assign_types_to_resources
+2014-10-20 17:08:56,914 - INFO - Starting new HTTP connection (1): 127.0.0.1

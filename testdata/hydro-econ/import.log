@@ -1,0 +1,184 @@
+2013-11-04 11:54:00,380 [0;31mERROR[0;31m: <?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:ns0="hydra.base" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="hydra.base" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header>
+      <tns:RequestHeader>
+         <tns:username>root</tns:username>
+         <tns:session_id>7cfde5ef241b2fde680c3c56caedba60</tns:session_id>
+      </tns:RequestHeader>
+   </SOAP-ENV:Header>
+   <ns1:Body>
+      <ns0:get_network>
+         <ns0:network_id>1 </ns0:network_id>
+      </ns0:get_network>
+   </ns1:Body>
+</SOAP-ENV:Envelope>[0m
+2013-11-04 11:54:00,382 [0;mINFO[0;m: Network ID not found. Creating new network.[0m
+2013-11-04 11:54:00,549 [0;mINFO[0;m: X coordinate of node J3 is not a number.[0m
+$$ ag   $$
+$$       0.7 $$
+$$ TS/Ag1_linCoeff.csv$$
+$$ TS/Ag1_quadCoeff.csv$$
+$$ TS/Ag1_BC.csv$$
+$$ ag   $$
+$$       0.7 $$
+$$ TS/Ag2_linCoeff.csv$$
+$$ TS/Ag2_quadCoeff.csv$$
+$$ ag   $$
+$$       1.0 $$
+$$ desal$$
+$$ 100000.0 $$
+$$    0.0 $$
+$$ 10000.0 $$
+$$ gw   $$
+$$ 2000.0 $$
+$$  300.0 $$
+$$ TS/GW1_BC.csv$$
+$$ TS/GW1_IC.csv$$
+$$ gw   $$
+$$ 2000.0 $$
+$$  300.0 $$
+$$ TS/GW2_BC.csv$$
+$$ TS/GW2_IC.csv$$
+$$ hp   $$
+$$ jn   $$
+$$ 0.0$$
+$$ jn   $$
+$$ 0.0$$
+$$ jn   $$
+$$ 0.0$$
+$$ sr   $$
+$$  500.0 $$
+$$   50.0 $$
+$$ TS/SR1_BC.csv$$
+$$ TS/SR1_IC.csv$$
+$$ sr   $$
+$$  200.0 $$
+$$   20.0 $$
+$$ TS/SR2_BC.csv$$
+$$ TS/SR2_IC.csv$$
+$$ sr   $$
+$$  300.0 $$
+$$   30.0 $$
+$$ TS/SR3_BC.csv$$
+$$ TS/SR3_IC.csv$$
+$$ sr   $$
+$$  600.0 $$
+$$   60.0 $$
+$$ TS/SR4_BC.csv$$
+$$ TS/SR4_IC.csv$$
+$$ ur   $$
+$$  1500.0 $$
+$$     -5.0 $$
+$$        0.5 $$
+$$ ur   $$
+$$  2500.0 $$
+$$     -7.0 $$
+$$        0.5 $$
+$$ WWTP $$
+$$ 8.0 $$
+$$ costLink$$
+$$ 10.0$$
+$$        0.0 $$
+$$       80.0 $$
+$$      1.0 $$
+$$ costLink$$
+$$ 60.0$$
+$$        0.0 $$
+$$       80.0 $$
+$$      1.0 $$
+$$ costLink$$
+$$ 50.0$$
+$$        0.0 $$
+$$       80.0 $$
+$$      1.0 $$
+$$ costLink$$
+$$ 20.0$$
+$$        0.0 $$
+$$       80.0 $$
+$$      1.0 $$
+$$ costLink$$
+$$ 15.0$$
+$$        0.0 $$
+$$       80.0 $$
+$$      1.0 $$
+$$ costLink$$
+$$ 15.0$$
+$$        0.0 $$
+$$       80.0 $$
+$$      1.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$       10.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$       10.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$       10.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$        0.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$        0.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$       10.0 $$
+$$ defLink$$
+$$    0.95 $$
+$$      200.0 $$
+$$       10.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$        0.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$        0.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$        0.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$       10.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$       10.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$       10.0 $$
+$$ defLink$$
+$$     0.9 $$
+$$      200.0 $$
+$$       10.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$        0.0 $$
+$$ defLink$$
+$$    0.95 $$
+$$      100.0 $$
+$$        0.0 $$
+$$ defLink$$
+$$    0.95 $$
+$$      100.0 $$
+$$        1.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      100.0 $$
+$$        0.0 $$
+$$ defLink$$
+$$     1.0 $$
+$$      350.0 $$
+$$      175.0 $$
