@@ -77,6 +77,7 @@ from HydraLib.PluginLib import write_progress, write_output, validate_plugin_xml
 
 from numpy import array
 import os, sys
+import json
 log = logging.getLogger(__name__)
 
 __location__ = os.path.split(sys.argv[0])[0]
@@ -158,6 +159,8 @@ class ExportCSV(object):
                 log.info("Exporting Scenario %s"%(scenario.name))
                 csv.export_network(network, scenario)
         csv.files.append(network_dir)
+
+
     def export_network(self, network, scenario):
         log.info("\n************NETWORK****************")
         scenario.target_dir = os.path.join(network.network_dir, scenario.name.replace(' ', '_'))
@@ -437,9 +440,19 @@ class ExportCSV(object):
 
         metadata_entries = []
         for m in data:
+            metadata = m[1]
+            metadata_vals = []
+            for metadata_dict in metadata:
+                if metadata_dict == '':
+                    continue
+                else:
+                    metadata_text = []
+                    for k, v in metadata_dict.items():
+                        metadata_text.append("(%s;%s)"%(k,v))
+                    metadata_vals.append("".join(metadata_text))
             metadata_entry = "%(name)s,%(metadata)s\n"%{
                 "name"        : m[0],
-                "metadata"    : "%s"%(",".join(m[1])),
+                "metadata"    : "%s"%(",".join(metadata_vals)),
             }
             metadata_entries.append(metadata_entry)
 
@@ -519,22 +532,23 @@ class ExportCSV(object):
         for rs in scenario.resourcescenarios.ResourceScenario:
             if rs.resource_attr_id == r_attr_id:
                 if rs.value.type == 'descriptor':
-                    value = rs.value.value.desc_val
+                    value = str(rs.value.value)
                 elif rs.value.type == 'array':
-                    value = rs.value.value.arr_data
+                    value = rs.value.value
                     file_name = "array_%s_%s.csv"%(resource_attr.ref_key, attr_name)
                     file_loc = os.path.join(scenario.target_dir, file_name)
                     if os.path.exists(file_loc):
                         arr_file      = open(file_loc, 'a')
                     else:
                         arr_file      = open(file_loc, 'w')
-                        if rs.value.metadata:
-                            for m in rs.value.metadata.Metadata:
-                                if m.name == 'data_struct':
-                                    arr_desc = ",".join(m.value.split('|'))
-                                    arr_file.write("array description, ,%s\n"%arr_desc)
+                        log.info("Metadata_type=%s",type(rs.value.metadata))
+                        if rs.value.metadata is not None:
+                            for k, v in json.loads(rs.value.metadata).items():
+                                if k == 'data_struct':
+                                    arr_desc = ",".join(v.split('|'))
+                                    arr_file.write("array , ,%s\n"%arr_desc)
 
-                    arr_val = PluginLib.parse_suds_array(value)
+                    arr_val = json.loads(value)
 
                     np_val = array(eval(repr(arr_val)))
                     shape = np_val.shape
@@ -554,36 +568,29 @@ class ExportCSV(object):
                     arr_file.close()
                     value = file_name
                 elif rs.value.type == 'scalar':
-                    value = rs.value.value.param_value
+                    value = json.loads(rs.value.value)
                 elif rs.value.type == 'timeseries':
-                    value = rs.value.value.ts_values
+                    value = json.loads(rs.value.value)
+                    col_names = value.keys()
                     file_name = "timeseries_%s_%s.csv"%(resource_attr.ref_key, attr_name)
                     file_loc = os.path.join(scenario.target_dir, file_name)
                     if os.path.exists(file_loc):
                         ts_file      = open(file_loc, 'a')
                     else:
                         ts_file      = open(file_loc, 'w')
-                        if rs.value.metadata:
-                            for m in rs.value.metadata.Metadata:
-                                if m.name == 'data_struct':
-                                    arr_desc = ",".join(m.value.split('|'))
-                                    arr_file.write("array description,,,%s\n"%arr_desc)
+                        ts_file.write(",,,%s\n"%','.join(col_names))
 
-                    for ts in value:
-                        ts_time = ts['ts_time'].replace('1900', 'XXXX')
-                        ts_val  = ts['ts_value']
+                    timestamps = value[col_names[0]].keys()
+                    ts_dict = {}
+                    for t in timestamps:
+                        ts_dict[t] = []
 
-                        try:
-                            ts_val = float(ts_val)
-                            ts_file.write("%s,%s,%s,%s\n"%
-                                        ( resource_name,
-                                        ts_time,
-                                        '1',
-                                        ts_val))
+                    for col, ts in value.items():
+                        for timestep, val in ts.items():
+                            ts_dict[timestep].append(val)
 
-                        except:
-                            parsed_val = PluginLib.parse_suds_array(ts_val)
-                            np_val = array(parsed_val)
+                    for timestep, val in ts_dict.items():
+                            np_val = array(val)
                             shape = np_val.shape
                             n = 1
                             shape_str = []
@@ -593,58 +600,19 @@ class ExportCSV(object):
                             one_dimensional_val = np_val.reshape(1, n)
                             ts_file.write("%s,%s,%s,%s\n"%
                                         ( resource_name,
-                                        ts_time,
+                                        timestep,
                                         ' '.join(shape_str),
                                         ','.join([str(x) for x in one_dimensional_val.tolist()[0]])))
 
                     ts_file.close()
+
                     value = file_name
 
-                elif rs.value.type == 'eqtimeseries':
-                    ts_val = PluginLib.parse_suds_array(rs.value.value.arr_data)
-                    file_name = "eq_timeseries_%s_%s.csv"%(resource_attr.ref_key, attr_name)
-                    file_loc = os.path.join(scenario.target_dir, file_name)
-                    if os.path.exists(file_loc):
-                        arr_file      = open(file_loc, 'a')
-                    else:
-                        arr_file      = open(file_loc, 'w')
-                    np_val = array(ts_val)
-                    shape = np_val.shape
-                    n = 1
-                    shape_str = []
-                    for x in shape:
-                        n = n * x
-                        shape_str.append(str(x))
-                    one_dimensional_val = np_val.reshape(1, n)
-                    arr_file.write("%s,%s,%s,%s,%s\n"%
-                                (
-                                    resource_name,
-                                    rs.value.value.start_time,
-                                    rs.value.value.frequency,
-                                    ' '.join(shape_str),
-                                    ','.join([str(x) for x in one_dimensional_val.tolist()[0]]))
-                                 )
-
-                    arr_file.close()
-                    value = file_name
-
-                metadata = self.get_metadata_string(rs.value.metadata)
+                metadata = json.loads(rs.value.metadata)
 
                 return (str(value), metadata)
 
         return ('', '')
-
-    def get_metadata_string(self,metadata_list):
-        if metadata_list is None or len(metadata_list) == 0:
-            return ''
-        metadata_string_list = []
-        for metadatum in metadata_list.Metadata:
-            name = metadatum.name
-            val  = metadatum.value
-            metadata_string_list.append("(%s;%s)"%(name, val))
-
-        metadata_string = ' '.join(metadata_string_list)
-        return metadata_string
 
 def commandline_parser():
     parser = ap.ArgumentParser(
@@ -698,6 +666,7 @@ if __name__ == '__main__':
         csv.export(args.project, args.network, args.scenario)
         message = "Export complete"
     except Exception, e:
+        log.exception(e)
         message = "An error has occurred"
         csv.errors = [e.message]
 

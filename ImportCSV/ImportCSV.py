@@ -173,8 +173,8 @@ from datetime import datetime
 import pytz
 
 from HydraLib import PluginLib
-from HydraLib.PluginLib import JsonConnection, write_progress, write_output, validate_plugin_xml
-from HydraLib import config, util, dateutil
+from HydraLib.PluginLib import JsonConnection, write_progress, write_output, validate_plugin_xml, validate_template
+from HydraLib import util, dateutil
 from HydraLib.units import validate_resource_attributes
 
 from HydraLib.HydraException import HydraPluginError,HydraError
@@ -182,7 +182,7 @@ from HydraLib.HydraException import HydraPluginError,HydraError
 from suds import WebFault
 from numpy import array, reshape
 
-from lxml import etree
+import json
 
 log = logging.getLogger(__name__)
 
@@ -1230,16 +1230,17 @@ class ImportCSV(object):
                         filedata = self.file_dict[full_file_path]
 
                     value_header = filedata[0].lower().replace(' ', '')
-                    if value_header.startswith('arraydescription,') or value_header.startswith(','):
+                    if value_header.startswith('timeseriesdescription,') or \
+                        value_header.startswith('arraydescription,') or \
+                        value_header.startswith(','):
                         arr_struct = filedata[0].strip()
                         arr_struct = arr_struct.split(',')
                         arr_struct = "|".join(arr_struct[3:])
+                        value_header = filedata[0]
                         filedata = filedata[1:]
-                    elif value_header.startswith('timeseriesdescription') or value_header.startswith(','):
-                        arr_struct = filedata[0].strip()
-                        arr_struct = arr_struct.split(',')
-                        arr_struct = "|".join(arr_struct[3:])
-                        filedata = filedata[1:]
+                    else:
+                        value_header = None
+
 
                     #The name of the resource is how to identify the data for it.
                     #Once this the correct line(s) has been identified, remove the
@@ -1258,8 +1259,8 @@ class ImportCSV(object):
                         return None
                     else:
                         if self.is_timeseries(data):
-                            ts_type, ts = self.create_timeseries(data, restriction_dict)
-                            dataset['type'] = ts_type
+                            ts = self.create_timeseries(data, restriction_dict, header=value_header)
+                            dataset['type'] = 'timeseries' 
                             dataset['value'] = ts
                         else:
                             dataset['type'] = 'array'
@@ -1285,15 +1286,15 @@ class ImportCSV(object):
 
         resourcescenario['value'] = dataset
 
-        m = []
-        if arr_struct:
-            m.append(dict(name='data_struct',value=arr_struct))
-        if metadata:
-            for k, v in metadata.items():
-                if k == 'data_struct' and arr_struct:
-                    continue
-                m.append(dict(name=k,value=v))
+        m = {}
 
+        if metadata:
+            m = metadata
+        
+        if arr_struct:
+            m['data_struct'] = arr_struct
+
+        m = json.dumps(m)
 
         dataset['metadata'] = m
 
@@ -1301,29 +1302,34 @@ class ImportCSV(object):
 
     def create_scalar(self, value, restriction_dict={}):
         self.validate_value(value, restriction_dict)
-        scalar = dict(
-            param_value = str(value)
-        )
+        scalar = str(value)
         return scalar
 
     def create_descriptor(self, value, restriction_dict={}):
         self.validate_value(value, restriction_dict)
-        descriptor = dict(
-            desc_val = value
-        )
+        descriptor = json.dumps(value)
         return descriptor
 
-    def create_timeseries(self, data, restriction_dict={}):
+    def create_timeseries(self, data, restriction_dict={}, header=None):
+
         if len(data) == 0:
             return None
+        
+        if header is not None:
+            header = header.strip(',')
+            col_headings = header.split(',')
+        else:
+            col_headings = range(len(data[0].split(',')[2:]))
 
         date = data[0].split(',', 1)[0].strip()
         timeformat = dateutil.guess_timefmt(date)
         seasonal = False
         if 'XXXX' in timeformat:
             seasonal = True
-
-        ts_values = []
+        
+        ts_values = {}
+        for col in col_headings:
+            ts_values[col] = {}
         start_time = None
         freq       = None
         prev_time  = None
@@ -1346,17 +1352,14 @@ class ImportCSV(object):
                 else:
                     array_shape = (value_length,)
 
-                if array_shape == (1,):
-                    ts_value = dataset[2].strip()
-                else:
-                    ts_val_1d = []
-                    for i in range(value_length):
-                        ts_val_1d.append(str(dataset[i + 2].strip()))
+                ts_val_1d = []
+                for i in range(value_length):
+                    ts_val_1d.append(str(dataset[i + 2].strip()))
 
-                    ts_arr = array(ts_val_1d)
-                    ts_arr = reshape(ts_arr, array_shape)
+                ts_arr = array(ts_val_1d)
+                ts_arr = reshape(ts_arr, array_shape)
 
-                    ts_value = ts_arr.tolist()
+                ts_value = ts_arr.tolist()
 
                 #Check for whether timeseries is equally spaced.
                 if is_eq_spaced:
@@ -1373,28 +1376,16 @@ class ImportCSV(object):
                             if (tstime - prev_time) != freq:
                                 is_eq_spaced = False
                     prev_time = tstime
+                log.info(col_headings)
+                for i, ts_val in enumerate(ts_value):
+                    idx = col_headings[i]
+                    ts_values[idx][ts_time] = ts_val
 
-                ts_values.append({'ts_time': ts_time,
-                                  'ts_value': ts_value
-                                  })
+        self.validate_value(ts_values, restriction_dict)
+        
+        timeseries = json.dumps(ts_values)
 
-        if is_eq_spaced:
-            ts_type = 'eqtimeseries'
-            timeseries = {'frequency': freq.total_seconds(),
-                          'start_time':dateutil.date_to_string(start_time, seasonal=seasonal),
-                          'arr_data':str(eq_val)}
-            self.validate_value(timeseries, restriction_dict)
-        else:
-            ts_type = 'timeseries'
-            timeseries = {'ts_values': ts_values}
-            self.validate_value(timeseries, restriction_dict)
-
-            #After validating the data, turn it into the format the server wants.
-            for ts in timeseries['ts_values']:
-                ts['ts_value'] = PluginLib.create_dict(ts['ts_value'])
-
-
-        return ts_type, timeseries
+        return timeseries
 
     def create_array(self, data, restriction_dict={}):
         #Split the line into a list
@@ -1428,9 +1419,7 @@ class ImportCSV(object):
 
         self.validate_value(arr.tolist(), restriction_dict)
 
-        arr = dict(
-            arr_data = PluginLib.create_dict(arr.tolist())
-        )
+        arr = json.dumps(arr.tolist())
 
         return arr
 
@@ -1476,71 +1465,6 @@ class ImportCSV(object):
                                                      scen_ids)
 
         print xml_response
-
-    def validate_template(self, template_file):
-
-        log.info('Validating template file (%s).' % template_file)
-
-        with open(template_file) as f:
-            xml_template = f.read()
-
-        template_xsd_path = os.path.expanduser(config.get('templates', 'template_xsd_path'))
-        log.info("Template xsd: %s",template_xsd_path)
-        xmlschema_doc = etree.parse(template_xsd_path)
-        xmlschema = etree.XMLSchema(xmlschema_doc)
-        xml_tree = etree.fromstring(xml_template)
-
-        try:
-            xmlschema.assertValid(xml_tree)
-        except etree.DocumentInvalid as e:
-            raise HydraPluginError('Template validation failed: ' + e.message)
-
-        template_dict = {'name':xml_tree.find('template_name').text,
-                         'resources' : {}
-                        }
-
-        for r in xml_tree.find('resources'):
-            resource_dict = {}
-            resource_name = r.find('name').text
-            resource_type = r.find('type').text
-            resource_dict['type'] = resource_type
-            resource_dict['name'] = resource_name
-            resource_dict['attributes'] = {}
-            for attr in r.findall("attribute"):
-                attr_dict = {}
-                attr_name = attr.find('name').text
-                attr_dict['name'] = attr_name
-                if attr.find('dimension') is not None:
-                    attr_dict['dimension'] = attr.find('dimension').text
-                if attr.find('unit') is not None:
-                    attr_dict['unit'] = attr.find('unit').text
-                if attr.find('is_var') is not None:
-                    attr_dict['is_var'] = attr.find('is_var').text
-                if attr.find('data_type') is not None:
-                    attr_dict['data_type'] = attr.find('data_type').text
-
-                try:
-                    stored_attr = self.connection.call('get_attribute', 
-                                                       {'name':attr_name, 
-                                                        'dimension': attr_dict.get('dimension')})
-                    attr_dict['id'] = stored_attr['id']
-                    log.info("Attribute %s retrieved!", attr_name)
-                except Exception, e:
-                    log.info("Attribute %s (%s) is not on the server", attr_name, attr_dict.get('dimension'))
-
-                restction_xml = attr.find("restrictions")
-                attr_dict['restrictions'] = util.get_restriction_as_dict(restction_xml)
-                resource_dict['attributes'][attr_name] = attr_dict
-
-            if template_dict['resources'].get(resource_type):
-                template_dict['resources'][resource_type][resource_name] = resource_dict
-            else:
-                template_dict['resources'][resource_type] = {resource_name : resource_dict}
-
-        self.Templates = template_dict
-
-        log.info("Template OK")
-
 
 def commandline_parser():
     parser = ap.ArgumentParser(
@@ -1634,7 +1558,7 @@ if __name__ == '__main__':
                 try:
                     if args.template == '':
                         raise Exception("The template name is empty.")
-                    csv.validate_template(args.template)
+                    csv.Template = validate_template(args.template, csv.connection)
                 except Exception, e:
                     log.exception(e)
                     raise HydraPluginError("An error has occurred with the template. (%s)"%(e))
