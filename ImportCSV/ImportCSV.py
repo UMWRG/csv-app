@@ -1500,6 +1500,8 @@ class ImportCSV(object):
                          'resources' : {}
                         }
 
+        attributes = []
+
         for r in xml_tree.find('resources'):
             resource_dict = {}
             resource_name = r.find('name').text
@@ -1520,14 +1522,7 @@ class ImportCSV(object):
                 if attr.find('data_type') is not None:
                     attr_dict['data_type'] = attr.find('data_type').text
 
-                try:
-                    stored_attr = self.connection.call('get_attribute', 
-                                                       {'name':attr_name, 
-                                                        'dimension': attr_dict.get('dimension')})
-                    attr_dict['id'] = stored_attr['id']
-                    log.info("Attribute %s retrieved!", attr_name)
-                except Exception, e:
-                    log.info("Attribute %s (%s) is not on the server", attr_name, attr_dict.get('dimension'))
+                attributes.append({'name': attr_name, 'dimen': attr_dict['dimension']})
 
                 restction_xml = attr.find("restrictions")
                 attr_dict['restrictions'] = util.get_restriction_as_dict(restction_xml)
@@ -1538,6 +1533,21 @@ class ImportCSV(object):
             else:
                 template_dict['resources'][resource_type] = {resource_name : resource_dict}
 
+        stored_attrs = self.connection.call('get_attributes', {'attrs':attributes})
+        attr_dict = {}
+        for a in stored_attrs:
+            if a:
+                attr_dict[(a['name'], a.get('dimen'))] = a['id']
+
+        log.info("Template attributes retrieved!")
+
+        for rt in template_dict['resources'].values():
+            for t in rt.values():
+                for a in t['attributes'].values():
+                    a['id'] = attr_dict.get((a['name'], a.get('dimension')))
+
+        log.info("Template attributes updated with IDS")
+ 
         self.Templates = template_dict
 
         log.info("Template OK")
@@ -1547,7 +1557,8 @@ def commandline_parser():
     parser = ap.ArgumentParser(
         description="""Import a network saved in a set of CSV files into Hydra.
 
-        Written by Philipp Meier <philipp@diemeiers.ch> and Stephen Knox <stephen.knox@manchester.ac.uk>
+        Written by Philipp Meier <philipp@diemeiers.ch> and 
+        Stephen Knox <stephen.knox@manchester.ac.uk>
         (c) Copyright 2013, University of Manchester.
 
         """, epilog="For more information visit www.hydra-network.com",

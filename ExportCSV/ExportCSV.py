@@ -97,7 +97,7 @@ class ExportCSV(object):
 
         self.client = PluginLib.connect(url=url, session_id=session_id)
 
-        all_attributes = self.client.service.get_attributes()
+        all_attributes = self.client.service.get_all_attributes()
         self.attributes = {}
         if not all_attributes:
             raise HydraPluginError("An error has occurred. Please check that the "
