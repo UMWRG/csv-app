@@ -452,6 +452,7 @@ class ImportCSV(object):
                     # The scenario loaded with the network will be deleted as
                     # well, we create a new one.
                     self.Network['scenarios'] = []
+                    self.Network['type'] = data[field_idx['type']].strip()
                 except WebFault:
                     log.info('Network %s not found. Creating new network.', network_id)
                     self.warnings.append('Network %s not found. Creating new network.'%(network_id,))
