@@ -240,6 +240,8 @@ class ImportCSV(object):
         self.group_id = PluginLib.temp_ids()
         self.attr_id  = PluginLib.temp_ids()
 
+        self.units = self.get_dimensions()
+
         self.warnings = []
         self.message = ''
         self.files = []
@@ -247,6 +249,22 @@ class ImportCSV(object):
         self.num_steps = 6
 
         self.ignorelines = ['', '\n', '\r']
+
+    def parse_unit(self, unit):
+        try:
+            float(unit[0])
+            factor, unit = unit.split(' ', 1)
+            return unit, float(factor)
+        except ValueError:
+            return unit, 1.0
+
+    def get_dimensions(self):
+        units = {}
+        dimensions = self.connection.call('get_all_dimensions', {})
+        for dimension in dimensions:
+            for unit_name in dimension['units']:
+                units[unit_name] = dimension['name']
+        return units
 
     def validate_value(self, value, restriction_dict):
         if restriction_dict is None or restriction_dict == {}:
@@ -267,6 +285,7 @@ class ImportCSV(object):
         if file == None:
             log.warn("No file specified")
             return None
+        log.info("Reading file data from: %s", os.path.realpath(file))
         self.basepath = os.path.dirname(os.path.realpath(file))
         with open(file, mode='r') as csv_file:
             file_data = csv_file.read().split('\n')
@@ -979,7 +998,8 @@ class ImportCSV(object):
                 if unit.strip() == '-' or unit.strip() == '':
                     attribute['dimen'] = 'Dimensionless'
                 else:
-                    attribute['dimen'] = self.connection.call('get_dimension', {'unit1':unit.strip()})
+                    basic_unit, factor = self.parse_unit(unit.strip())
+                    attribute['dimen'] = self.units.get(basic_unit)
 
         except Exception,e:
             raise HydraPluginError("Invalid attribute %s %s: error was: %s"%(name,unit,e))
