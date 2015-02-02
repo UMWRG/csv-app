@@ -102,6 +102,14 @@
                 to the network bing imported.</help>
         </arg>
         <arg>
+            <name>server_url</name>
+            <switch>-u</switch>
+            <multiple>N</multiple>
+            <argtype>string</argtype>
+            <help>Specify the URL of the server to which this
+                        plug-in connects.</help>
+        </arg>
+        <arg>
             <name>session_id</name>
             <switch>-c</switch>
             <multiple>N</multiple>
