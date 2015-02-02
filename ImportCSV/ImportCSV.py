@@ -1397,7 +1397,7 @@ class ImportCSV(object):
                             if (tstime - prev_time) != freq:
                                 is_eq_spaced = False
                     prev_time = tstime
-                log.info(col_headings)
+               
                 for i, ts_val in enumerate(ts_value):
                     idx = col_headings[i]
                     ts_values[idx][ts_time] = ts_val
