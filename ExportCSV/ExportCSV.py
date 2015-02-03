@@ -1,5 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# (c) Copyright 2013, 2014, 2015 University of Manchester\
+#\
+# ExportCSV is free software: you can redistribute it and/or modify\
+# it under the terms of the GNU General Public License as published by\
+# the Free Software Foundation, either version 3 of the License, or\
+# (at your option) any later version.\
+#\
+# ExportCSV is distributed in the hope that it will be useful,\
+# but WITHOUT ANY WARRANTY; without even the implied warranty of\
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\
+# GNU General Public License for more details.\
+# \
+# You should have received a copy of the GNU General Public License\
+# along with ExportCSV.  If not, see <http://www.gnu.org/licenses/>\
+#
+
 """A Hydra plug-in for importing CSV files.
 
 Basics
@@ -16,21 +32,27 @@ Basic usage::
 Options
 ~~~~~~~
 
-====================== ====== ========= =======================================
-Option                 Short  Parameter Description
-====================== ====== ========= =======================================
-``--help``             ``-h``           show help message and exit.
-``--network``          ``-t`` NETWORK   Specify the file containing network
-                                        information. If no file is specified, a
-                                        new network will be created using
-                                        default values.
-``--timezone``         ``-z`` TIMEZONE  Specify a timezone as a string
-                                        following the Area/Loctation pattern
-                                        (e.g.  Europe/London). This timezone
-                                        will be used for all timeseries data
-                                        that is exported. If you don't specify
-                                        a timezone, it defaults to UTC.
-====================== ====== ========= =======================================
+====================== ====== ============ =======================================
+Option                 Short  Parameter    Description
+====================== ====== ============ =======================================
+``--help``             ``-h``              show help message and exit.
+``--network``          ``-t`` NETWORK      Specify the file containing network
+                                           information. If no file is specified, a
+                                           new network will be created using
+                                           default values.
+``--timezone``         ``-z`` TIMEZONE     Specify a timezone as a string
+                                           following the Area/Loctation pattern
+                                           (e.g.  Europe/London). This timezone
+                                           will be used for all timeseries data
+                                           that is exported. If you don't specify
+                                           a timezone, it defaults to UTC.
+``--server-url``       ``-u`` SERVER-URL   Url of the server the plugin will
+                                           connect to.
+                                           Defaults to localhost.
+``--session-id``       ``-c`` SESSION-ID   Session ID used by the callig software.
+                                           If left empty, the plugin will attempt
+                                           to log in itself.
+====================== ====== ============ =======================================
 
 
 File structure
