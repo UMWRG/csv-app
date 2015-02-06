@@ -1,5 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# (c) Copyright 2013, 2014, 2015 University of Manchester\
+#\
+# ImportCSV is free software: you can redistribute it and/or modify\
+# it under the terms of the GNU General Public License as published by\
+# the Free Software Foundation, either version 3 of the License, or\
+# (at your option) any later version.\
+#\
+# ImportCSV is distributed in the hope that it will be useful,\
+# but WITHOUT ANY WARRANTY; without even the implied warranty of\
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\
+# GNU General Public License for more details.\
+# \
+# You should have received a copy of the GNU General Public License\
+# along with ImportCSV.  If not, see <http://www.gnu.org/licenses/>\
+#
+
 """A Hydra plug-in for importing CSV files.
 
 Basics
@@ -18,6 +34,7 @@ Basic usage::
                     [-r RULES [RULES ...]] [-z TIMEZONE]
                     [-g GROUPS] [-k GROUPMEMBERS]
                     [-t TEMPLATE]
+                    [-u SERVER=URL] [-c SESSION-ID]
                     [-x]
 
 Options
@@ -65,6 +82,12 @@ Option                 Short  Parameter    Description
 ``--expand-filenames`` ``-x``              If the import function encounters
                                            something that looks like a filename,
                                            it tries to read the file.
+``--server-url``       ``-u`` SERVER-URL   Url of the server the plugin will
+                                           connect to.
+                                           Defaults to localhost.
+``--session-id``       ``-c`` SESSION-ID   Session ID used by the callig software.
+                                           If left empty, the plugin will attempt
+                                           to log in itself.
 ====================== ====== ============ =======================================
 
 
@@ -1251,9 +1274,12 @@ class ImportCSV(object):
                         filedata = self.file_dict[full_file_path]
 
                     value_header = filedata[0].lower().replace(' ', '')
-                    if value_header.startswith('timeseriesdescription,') or \
-                        value_header.startswith('arraydescription,') or \
-                        value_header.startswith(','):
+                    if value_header.startswith('arraydescription,') or value_header.startswith(','):
+                        arr_struct = filedata[0].strip()
+                        arr_struct = arr_struct.split(',')
+                        arr_struct = "|".join(arr_struct[2:])
+                        filedata = filedata[1:]
+                    elif value_header.startswith('timeseriesdescription') or value_header.startswith(','):
                         arr_struct = filedata[0].strip()
                         arr_struct = arr_struct.split(',')
                         arr_struct = "|".join(arr_struct[3:])
@@ -1546,7 +1572,7 @@ def commandline_parser():
                         that looks like a filename, it tries to read the file.
                         It also tries to guess if it contains a number, a
                         descriptor, an array or a time series.''')
-    parser.add_argument('-u', '--server-url',
+    parser.add_argument('-u', '--server_url',
                         help='''Specify the URL of the server to which this
                         plug-in connects.''')
     parser.add_argument('-c', '--session_id',
