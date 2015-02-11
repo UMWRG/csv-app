@@ -94,6 +94,7 @@ import logging
 import pytz
 
 from HydraLib import PluginLib
+from HydraLib.PluginLib import JsonConnection
 from HydraLib.HydraException import HydraPluginError
 from HydraLib.PluginLib import write_progress, write_output, validate_plugin_xml
 
@@ -117,16 +118,24 @@ class ExportCSV(object):
         self.warnings = []
         self.files    = []
 
-        self.client = PluginLib.connect(url=url, session_id=session_id)
+        self.connection = JsonConnection(url)
+        if session_id is not None:
+            log.info("Using existing session %s", session_id)
+            self.connection.session_id=session_id
+        else:
+            self.connection.login()
 
-        all_attributes = self.client.service.get_all_attributes()
+        all_attributes = self.call('get_all_attributes')
         self.attributes = {}
         if not all_attributes:
             raise HydraPluginError("An error has occurred. Please check that the "
                                    "network and all attributes are available.")
         
-        for attr in all_attributes.Attr:
+        for attr in all_attributes:
             self.attributes[attr.id] = attr.name
+
+    def call(self, func, args={}):
+        return self.connection.call(func, args)
 
     def export(self, project_id, network_id, scenario_id):
        
@@ -135,12 +144,14 @@ class ExportCSV(object):
             try:
                 try:
                     network_id = int(network_id)
-                    network = csv.client.service.get_network(network_id)
+                    network = self.call('get_network', {'network_id':network_id})
                 except Exception:
                     #...or the network name can be specified, but with the project ID.
                     project_id = project_id
                     network_name = network
-                    network = csv.client.service.get_network_by_name(project_id, network_name)
+                    network = self.call('get_network_by_name', 
+                                                {'project_id':project_id,
+                                                 'network_name':network_name})
             except:
                 raise HydraPluginError("A network %s not found."%network_id)
 
@@ -167,19 +178,21 @@ class ExportCSV(object):
             raise HydraPluginError("Network %s has no scenarios!"%(network))
 
         if scenario_id is not None:
-            for scenario in network.scenarios.Scenario:
+            for scenario in network.scenarios:
                 if int(scenario.id) == int(scenario_id):
                     log.info("Exporting Scenario %s"%(scenario.name))
-                    csv.export_network(network, scenario)
+                    self.export_network(network, scenario)
                     break
             else:
                 raise HydraPluginError("No scenario with ID %s found"%(args.scenario))
         else:
             log.info("No Scenario specified, exporting them all!")
-            for scenario in network.scenarios.Scenario:
+            for scenario in network.scenarios:
                 log.info("Exporting Scenario %s"%(scenario.name))
-                csv.export_network(network, scenario)
-        csv.files.append(network_dir)
+                self.export_network(network, scenario)
+
+        self.files.append(network_dir)
+
     def export_network(self, network, scenario):
         log.info("\n************NETWORK****************")
         scenario.target_dir = os.path.join(network.network_dir, scenario.name.replace(' ', '_'))
@@ -208,14 +221,14 @@ class ExportCSV(object):
         metadata_placeholder = ["" for attr_id in network_attributes.keys()]
 
         if network.attributes is not None:
-            for r_attr in network.attributes.ResourceAttr:
+            for r_attr in network.attributes:
                 attr_name = network_attributes[r_attr.attr_id]
                 value, metadata = self.get_attr_value(scenario, r_attr, attr_name, network.name)
                 values[network_attributes.keys().index(r_attr.attr_id)] = value
                 metadata_placeholder[network_attributes.keys().index(r_attr.attr_id)] = metadata
 
-        if network.types is not None and len(network.types.TypeSummary) > 0:
-            net_type = network.types.TypeSummary[0]['name']
+        if network.types is not None and len(network.types) > 0:
+            net_type = network.types[0]['name']
         else:
             net_type = ""
 
@@ -238,18 +251,18 @@ class ExportCSV(object):
         node_map = dict()
 
         if network.nodes:
-            node_map = self.export_nodes(scenario, network.nodes.Node)
+            node_map = self.export_nodes(scenario, network.nodes)
         else:
             log.warning("Network has no nodes!")
 
         link_map = dict()
         if network.links:
-            link_map = self.export_links(scenario, network.links.Link, node_map)
+            link_map = self.export_links(scenario, network.links, node_map)
         else:
             log.warning("Network has no links!")
 
         if network.resourcegroups:
-            self.export_resourcegroups(scenario, network.resourcegroups.ResourceGroup, node_map, link_map)
+            self.export_resourcegroups(scenario, network.resourcegroups, node_map, link_map)
         else:
             log.warning("Network has no resourcegroups.")
 
@@ -290,15 +303,15 @@ class ExportCSV(object):
             values = ["" for attr_id in node_attributes.keys()]
             metadata_placeholder = ["" for attr_id in node_attributes.keys()]
             if node.attributes is not None:
-                for r_attr in node.attributes.ResourceAttr:
+                for r_attr in node.attributes:
                     attr_name = node_attributes[r_attr.attr_id]
                     value, metadata = self.get_attr_value(scenario, r_attr, attr_name, node.name)
                     idx = node_attributes.keys().index(r_attr.attr_id)
                     values[idx] = value
                     metadata_placeholder[idx] = metadata
             
-            if node.types is not None and len(node.types.TypeSummary) > 0:
-                node_type = node.types.TypeSummary[0]['name']
+            if node.types is not None and len(node.types) > 0:
+                node_type = node.types[0]['name']
             else:
                 node_type = ""
 
@@ -360,13 +373,14 @@ class ExportCSV(object):
             values = ["" for attr_id in link_attributes.keys()]
             metadata_placeholder = ["" for attr_id in link_attributes.keys()]
             if link.attributes is not None:
-                for r_attr in link.attributes.ResourceAttr:
+                for r_attr in link.attributes:
                     attr_name = link_attributes[r_attr.attr_id]
                     value, metadata = self.get_attr_value(scenario, r_attr, attr_name, link.name)
                     values[link_attributes.keys().index(r_attr.attr_id)] = value
                     metadata_placeholder[link_attributes.keys().index(r_attr.attr_id)] = metadata
-            if link.types is not None and len(link.types.TypeSummary) > 0:
-                link_type = link.types.TypeSummary[0]['name']
+
+            if link.types is not None and len(link.types) > 0:
+                link_type = link.types[0]['name']
             else:
                 link_type = ""
 
@@ -423,14 +437,14 @@ class ExportCSV(object):
             values = ["" for attr_id in group_attributes.keys()]
             metadata_placeholder = ["" for attr_id in group_attributes.keys()]
             if group.attributes is not None:
-                for r_attr in group.attributes.ResourceAttr:
+                for r_attr in group.attributes:
                     attr_name = group_attributes[r_attr.attr_id]
                     value, metadata = self.get_attr_value(scenario, r_attr, attr_name, group.name)
                     values[group_attributes.keys().index(r_attr.attr_id)] = value
                     metadata_placeholder[group_attributes.keys().index(r_attr.attr_id)] = metadata
 
-            if group.types is not None and len(group.types.TypeSummary) > 0:
-                group_type = group.types.TypeSummary[0]['name']
+            if group.types is not None and len(group.types) > 0:
+                group_type = group.types[0]['name']
             else:
                 group_type = ""
 
@@ -480,7 +494,7 @@ class ExportCSV(object):
 
         group_member_heading   = "Name, Type, Member\n"
         group_member_entries   = []
-        for group_member in scenario.resourcegroupitems.ResourceGroupItem:
+        for group_member in scenario.resourcegroupitems:
             group_name = group_map[group_member.group_id]
             member_type = group_member.ref_key
             if member_type == 'LINK':
@@ -508,7 +522,7 @@ class ExportCSV(object):
         attributes = {}
         for resource in resources:
             if resource.attributes is not None:
-                for r_attr in resource.attributes.ResourceAttr:
+                for r_attr in resource.attributes:
                     if r_attr.attr_id not in attributes.keys():
                         attr_name = self.attributes[r_attr.attr_id]
                         attributes[r_attr.attr_id] = attr_name
@@ -519,7 +533,7 @@ class ExportCSV(object):
             Returns the unit of a given resource attribute within a scenario
         """
 
-        for rs in scenario.resourcescenarios.ResourceScenario:
+        for rs in scenario.resourcescenarios:
             if rs.attr_id == attr_id:
                 if rs.value.unit is not None:
                     return rs.value.unit
@@ -538,12 +552,12 @@ class ExportCSV(object):
         if resource_attr.attr_is_var == 'Y':
             return 'NULL', ''
 
-        for rs in scenario.resourcescenarios.ResourceScenario:
+        for rs in scenario.resourcescenarios:
             if rs.resource_attr_id == r_attr_id:
                 if rs.value.type == 'descriptor':
-                    value = rs.value.value.desc_val
+                    value = rs.value.value.desc_val[0]
                 elif rs.value.type == 'array':
-                    value = rs.value.value.arr_data
+                    value = rs.value.value.arr_data[0]
                     file_name = "array_%s_%s.csv"%(resource_attr.ref_key, attr_name)
                     file_loc = os.path.join(scenario.target_dir, file_name)
                     if os.path.exists(file_loc):
@@ -551,7 +565,7 @@ class ExportCSV(object):
                     else:
                         arr_file      = open(file_loc, 'w')
                         if rs.value.metadata:
-                            for m in rs.value.metadata.Metadata:
+                            for m in rs.value.metadata:
                                 if m.name == 'data_struct':
                                     arr_desc = ",".join(m.value.split('|'))
                                     arr_file.write("array description, ,%s\n"%arr_desc)
@@ -576,7 +590,7 @@ class ExportCSV(object):
                     arr_file.close()
                     value = file_name
                 elif rs.value.type == 'scalar':
-                    value = rs.value.value.param_value
+                    value = rs.value.value.param_value[0]
                 elif rs.value.type == 'timeseries':
                     value = rs.value.value.ts_values
                     file_name = "timeseries_%s_%s.csv"%(resource_attr.ref_key, attr_name)
@@ -586,14 +600,14 @@ class ExportCSV(object):
                     else:
                         ts_file      = open(file_loc, 'w')
                         if rs.value.metadata:
-                            for m in rs.value.metadata.Metadata:
+                            for m in rs.value.metadata:
                                 if m.name == 'data_struct':
                                     arr_desc = ",".join(m.value.split('|'))
                                     arr_file.write("array description,,,%s\n"%arr_desc)
 
                     for ts in value:
-                        ts_time = ts['ts_time'].replace('1900', 'XXXX')
-                        ts_val  = ts['ts_value']
+                        ts_time = ts['ts_time'][0].replace('1900', 'XXXX')
+                        ts_val  = ts['ts_value'][0]
 
                         try:
                             ts_val = float(ts_val)
@@ -660,7 +674,7 @@ class ExportCSV(object):
         if metadata_list is None or len(metadata_list) == 0:
             return ''
         metadata_string_list = []
-        for metadatum in metadata_list.Metadata:
+        for metadatum in metadata_list:
             name = metadatum.name
             val  = metadatum.value
             metadata_string_list.append("(%s;%s)"%(name, val))
@@ -719,9 +733,14 @@ if __name__ == '__main__':
     
         csv.export(args.project, args.network, args.scenario)
         message = "Export complete"
+    except HydraPluginError as e:
+        message="An error has occurred"
+        errors = [e.message]
+        log.exception(e)
     except Exception, e:
-        message = "An error has occurred"
-        csv.errors = [e.message]
+        message="An error has occurred"
+        log.exception(e)
+        errors = [e]
 
     xml_response = PluginLib.create_xml_response('ExportCSV',
                                                  args.network,
