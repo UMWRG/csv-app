@@ -1,11 +1,11 @@
 <template_definition>
-    <template_name>EBSD Model</template_name>
+    <template_name>EBSD Model v2</template_name>
 	<layout>	    
         <item>
             <name>grouping</name>
             <value>			    
-			    <name>EBSD Model</name>
-				<description>EBSD Model</description>
+			    <name>EBSD Model v2</name>
+				<description>EBSD Model with network attributes</description>
 				<categories>
 				    <category>
 						<name>Source Options</name>
@@ -151,7 +151,7 @@
 								<name>CTR</name>
 								<description>Intra-company transfer</description>
 								<displayname>CTR</displayname>
-								<image>images\BlueSolidLine.png</image>
+								<image>images\BlueSolidLine16.png</image>
 							</group>
 							<group>
 								<name>OTR</name>
@@ -400,7 +400,7 @@
 		</resource>
         <resource>
             <type>NODE</type>
-            <name>WRZ</name>
+            <name>Water resource zone</name>
 			<layout>
 				<item>
 					<name>image</name>
@@ -419,6 +419,12 @@
 					<value>WRZ</value>
 				</item>
 			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
@@ -517,7 +523,7 @@
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Monetary value</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
 				<data_type>timeseries</data_type>
             </attribute>
@@ -554,7 +560,13 @@
 					<name>group</name>
 					<value>Junction</value>
 				</item>
-			</layout>			
+			</layout>		
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
@@ -606,7 +618,13 @@
 					<name>group</name>
 					<value>LEA</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -632,7 +650,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -743,7 +761,7 @@
                 <name>Carbon fopex spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-				<data_type>scalar</data_type>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon vopex spent</name>
@@ -779,7 +797,13 @@
 					<value>ASR</value>
 				</item>
 			</layout>			
-            <attribute>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>
+			<attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
                 <is_var>N</is_var>
@@ -804,7 +828,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -950,7 +974,13 @@
 					<name>group</name>
 					<value>CON</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -976,7 +1006,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -1122,7 +1152,13 @@
 					<name>group</name>
 					<value>DES</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -1148,7 +1184,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -1294,7 +1330,13 @@
 					<name>group</name>
 					<value>EFF</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -1320,7 +1362,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -1466,7 +1508,13 @@
 					<name>group</name>
 					<value>EGW</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -1492,7 +1540,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -1603,7 +1651,7 @@
                 <name>Carbon fopex spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-				<data_type>scalar</data_type>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon vopex spent</name>
@@ -1638,7 +1686,13 @@
 					<name>group</name>
 					<value>ESW</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -1664,7 +1718,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -1775,7 +1829,7 @@
                 <name>Carbon fopex spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-				<data_type>scalar</data_type>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon vopex spent</name>
@@ -1810,7 +1864,13 @@
 					<name>group</name>
 					<value>NSW</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -1836,7 +1896,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -1947,7 +2007,7 @@
                 <name>Carbon fopex spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-				<data_type>scalar</data_type>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon vopex spent</name>
@@ -1982,7 +2042,13 @@
 					<name>group</name>
 					<value>MET</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -2008,7 +2074,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -2154,7 +2220,13 @@
 					<name>group</name>
 					<value>NGW</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -2180,7 +2252,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -2291,7 +2363,7 @@
                 <name>Carbon fopex spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-				<data_type>scalar</data_type>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon vopex spent</name>
@@ -2326,7 +2398,13 @@
 					<name>group</name>
 					<value>RES</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -2352,7 +2430,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -2463,7 +2541,7 @@
                 <name>Carbon fopex spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-				<data_type>scalar</data_type>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon vopex spent</name>
@@ -2498,7 +2576,13 @@
 					<name>group</name>
 					<value>RNC</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -2524,7 +2608,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -2635,7 +2719,7 @@
                 <name>Carbon fopex spent</name>
                 <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
-				<data_type>scalar</data_type>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>Carbon vopex spent</name>
@@ -2670,7 +2754,13 @@
 					<name>group</name>
 					<value>WTW</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -2696,7 +2786,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -2842,7 +2932,13 @@
 					<name>group</name>
 					<value>TSW</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -2868,7 +2964,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -3014,7 +3110,13 @@
 					<name>group</name>
 					<value>WEF</value>
 				</item>
-			</layout>			
+			</layout>
+			<attribute>
+                <name>Location source</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>descriptor</data_type>
+            </attribute>			
             <attribute>
                 <name>WRSE-Ref</name>
                 <dimension/>
@@ -3040,7 +3142,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -3100,10 +3202,76 @@
 				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
+                <name>Financial cost</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>N</is_var>
+				<data_type>array</data_type>
+            </attribute>
+            <attribute>
+                <name>Financial vopex</name>
+                <dimension>Unit price (volume)</dimension>
+                <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
+                <name>EnvSoc cost</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>N</is_var>
+				<data_type>array</data_type>
+            </attribute>
+            <attribute>
+                <name>EnvSoc vopex</name>
+                <dimension>Unit price (volume)</dimension>
+                <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Financial cost spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+            <attribute>
+                <name>Financial vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+            <attribute>
+                <name>EnvSoc cost spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+            <attribute>
+                <name>EnvSoc vopex spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const</name>
+                <dimension>Mass</dimension>
+                <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
+                <name>Carbon const spent</name>
+                <dimension>Specific cost (time)</dimension>
+                <is_var>Y</is_var>
+				<data_type>timeseries</data_type>
+            </attribute>
+			<attribute>
+                <name>OneOff cost</name>
+                <dimension>Monetary value</dimension>
+                <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+			<attribute>
                 <name>OneOff cost spent</name>
                 <dimension>Monetary value</dimension>
                 <is_var>Y</is_var>
-				<data_type>scalar</data_type>
+				<data_type>timeseries</data_type>
             </attribute>
             <attribute>
                 <name>OneOff carbon</name>
@@ -3113,9 +3281,9 @@
             </attribute>
 			<attribute>
                 <name>OneOff carbon spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Monetary value</dimension>
                 <is_var>Y</is_var>
-				<data_type>scalar</data_type>
+				<data_type>timeseries</data_type>
             </attribute>
         </resource>
         <resource>
@@ -3228,7 +3396,7 @@
 				<data_type>timeseries</data_type>
             </attribute>
 			<attribute>
-                <name>Demand + THR flow</name>
+                <name>Demand+THR flow</name>
                 <dimension>Volumetric flow rate</dimension>
                 <is_var>Y</is_var>
 				<data_type>timeseries</data_type>
@@ -3277,6 +3445,12 @@
                 <is_var>N</is_var>
 				<data_type>descriptor</data_type>
             </attribute>
+			<attribute>
+                <name>Earliest start year</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
@@ -3320,7 +3494,7 @@
 				<data_type>descriptor</data_type>
             </attribute>
             <attribute>
-                <name>Earliest Start Year</name>
+                <name>Earliest start year</name>
                 <dimension/>
                 <is_var>N</is_var>
 				<data_type>scalar</data_type>
@@ -3404,7 +3578,7 @@
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
 				<data_type>timeseries</data_type>
             </attribute>
@@ -3422,7 +3596,7 @@
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
 				<data_type>timeseries</data_type>
             </attribute>
@@ -3518,6 +3692,12 @@
                 <is_var>N</is_var>
 				<data_type>descriptor</data_type>
             </attribute>
+			<attribute>
+                <name>Earliest start year</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
@@ -3645,7 +3825,7 @@
             </attribute>
             <attribute>
                 <name>Financial vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
 				<data_type>timeseries</data_type>
             </attribute>
@@ -3663,7 +3843,7 @@
             </attribute>
             <attribute>
                 <name>EnvSoc vopex spent</name>
-                <dimension>Unit price (volume)</dimension>
+                <dimension>Specific cost (time)</dimension>
                 <is_var>Y</is_var>
 				<data_type>timeseries</data_type>
             </attribute>
@@ -3759,6 +3939,12 @@
                 <is_var>N</is_var>
 				<data_type>descriptor</data_type>
             </attribute>
+			<attribute>
+                <name>Earliest start year</name>
+                <dimension/>
+                <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
             <attribute>
                 <name>Zone generic</name>
                 <dimension/>
@@ -3801,11 +3987,11 @@
                 <is_var>N</is_var>
 				<data_type>descriptor</data_type>
             </attribute>
-            <attribute>
-                <name>Earliest Start Year</name>
+			<attribute>
+                <name>Transfer type</name>
                 <dimension/>
                 <is_var>N</is_var>
-				<data_type>scalar</data_type>
+				<data_type>descriptor</data_type>
             </attribute>
 			<attribute>
                 <name>Year activated</name>
