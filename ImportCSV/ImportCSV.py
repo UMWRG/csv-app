@@ -269,7 +269,7 @@ class ImportCSV(object):
         self.message = ''
         self.files = []
 
-        self.num_steps = 6
+        self.num_steps = 9
 
         self.ignorelines = ['', '\n', '\r']
 
@@ -1674,6 +1674,7 @@ if __name__ == '__main__':
     errors = []
     try:
 
+        write_progress(1,csv.num_steps)
         validate_plugin_xml(os.path.join(__location__, 'plugin.xml'))
 
         if args.expand_filenames:
@@ -1696,28 +1697,29 @@ if __name__ == '__main__':
 
             # Create project and network only when there is actual data to
             # import.
+            write_progress(2,csv.num_steps)
             csv.create_project(ID=args.project, network_id=args.network_id)
             csv.create_scenario(name=args.scenario)
             csv.create_network(file=args.network, network_id=args.network_id)
 
-            write_progress(1,csv.num_steps)
+            write_progress(3,csv.num_steps)
             for nodefile in args.nodes:
                 write_output("Reading Node file %s" % nodefile)
                 csv.read_nodes(nodefile)
 
-            write_progress(2,csv.num_steps)
+            write_progress(4,csv.num_steps)
             if args.links is not None:
                 for linkfile in args.links:
                     write_output("Reading Link file %s" % linkfile)
                     csv.read_links(linkfile)
 
-            write_progress(3,csv.num_steps)
+            write_progress(5,csv.num_steps)
             if args.groups is not None:
                 for groupfile in args.groups:
                     write_output("Reading Group file %s"% groupfile)
                     csv.read_groups(groupfile)
 
-            write_progress(4,csv.num_steps)
+            write_progress(6,csv.num_steps)
             if args.groupmembers is not None:
                 write_output("Reading Group Members")
                 if args.groups is None:
@@ -1726,7 +1728,7 @@ if __name__ == '__main__':
                 for groupmemberfile in args.groupmembers:
                     csv.read_group_members(groupmemberfile)
 
-            write_progress(5,csv.num_steps)
+            write_progress(7,csv.num_steps)
             write_output("Saving network")
             csv.commit()
             if csv.NetworkSummary.get('scenarios') is not None:
@@ -1734,6 +1736,7 @@ if __name__ == '__main__':
 
             network_id = csv.NetworkSummary['id']
 
+            write_progress(8,csv.num_steps)
             write_output("Saving types")
             if args.template is not None:
                 try:
@@ -1743,7 +1746,7 @@ if __name__ == '__main__':
                     raise HydraPluginError("An error occurred setting the types from the template. "
                                            "Error relates to \"%s\" "
                                            "Please check the template and resource types."%(e.message))
-            write_progress(6,csv.num_steps)
+            write_progress(9,csv.num_steps)
 
         else:
             log.info('No nodes found. Nothing imported.')

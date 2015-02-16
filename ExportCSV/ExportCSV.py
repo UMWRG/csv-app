@@ -97,7 +97,7 @@ from HydraLib import PluginLib
 from HydraLib.PluginLib import JsonConnection
 from HydraLib.HydraException import HydraPluginError
 from HydraLib.PluginLib import write_progress, write_output, validate_plugin_xml
-
+import time
 from numpy import array
 import os, sys
 log = logging.getLogger(__name__)
@@ -134,26 +134,32 @@ class ExportCSV(object):
         for attr in all_attributes:
             self.attributes[attr.id] = attr.name
 
+        self.num_steps = 6
+
     def call(self, func, args={}):
         return self.connection.call(func, args)
 
     def export(self, project_id, network_id, scenario_id):
-       
+        write_output("Retrieving Network") 
+        write_progress(2, self.num_steps) 
         if network_id is not None:
             #The network ID can be specified to get the network...
             try:
                 try:
                     network_id = int(network_id)
+                    x = time.time()
                     network = self.call('get_network', {'network_id':network_id})
+                    log.info("Network retrieved in %s", time.time()-x)
+
                 except Exception:
                     #...or the network name can be specified, but with the project ID.
                     project_id = project_id
-                    network_name = network
+                    network_name = str(network_id)
                     network = self.call('get_network_by_name', 
                                                 {'project_id':project_id,
                                                  'network_name':network_name})
             except:
-                raise HydraPluginError("A network %s not found."%network_id)
+                raise HydraPluginError("Network %s not found."%network_id)
 
         else:
             raise HydraPluginError("A network ID must be specified!")
@@ -194,6 +200,8 @@ class ExportCSV(object):
         self.files.append(network_dir)
 
     def export_network(self, network, scenario):
+        write_output("Exporting network")
+        write_progress(3, self.num_steps) 
         log.info("\n************NETWORK****************")
         scenario.target_dir = os.path.join(network.network_dir, scenario.name.replace(' ', '_'))
 
@@ -269,6 +277,8 @@ class ExportCSV(object):
         log.info("Network export complete")
 
     def export_nodes(self, scenario, nodes):
+        write_output("Exporting nodes.")
+        write_progress(4, self.num_steps) 
         log.info("\n************NODES****************")
 
         #return this so that the link export can easily access
@@ -338,6 +348,8 @@ class ExportCSV(object):
         return id_name_map
 
     def export_links(self, scenario, links, node_map):
+        write_output("Exporting links.")
+        write_progress(5, self.num_steps) 
         log.info("\n************LINKS****************")
 
         #return this so that the group export can easily access
@@ -412,6 +424,8 @@ class ExportCSV(object):
             2:group_members.csv defining the contents of each group for this scenario
         """
         log.info("\n************RESOURCE GROUPS****************")
+        write_output("Exporting groups.")
+        write_progress(6, self.num_steps) 
 
         group_file = open(os.path.join(scenario.target_dir, "groups.csv"), 'w')
         group_attributes = self.get_resource_attributes(resourcegroups)
@@ -603,7 +617,7 @@ class ExportCSV(object):
                             for m in rs.value.metadata:
                                 if m.name == 'data_struct':
                                     arr_desc = ",".join(m.value.split('|'))
-                                    arr_file.write("array description,,,%s\n"%arr_desc)
+                                    ts_file.write("array description,,,%s\n"%arr_desc)
 
                     for ts in value:
                         ts_time = ts['ts_time'][0].replace('1900', 'XXXX')
@@ -724,7 +738,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     csv = ExportCSV(url=args.server_url, session_id=args.session_id)
     try:      
-        
+        write_progress(1, csv.num_steps) 
         validate_plugin_xml(os.path.join(__location__, 'plugin.xml'))
 
 
