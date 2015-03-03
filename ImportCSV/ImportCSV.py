@@ -643,7 +643,7 @@ class ImportCSV(object):
                 node = self.read_node_line(line, attrs, field_idx, metadata, units)
             except Exception, e:
                 log.exception(e)
-                raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(file, line_num+3, e))
+                raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(os.path.split(file)[-1], line_num+3, e))
 
             self.Nodes.update({node['name']: node})
 
@@ -754,7 +754,7 @@ class ImportCSV(object):
                 link = self.read_link_line(line, attrs, field_idx, metadata, units)
             except Exception, e:
                 log.exception(e)
-                raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(file, line_num+3, e))
+                raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(os.path.split(file)[-1], line_num+3, e))
 
             self.Links.update({link['name']: link})
 
@@ -866,7 +866,7 @@ class ImportCSV(object):
                 group = self.read_group_line(line, attrs, field_idx, metadata, units)
             except Exception, e:
                 log.exception(e)
-                raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(file, line_num+3, e))
+                raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(os.path.split(file)[-1], line_num+3, e))
             
             self.Groups.update({group['name']: group})
 
@@ -959,7 +959,7 @@ class ImportCSV(object):
                     continue
             except Exception, e:
                 log.exception(e)
-                raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(file, line_num+3, e))
+                raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(os.path.split(file)[-1], line_num+3, e))
 
 
             items.append(item)
@@ -1298,15 +1298,15 @@ class ImportCSV(object):
                         if l_resource_name == resource_name:
                             data.append(l[l.find(',')+1:])
 
-                    if len(filedata) == 0:
+                    if len(data) == 0:
                         log.info('%s: No data found in file %s' %
-                                     (resource_name, full_file_path))
+                                     (resource_name, value))
                         self.warnings.append('%s: No data found in file %s' %
-                                             (resource_name, full_file_path))
+                                             (resource_name, value))
                         return None
                     else:
                         if self.is_timeseries(data):
-                            ts = self.create_timeseries(data, restriction_dict, header=value_header)
+                            ts = self.create_timeseries(data, restriction_dict, header=value_header, filename=value)
                             dataset['type'] = 'timeseries' 
                             dataset['value'] = ts
                         else:
@@ -1315,7 +1315,10 @@ class ImportCSV(object):
                                 try:
                                     dataset['value'] = self.create_array(data[0], restriction_dict)
                                 except Exception, e:
-                                    raise HydraPluginError("There is a value error in %s. Please check value %s is correct."%(value, data[0]))
+                                    raise HydraPluginError("There is a value "
+                                                           "error in %s. "
+                                                           "Please check value"
+                                                           " %s is correct."%(value, data[0]))
                             else:
                                 dataset['value'] = None
                 else:
@@ -1357,8 +1360,7 @@ class ImportCSV(object):
         descriptor = json.dumps(value)
         return descriptor
 
-    def create_timeseries(self, data, restriction_dict={}, header=None):
-
+    def create_timeseries(self, data, restriction_dict={}, header=None, filename=""):
         if len(data) == 0:
             return None
         
@@ -1377,6 +1379,7 @@ class ImportCSV(object):
         ts_values = {}
         for col in col_headings:
             ts_values[col] = {}
+        ts_times = [] # to check for duplicae timestamps in a timeseries.
         start_time = None
         freq       = None
         prev_time  = None
@@ -1390,6 +1393,14 @@ class ImportCSV(object):
                 tstime = self.timezone.localize(tstime)
 
                 ts_time = dateutil.date_to_string(tstime, seasonal=seasonal)
+
+                if ts_time in ts_times:
+                    raise HydraPluginError("A duplicate time %s has been found "
+                                           "in %s where the value = %s)"%( ts_time,
+                                                              filename,
+                                                             dataset[2:]))
+                else:
+                    ts_times.append(ts_time)
 
                 value_length = len(dataset[2:])
                 shape = dataset[1].strip()
@@ -1471,12 +1482,15 @@ class ImportCSV(object):
         return arr
 
     def is_timeseries(self, data):
-        date = data[0].split(',')[0].strip()
-        timeformat = dateutil.guess_timefmt(date)
-        if timeformat is None:
-            return False
-        else:
-            return True
+        try:
+            date = data[0].split(',')[0].strip()
+            timeformat = dateutil.guess_timefmt(date)
+            if timeformat is None:
+                return False
+            else:
+                return True
+        except:
+            raise HydraPluginError("Unable to parse timeseries %s"%data)
 
     def commit(self):
         log.info("Committing Network")
