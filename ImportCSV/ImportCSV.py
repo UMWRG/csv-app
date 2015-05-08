@@ -154,21 +154,17 @@ Lines starting with the ``#`` character are ignored.
 
 Please also consider the following:
 
-- A link references to start and end node by name. This also implies that the
+- A link references to start and end node by name. This also implies that the\
   node names defined in the file need to be unique.
-
-- The description should be in the last column. This will lead to more readable
+- The description should be in the last column. This will lead to more readable\
   files, since the description is usually free form text.
-
-- If you specify more than one file containing nodes, common attributes (i.e.
-  with the same name) will be considered the same. This results in a unique
+- If you specify more than one file containing nodes, common attributes (i.e.\
+  with the same name) will be considered the same. This results in a unique\
   attribute set for nodes. The same applies for links.
-
-- An attribute to a node or link is only added if there is a value for that
-  specific attribute in the line specifying a node (or link). If an attribute
+- An attribute to a node or link is only added if there is a value for that\
+  specific attribute in the line specifying a node (or link). If an attribute\
   should be added as a variable, you need to enter ``NULL``.
-
-- If you use a tmplate during import, missing attributes will be added to each
+- If you use a tmplate during import, missing attributes will be added to each\
   node or link according to its type.
 
 TODO
@@ -181,8 +177,7 @@ Building a windows executable
  - Use pyinstaller (pip install pyisntaller) to build a windows executable.
  - cd to the $PATH_TO_HYDRA/HydraPlugins/CSVPlugin/trunk
  - pyinstaller -F ImportCSV.py
- or if you want more compression (a smaller exe), install upx
- - pyinstaller -F --upx-dir=/path/to/upx/dir ExportCSV.py
+ - If you want more compression (a smaller exe), install upx and run pyinstaller -F --upx-dir=/path/to/upx/dir ExportCSV.py
  - An executable file will appear in the dist folder
 
 API docs
@@ -569,10 +564,8 @@ class ImportCSV(object):
         """
             Turn a list of metadata values into a dictionary structure.
             @parameter keys to describe the attribte to which this metadata refers
-            @parameter list of metadata. in the structure:
-                ["(key;val) (key;val)", "(key;val) (key;val)",...]
-            @returns dictionary in the format:
-                {attr1 : {key:val, key:val}, attr2: {key:val, key:val}...}
+            @parameter list of metadata. in the structure: ["(key;val) (key;val)", "(key;val) (key;val)",...]
+            @returns dictionary in the format: {attr1 : {key:val, key:val}, attr2: {key:val, key:val}...}
         """
         metadata_dict = {}
         for i, attr in enumerate(keys):
