@@ -191,13 +191,12 @@ from datetime import datetime
 import pytz
 
 from HydraLib import PluginLib
-from HydraLib.PluginLib import JsonConnection, write_progress, write_output, validate_plugin_xml
+from HydraLib.PluginLib import JsonConnection, write_progress, write_output, validate_plugin_xml, RequestError
 from HydraLib import config, util, dateutil
 from HydraLib.units import validate_resource_attributes
 
 from HydraLib.HydraException import HydraPluginError,HydraError
 
-from suds import WebFault
 from numpy import array, reshape
 
 from lxml import etree
@@ -367,7 +366,7 @@ class ImportCSV(object):
                     self.Project['networks'] = networks
                     log.info('Loading existing project (ID=%s)' % ID)
                     return
-                except WebFault:
+                except RequestError:
                     log.info('Project ID not found. Creating new project')
 
             except ValueError:
@@ -381,7 +380,7 @@ class ImportCSV(object):
                     self.Project = self.connection.call('get_network_project', {'network_id':network_id})
                     log.info('Loading existing project with network ID(ID=%s)' % network_id)
                     return
-                except WebFault:
+                except RequestError:
                     log.info('Project ID not found. Creating new project')
 
             except ValueError:
@@ -490,7 +489,7 @@ class ImportCSV(object):
                     # well, we create a new one.
                     self.Network['scenarios'] = []
                     self.Network['type'] = data[field_idx['type']].strip()
-                except WebFault:
+                except RequestError:
                     log.info('Network %s not found. Creating new network.', network_id)
                     self.warnings.append('Network %s not found. Creating new network.'%(network_id,))
                     network_id = None
