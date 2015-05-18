@@ -137,6 +137,16 @@ of that other member are needed::
     stor  , NODE  , node2
     stor  , LINK  , link1
 
+Metadata files are structured as follows:
+    
+ Name  , attribute_1             , attribute_2             , attribute_3
+ link1 , (key1:val1) (key2:val2) , (key3:val3) (key4:val4) , (key5:val5)
+
+In this case, key1 and key2 are metadata items for attribute 1 and so on.
+The deliminator for the key-val can be ';' or ':'. Note that all key-val
+pairs are contained within '(...)', with a space between each one. This way
+you can have several metadata items per attribute.
+
 Lines starting with the ``#`` character are ignored.
 
 .. note::
@@ -315,7 +325,7 @@ class ImportCSV(object):
             line = line.strip()
 			
 			# Ignore comments            
-			if len(line) == 0 or line[0] == '#':
+            if len(line) == 0 or line[0] == '#':
                 continue
             try:
                 line = ''.join([x if ord(x) < 128 else ' ' for x in line])
@@ -579,7 +589,12 @@ class ImportCSV(object):
                         if attr_meta == '':
                             continue
                         attr_meta = attr_meta.replace('(', '')
-                        keyval = attr_meta.split(';')
+                        #Check if it's ';' or ':' that is the deliminator..
+                        if attr_meta.find(';') > 0:
+                            keyval = attr_meta.split(';')
+                        else:
+                            keyval = attr_meta.split(':')
+
                         key = keyval[0].strip()
                         if key.lower() in ('name', 'dataset_name', 'dataset name'):
                             key = 'name'
