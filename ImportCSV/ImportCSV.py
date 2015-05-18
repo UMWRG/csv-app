@@ -137,6 +137,15 @@ of that other member are needed::
     stor  , NODE  , node2
     stor  , LINK  , link1
 
+Metadata can also be included in separate files, which are **named the same
+as the node/link file, but with _metadata at the end.**
+
+For example:
+    nodes.csv becomes nodes_metadata.csv
+    network.csv becomes network_metadata.csv
+    my_urban_links.csv becomes my_urban_links_metadata.csv
+
+
 Metadata files are structured as follows:
     
  Name  , attribute_1             , attribute_2             , attribute_3
