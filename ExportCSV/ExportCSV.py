@@ -16,7 +16,7 @@
 # along with ExportCSV.  If not, see <http://www.gnu.org/licenses/>\
 #
 
-"""A Hydra plug-in for importing CSV files.
+"""A Hydra plug-in for exporting a hydra network to CSV files.
 
 Basics
 ~~~~~~
@@ -27,7 +27,7 @@ Time series and array values will each have its own file also.
 
 Basic usage::
 
-       ImportCSV.py [-h] [-t NETWORK] [-z TIMEZONE]
+       ExportCSV.py [-h] [-t NETWORK] [-z TIMEZONE]
 
 Options
 ~~~~~~~
