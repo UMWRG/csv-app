@@ -5,7 +5,7 @@
             <name>grouping</name>
             <value>			    
 			    <name>Calvin Model</name>
-				<description>Calvin Model</description>
+				<description>Calvin Model demo network</description>
 				<categories>
 				    <category>
 						<name>Nodes</name>
@@ -61,9 +61,9 @@
 								<image>Groundwater16.png</image>								
 							</group>
 							<group>
-								<name>Agricultural demand</name>
-								<description>Agricultural demand</description>
-								<displayname>Agricultural demand</displayname>
+								<name>Agricultural Demand</name>
+								<description>Agricultural Demand</description>
+								<displayname>Agricultural Demand</displayname>
 								<image>AgriculturalDemand16.png</image>								
 							</group>
 							<group>
@@ -122,7 +122,7 @@
         </resource>
 		<resource>
             <type>NODE</type>
-            <name>Water Treatment Node</name>
+            <name>Water Treatment</name>
 			<layout>
 				<item>
 					<name>image</name>
@@ -276,7 +276,7 @@
         </resource>
 		<resource>
             <type>NODE</type>
-            <name>Surface Storage Node</name>
+            <name>Surface Storage</name>
 			<layout>
 				<item>
 					<name>image</name>
@@ -430,7 +430,7 @@
         </resource>
 		<resource>
             <type>NODE</type>
-            <name>Sink Node</name>
+            <name>Sink</name>
 			<layout>
 				<item>
 					<name>image</name>
@@ -584,7 +584,7 @@
         </resource>
 		<resource>
             <type>NODE</type>
-            <name>Pump Plant Node</name>
+            <name>Pump Plant</name>
 			<layout>
 				<item>
 					<name>image</name>
@@ -738,7 +738,7 @@
         </resource>
 		<resource>
             <type>NODE</type>
-            <name>Power Plant Node</name>
+            <name>Power Plant</name>
 			<layout>
 				<item>
 					<name>image</name>
@@ -892,7 +892,7 @@
         </resource>
 		<resource>
             <type>NODE</type>
-            <name>Urban Demand Node</name>
+            <name>Urban Demand</name>
 			<layout>
 				<item>
 					<name>image</name>
@@ -1046,7 +1046,7 @@
         </resource>
 		<resource>
             <type>NODE</type>
-            <name>Non-Standard Demand Node</name>
+            <name>Non-Standard Demand</name>
 			<layout>
 				<item>
 					<name>image</name>
@@ -1200,7 +1200,7 @@
         </resource>
 		<resource>
             <type>NODE</type>
-            <name>Junction Node</name>
+            <name>Junction</name>
 			<layout>
 				<item>
 					<name>image</name>
@@ -1354,7 +1354,7 @@
         </resource>
 		<resource>
             <type>NODE</type>
-            <name>Groundwater Storage Node</name>
+            <name>Groundwater Storage</name>
 			<layout>
 				<item>
 					<name>image</name>
@@ -1508,7 +1508,7 @@
         </resource>
 		<resource>
             <type>NODE</type>
-            <name>Agricultural Demand Node</name>
+            <name>Agricultural Demand</name>
 			<layout>
 				<item>
 					<name>image</name>
@@ -1524,7 +1524,7 @@
 				</item>
 				<item>
 					<name>group</name>
-					<value>Agricultural demand</value>
+					<value>Agricultural Demand</value>
 				</item>
 			</layout>
             <attribute>
@@ -1662,7 +1662,7 @@
         </resource>
         <resource>
             <type>NODE</type>
-            <name>Source Node TS</name>
+            <name>Source TS</name>
 			<layout>
 				<item>
 					<name>image</name>
@@ -1732,7 +1732,7 @@
         </resource>
 		<resource>
             <type>NODE</type>
-            <name>Source Node</name>
+            <name>Source</name>
 			<layout>
 				<item>
 					<name>image</name>
@@ -2051,7 +2051,7 @@
         </resource>
 		<resource>
             <type>LINK</type>
-            <name>Inflow Link</name>
+            <name>Inflow</name>
 			<layout>
 				<item>
 					<name>symbol</name>
@@ -2337,6 +2337,12 @@
 				<data_type>scalar</data_type>
             </attribute>
             <attribute>
+                <name>Unit cost</name>
+                <dimension>Unit price (volume)</dimension>
+                <is_var>N</is_var>
+				<data_type>scalar</data_type>
+            </attribute>
+            <attribute>
                 <name>Amplitude</name>
                 <dimension/>
                 <is_var>N</is_var>
@@ -2546,5 +2552,9 @@
 				<data_type>scalar</data_type>
             </attribute>
         </resource>
+		<resource>
+			<type>NETWORK</type>
+			<name>Calvin demo network</name>
+		</resource>
     </resources>
 </template_definition>

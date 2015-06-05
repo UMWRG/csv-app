@@ -1,5 +1,5 @@
 Name,From,To,Type,Type_ID,OriginNode,TerminalNode,Amplitude,AmplitudeMID,AmplitudeMID_text,Unit cost,CostMID,CostMID_text,CostMethod,CostMethod_text,LowerBound,LowerBoundMID,LowerBoundMID_text,UpperBound,UpperBoundMID,UpperBoundMID_text,LowerBoundMonthlyID,LowerBoundMonthlyMID,LowerBoundMonthlyMID_text,UpperBoundMonthlyID,UpperBoundMonthlyMID,UpperBoundMonthlyMID_text,ConstrainedFlowPathname,ConstrainedFlowPathnameMID,ConstrainedFlowPathnameMID_text,LowerBoundPathname,LowerBoundPathnameMID,LowerBoundPathnameMID_text,UpperBoundPathname,UpperBoundPathnameMID,UpperBoundPathnameMID_text,ConstraintMethod,ConstraintMethod_text,AuthorID,AuthorID_text,Categories,Boundary,Description
-Units,,,,,,,,,,$ ac-ft^-1,,,,,1000 ac-ft mon^-1,,,1000 ac-ft mon^-1,,,,,,,,,,,,,,,,,,,,,,,,
+Units,,,,,,,,,,USD ac-ft^-1,,,,,1000 ac-ft mon^-1,,,1000 ac-ft mon^-1,,,,,,,,,,,,,,,,,,,,,,,,
 AgG: Antelope_GW-AV,AGG AV,GW-AV,Diversion,3,900,553,0.319999993,,,0,,,1,None,0,,,0,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,,0,return flows
 AgG: Coachella_GW-CH,AGG COACH,GW-CH,Diversion,3,919,555,0.319999993,,,0,,,1,None,0,,,0,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,,0,return flows to groundwater
 AgG: E&W MWD_GW-EW,AGG EW,GW-EW,Diversion,3,908,909,0.319999993,,,0,,,1,None,0,,,0,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,,0,outflow
@@ -119,7 +119,7 @@ C25_C31,C25,C31,Diversion,3,23,38,1,304,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,
 C25_T61,C25,T61YUBA,Diversion,3,23,289,1,305,no losses,74,,,2,Constant,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,22,0,Butte/Plumas/Yuba Div.
 C26_HSURC26,C26,HSURC26,Diversion,3,24,198,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD_CAP4/C26_C311/FLOW_FXC(KAF)//1MON/MODIFIED L2 FROM C26/,307,"See Stacy""s files in Refuge folder for est of these deliveries to level 2 refuge demands for Sac E. Ref.",,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,22,0,Thermolito Afterbay and GW u/s supply via CVPM 5 to Sacramento East Refuges
 C26_HU5,C26,HU5,Diversion,3,24,206,1.100000024,308,CVPM data unadjusted from CVPIAPEIS input data,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD1/C26_HU5/FLOW_FXC(KAF)//1MON/C2VSIM_FXD REUSE/,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,22,0,Hidden ag delivery reuse calibration link
-C26_Sink,C26,SinkDelta,Diversion,3,24,256,1,,,0,,,1,None,0,,,0,,,,,,,,,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,22,1,Overflow for base case boundary flow at HSU5D31 in 1a regional model
+C26_Sink,C26,Sink Delta,Diversion,3,24,256,1,,,0,,,1,None,0,,,0,,,,,,,,,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,22,1,Overflow for base case boundary flow at HSU5D31 in 1a regional model
 C26_SinkR1,C26,Sink R1,Diversion,3,24,254,1,,,0,,,1,None,0,,,0,,,,,,,,,/CAWI_WC/AG CAL CVPM5/FLOW(KAF)/01JAN1970/1MON/CALIBRATION CVPM5/,,,,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,,0,Debug losses from CVPM 5
 C27_SR-EL,C27,SR-EL,Diversion,3,25,268,1,320,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,22,0,Yuba River inflow to Englebright Lake
 C28_C29,C28,C29,Diversion,3,26,27,1,323,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,/UCD CECT/C28_C29/FLOW_LBC(KAF)//1MON/SWRCB D-1644/,324,Minimum Instream Flow Requirement,,,,14,LowerBoundTimeSeries+NoUpperBound,13,Stacy Tanaka,22,0,Yuba River between Deer Creek and French Dry Creek
@@ -151,7 +151,7 @@ C313_C306,C313,C306,Diversion,3,41,34,1,,,0,,,1,None,0,,,0,,,,,,,,,,,,,,,,,,11,N
 C313_C314,C313,C314,Diversion,3,41,42,1,,,0,,,1,None,0,,,0,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,13,Stacy Tanaka,,0,Knights Landing Ridge Cut diversion to CVPM 6 (DA 12)
 C314_HSU6C314,C314,HSU6C314,Diversion,3,42,186,1,,,0,,,1,None,0,,,34,387,Upper bound constraint on agricultural deliveries from surface water for Policy 1. 07242012 - Increased upper bound by 6% to account for reduction of loss fraction from 0.93 to 0.88.,,,,,,,/UCD CAP4/C314_C17/FLOW_FXC(KAF)//1MON/CVGSM NAA ID24&32*1/,388,"Constrained delivery for Policy 4a from CVGSM delivery ID24 & ID32 in Cnjdvsp2.nda; with an average annual delivery of 96.9 TAF.  Data for Oct 1990 - Sep 1993 calculated by linear regression with DWRSIM CP77 diversion; in ""C:\public\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,22,0,Knights Landing Ridge Cut and Sacramento River water delivery to CVPM 6 (DA 12)
 C315_C316,C315,C316,Diversion,3,338,339,1,1401,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Local Groundwater Recharge
-C315_Sink G99,C315,SinkG99,Diversion,3,338,775,1,1402,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,2,Andy Draper,33,0,Santa Clara local supply spills
+C315_Sink G99,C315,Sink G99,Diversion,3,338,775,1,1402,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,2,Andy Draper,33,0,Santa Clara local supply spills
 C315_T7,C315,T7SCV,Diversion,3,338,858,1,,,170.1999969,1403,treatment ($20/af) + local distribution/conveyance ($95/af),2,Constant,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,4,Mimi Jenkins,33,0,Local surface water yield
 C316_GW-SC,C316,GW-SC,Diversion,3,339,562,1,,,14.80000019,1405,rough estimate for variable costs of spreading basin recharge operations,2,Constant,0,,,20,1406,"Corrected from previous value of ""84""; Value is estimated aggregated Santa Clara Valley (includes ACWA and ACFCWCD Zone 7) recharge capacity",,,,,,,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,1,Matthew Davis,33,0,GW-SC Artificial Recharge
 C318_D692,C318,D692,Diversion,3,340,465,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,2,Andy Draper,33,0,Outflow from DA42 to Eastside Bypass
@@ -187,7 +187,7 @@ C42_D521,C42,D521,Diversion,3,54,117,1,439,no losses,0,,,1,None,0,,,3.40E+38,,,,
 C43_HSU8C43,C43,HSU8C43,Diversion,3,55,192,1,,,0,,,1,None,0,,,11,440,Upper bound constraint on agricultural deliveries from surface water for Policy 1,,,,,,,/UCD CAP4/C43_C36/FLOW_FXC(KAF)//1MON/CVGSM NAA ID130*1/,441,"Constrained delivery for Policy 4a from CVGSM delivery ID130 in Cnjdvsp2.nda; with an average annual delivery of 19.1 TAF.  Data for Oct 1990 - Sep 1993 calculated by matching years with DWRSIM CP670 diversion (1991=1935;1992=1986;1993=1977); in ""C:\public\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,22,0,Central San Joaquin ID from Stanislaus River diversion to CVPM 8
 C43_T26,C43,T26STOC,Diversion,3,55,281,1,,,37,442,treatment and local conveyance,2,Constant,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,4,Mimi Jenkins,22,0,Stanislaus R SW Diversion
 C44_C88,C44,C88,Diversion,3,345,378,1,1429,no losses,0,,,3,Time Dependant,0,,,3.40E+38,,,,,,157,1431,Revised infrastructure capacity of 620 cfs (A02C10) down to 465 cfs.  Though Foothill and Coast Range Tunnels have a capacity of 620 cfs; the three San Joaquin Pipelines currently in use have a combined capacity of 465 cfs.  The addition of a fourth pipeline will bring the combined capacity to 620 cfs (RR).,/UCD CAP4/C44_C88/FLOW_FXC(KAF)//1MON/SANJASMPL325/,1430,From file Sjpl325.xls; base case 2020 scenario of diversions by SFPUC from Upper Tuolumne River.,,,,,,,31,NoLowerBound+MonthlyUpperBound,13,Stacy Tanaka,33,0,Hetch Hetchy Aqueduct.  Mocassin hydropower added on this link.
-C44_Sink,C44,SinkCN3,Diversion,3,345,716,1,,,0,,,1,None,0,,,0,1433,Sink used b/c of infeasibilities in Base Case is turned off in Unconstrained Case.,,,,,,,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,4,Mimi Jenkins,33,0,Outlet for infeasibility in Base Case over-constrained upper Tuolumne River
+C44_Sink,C44,Sink CN3,Diversion,3,345,716,1,,,0,,,1,None,0,,,0,1433,Sink used b/c of infeasibilities in Base Case is turned off in Unconstrained Case.,,,,,,,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,4,Mimi Jenkins,33,0,Outlet for infeasibility in Base Case over-constrained upper Tuolumne River
 C45_HU12,C45,HU12,Diversion,3,346,647,1.036999941,1438,CVPM data unadjusted from CVPEIS CD-ROM disc2\Ag-Econ\naa\model\cesdat95.gms Table Localcst.,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD1/C45_HU12/FLOW_FXC(KAF)//1MON/C2VSIM_FXD REUSE/,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,33,0,Hidden ag delivery reuse calibration link
 C45_SinkR3,C45,Sink R3,Diversion,3,346,776,1,,,0,,,1,None,0,,,0,,,,,,,,,/CAWI_WC/AG CAL CVPM12/FLOW(KAF)/01JAN1970/1MON/CALIBRATION CVPM12/,,,,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,,0,Debug losses from CVPM 12
 C46_HU13,C46,HU13,Diversion,3,347,648,1.001000047,1447,CVPM data unadjusted from CVPEIS CD-ROM disc2\Ag-Econ\naa\model\cesdat95.gms Table Localcst.,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD1/C46_HU13/FLOW_FXC(KAF)//1MON/C2VSIM_FXD REUSE/,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,33,0,Hidden ag delivery reuse calibration link
@@ -379,7 +379,7 @@ CN3_D670,CN3,D670,Diversion,3,389,456,1,,,2590000,1655,Cost used when using CALB
 CN3_D694,CN3,D694,Diversion,3,389,467,1,,,2220000,1657,Cost used when using CALB links as debug flows.  Otherwise; when calibration flows are implemented; TS are used instead of link cost (RR).,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/CALB_D694/FLOW_FXC(KAF)//1MON/A03C40 DBUG FLOWS/,1658,"TS was determined by turning off CALB flows at D616 from A03C38; and then adding a debug link at D694; where corrected refuge return flow enter the San Joaquin (RR; A03C39).  Updated with debug links from A03C40 (see ""CalbINTSV41.xls"" file in V41 folder) (RR; A03C41).",,,,,,,54,ConstrainedTimeSeries,13,Stacy Tanaka,33,0,Calibration flow to add water to match DWRSIM on SJR at D616
 CN3_D744,CN3,D744,Diversion,3,389,485,1,,,2220000,1659,Cost used when using CALB links as debug flows.  Otherwise; when calibration flows are implemented; TS are used instead of link cost (RR).,1,None,0,,,0,1660,Turned off to re-calibrate from model changes (RR; V40).,,,,,,,/UCD CAP1/CALB_D744/FLOW_FXC(KAF)//1MON/A03C45 MATCH DWRSIM514/,1661,Calibration flow calculated using V36 unconstrained flow results at D744 as compared to /UCD CAP1/D744_SINK/FLOW_FXC(KAF)//1MON/BOUNDARY FLOW 3 WITH LOSSES/ (RR; V37).  Adjusted again to results from V40 (RR; A03c41).  And again from A03C45 in A03C46 (RR).,,,,,,,54,ConstrainedTimeSeries,13,Stacy Tanaka,33,0,Calibration flow to add water to match DWRSIM CP744+828 flow downstream on CAL AQUEDUCT
 CN3_D801,CN3,D801,Diversion,3,389,492,1,,,2220000,1662,Cost used when using CALB links as debug flows.  Otherwise; when calibration flows are implemented; TS are used instead of link cost (RR).,1,None,0,,,0,1663,Temporarily turned off to recalibrate with dbug flows on A03C20,,,,,,,/UCD CAP1/CALB_D801/FLOW_FXC(KAF)//1MON/A03C40 DBUG FLOWS/,1664,"Calibration flow from dbug links out of A03C22 (see V22 folder and file ""dBUG AND NEW CALB V22.xls"").  Updated with debug links from A03C36 (see ""CalbflowsINTS"" file in V37 folder) (RR; V37).  Updated again with debug links from A03C40 (see ""CalbINTSV41.xls"" file in V41 folder) (RR; A03C41).",,,,,,,54,ConstrainedTimeSeries,13,Stacy Tanaka,33,0,Calibration flow to add water for 4a infeasibilities on CA AQ and DMC
-CN3_Sink CN3,CN3,SinkCN3,Diversion,3,389,716,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,13,Stacy Tanaka,33,0,Removed calibration water
+CN3_Sink CN3,CN3,Sink CN3,Diversion,3,389,716,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,13,Stacy Tanaka,33,0,Removed calibration water
 CN3_SR-15,CN3,SR-15,Diversion,3,389,783,1,,,0,,,1,None,0,,,0,1665,Temporarily turned off to recalibrate with dbug flows on A03C20,,,,,,,/UCD CAP1/CALB_SR-15/FLOW_FXC(KAF)//1MON/A03C22 DBUG FLOWS/,1666,"Calibration flow from dbug links out of A03C22 (see V22 folder and file ""dBUG AND NEW CALB V22.xls"")",,,,,,,54,ConstrainedTimeSeries,13,Stacy Tanaka,33,0,Calibration flow to add water for 4a infeasibilities on South Bay AQ & at SR-15
 CN3_SR-18,CN3,SR-18,Diversion,3,389,784,1,,,2960000,1667,Cost used when using CALB links as debug flows.  Otherwise; when calibration flows are implemented; TS are used instead of link cost (RR).,1,None,0,,,0,1668,Temporarily turned off to recalibrate with dbug flows on A03C20,,,,,,,/UCD CAP1/CALB_SR-18/FLOW_FXC(KAF)//1MON/A03C40 DBUG FLOWS/,1669,"Calibration flow from dbug links out of A03C22 (see V22 folder and file ""dBUG AND NEW CALB V22.xls"").  Updated with debug links from A03C36 (see ""CalbflowsINTS"" file in V37 folder) (RR; V37).  Updated again with debug links from A03C40 (see ""CalbINTSV41.xls"" file in V41 folder) (RR; A03C41).",,,,,,,54,ConstrainedTimeSeries,13,Stacy Tanaka,33,0,Calibration flow to add water for 4a infeasibilities above Millerton and on Upper San Joaquin River
 CN3_SR-81,CN3,SR-81,Diversion,3,389,793,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/CALB_SR-81/FLOW_FXC(KAF)//1MON/A03C45 DBUG FLOWS/,1670,Debug flows from A03C45 are now used as calibration flows in A03C46.  These flows are needed to allow feasible solutions to a highly constrained SFPUC system with sometimes differing input data sets and assumptions (RR; A03C45).,,,,,,,54,ConstrainedTimeSeries,13,Stacy Tanaka,33,0,Calibration flow to correct evap and input data inconsistencies at SR-81 to match DWRSIM
@@ -500,7 +500,7 @@ D5_D73,D5,D73,Diversion,3,109,129,1,628,no losses,0,,,3,Time Dependant,0,,,3.40E
 D5_HSU1D5,D5,HSU1D5,Diversion,3,109,166,1,,,0,,,1,None,0,,,7.300000191,630,Upper bound constraint on agricultural deliveries from surface water for Policy 1,,,,,,,/UCD CAP4/D5_C3/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID2*1/,631,"Constrained delivery for Policy 4a from CVGSM delivery ID2 in Cnjdvsp2.nda; with an average annual delivery of 22.2 TAF.  Data for Oct 1990 - Sep 1993 calculated by linear regression with DWRSIM CP74 diversion; in ""C:\public\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,11,0,surface delivery CVPM 1
 D5_T41,D5,T41RED,Diversion,3,109,285,1,,,0,,,1,None,0,,,0,,,75,632,Diversion from Keswick to Redding Demand (64% of demand -fixed); lower bound for July reduced by 0.04 to avoid infeasibility,76,633,Diversion from Keswick to Redding Demand (64% of demand -fixed),,,,,,,,,,13,MonthlyLowerBound+NoUpperBound,6,Jay Lund,11,0,Sacramento River diversions to the city of Redding
 D605_D606,D605,D606,Diversion,3,431,432,1,1840,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River between Friant Dam and Gravelly Ford Reach 2
-D605_Sink G102,D605,SinkG102,Diversion,3,431,733,1,1841,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D605_SINK G102/FLOW_LOC(KAF)//1MON/DEPLETION SJR-MILLERTO/,1842,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,6,Jay Lund,33,0,Depletion: San Joaquin River between Friant Dam and Gravelly Ford
+D605_Sink G102,D605,Sink G102,Diversion,3,431,733,1,1841,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D605_SINK G102/FLOW_LOC(KAF)//1MON/DEPLETION SJR-MILLERTO/,1842,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,6,Jay Lund,33,0,Depletion: San Joaquin River between Friant Dam and Gravelly Ford
 D606_D609,D606,D609,Diversion,3,432,434,1,1847,no losses.  Changed amplitude from 0.48 back to 1.0; since losses to groundwater at Gravelly Ford are modeled elsewhere.  Will need to check that 1a flows are not significantly different than 4a flows; if so; will need to reconsider (Randy R.- 8/1/00),0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River between Gravelly Ford and Coachella Bypass
 D606_HSU13D606,D606,HSU13D606,Diversion,3,432,607,1,,,0,,,1,None,0,,,2.200000048,1848,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D606_C46/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID78*0.5/,1849,"Constrained delivery for Policy 4a from CVGSM delivery ID78 in Cnjdvsp2.nda; with an average annual delivery of 5.9 TAF.  Data for Oct 1990 - Sep 1993 calculated by linear regression with DWRSIM CP606 diversion; in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,33,0,surface delivery CVPM 13
 D606_HSU16D606,D606,HSU16D606,Diversion,3,432,623,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D606_SINK/FLOW_FXC(KAF)//1MON/BOUNDARY FLOW 3 WITH LOSSES/,1850,Calculated boundary flows- see source file.,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,34,1,Boundary Flow - SJ River Riparian export to CVPM 16 (C50)
@@ -522,23 +522,23 @@ D622_D624,D622,D624,Diversion,3,440,441,1,1872,no losses,0,,,1,None,0,,,3.40E+38
 D624_C48,D624,C48,Diversion,3,441,349,1,1463,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Fresno River Reach
 D624_HAR13,D624,HAR13,Diversion,3,441,1001,1,,,6.5,,,2,Constant,0,,,0,,,,,,,,,/GWUPD1/D624_HAR13/FLOW_FXC(KAF)//1MON/C2VSIM_FXDARTRECHARGE/,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,,0,Artificial Recharge diversion from Fresno R riparian
 D624_HSU13D624,D624,HSU13D624,Diversion,3,441,608,1,,,0,,,1,None,0,,,62.90000153,1875,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D624_C46/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID77*1/,1876,"Constrained delivery for Policy 4a from CVGSM delivery ID77 in Cnjdvsp2.nda; with an average annual delivery of 52.8 TAF.  Data for Oct 1990 - Sep 1993 calculated by matching years with previous years"" CVGSM net (DWRSIM CP624 + CP634) minus diversions (DWRSIM CP603 + CP604) (1991=1990; 1992=1990; 1993=1962); in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,33,0,surface delivery CVPM 13
-D624_Sink G43,D624,SinkG43,Diversion,3,441,757,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D624_SINK G43/FLOW_LOC(KAF)//1MON/DEPLETION FRESNO/,1877,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,6,Jay Lund,33,0,Depletion: Fresno River
+D624_Sink G43,D624,Sink G43,Diversion,3,441,757,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D624_SINK G43/FLOW_LOC(KAF)//1MON/DEPLETION FRESNO/,1877,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,6,Jay Lund,33,0,Depletion: Fresno River
 D632_D634,D632,D634,Diversion,3,442,443,1,1879,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Chowchilla River Reach
 D634_C47,D634,C47,Diversion,3,443,348,1,1461,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,33,0,Chowchilla River Reach
 D634_HAR13,D634,HAR13,Diversion,3,443,1001,1,,,6.5,,,2,Constant,0,,,0,,,,,,,,,/GWUPD1/D634_HAR13/FLOW_FXC(KAF)//1MON/C2VSIM_FXDARTRECHARGE/,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,,0,Artificial recharge from Chowchilla R riparian to GW-13
 D634_HSU13D634,D634,HSU13D634,Diversion,3,443,609,1,,,0,,,1,None,0,,,47.20000076,1882,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D634_C46/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID76*1/,1883,"Constrained delivery for Policy 4a from CVGSM delivery ID76 in Cnjdvsp2.nda; with an average annual delivery of 56.4 TAF.  Data for Oct 1990 - Sep 1993 calculated by matching years with previous years"" CVGSM net (DWRSIM CP624 + CP634) minus diversions (DWRSIM CP603 + CP604) (1991=1990; 1992=1990; 1993=1962); in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,33,0,surface delivery CVPM 13
-D634_Sink G42,D634,SinkG42,Diversion,3,443,756,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D634_SINK G42/FLOW_LOC(KAF)//1MON/DEPLETION CHOWCHILLA/,1884,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,6,Jay Lund,33,0,Depletion: Chowchilla River
+D634_Sink G42,D634,Sink G42,Diversion,3,443,756,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D634_SINK G42/FLOW_LOC(KAF)//1MON/DEPLETION CHOWCHILLA/,1884,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,6,Jay Lund,33,0,Depletion: Chowchilla River
 D640_D694,D640,D694,Diversion,3,444,467,1,1885,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Refuge 2 and CVPM14 return
 D642_D643,D642,D643,Diversion,3,445,446,1,1887,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Merced River Reach
 D643_D645,D643,D645,Diversion,3,446,447,1,1891,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Merced River Reach
-D643_Sink G105,D643,SinkG105,Diversion,3,446,736,1,1892,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D643_SINK G105/FLOW_LOC(KAF)//1MON/DEPLETION UPPER MERCED/,1893,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,6,Jay Lund,33,0,Depetion: upper Merced River
+D643_Sink G105,D643,Sink G105,Diversion,3,446,736,1,1892,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D643_SINK G105/FLOW_LOC(KAF)//1MON/DEPLETION UPPER MERCED/,1893,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,6,Jay Lund,33,0,Depetion: upper Merced River
 D645_D646,D645,D646,Diversion,3,447,448,1,1894,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,/UCD CECT/D645_D646/FLOW_LBC(KAF)/01JAN1920/1MON/CALSIM II 2001G-ARC C562/,1895,Minimum instream flow requirement based on CalSim II Bench Mark Studies 2020 LOD.  Created by Ines Ferreira Summer 2002.  040104 skt,,,,14,LowerBoundTimeSeries+NoUpperBound,13,Stacy Tanaka,33,0,Merced River Reach - Instream Flow Requirement downstream of Sanjasm CP50
 D645_HSU12D645,D645,HSU12D645,Diversion,3,447,601,1,,,0,,,1,None,0,,,5.900000095,1896,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D645_C45/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID70*1/,1897,"Constrained delivery for Policy 4a from CVGSM delivery ID70 in Cnjdvsp2.nda; with an average annual delivery of 23.1 TAF.  Data for Oct 1990 - Sep 1993 calculated by linear regression with DWRSIM CP645 diversion; in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,33,0,surface delivery CVPM 12
 D645_HSU13D645,D645,HSU13D645,Diversion,3,447,610,1,,,0,,,1,None,0,,,122.5,1898,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D645_C46/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID74*1/,1899,"Constrained delivery for Policy 4a from CVGSM delivery ID74 in Cnjdvsp2.nda; with an average annual delivery of 504.8 TAF.  Data for Oct 1990 - Sep 1993 calculated by linear regression with DWRSIM CP645 diversion; in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,33,0,surface delivery CVPM 13
 D645_T66,D645,T66Turlock,Diversion,3,447,856,1,,,74,1900,Estimate based on $30 local conveyance/distribution and $20 water treatment cost for Central Valley Cities,2,Constant,0,,,0,1901,7.9 for 2100 historic runs,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,,0,Transfer of AG AW from Merced ID to urban use from land conversion
 D646_D647,D646,D647,Diversion,3,448,449,1,1903,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Merced River Reach
 D647_D649,D647,D649,Diversion,3,449,450,1,1904,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Merced River Reach
-D647_Sink G104,D647,SinkG104,Diversion,3,449,735,1,1905,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D647_SINK G104/FLOW_LOC(KAF)//1MON/DEPLETION LOWER MERCED/,1906,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,6,Jay Lund,33,0,Depletion: lower Merced River
+D647_Sink G104,D647,Sink G104,Diversion,3,449,735,1,1905,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D647_SINK G104/FLOW_LOC(KAF)//1MON/DEPLETION LOWER MERCED/,1906,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,6,Jay Lund,33,0,Depletion: lower Merced River
 D649_D695,D649,D695,Diversion,3,450,468,1,1907,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,/UCD CECT/D649_D695/FLOW_LBC(KAF)/01JAN1940/1MON/CALSIM II 2001G-ARC C567/,1908,Minimum instream flow requirement based on CalSim II Bench Mark Studies 2020 LOD.  Created by Ines Ferreira Summer 2002.  040104 skt,,,,14,LowerBoundTimeSeries+NoUpperBound,13,Stacy Tanaka,33,0,Merced River Reach; minimum instream flow requirement near mouth - Sanjasm CP55
 D649_HSU12D649,D649,HSU12D649,Diversion,3,450,602,1,,,0,,,1,None,0,,,13.39999962,1909,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D649_C45/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID71*1/,1910,"Constrained delivery for Policy 4a from CVGSM delivery ID71 in Cnjdvsp2.nda; with an average annual delivery of 60.6 TAF.  Data for Oct 1990 - Sep 1993 calculated by linear regression with DWRSIM CP649 diversion; in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,33,0,surface delivery CVPM 12
 D649_HSU13D649,D649,HSU13D649,Diversion,3,450,611,1,,,0,,,1,None,0,,,4.730000019,1911,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D649_C46/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID72*1/,1912,"Constrained delivery for Policy 4a from CVGSM delivery ID72 in Cnjdvsp2.nda; with an average annual delivery of 21.2 TAF.  Data for Oct 1990 - Sep 1993 calculated by linear regression with DWRSIM CP649 diversion; in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,33,0,surface delivery CVPM 13
@@ -546,7 +546,7 @@ D64_C8,D64,C8,Diversion,3,127,65,1,488,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,
 D64_T4,D64,T4SAC,Diversion,3,127,284,1,,,88.80000305,679,treatment cost,2,Constant,0,,,20.10000038,680,SW treatment capacity,,,,,,,/UCD CAP4/D64_T4/FLOW_FXC(KAF)//1MON/CVGSM NAA ID31&38*1/,,,,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,22,0,American River diversion to city of Sacramento
 D653a_D653b,D653a,D653b,Diversion,3,451,452,1,1913,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,/UCD CECT/D653A_D653B/FLOW_LBC(KAF)/01JAN1920/1MON/CALSIM II 2001G-ARC C16/,1914,Mminimum instream flow requirement below Goodwin on Stanislaus River based on CalSim II Bench Mark Studies 2020 LOD.  Created by Ines Ferreira Summer 2002.  040104 skt,,,,14,LowerBoundTimeSeries+NoUpperBound,13,Stacy Tanaka,33,0,Stanislaus River Reach - Minimum instream flow below Goodwin Sanjasm CP110
 D653b_D672,D653b,D672,Diversion,3,452,457,1,1916,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Stanislaus River Reach
-D653b_Sink G100,D653b,SinkG100,Diversion,3,452,731,1,1917,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D653B_SINK G100/FLOW_FXC(KAF)//1MON/DEPLETION STANISLAUS/,1918,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Depletion: Stanislaus River from Goodwin to mouth
+D653b_Sink G100,D653b,Sink G100,Diversion,3,452,731,1,1917,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D653B_SINK G100/FLOW_FXC(KAF)//1MON/DEPLETION STANISLAUS/,1918,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Depletion: Stanislaus River from Goodwin to mouth
 D662_D663,D662,D663,Diversion,3,453,454,1,1919,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,/UCD CECT/D662_D663/FLOW_LBC(KAF)/01JAN1930/1MON/CALSIM II 2001G-ARC C540/,1920,Minimum instream flow requirement on Tuolumne River d/s of MID & TID diversions based on CalSim II Bench Mark Studies 2020 LOD.  Created by Ines Ferreira Summer 2002.  040104 skt,,,,14,LowerBoundTimeSeries+NoUpperBound,13,Stacy Tanaka,33,0,Tuolumne River Reach - Minimum instream flow requirement Sanjasm CP75
 D662_HSU11D662,D662,HSU11D662,Diversion,3,453,597,1,,,0,,,1,None,0,,,66,1921,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D662_C172/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID126*0/,1922,"Constrained delivery for Policy 4a from CVGSM delivery ID126 in Cnjdvsp2.nda; with an average annual delivery of 354.9 TAF.  Data for Oct 1990 - Sep 1993 calculated by matching years with DWRSIM CP662 diversion (1991=1990;1992=1990;1993=1962); in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,2,Andy Draper,33,0,surface delivery CVPM 11
 D662_HSU12D662,D662,HSU12D662,Diversion,3,453,603,1,,,0,,,1,None,0,,,117.8000031,1923,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D662_C45/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID127*0/,1924,"Constrained delivery for Policy 4a from CVGSM delivery ID127 in Cnjdvsp2.nda; with an average annual delivery of 564.1 TAF.  Data for Oct 1990 - Sep 1993 calculated by matching years with DWRSIM CP662 diversion (1991=1990;1992=1990;1993=1962); in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,33,0,surface delivery CVPM 12
@@ -556,7 +556,7 @@ D663_D664,D663,D664,Diversion,3,454,455,1,1933,no losses,0,,,1,None,0,,,3.40E+38
 D664_D683,D664,D683,Diversion,3,455,460,1,1934,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,/UCD CECT/D664_D683/FLOW_LBC(KAF)/01JAN1920/1MON/CALSIM II 2001G-ARC C544/,1935,Minimum instream flow requirement based on CalSim II Bench Mark Studies 2020 LOD.  Created by Ines Ferreira Summer 2002.  040104 skt,,,,14,LowerBoundTimeSeries+NoUpperBound,13,Stacy Tanaka,33,0,Tuolumne River Reach.  Minimum instream flow requirement.
 D664_HSU11D664,D664,HSU11D664,Diversion,3,455,598,1,,,0,,,1,None,0,,,2.5,1936,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D664_C172/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID66*1/,1937,"Constrained delivery for Policy 4a from CVGSM delivery ID66 in Cnjdvsp2.nda; with an average annual delivery of 9.5 TAF.  Data for Oct 1990 - Sep 1993 calculated by linear regression with DWRSIM CP664 diversion; in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,33,0,surface delivery CVPM 11
 D664_HSU12D664,D664,HSU12D664,Diversion,3,455,604,1,,,0,,,1,None,0,,,2.200000048,1938,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D664_C45/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID67*1/,1939,"Constrained delivery for Policy 4a from CVGSM delivery ID67 in Cnjdvsp2.nda; with an average annual delivery of 7.4 TAF.  Data for Oct 1990 - Sep 1993 calculated by linear regression with DWRSIM CP664 diversion; in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,33,0,surface delivery CVPM 12
-D664_Sink G18,D664,SinkG18,Diversion,3,455,743,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D664_SINK G18/FLOW_FXC(KAF)//1MON/DEPLETION TUOLOMNE/,1940,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Depletion: Tuolumne River
+D664_Sink G18,D664,Sink G18,Diversion,3,455,743,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D664_SINK G18/FLOW_FXC(KAF)//1MON/DEPLETION TUOLOMNE/,1940,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Depletion: Tuolumne River
 D66_D30,D66,D30,Diversion,3,128,102,1,616,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,11,0,Sacramento River between Ord ferry and Knights Landing Reach 1
 D66_HSU3D66,D66,HSU3D66,Diversion,3,128,176,1,,,0,,,1,None,0,,,54.90000153,683,Upper bound constraint on agricultural deliveries from surface water for Policy 1,,,,,,,/UCD CAP4/D66_C303/FLOW_FXC(KAF)//1MON/CVGSM NAA ID10*1/,684,"Constrained delivery for Policy 4a from CVGSM delivery ID10 in Cnjdvsp2.nda; with an average annual delivery of 205.7 TAF.  Data for Oct 1990 - Sep 1993 calculated by linear regression with DWRSIM CP77 diversion; in ""C:\public\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,2,Andy Draper,11,0,surface delivery CVPM 3
 D66_Sink D66,D66,Sink D66,Diversion,3,128,237,1,685,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D66_SINK/FLOW_LOC(KAF)//1MON/DA15/,686,"Calculated as the sum of runoff and groundwater gains from the CVGSM output file ""Hobbes\public\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,6,Jay Lund,11,0,DA 15 local depletion
@@ -569,52 +569,52 @@ D676_D616,D676,D616,Diversion,3,459,438,1,1865,no losses,0,,,1,None,0,,,3.40E+38
 D683_D687,D683,D687,Diversion,3,460,461,1,1951,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River Reach
 D687_D688,D687,D688,Diversion,3,461,462,1,1954,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River Reach
 D688_D689,D688,D689,Diversion,3,462,463,1,1955,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River Reach
-D688_Sink G101,D688,SinkG101,Diversion,3,462,732,1,1956,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D688_SINK G101/FLOW_LOC(KAF)//1MON/DEPLETION SJR-TUOLOMNE/,1957,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,6,Jay Lund,33,0,Depletion: San Joaquin River between Tuolumne and Stanislaus Rivers
+D688_Sink G101,D688,Sink G101,Diversion,3,462,732,1,1956,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D688_SINK G101/FLOW_LOC(KAF)//1MON/DEPLETION SJR-TUOLOMNE/,1957,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,6,Jay Lund,33,0,Depletion: San Joaquin River between Tuolumne and Stanislaus Rivers
 D689_C10,D689,C10,Diversion,3,463,301,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,2,Andy Draper,33,0,San Joaquin River riparian diversions
 D689_D612,D689,D612,Diversion,3,463,435,1,1857,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River Reach
 D689_HSU11D689,D689,HSU11D689,Diversion,3,463,600,1,,,0,,,1,None,0,,,3,1958,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D689_C172/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID42*0.06186/,1959,"Constrained delivery for Policy 4a from CVGSM delivery ID42 in Cnjdvsp2.nda; with an average annual delivery of 12.5 TAF.  Data for Oct 1990 - Sep 1993 calculated by linear regression with DWRSIM CP689 diversion; in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,33,0,surface delivery CVPM 11
 D691_D694,D691,D694,Diversion,3,464,467,1,1961,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River Reach
 D692_D693,D692,D693,Diversion,3,465,466,1,1962,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Eastside Bypass
 D693_D619,D693,D619,Diversion,3,466,439,1,1868,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Eastside Bypass
-D693_Sink G103,D693,SinkG103,Diversion,3,466,734,1,1963,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D693_SINK G103/FLOW_FXC(KAF)/01JAN1920/1MON/DEPLTN EASTSIDE BYPASS 06/,1964,"Corrected by Andy 062000 see file: ""\Spiff\ex_hobbes\Prm\Calibration\Region3\Policy4\V21\AccretionCorrectionforRegion3 MJ.xls""",,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Depletion: Eastside Bypass
+D693_Sink G103,D693,Sink G103,Diversion,3,466,734,1,1963,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D693_SINK G103/FLOW_FXC(KAF)/01JAN1920/1MON/DEPLTN EASTSIDE BYPASS 06/,1964,"Corrected by Andy 062000 see file: ""\Spiff\ex_hobbes\Prm\Calibration\Region3\Policy4\V21\AccretionCorrectionforRegion3 MJ.xls""",,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Depletion: Eastside Bypass
 D694_D695,D694,D695,Diversion,3,467,468,1,1965,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River Reach
 D694_HSU13D694,D694,HSU13D694,Diversion,3,467,612,1,,,0,,,1,None,0,,,0.550000012,1966,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D694_C46/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID42*0.01031/,1967,"Constrained delivery for Policy 4a from CVGSM delivery ID42 in Cnjdvsp2.nda; with an average annual delivery of 2.1 TAF.  Data for Oct 1990 - Sep 1993 calculated by linear regression with DWRSIM CP694 diversion; in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,33,0,surface delivery CVPM 13
-D694_Sink G47,D694,SinkG47,Diversion,3,467,761,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D694_SINK G47/FLOW_FXC(KAF)//1MON/DEPLETION SJR-BYPASS TO ME/,1968,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Depletion: San Joaquin River between Bypass and Merced River
+D694_Sink G47,D694,Sink G47,Diversion,3,467,761,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D694_SINK G47/FLOW_FXC(KAF)//1MON/DEPLETION SJR-BYPASS TO ME/,1968,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Depletion: San Joaquin River between Bypass and Merced River
 D695_D697,D695,D697,Diversion,3,468,469,1,1969,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP4/D695_D697/FLOW_FXC(KAF)/01JAN1920/1MON/CONTROL POINT/,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River Reach
 D697_D698,D697,D698,Diversion,3,469,470,1,1970,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River Reach
 D698_D699,D698,D699,Diversion,3,470,471,1,1972,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River Reach
-D698_Sink G49,D698,SinkG49,Diversion,3,470,763,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D698_SINK G49/FLOW_FXC(KAF)//1MON/DEPLETION SJR-MERCED TO TU/,1973,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Depletion: San Joaquin River between Merced and Tuolumne Rivers
+D698_Sink G49,D698,Sink G49,Diversion,3,470,763,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D698_SINK G49/FLOW_FXC(KAF)//1MON/DEPLETION SJR-MERCED TO TU/,1973,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Depletion: San Joaquin River between Merced and Tuolumne Rivers
 D699_C10,D699,C10,Diversion,3,471,301,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,2,Andy Draper,33,0,San Joaquin River riparian diversions
 D699_D683,D699,D683,Diversion,3,471,460,1,1952,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River Reach
 D699_HSU12D699,D699,HSU12D699,Diversion,3,471,605,1,,,0,,,1,None,0,,,4.949999809,1974,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D699_C45/FLOW_FXC(KAF)/01JAN1920/1MON/CVGSM NAA ID42*0.09278/,1975,"Constrained delivery for Policy 4a from CVGSM delivery ID42 in Cnjdvsp2.nda; with an average annual delivery of 18.7 TAF.  Data for Oct 1990 - Sep 1993 calculated by linear regression with the sum of DWRSIM CP616 & CP699 diversions; in ""\Spiff\ex_hobbes\Report\Software & Data Appendices\P [Policy 4a]\Extensions 1990-1993\Alt 4 Diversions 3-7-00 extMJ.xls""",,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,33,0,surface delivery CVPM 12
 D701_C30,D701,C30,Diversion,3,472,336,1,,,31.96800041,,,2,Constant,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,13,Stacy Tanaka,33,0,Agricultural diversions off the DMC
 D701_D703,D701,D703,Diversion,3,472,473,1,1977,no losses,31.96800041,,,1,None,0,,,3.40E+38,,,,,,243,1978,Infrastructure Capacity: 4600 cfs,,,,,,,,,,31,NoLowerBound+MonthlyUpperBound,6,Jay Lund,33,0,Delta Mendota Canal
 D703_D710,D703,D710,Diversion,3,473,474,1,1979,no losses,0,,,1,None,0,,,3.40E+38,,,,,,244,1980,Turned of this capacity constraint because it is same value and redundant with D701_D703,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Delta Mendota Canal
-D703_Sink G7,D703,SinkG7,Diversion,3,473,774,1,1981,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D703_SINK G7/FLOW_FXC(KAF)//1MON/UPPER DMC LOSS/,1982,DMC losses taken from DWRSIM Run 514.,,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Upper Delta Mendota Canal losses
+D703_Sink G7,D703,Sink G7,Diversion,3,473,774,1,1981,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D703_SINK G7/FLOW_FXC(KAF)//1MON/UPPER DMC LOSS/,1982,DMC losses taken from DWRSIM Run 514.,,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Upper Delta Mendota Canal losses
 D710_D712,D710,D712,Diversion,3,474,475,1,1983,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Delta Mendota Canal
 D710_ONeill PMP,D710,ONeillPMP,Diversion,3,474,685,1,1984,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,13,Stacy Tanaka,33,0,Delta Mendota Canal diversion to ONeil Pumping Plant and California Aqueduct
 D712_D722,D712,D722,Diversion,3,475,477,1,1985,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Delta Mendota Canal
 D714_C316,D714,C316,Diversion,3,476,339,1,1407,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,SCV Groundwater Recharge from Delta Mendota Canal
-D714_Sink G509,D714,SinkG509,Diversion,3,476,765,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D714_SINK G509/FLOW_FXC(KAF)//1MON/CENTRAL COAST AG DWRSIM 5/,1989,CVP contract Ag diversion to Central Coast from San Luis; DWRSIM Diversion-Actual at CP714,,,,,,,54,ConstrainedTimeSeries,4,Mimi Jenkins,33,0,CVP ag diversion to Central Coast
+D714_Sink G509,D714,Sink G509,Diversion,3,476,765,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D714_SINK G509/FLOW_FXC(KAF)//1MON/CENTRAL COAST AG DWRSIM 5/,1989,CVP contract Ag diversion to Central Coast from San Luis; DWRSIM Diversion-Actual at CP714,,,,,,,54,ConstrainedTimeSeries,4,Mimi Jenkins,33,0,CVP ag diversion to Central Coast
 D714_T7,D714,T7SCV,Diversion,3,476,858,1,,,516.5200195,1990,Treatment cost includes current 1995 ($30/af) plus additional thru Delta treatment cost for removal of bromide by membrane filtration ($224/af) + local distribution/conveyance ($95/af).,2,Constant,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,4,Mimi Jenkins,33,0,San Felipe Aqueduct water Diversion to SCV (direct use)
 D722_C30,D722,C30,Diversion,3,477,336,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,2,Andy Draper,33,0,Agricultural diversions off the DMC
 D722_D723,D722,D723,Diversion,3,477,478,1,1994,no losses,0,,,1,None,0,,,3.40E+38,,,,,,247,1995,Infrastructure Capacity: 3300 cfs,,,,,,,,,,31,NoLowerBound+MonthlyUpperBound,8,Brian Van Lienden,33,0,Delta Mendota Canal
 D723_D724,D723,D724,Diversion,3,478,479,1,1996,no losses,0,,,1,None,0,,,3.40E+38,,,,,,248,1997,Turned off this capacity constraint because it is same value and redundant with D722_D723,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Delta Mendota Canal
 D723_HSURD723,D723,HSURD723,Diversion,3,478,643,1,1998,no losses,0,,,1,None,0,,,3.40E+38,,,249,,,250,2000,0,/UCD CECT/D723_S JOAQ REF/FLOW_FXC(KAF)/01JAN1920/1MON/L4 08072002/,1999,New environmental requirements created by Ines Ferreira Summer 2002 to reflect Level 4 refuge demands; based mostly on new CalSim II Bench Mark Studies for 2020 LOD (040104 skt),,,,,,,54,ConstrainedTimeSeries,13,Stacy Tanaka,33,0,San Joaquin Refuges delivery (including losses)
 D724_D608,D724,D608,Diversion,3,479,433,1,1854,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP4/D724_D608/FLOW_FXC(KAF)//1MON/DWRSIM514 FLDW CP724-DIVR CP73/,1855,Constrained outflow for DMC set to DWRSIM Flow-Downstream at CP724 minus Diversion-Actual at CP733.  When this value is negative it is replaced by 0.  This occurs infrequently and accumulates to about  6 TAF/yr which will have to be made up with Dbug flows - this volume is actually supplied by inflow to CP608 in DWRSIM (SJR and St James by pass flood flows).,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,Delta Mendota canal delivery to Mendota Pool
-D724_Sink D724,D724,SinkD724,Diversion,3,479,719,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D724_SINK D724/FLOW_FXC(KAF)//1MON/DWRSIM514 DIVR CP733/,2001,Lower Delta Mendota Pool Losses - from DWRSIM Run 514 Diversion-Actual at CP733,,,,,,,54,ConstrainedTimeSeries,4,Mimi Jenkins,33,0,Lower Delta Mendota Pool Losses (DWRSIM CP733 diversion)
+D724_Sink D724,D724,Sink D724,Diversion,3,479,719,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D724_SINK D724/FLOW_FXC(KAF)//1MON/DWRSIM514 DIVR CP733/,2001,Lower Delta Mendota Pool Losses - from DWRSIM Run 514 Diversion-Actual at CP733,,,,,,,54,ConstrainedTimeSeries,4,Mimi Jenkins,33,0,Lower Delta Mendota Pool Losses (DWRSIM CP733 diversion)
 D731_D732,D731,D732,Diversion,3,480,481,1,2002,no losses,0,,,1,None,0,,,3.40E+38,,,,,,251,2003,0,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River Reach
 D731_HSU10D731,D731,HSU10D731,Diversion,3,480,594,1,,,0,,,1,None,0,,,118.0999985,2004,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D731_C84/FLOW_FXC(KAF)/01JAN1920/1MON/DWRSIM 514 731/,2005,Constrained delivery for Policy 4a from DWRSIM Run 514 flow for CP731 in dsimout.dss.  Data for CP731 is split with that for D731_HSU13D731,,,,,,,21,NoLowerBound+ConstantUpperBound,2,Andy Draper,33,0,surface delivery CVPM 10
 D731_HSU13D731,D731,HSU13D731,Diversion,3,480,613,1,,,0,,,1,None,0,,,10.30000019,2006,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D731_C46/FLOW_FXC(KAF)/01JAN1920/1MON/DWRSIM 514 731/,2007,Constrained delivery for Policy 4a from DWRSIM Run 514 flow for CP731 in dsimout.dss.  Data for CP731 is split with that for D731_HSU13D731,,,,,,,21,NoLowerBound+ConstantUpperBound,2,Andy Draper,33,0,surface delivery CVPM 13
 D732_D733,D732,D733,Diversion,3,481,482,1,2008,no losses,0,,,1,None,0,,,3.40E+38,,,,,,252,2009,0,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River Reach
 D732_HSURD732,D732,HSURD732,Diversion,3,481,644,1,2010,no losses,0,,,1,None,0,,,3.40E+38,,,253,,,254,2012,0,/UCD CECT/D732_MEND REF/FLOW_FXC(KAF)/01JAN1920/1MON/L4 08072002/,2011,New environmental requirements updated by Ines Ferreira Summer 2002 to reflect Level 4 Refuge demands based mostly on new CalSim II Bench Mark Studies for 2020 LOD (040104 skt).,,,,,,,54,ConstrainedTimeSeries,13,Stacy Tanaka,33,0,Mendota Wildlife Area delivery (including losses)
 D733_D619,D733,D619,Diversion,3,482,439,1,1869,no losses,0,,,1,None,0,,,3.40E+38,,,,,,242,1870,0,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,San Joaquin River Reach
-D733_Sink G16,D733,SinkG16,Diversion,3,482,741,1,2014,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D733_SINK G16/FLOW_FXC(KAF)//1MON/DEPLETION SJR-MENDOTA TO B/,2015,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Depletion: Mendota Pool before Eastside Bypass
+D733_Sink G16,D733,Sink G16,Diversion,3,482,741,1,2014,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D733_SINK G16/FLOW_FXC(KAF)//1MON/DEPLETION SJR-MENDOTA TO B/,2015,"Derived by using negative values of the calculated sum of runoff and groundwater gains from the CVGSM output file ""\Spiff\ex_hobbes\CVPIAPEIS\Disk2\CVGSM\NAA\OUTPUT\strmdt2a.nea""",,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,Depletion: Mendota Pool before Eastside Bypass
 D73_C2,D73,C2,Diversion,3,129,17,1,273,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,5,Ken Kirby,11,0,Sacramento River between Clear Creek and Cottonwood Creek
 D742_C85,D742,C85,Diversion,3,483,377,1,1576,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,California Aqueduct div to CVPM 10
 D742_D743,D742,D743,Diversion,3,483,484,1,2016,no losses,0,,,1,None,0,,,3.40E+38,,,,,,255,2017,Turned of this capacity constraint because it is same as downstream Dos Amigos_D744 and smaller than upstream D820_D742,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,California Aqueduct
 D743_Dos Amigos PMP,D743,DAmigoPMP,Diversion,3,484,534,1,2020,no losses,0,,,1,None,0,,,3.40E+38,,,,,,257,2021,Turned off this capacity constraint as it is higher than Dos Amigos_D744 and there for never constraining - If this gets used in future; it looks wrong as it is much higher than next upstream link D742_D743 - in fact it is same as D820_D742!,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,California Aqueduct Diversion to Dos Amigos Pumping Plant
-D743_Sink G6,D743,SinkG6,Diversion,3,484,773,1,2022,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D743_SINK G6/FLOW_FXC(KAF)//1MON/CAL AQUEDUCT LOSSES R3/,2023,California Aqueduct losses taken from DWRSIM Run 514.,,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,California Aqueduct losses R3
+D743_Sink G6,D743,Sink G6,Diversion,3,484,773,1,2022,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D743_SINK G6/FLOW_FXC(KAF)//1MON/CAL AQUEDUCT LOSSES R3/,2023,California Aqueduct losses taken from DWRSIM Run 514.,,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,California Aqueduct losses R3
 D744_C85,D744,C85,Diversion,3,485,377,1,1577,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,California Aqueduct div to CVPM 10
 D744_C92,D744,C92,Diversion,3,485,382,1,,,-0.296000004,1601,Persuasion used to force excess water in system to exit through the California Aqueduct.,2,Constant,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D744_SINK/FLOW_FXC(KAF)//1MON/BOUNDARY FLOW 3 WITH LOSSES/,1602,Used in early CALVIN runs to match San Joaquin River flow at Vernalis to DWRSIM Run 514.  In later runs; the link is left unconstrained; and calibration flows at D744 are used to match DWRSIM.,/UCD CAP1/D744_SINK/FLOW_LBC(KAF)//1MON/BOUNDARY FLOW REG 3/,1603,Flows from DWRSIM 514 on this stretch of the California Aqueduct are used as lower bound time varying constraints in the 1a run (RR;A02C06).,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,34,1,CAL AQ export to Reg 4 (downstream of CP744+CP828)
 D744_CN3,D744,CN3,Diversion,3,485,389,1,,,2220000,,,1,None,0,,,0,1678,Turned off to re-calibrate from model changes (RR; V40).,,,,,,,/UCD CAP1/D744_CALB/FLOW_FXC(KAF)//1MON/A03C45 MATCH DWRSIM514/,1679,Calibration flow calculated using V36 unconstrained flow results at D744 as compared to /UCD CAP1/D744_SINK/FLOW_FXC(KAF)//1MON/BOUNDARY FLOW 3 WITH LOSSES/  (RR; V37).  Adjusted again to results from V40 (RR; A03c41).  And again; from A03C45 (RR).,,,,,,,54,ConstrainedTimeSeries,13,Stacy Tanaka,33,0,Calibration flow to remove water to match DWRSIM CP744+828 flow-downstream on CAL AQUEDUCT
@@ -645,7 +645,7 @@ D801_South Bay PMP,D801,SoBayPMP,Diversion,3,492,780,1,2040,no losses,33.1668014
 D803_D804,D803,D804,Diversion,3,493,494,1,2042,no losses,0,,,1,None,0,,,3.40E+38,,,,,,265,2043,turned off this constraint because it is redundant with same capacity on D801_D803,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,California Aqueduct
 D803_HSU10D803,D803,HSU10D803,Diversion,3,493,595,1,,,0,,,1,None,0,,,1.200000048,2044,Upper bound constraint on agricultural surface water deliveries for Policy 1 only,,,,,,,/UCD CAP4/D803_C84/FLOW_FXC(KAF)/01JAN1920/1MON/DWRSIM 514 803/,2045,Constrained delivery for Policy 4a from DWRSIM Run 514 flows for CP803 in dsimout.dss,,,,,,,21,NoLowerBound+ConstantUpperBound,2,Andy Draper,33,0,surface delivery CVPM 10
 D804_D814,D804,D814,Diversion,3,494,495,1,2046,no losses,0,,,1,None,0,,,3.40E+38,,,,,,266,2047,Turned off this capacity constraint as it is same value and redundant with D801_D803,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,California Aqueduct
-D804_Sink G3,D804,SinkG3,Diversion,3,494,747,1,2048,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D804_SINK G3/FLOW_FXC(KAF)//1MON/CAL AQUEDUCT LOSSES R1-/,2049,California Aqueduct losses taken from DWRSIM Run 514.,,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,California Aqueduct losses R1-2
+D804_Sink G3,D804,Sink G3,Diversion,3,494,747,1,2048,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D804_SINK G3/FLOW_FXC(KAF)//1MON/CAL AQUEDUCT LOSSES R1-/,2049,California Aqueduct losses taken from DWRSIM Run 514.,,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,California Aqueduct losses R1-2
 D814_D816,D814,D816,Diversion,3,495,496,1,2050,no losses,0,,,1,None,0,,,3.40E+38,,,,,,267,2051,Infrastructure Capacity: 10;000 cfs,,,,,,,,,,31,NoLowerBound+MonthlyUpperBound,8,Brian Van Lienden,33,0,California Aqueduct
 D814_Gianelli PMP,D814,GianPMP,Diversion,3,495,539,1,2052,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,California Aqueduct div to San Luis Res
 D816_D818,D816,D818,Diversion,3,496,497,1,2056,no losses,0,,,1,None,0,,,3.40E+38,,,,,,269,2057,Infrastructure Capacity: 13;100 cfs,,,,,,,,,,31,NoLowerBound+MonthlyUpperBound,8,Brian Van Lienden,33,0,California Aqueduct
@@ -714,7 +714,7 @@ D892_D896,D892,D896,Diversion,3,527,528,1,2151,,0,,,1,None,0,,,3.40E+38,,,,,,299
 D896_C316,D896,C316,Diversion,3,528,339,1,1408,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,SCV urban groundwater Recharge from So Bay Aqueduct
 D896_D897,D896,D897,Diversion,3,528,529,1,2154,,0,,,1,None,0,,,3.40E+38,,,,,,300,2155,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,33,0,South Bay Aqueduct (end)
 D896_T7,D896,T7SCV,Diversion,3,528,858,1,,,516.5200195,2156,,2,Constant,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,4,Mimi Jenkins,33,0,"S. Bay Aqueduct combined Diversions to ACWD; ACZone7 and SCVWD = CALVIN urban demand ""SCV"""
-D897_Sink G17,D897,SinkG17,Diversion,3,529,742,1,2157,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D897_SINK G17/FLOW_FXC(KAF)//1MON/SOUTH BAY AQUEDUCT LOSS/,2158,,,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,South Bay Aqueduct losses R1-9
+D897_Sink G17,D897,Sink G17,Diversion,3,529,742,1,2157,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/D897_SINK G17/FLOW_FXC(KAF)//1MON/SOUTH BAY AQUEDUCT LOSS/,2158,,,,,,,,54,ConstrainedTimeSeries,2,Andy Draper,33,0,South Bay Aqueduct losses R1-9
 D94&D40_Sink D94,D94&D40,Sink D94,Diversion,3,137,239,1,707,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CECT/D94&D40_SINK/FLOW_LBC(KAF)//1MON/CALSIM II 2001G-ARC C100/,708,Note that the fxc time series for minimum instream flow for the Trinity River includes both the minimum instream requirement (CP94) and the spill flows (CP40).,/UCD CECT/D94&D40_SINK/FLOW_LBC(KAF)//1MON/CALSIM II 2001G-ARC C100/,709,none,,,,14,LowerBoundTimeSeries+NoUpperBound,13,Stacy Tanaka,11,0,Trinity River model outflow - minimum instream flow requirement
 D94&D40_SR-3,D94&D40,SR-3,Diversion,3,137,258,1,710,no losses,0,,,3,Time Dependant,0,,,3.40E+38,,,,,,79,712,Infrastructure Capacity: 3;200 cfs,,,,,,,,711,none,31,NoLowerBound+MonthlyUpperBound,13,Stacy Tanaka,11,0,Trinity River export to Whiskeytown Lake via Clear Creek Tunnel
 D98_D517,D98,D517,Diversion,3,138,116,1,661,no losses,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,/UCD CECT/D98_D517/FLOW_LBC(KAF)//1MON/CALSIM II 2001G-ARC C504/,662,Sanjasm node 179; WY 1991-93 data are duplicated from WY 1933-35 data; due to the near duplication of these and immediately preceding water year types according to the 40-30-30 Four River Index for the Sacramento Basin; minimum instream flow requirement,,,,14,LowerBoundTimeSeries+NoUpperBound,13,Stacy Tanaka,22,0,Mokelumne River Reach; new location minimum instream flow requirement
@@ -722,7 +722,7 @@ D98_HSU8D98,D98,HSU8D98,Diversion,3,138,193,1,,,0,,,1,None,0,,,26.39999962,715,U
 D9_C173,D9,C173,Diversion,3,136,14,1,263,no losses,0,,,1,None,0,,,3.40E+38,,,,,,15,265,Infrastructure capacity: 3;500 cfs,,,,,,,,264,none,31,NoLowerBound+MonthlyUpperBound,6,Jay Lund,22,0,Lake Natoma export to Folsom South Canal
 D9_D85,D9,D85,Diversion,3,136,135,1,702,no losses,0,,,3,Time Dependant,0,,,3.40E+38,,,,,,,,,,,,/UCD CECT/D9_D85/FLOW_LBC(KAF)//1MON/CALSIM II 2001G-ARC C9/,703,minimum instream flow requirement,,,,14,LowerBoundTimeSeries+NoUpperBound,6,Jay Lund,22,0,American River d/s Nimbus Dam Reach 1
 Del Valle PMP_SR-15,DVallePMP,SR-15,Diversion,3,530,783,1,2159,,7.992000103,2160,,2,Constant,0,,,3.40E+38,,,,,,301,2161,,,,,,,,,,,31,NoLowerBound+MonthlyUpperBound,8,Brian Van Lienden,33,0,South Bay Aqueduct; Del Vale Pump Plant release to Lake Del Valle
-Desalination_CN3,Desal,SinkCN3,Diversion,3,531,716,1,,,0,,,1,None,0,,,0,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,13,Stacy Tanaka,,0,Excess desalination flows
+Desalination_CN3,Desal,Sink CN3,Diversion,3,531,716,1,,,0,,,1,None,0,,,0,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,13,Stacy Tanaka,,0,Excess desalination flows
 Desalination_T20,Desal,T20SFPU,Diversion,3,531,822,1,,,2072,,,2,Constant,0,,,0,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,,0,Proposed desalination capabilities for SFPUC
 Desalination_T71,Desal,T71,Diversion,3,531,859,1,,,2072,,,2,Constant,0,,,0,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,13,Stacy Tanaka,,0,Desalination plant for SB-SLO
 Desalination_T7,Desal,T7SCV,Diversion,3,531,858,1,,,2072,,,2,Constant,0,,,0,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,,0,Proposed ocean desalination for SCV
@@ -1157,135 +1157,135 @@ Ind: SBV_T9,Ind: SBV,T9SBV,Diversion,3,671,862,0.400000006,2261,,0,,,1,None,0,,,
 Ind: SCV_T19,Ind:SCV,T19SCV,Diversion,3,672,820,0.400000006,2264,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,4,Mimi Jenkins,33,0,Ind Return Flow Total
 Ind: Ventura_Sink G30,IND:VENT,Sink G30,Diversion,3,673,748,0.400000006,2269,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,5,0,Return Flow
 Ind: Ventura_T56,IND:VENT,T56VENT,Diversion,3,673,847,0.400000006,,,0,,,1,None,0,,,0,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,,0,Wastewater return flows from Industrial Ventura
-Inflow_C116,Source_C116,C116,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C146,Source_C146,C146,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C148,Source_C148,C148,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C154,Source_C154,C154,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C161,Source_C161,C161,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C23,Source_C23,C23,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C27,Source_C27,C27,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C28,Source_C28,C28,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C29,Source_C29,C29,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C2,Source_C2,C2,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C304,Source_C304,C304,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C306,Source_C306,C306,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C308,Source_C308,C308,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C318,Source_C318,C318,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C32,Source_C32,C32,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C35,Source_C35,C35,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C37,Source_C37,C37,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C38,Source_C38,C38,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C51,Source_C51,C51,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C52,Source_C52,C52,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C54,Source_C54,C54,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C57,Source_C57,C57,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C65,Source_C65,C65,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C67,Source_C67,C67,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C77,Source_C77,C77,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C81,Source_C81,C81,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C82,Source_C82,C82,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C86,Source_C86,C86,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C87,Source_C87,C87,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_C89,Source_C89,C89,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_CN1,Source_CN1,CN1,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_CN2,Source_CN2,CN2,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_CN3,Source_CN3,CN3,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_CN4,Source_CN4,CN4,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_CN5,Source_CN5,CN5,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D16,Source_D16,D16,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D17,Source_D17,D17,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D30,Source_D30,D30,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D43a,Source_D43a,D43a,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D509,SOURCE_D509,D509,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D511,Source_D511,D511,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D606,Source_D606,D606,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D616,Source_D616,D616,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D622,Source_D622,D622,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D632,Source_D632,D632,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D642,Source_D642,D642,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D646,Source_D646,D646,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D653b,Source_D653b,D653b,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D663,Source_D663,D663,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D687,Source_D687,D687,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D691,Source_D691,D691,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D698,Source_D698,D698,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D733,Source_D733,D733,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D74,Source_D74,D74,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D849,Source_D849,D849,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D889,Source_D889,D889,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D94&D40,Source_D94,D94&D40,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D98,Source_D98,D98,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_D9,Source_D9,D9,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_DesalR5,Source_DesalR5,DesalR5,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_Desal,Source_Desal,Desal,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-10,Source_GW-10,GW-10,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-11,Source_GW-11,GW-11,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-12,Source_GW-12,GW-12,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-13,Source_GW-13,GW-13,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-14,Source_GW-14,GW-14,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-15,Source_GW-15,GW-15,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-16,Source_GW-16,GW-16,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-17,Source_GW-17,GW-17,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-18,Source_GW-18,GW-18,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-19,Source_GW-19,GW-19,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-1,Source_GW-1,GW-1,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-20,Source_GW-20,GW-20,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-21,Source_GW-21,GW-21,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-2,Source_GW-2,GW-2,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-3,Source_GW-3,GW-3,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-4,Source_GW-4,GW-4,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-5,Source_GW-5,GW-5,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-6,Source_GW-6,GW-6,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-7,Source_GW-7,GW-7,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-8,Source_GW-8,GW-8,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-9,Source_GW-9,GW-9,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-AV,Source_GW-AV,GW-AV,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-CH,Source_GW-CH,GW-CH,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-EW,Source_GW-EW,GW-EW,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-IM,Source_GW-IM,GW-IM,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-MJ,Source_GW-MJ,GW-MJ,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-MWD,Source_GW-MWD,GW-MWD,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-OW,Source_GW-OW,GW-OW,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-SBV,Source_GW-SBV,GW-SBV,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-SC,Source_GW-SC,GW-SC,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-SD,Source_GW-SD,GW-SD,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_GW-VC,Source_GW-VC,GW-VC,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_HXCMWD,Source_T5,HXCMWD,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_HXEWMWD,Source_T34,HXEWMWD,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_HXSD,Source_T30,HXSD,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_Owens2 PWP,Source_Owens2  PWP,Owens2 PWP,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-10,Source_SR-10,SR-10,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-18,Source_SR-18,SR-18,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-1,Source_SR-1,SR-1,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-20,Source_SR-20,SR-20,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-3,Source_SR-3,SR-3,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-4,Source_SR-4,SR-4,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-52,Source_SR-52,SR-52,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-53,Source_SR-53,SR-53,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-81,Source_SR-81,SR-81,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-8,Source_SR-8,SR-8,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-BBL,Source_SR-BBL,SR-BBL,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-CL-IVR,Source_SR-CL-IVR,SR-CL-IVR,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-CR3,Source_SR-CR3,SR-CR3,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-GL,Source_SR-GL,SR-GL,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-HHR,Source_SR-HHR,SR-HHR,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-LB,Source_SR-LB,SR-LB,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-LC,Source_SR-LC,SR-LC,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-LI,Source_SR-LI,SR-LI,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-LK,Source_SR-LK,SR-LK,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-LL-LE,Source_SR-LL-LE,SR-LL-LE,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-LS,Source_SR-LS,SR-LS,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-NBB,Source_SR-NBB,SR-NBB,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-NHL,Source_SR-NHL,SR-NHL,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-PF,Source_SR-PF,SR-PF,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-PR,Source_SR-PR,SR-PR,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_SR-SCV,Source_SR-SCV,SR-SCV,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_T14NAPA,Source_T14,T14NAPA,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_T2SBV,Source_T2,T2SBV,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_T40SDMWD,Source_T40,T40SDMWD,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_T55VENT,Source_T55,T55VENT,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_T59CLWA,Source_T59,T59CLWA,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Inflow_T6AV,Source_T6,T6AV,Inflow Link,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C116,Source_C116,C116,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C146,Source_C146,C146,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C148,Source_C148,C148,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C154,Source_C154,C154,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C161,Source_C161,C161,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C23,Source_C23,C23,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C27,Source_C27,C27,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C28,Source_C28,C28,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C29,Source_C29,C29,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C2,Source_C2,C2,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C304,Source_C304,C304,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C306,Source_C306,C306,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C308,Source_C308,C308,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C318,Source_C318,C318,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C32,Source_C32,C32,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C35,Source_C35,C35,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C37,Source_C37,C37,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C38,Source_C38,C38,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C51,Source_C51,C51,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C52,Source_C52,C52,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C54,Source_C54,C54,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C57,Source_C57,C57,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C65,Source_C65,C65,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C67,Source_C67,C67,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C77,Source_C77,C77,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C81,Source_C81,C81,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C82,Source_C82,C82,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C86,Source_C86,C86,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C87,Source_C87,C87,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_C89,Source_C89,C89,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_CN1,Source_CN1,CN1,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_CN2,Source_CN2,CN2,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_CN3,Source_CN3,CN3,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_CN4,Source_CN4,CN4,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_CN5,Source_CN5,CN5,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D16,Source_D16,D16,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D17,Source_D17,D17,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D30,Source_D30,D30,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D43a,Source_D43a,D43a,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D509,SOURCE_D509,D509,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D511,Source_D511,D511,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D606,Source_D606,D606,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D616,Source_D616,D616,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D622,Source_D622,D622,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D632,Source_D632,D632,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D642,Source_D642,D642,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D646,Source_D646,D646,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D653b,Source_D653b,D653b,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D663,Source_D663,D663,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D687,Source_D687,D687,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D691,Source_D691,D691,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D698,Source_D698,D698,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D733,Source_D733,D733,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D74,Source_D74,D74,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D849,Source_D849,D849,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D889,Source_D889,D889,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D94&D40,Source_D94,D94&D40,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D98,Source_D98,D98,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_D9,Source_D9,D9,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_DesalR5,Source_DesalR5,DesalR5,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_Desal,Source_Desal,Desal,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-10,Source_GW-10,GW-10,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-11,Source_GW-11,GW-11,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-12,Source_GW-12,GW-12,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-13,Source_GW-13,GW-13,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-14,Source_GW-14,GW-14,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-15,Source_GW-15,GW-15,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-16,Source_GW-16,GW-16,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-17,Source_GW-17,GW-17,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-18,Source_GW-18,GW-18,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-19,Source_GW-19,GW-19,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-1,Source_GW-1,GW-1,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-20,Source_GW-20,GW-20,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-21,Source_GW-21,GW-21,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-2,Source_GW-2,GW-2,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-3,Source_GW-3,GW-3,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-4,Source_GW-4,GW-4,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-5,Source_GW-5,GW-5,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-6,Source_GW-6,GW-6,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-7,Source_GW-7,GW-7,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-8,Source_GW-8,GW-8,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-9,Source_GW-9,GW-9,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-AV,Source_GW-AV,GW-AV,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-CH,Source_GW-CH,GW-CH,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-EW,Source_GW-EW,GW-EW,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-IM,Source_GW-IM,GW-IM,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-MJ,Source_GW-MJ,GW-MJ,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-MWD,Source_GW-MWD,GW-MWD,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-OW,Source_GW-OW,GW-OW,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-SBV,Source_GW-SBV,GW-SBV,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-SC,Source_GW-SC,GW-SC,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-SD,Source_GW-SD,GW-SD,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_GW-VC,Source_GW-VC,GW-VC,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_HXCMWD,Source_T5,HXCMWD,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_HXEWMWD,Source_T34,HXEWMWD,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_HXSD,Source_T30,HXSD,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_Owens2 PWP,Source_Owens2  PWP,Owens2 PWP,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-10,Source_SR-10,SR-10,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-18,Source_SR-18,SR-18,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-1,Source_SR-1,SR-1,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-20,Source_SR-20,SR-20,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-3,Source_SR-3,SR-3,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-4,Source_SR-4,SR-4,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-52,Source_SR-52,SR-52,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-53,Source_SR-53,SR-53,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-81,Source_SR-81,SR-81,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-8,Source_SR-8,SR-8,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-BBL,Source_SR-BBL,SR-BBL,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-CL-IVR,Source_SR-CL-IVR,SR-CL-IVR,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-CR3,Source_SR-CR3,SR-CR3,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-GL,Source_SR-GL,SR-GL,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-HHR,Source_SR-HHR,SR-HHR,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-LB,Source_SR-LB,SR-LB,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-LC,Source_SR-LC,SR-LC,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-LI,Source_SR-LI,SR-LI,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-LK,Source_SR-LK,SR-LK,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-LL-LE,Source_SR-LL-LE,SR-LL-LE,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-LS,Source_SR-LS,SR-LS,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-NBB,Source_SR-NBB,SR-NBB,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-NHL,Source_SR-NHL,SR-NHL,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-PF,Source_SR-PF,SR-PF,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-PR,Source_SR-PR,SR-PR,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_SR-SCV,Source_SR-SCV,SR-SCV,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_T14NAPA,Source_T14,T14NAPA,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_T2SBV,Source_T2,T2SBV,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_T40SDMWD,Source_T40,T40SDMWD,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_T55VENT,Source_T55,T55VENT,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_T59CLWA,Source_T59,T59CLWA,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Inflow_T6AV,Source_T6,T6AV,Inflow,91,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Int: Antelope_T33,INT AV,T33AV,Diversion,3,297,832,0.899999976,1193,Urban state-wide average for ground and local data for surface water return,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,5,0,Urban Return Flow
 Int:Bakersfield_T29,INT BAKER,T29BAKE,Diversion,3,701,827,0.899999976,2306,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,44,0,interior residential Return Flow TOTAL
 Int: Blythe_T64,INT Blythe,T64BLY,Diversion,3,299,854,0.899999976,2491,Number proposed by Prof. Lund. See southern CA update report,0,,,1,None,0,,,0,2460,Blythe percolates all its wastewater.,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,,0,Wastewater return flows from Blthe
@@ -1364,7 +1364,7 @@ PixleyNWR_SR-TLB,PixleyNWR,SR-TLB,Diversion,3,693,815,0.001,,,0,,,1,None,0,,,3.4
 Required Delta Outflow_Sink G20,Req Delta,Sink G20,Diversion,3,224,242,1,772,none,0,,,1,None,0,,,3.40E+38,,,,,,,,,/GWUPD_FINAL/D541-REQ DELTA/FLOW_DIV(KAF)//1MON/07302012 MAX REQ OUTFLOWTEST1/,773,none,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,22,0,Required Delta outflow
 Sac East Refuges_D42,Sac E Ref,D42,Diversion,3,230,105,0.159999996,625,Estimated from percent loss in DWRSIM flows between nodes 732 and 615,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,22,0,Sacramento East Refuges return flow to Feather River
 Sac West Refuges_C15,Sac W Ref,C15,Diversion,3,231,9,0.159999996,246,Estimated from percent loss in DWRSIM flows between nodes 732 and 615,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,8,Brian Van Lienden,11,0,Sacramento West Refuges return flow to Colusa Basin Drain
-San Joaquin Refuges_Sink G27,SJoaqRef,SinkG27,Diversion,3,703,746,0.25,2314,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,2,Andy Draper,33,0,San Joaquin Refuges return
+San Joaquin Refuges_Sink G27,SJoaqRef,Sink G27,Diversion,3,703,746,0.25,2314,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,2,Andy Draper,33,0,San Joaquin Refuges return
 South Bay PMP_D891,SoBayPMP,D891,Diversion,3,780,526,1,2148,,81.3852005,2149,,2,Constant,0,,,3.40E+38,,,,,,298,2150,,,,,,,,,,,31,NoLowerBound+MonthlyUpperBound,8,Brian Van Lienden,33,0,South Bay Aqueduct Pumping Plant
 SR-10_CN3,SR-10,CN3,Diversion,3,781,389,1,,,0,,,1,None,0,,,3.40E+38,1680,Temporarily turned off to recalibrate with dbug flows on A03C20,,,,,,,/UCD CAP1/SR-10_CALB/FLOW_FXC(KAF)//1MON/A03C22 DBUG FLOWS/,1681,"Calibration flow from dbug links out of A03C22 (see V22 folder and file ""dBUG AND NEW CALB V22.xls"")",,,,,,,54,ConstrainedTimeSeries,13,Stacy Tanaka,33,0,Calibration flow to remove water for 4a infeasibilities at SR-10
 SR-10_D670,SR-10,D670,Diversion,3,781,456,1,1943,no losses,0,,,3,Time Dependant,0,,,3.40E+38,,,,,,,,,/UCD CAP4T/SR-10-D670/FLOW_FXC(KAF)//1MON/DWRSIM FDOWN CP10/,1944,Temporary constraint to get 4a calibration flows properly distributed between upstream reservoir evaporation differences and downstream accretion/depletion problems - constrained flow is DWRSIM flow-downstream CP10.  NB. When both SR-10 storage and this release on constrained with the base case constrained diversions downstream; a very small infeasibility occurs between SR-10 and D16 which requires a debug or CALB flow at D670,,,,,,,11,NoLowerBound+NoUpperBound,13,Stacy Tanaka,33,0,Reservoir release from New Melones Dam to Stanislaus River.  Hydropower added.
@@ -1418,7 +1418,7 @@ SR-7_SR-7,SR-7,SR-7,Storage Link,6,261,261,1,86,No Losses,0,,,3,Time Dependant,9
 SR-81_C88,SR-81,C88,Diversion,3,793,378,1,,,0,,,1,None,0,,,0,,,,,,,,,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,13,Stacy Tanaka,,0,New Don Pedro - HH Aqueduct connection.  New pipeline for greater conveyance/flexiblity of New Don Pedro water to San Francisco.
 SR-81_CN3,SR-81,CN3,Diversion,3,793,389,1,,,2960000,1688,Cost used when using CALB links as debug flows.  Otherwise; when calibration flows are implemented; TS are used instead of link cost (RR).,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP1/SR-81_CALB/FLOW_FXC(KAF)//1MON/A03C45 DBUG & EVAP DIF/,1689,Difference between DWRSIM 514 EVAP at CP81 and CALVIN base case evap at SR-81 when storage is constrained to DWRSIM 514 levels.  Debug flows from A03C45 are now used as calibration flows in A03C46.  These flows are needed to allow feasible solutions to a highly constrained SFPUC system with sometimes differing input data sets and assumptions (RR; A03C45).,,,,,,,54,ConstrainedTimeSeries,13,Stacy Tanaka,33,0,Calibration flow to correct evap at SR-81and remove excess inflow in 01/93 at SR-81 to match DWRSIM
 SR-81_D662,SR-81,D662,Diversion,3,793,453,1,1928,no losses,0,,,3,Time Dependant,0,,,3.40E+38,,,,,,,,,/UCD CAP4/SR-81_D662/FLOW_FXC(KAF)//1MON/DWRSIM FLWDWN CP81/,1929,"Policy 4a constraint to limit or impose ""base case"" operations on SR-LL-LE and SR-HHR for which we do not have any base case storage time series data.  Based on SR-81 release (""Flow_Downstream"") from DWRSIM run 514 output.",/UCD CAP1/SR-81_D662/FLOW_LBC(KAF)/01JAN1920/1MON/SANJASM FWREQ CP70/,1930,From CVPIA PEIS SANJASM NAA input file instream flow requirement at CP70 on Tuolumne below New Don Pedro (same values as below CP75),,,,14,LowerBoundTimeSeries+NoUpperBound,13,Stacy Tanaka,33,0,Reservoir release from New Don Pedro Dam to Tuolumne River; inflow to la Grange Dam; minimum instream flow requirement at CP70 in SANJASM.  Hydropower added
-SR-81_Sink,SR-81,SinkCN3,Diversion,3,793,716,1,,,0,,,1,None,0,,,0,2319,,,,,,,,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,4,Mimi Jenkins,33,0,Outlet for infeasibility in Base Case over-constrained upper Tuolumne river
+SR-81_Sink,SR-81,Sink CN3,Diversion,3,793,716,1,,,0,,,1,None,0,,,0,2319,,,,,,,,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,4,Mimi Jenkins,33,0,Outlet for infeasibility in Base Case over-constrained upper Tuolumne river
 SR-81_SR-81,SR-81,SR-81,Storage Link,6,793,793,1,1029,No Losses,0,,,3,Time Dependant,100,1030,RL1 Card for DWRSIM CP81: Dead storage,3.40E+38,,,,,,,,,/UCD CAP4/SR-81/STOR(KAF)/01JAN1920/1MON/DWRSIM 514 CP81/,1031,Storage output from DWRSIM Run 514 for CP81,,,,/UCD CAP1/SR-81_SR-81/STOR_UBC(KAF)//1MON/DWRSIM 514 INPUT/,1032,See source file.,42,ConstantLowerBound+UpperBoundTimeSeries,13,Stacy Tanaka,33,0,New Don Pedro Res Storage Link
 SR-8_D9,SR-8,D9,Diversion,3,262,136,1,705,no losses,0,,,3,Time Dependant,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,22,0,Reservoir release from Folsom Dam to American River
 SR-8_SR-8,SR-8,SR-8,Storage Link,6,262,262,1,96,No Losses,0,,,3,Time Dependant,83,97,RL1 Card for DWRSIM CP4: Dead storage,3.40E+38,,,,,,5,,,/UCD CAP4/SR-8/FLOW_FXC(KAF)//1MON/DWRSIM 514 CP8/,98,Storage output from DWRSIM Run 514 for CP8,,,,/UCD CAP1/SR-8_SR-8/STOR_UBC(KAF)//1MON/DWRSIM 514 INPUT/,99,0,42,ConstantLowerBound+UpperBoundTimeSeries,13,Stacy Tanaka,22,0,Folsom Lake Storage Link
@@ -1437,10 +1437,10 @@ SR-CL-IVR_C150,SR-CL-IVR,C150,Diversion,3,265,10,1,,,0,,,1,None,0,,,3.40E+38,,,,
 SR-CL-IVR_SR-CL-IVR,SR-CL-IVR,SR-CL-IVR,Storage Link,6,265,265,1,127,0,0,,,3,Time Dependant,0,128,See BDN4.doc,3.40E+38,129,0,,,,7,132,0,/UCD CAP4/SR-CL-IVR/STOR_FXC(KAF)//1MON/A03B19 RESULT/,130,From optimized calibration result in A03B19 with evap turned off and calibration flows undefined.,,,,,131,0,32,ConstantLowerBound+MonthlyUpperBound,7,Brad Newlin,22,0,Clear Lake & Indian Valley Reservoir Storage Link
 SR-CR1_C141,SR-CR1,C141,Diversion,3,796,319,1,,,0,,,1,None,0,,,0,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,6,Jay Lund,5,0,First priority water to Palo Verde Ag - Policy 4a
 SR-CR1_Sink G38,SR-CR1,Sink G38,Diversion,3,796,753,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,4,Mimi Jenkins,5,0,outlet for excess Colorado River water - Policy 4a
-SR-CR1_SR-CR1,SR-CR1,SR-CR1,Storage Link,6,796,796,1,,,0,,,1,None,0,,,3.40E+38,,,,,,97,1043,0,,,,,,,,,,11,NoLowerBound+NoUpperBound,4,Mimi Jenkins,5,0,Storage link - first priority Colorado water -Policy 4a
+SR-CR1_SR-CR1,SR-CR1,SR-CR1,Storage Link,6,796,796,1,,,0,,,1,None,0,,,3.40E+38,,,,,,97,1043,0,,,,,,,,,,11,NoLowerBound+NoUpperBound,4,Mimi Jenkins,5,0,Storage Link - first priority Colorado water -Policy 4a
 SR-CR2_C143,SR-CR2,C143,Diversion,3,797,321,1,,,0,,,1,None,0,,,0,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,4,Mimi Jenkins,5,0,Second priority water to AA canal users -Policy 4a
 SR-CR2_SR-CR1,SR-CR2,SR-CR1,Diversion,3,797,796,1,,,0,,,1,None,0,,,3.40E+38,,,,,,,,,/UCD CAP4/SR-CR2_SR-CR1/FLOW(KAF)/01JAN1990/1MON/PVID CONSTRAINED DELIVERY/,2337,,,,,,,,11,NoLowerBound+NoUpperBound,4,Mimi Jenkins,5,0,diversion from 2nd (IID and CVWD) to 1st  priority (PVID) Colorado River - Policy 4a
-SR-CR2_SR-CR2,SR-CR2,SR-CR2,Storage Link,6,797,797,1,,,0,,,1,None,0,,,3.40E+38,,,,,,98,1044,0,,,,,,,,,,11,NoLowerBound+NoUpperBound,4,Mimi Jenkins,5,0,Storage link - second  priority Colorado water -Policy 4a
+SR-CR2_SR-CR2,SR-CR2,SR-CR2,Storage Link,6,797,797,1,,,0,,,1,None,0,,,3.40E+38,,,,,,98,1044,0,,,,,,,,,,11,NoLowerBound+NoUpperBound,4,Mimi Jenkins,5,0,Storage Link - second  priority Colorado water -Policy 4a
 SR-CR3_C134,SR-CR3,C134,Diversion,3,798,314,1,1282,0,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,7,Brad Newlin,5,0,Colorado River (unconstrained)
 SR-CR3_SR-CR2,SR-CR3,SR-CR2,Diversion,3,798,797,1,,,0,,,1,None,0,,,0,,,,,,,,,/UCD CAP4/SR-CR3_SR-CR2/FLOW(KAF)/01JAN1920/1MON/AG CONSTRAINED DELIVERY/,,,,,,,,,21,NoLowerBound+ConstantUpperBound,4,Mimi Jenkins,5,0,diversion from 3rd (MWD) to 2nd and 1st priority of Colorado River water - Policy 4a
 SR-CR3_SR-CR3,SR-CR3,SR-CR3,Storage Link,6,798,798,1,1047,0,0,,,1,None,0,,,4400,1048,Technical Memo: BDN2,,,,99,1049,0,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,7,Brad Newlin,5,0,Colorado River Storage Storage Link
@@ -1539,12 +1539,12 @@ T18_T16,T18CCWD,T16CCWD,Diversion,3,280,278,1,,,518,812,only non-potable O&M cos
 T19_C316,T19SCV,C316,Diversion,3,820,339,1,,,48.84000015,1409,rough estimate of additional variable costs of waste water treatment for recharge,2,Constant,0,,,6,1410,estimated limit of WWTP discharge to AR for GW (25% of WWTP discharge or 10% of full demand),,,,,,,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,4,Mimi Jenkins,33,0,artificial groundwater recharge using waste water
 T19_GW-SC,T19SCV,GW-SC,Diversion,3,820,562,1,,,0,,,1,None,0,,,0,2235,,,,,,,,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,4,Mimi Jenkins,33,0,Deep percolation of applied water
 T19_HWWT19,T19SCV,HWWT19,Diversion,3,820,661,1,,,1480,,,2,Constant,0,,,10.56000042,2517,,,,,,,,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,,0,Proposed expanded wastewater treatment facility for SCV
-T19_Sink G26,T19SCV,SinkG26,Diversion,3,820,745,1,2321,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,2,Andy Draper,33,0,Santa Clara waste
+T19_Sink G26,T19SCV,Sink G26,Diversion,3,820,745,1,2321,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,2,Andy Draper,33,0,Santa Clara waste
 T19_T7,T19SCV,T7SCV,Diversion,3,820,858,1,,,518,2359,,2,Constant,0,,,1.330000043,2360,,,,,,,,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,4,Mimi Jenkins,33,0,SCV+ Recycled water
 T20_ERes: San Fransisco,T20SFPU,ERES SF,Diversion,3,822,960,1,,,0,,,3,Time Dependant,0,,,0,,,,,,,,,,,,,,,/SOUTH UPDT/T20_ERES: SF/FLOW_DIV(KAF)-TARG//1MON/2050H POP 030911/,2531,,41,NoLowerBound+UpperBoundTimeSeries,6,Jay Lund,,0,"Exterior Residential (+com+gov""t) Urban Penalty Function for SFPUC demand area (DAU 43) includes City and County of SF; plus San Mateo County services areas not included in SCV demand area."
 T20_Ind: San Francisco,T20SFPU,IND SFPUC,Diversion,3,822,670,1,,,0,,,3,Time Dependant,0,,,3.40E+38,,,,,,320,2259,,,,,,,,/SOUTH UPDT/T20_IND: SF/FLOW_DIV(KAF)-TARG//1MON/2050H POP 030911/,2531,,41,NoLowerBound+UpperBoundTimeSeries,6,Jay Lund,33,0,Industrial Urban Penalty Function for SFPUC demand area (DAU 43) includes City and County of SF; plus San Mateo County services areas not included in SCV demand area.
 T20_IRes: San Francisco,T20SFPU,IRES SF,Diversion,3,822,697,1,,,0,,,3,Time Dependant,0,,,3.40E+38,,,,,,332,2297,,,,,,,,/SOUTH UPDT/T20_IRES: SF/FLOW_DIV(KAF)-TARG//1MON/2050H POP 030911/,2531,,41,NoLowerBound+UpperBoundTimeSeries,6,Jay Lund,33,0,"Interior Residential (+com+gov""t) Urban Penalty Function for SFPUC demand area (DAU 43) includes City and County of SF; plus San Mateo County services areas not included in SCV demand area."
-T21_Sink G25,T21SPFU,SinkG25,Diversion,3,823,744,1,2320,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,2,Andy Draper,33,0,San Francisco waste
+T21_Sink G25,T21SPFU,Sink G25,Diversion,3,823,744,1,2320,,0,,,1,None,0,,,3.40E+38,,,,,,,,,,,,,,,,,,11,NoLowerBound+NoUpperBound,2,Andy Draper,33,0,San Francisco waste
 T21_T20,T21SPFU,T20SFPU,Diversion,3,823,822,1,,,1480,2363,,2,Constant,0,,,3.650000095,2364,,,,,,,,,,,,,,,,,21,NoLowerBound+ConstantUpperBound,6,Jay Lund,33,0,SFPUC Recycled water
 T24_Ext: CityofFresno,T24FRES,EXT FRESN,Diversion,3,824,955,1,2556,,0,,,3,Time Dependant,0,,,0,,,,,,,,,,,,,,,/SOUTH UPDT/T24_EXT: FRESNO/FLOW_DIV(KAF)-TARG//1MON/2050H POP 030911/,2531,,41,NoLowerBound+UpperBoundTimeSeries,6,Jay Lund,,0,Inflows exterior urban residential
 T24_Int: CityofFresno,T24FRES,INT FRESN,Diversion,3,824,702,1,2557,,0,,,3,Time Dependant,0,,,3.40E+38,,,,,,337,2312,,,,,,,,/SOUTH UPDT/T24_INT: FRESNO/FLOW_DIV(KAF)-TARG//1MON/2050H POP 030911/,2531,,41,NoLowerBound+UpperBoundTimeSeries,6,Jay Lund,44,0,Interior Residential Urban Penalty Function
