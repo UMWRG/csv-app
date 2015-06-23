@@ -1327,11 +1327,13 @@ class ImportCSV(object):
                     value_header = filedata[0].lower().replace(' ', '')
                     if value_header.startswith('arraydescription,') or value_header.startswith(','):
                         arr_struct = filedata[0].strip()
+                        arr_struct = filedata[0].replace(",,", "")
                         arr_struct = arr_struct.split(',')
                         arr_struct = "|".join(arr_struct[2:])
                         filedata = filedata[1:]
                     elif value_header.startswith('timeseriesdescription') or value_header.startswith(','):
                         arr_struct = filedata[0].strip()
+                        arr_struct = filedata[0].replace(",,", "")
                         arr_struct = arr_struct.split(',')
                         arr_struct = "|".join(arr_struct[3:])
                         filedata = filedata[1:]
