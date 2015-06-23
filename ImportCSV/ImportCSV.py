@@ -451,12 +451,17 @@ class ImportCSV(object):
 
             keys = net_data[0].split(',')
             self.check_header(file, keys)
-            units = net_data[1].split(',')
+            if net_data[1].lower().startswith('unit'):
+                units = net_data[1].split(',')
+                data_idx = 2
+            else:
+                units = None
+                data_idx = 1
             # A network file should only have one line of data
-            data = net_data[2].split(',')
-
-            for i, unit in enumerate(units):
-                units[i] = unit.strip()
+            data = net_data[data_idx].split(',')
+            if units is not None:
+                for i, unit in enumerate(units):
+                    units[i] = unit.strip()
 
             # We assume a standard order of the network information (Name,
             # Description, attributes,...).
@@ -632,11 +637,19 @@ class ImportCSV(object):
 
         keys  = node_data[0].split(',')
         self.check_header(file, keys)
-        units = node_data[1].split(',')
-        data = node_data[2:]
 
-        for i, unit in enumerate(units):
-            units[i] = unit.strip()
+        #There may or may not be a units line, so we need to account for that.
+        if node_data[1].lower().startswith('unit'):
+            units = node_data[1].split(',')
+            for i, unit in enumerate(units):
+                units[i] = unit.strip()
+
+            data_idx = 2
+        else:
+            units = None
+            data_idx = 1
+        # Get all the lines after the units line. 
+        data = node_data[data_idx:]
 
         field_idx = {'name': 0,
                      'description': -1,
@@ -745,11 +758,20 @@ class ImportCSV(object):
 
         keys = link_data[0].split(',')
         self.check_header(file, keys)
-        units = link_data[1].split(',')
-        data = link_data[2:]
 
-        for i, unit in enumerate(units):
-            units[i] = unit.strip()
+        #There may or may not be a units line, so we need to account for that.
+        if link_data[1].lower().startswith('unit'):
+            units = link_data[1].split(',')
+            for i, unit in enumerate(units):
+                units[i] = unit.strip()
+
+            data_idx = 2
+        else:
+            units = None
+            data_idx = 1
+
+        # Get all the lines after the units line 
+        data = link_data[data_idx:]
 
         field_idx = {'name': 0,
                      'description': -1,
@@ -858,11 +880,20 @@ class ImportCSV(object):
 
         keys  = group_data[0].split(',')
         self.check_header(file, keys)
-        units = group_data[1].split(',')
-        data  = group_data[2:]
 
-        for i, unit in enumerate(units):
-            units[i] = unit.strip()
+        #There may or may not be a units line, so we need to account for that.
+        if group_data[1].lower().startswith('unit'):
+            units = group_data[1].split(',')
+            for i, unit in enumerate(units):
+                units[i] = unit.strip()
+
+            data_idx = 2
+        else:
+            units = None
+            data_idx = 1
+
+        # Get all the lines after the units line
+        data = group_data[data_idx:]
 
         #Indicates what the mandatory columns are and where
         #we expect to see them.
@@ -1040,9 +1071,7 @@ class ImportCSV(object):
                 #Unit added to attribute definition for validation only. Not saved in DB
                 attribute['unit'] = unit.strip()
                 #Dimension is saved in DB.
-                if unit.strip() == '-' or unit.strip() == '':
-                    attribute['dimen'] = 'Dimensionless'
-                else:
+                if unit.strip() not in ('-' ,''):
                     basic_unit, factor = self.parse_unit(unit.strip())
                     attribute['dimen'] = self.units.get(basic_unit)
 
@@ -1088,6 +1117,7 @@ class ImportCSV(object):
         # Also, we add the attributes only once (that's why we use the
         # add_attrs flag).
         if self.add_attrs:
+            log.info(attributes)
             attributes = self.connection.call('add_attributes', {'attrs':attributes})
             self.add_attrs = False
             for attr in attributes:
@@ -1349,9 +1379,10 @@ class ImportCSV(object):
                 dataset['type'] = 'descriptor'
                 desc = self.create_descriptor(value, restriction_dict)
                 dataset['value'] = desc
-
-        dataset['unit'] = unit
+        
         if unit is not None:
+            dataset['unit'] = unit
+        if dimension is not None:
             dataset['dimension'] = dimension
 
         dataset['name'] = self.Scenario['name']
