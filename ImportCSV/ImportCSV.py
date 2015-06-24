@@ -1410,7 +1410,7 @@ class ImportCSV(object):
 
     def create_descriptor(self, value, restriction_dict={}):
         self.validate_value(value, restriction_dict)
-        descriptor = json.dumps(value)
+        descriptor = value
         return descriptor
 
     def create_timeseries(self, data, restriction_dict={}, header=None, filename=""):
