@@ -1066,8 +1066,6 @@ class ImportCSV(object):
         try:
             attribute = dict(
                 name = name.strip(),
-                unit = None,
-                dimen = None,
             )
             if unit is not None and len(unit.strip()) > 0:
                 #Unit added to attribute definition for validation only. Not saved in DB
@@ -1158,8 +1156,10 @@ class ImportCSV(object):
                         dataset_metadata = {}
 
                     if units is not None:
-                        if units[i] is not None and len(units[i].strip()) > 0:
-                            dimension = attr['dimen']
+                        if units[i] is not None and len(units[i].strip()) > 0: 
+                            dimension = attr.get('dimen')
+                            if dimension is None:
+                                log.warn("Dimension for unit %s is null. ", units[i])
                         else:
                             dimension = None
 
