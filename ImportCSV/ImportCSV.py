@@ -1066,6 +1066,8 @@ class ImportCSV(object):
         try:
             attribute = dict(
                 name = name.strip(),
+                unit = None,
+                dimen = None,
             )
             if unit is not None and len(unit.strip()) > 0:
                 #Unit added to attribute definition for validation only. Not saved in DB
@@ -1116,6 +1118,7 @@ class ImportCSV(object):
         # Add all attributes. If they exist already, we retrieve the real id.
         # Also, we add the attributes only once (that's why we use the
         # add_attrs flag).
+
         if self.add_attrs:
             log.info(attributes)
             attributes = self.connection.call('add_attributes', {'attrs':attributes})
