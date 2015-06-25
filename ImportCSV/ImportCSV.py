@@ -1154,8 +1154,8 @@ class ImportCSV(object):
                         dataset_metadata = {}
 
                     if units is not None:
-                        if units[i] is not None and len(units[i].strip()) > 0:
-                            dimension = attr['dimen']
+                        if units[i] is not None and len(units[i].strip()) > 0 and units[i].strip() != '-':
+                            dimension = attr.get('dimen')
                         else:
                             dimension = None
 
