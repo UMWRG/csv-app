@@ -986,7 +986,19 @@ class ImportCSV(object):
 
         keys  = member_data[0].split(',')
         self.check_header(file, keys)
-        data  = member_data[2:-1]
+        #There may or may not be a units line, so we need to account for that.
+        if member_data[1].lower().startswith('unit'):
+            units = member_data[1].split(',')
+            for i, unit in enumerate(units):
+                units[i] = unit.strip()
+
+            data_idx = 2
+        else:
+            units = None
+            data_idx = 1
+
+        # Get all the lines after the units line 
+        data = member_data[data_idx:]
 
         field_idx = {}
         for i, k in enumerate(keys):
