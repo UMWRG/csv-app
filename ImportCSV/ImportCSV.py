@@ -1171,7 +1171,7 @@ class ImportCSV(object):
                         if units[i] is not None and len(units[i].strip()) > 0: 
                             dimension = attr.get('dimen')
                             if dimension is None:
-                                log.warn("Dimension for unit %s is null. ", units[i])
+                                log.debug("Dimension for unit %s is null. ", units[i])
                         else:
                             dimension = None
 
@@ -1482,8 +1482,11 @@ class ImportCSV(object):
                 for i in range(value_length):
                     ts_val_1d.append(str(dataset[i + 2].strip()))
 
-                ts_arr = array(ts_val_1d)
-                ts_arr = reshape(ts_arr, array_shape)
+                try:
+                    ts_arr = array(ts_val_1d)
+                    ts_arr = reshape(ts_arr, array_shape)
+                except:
+                    raise HydraPluginError("Error converting %s in file %s to an array"%(ts_val_1d, filename))
 
                 ts_value = ts_arr.tolist()
 
