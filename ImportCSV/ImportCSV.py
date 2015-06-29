@@ -211,7 +211,7 @@ import pytz
 
 from HydraLib import PluginLib
 from HydraLib.PluginLib import JsonConnection, write_progress, write_output, validate_plugin_xml, RequestError, validate_template
-from HydraLib import util, dateutil
+from HydraLib import util, hydra_dateutil
 
 from HydraLib.units import validate_resource_attributes
 
@@ -374,8 +374,8 @@ class ImportCSV(object):
             else:
                 dupe_headings.append(k)
         if len(dupe_headings) > 0:
-            raise HydraPluginError("Malformed Header: Duplicate columns: %s",
-                                   dupe_headings)
+            raise HydraPluginError("Malformed Header in file %s: Duplicate columns: %s"%
+                                   (file , dupe_headings))
 
 
     def create_project(self, ID=None, network_id=None):
@@ -616,6 +616,8 @@ class ImportCSV(object):
                         val = keyval[1].strip()
                         metadata_dict[attr.strip()][key] = val
             except Exception, e:
+                log.critical(e)
+                log.critical("Make sure the CSV file is formatted correctly.")
                 raise Exception(attr)
 
         return metadata_dict
@@ -1340,14 +1342,15 @@ class ImportCSV(object):
                     else:
                         filedata = self.file_dict[full_file_path]
 
-                    value_header = filedata[0].lower().replace(' ', '')
+                    value_header = filedata[0].replace(' ', '')
                     if value_header.startswith('arraydescription,') or value_header.startswith(','):
-                        arr_struct = filedata[0].strip()
+                        arr_struct = filedata[0].strip().replace(' ', '').replace(',,', '')
                         arr_struct = arr_struct.split(',')
-                        arr_struct = "|".join(arr_struct[2:])
+                        arr_struct = "|".join(arr_struct)
                         filedata = filedata[1:]
                     elif value_header.startswith('timeseriesdescription') or value_header.startswith(','):
-                        arr_struct = filedata[0].strip()
+                        arr_struct = filedata[0].strip().replace(' ', '').replace(',,', '')
+
                         arr_struct = arr_struct.split(',')
                         arr_struct = "|".join(arr_struct[3:])
                         value_header = filedata[0]
@@ -1382,6 +1385,7 @@ class ImportCSV(object):
                                 try:
                                     dataset['value'] = self.create_array(data[0], restriction_dict)
                                 except Exception, e:
+                                    log.exception(e)
                                     raise HydraPluginError("There is a value "
                                                            "error in %s. "
                                                            "Please check value"
@@ -1390,7 +1394,7 @@ class ImportCSV(object):
                                 dataset['value'] = None
                 else:
                     raise IOError
-            except IOError:
+            except IOError, e:
                 dataset['type'] = 'descriptor'
                 desc = self.create_descriptor(value, restriction_dict)
                 dataset['value'] = desc
@@ -1439,7 +1443,7 @@ class ImportCSV(object):
             col_headings = range(len(data[0].split(',')[2:]))
 
         date = data[0].split(',', 1)[0].strip()
-        timeformat = dateutil.guess_timefmt(date)
+        timeformat = hydra_dateutil.guess_timefmt(date)
         seasonal = False
         if 'XXXX' in timeformat:
             seasonal = True
@@ -1460,7 +1464,7 @@ class ImportCSV(object):
                 tstime = datetime.strptime(dataset[0].strip(), timeformat)
                 tstime = self.timezone.localize(tstime)
 
-                ts_time = dateutil.date_to_string(tstime, seasonal=seasonal)
+                ts_time = hydra_dateutil.date_to_string(tstime, seasonal=seasonal)
 
                 if ts_time in ts_times:
                     raise HydraPluginError("A duplicate time %s has been found "
@@ -1555,7 +1559,7 @@ class ImportCSV(object):
     def is_timeseries(self, data):
         try:
             date = data[0].split(',')[0].strip()
-            timeformat = dateutil.guess_timefmt(date)
+            timeformat = hydra_dateutil.guess_timefmt(date)
             if timeformat is None:
                 return False
             else:

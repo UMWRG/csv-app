@@ -492,7 +492,7 @@ class ExportCSV(object):
             metadata_vals = []
             for metadata_dict in metadata:
                 if metadata_dict == '':
-                    continue
+                    metadata_vals.append("")
                 else:
                     metadata_text = []
                     for k, v in metadata_dict.items():
@@ -589,7 +589,7 @@ class ExportCSV(object):
                         arr_file      = open(file_loc, 'a')
                     else:
                         arr_file      = open(file_loc, 'w')
-                        log.info("Metadata_type=%s",type(rs.value.metadata))
+                        
                         if rs.value.metadata is not None:
                             for k, v in json.loads(rs.value.metadata).items():
                                 if k == 'data_struct':
@@ -631,33 +631,33 @@ class ExportCSV(object):
 
                         ts_file.write(",,,%s\n"%','.join(col_names))
 
-                        timestamps = value[col_names[0]].keys()
-                        ts_dict = {}
-                        for t in timestamps:
-                            ts_dict[t] = []
+                    timestamps = value[col_names[0]].keys()
+                    ts_dict = {}
+                    for t in timestamps:
+                        ts_dict[t] = []
 
-                        for col, ts in value.items():
-                            for timestep, val in ts.items():
-                                ts_dict[timestep].append(val)
+                    for col, ts in value.items():
+                        for timestep, val in ts.items():
+                            ts_dict[timestep].append(val)
 
-                        for timestep, val in ts_dict.items():
-                                np_val = array(val)
-                                shape = np_val.shape
-                                n = 1
-                                shape_str = []
-                                for x in shape:
-                                    n = n * x
-                                    shape_str.append(str(x))
-                                one_dimensional_val = np_val.reshape(1, n)
-                                ts_file.write("%s,%s,%s,%s\n"%
-                                            ( resource_name,
-                                            timestep,
-                                            ' '.join(shape_str),
-                                            ','.join([str(x) for x in one_dimensional_val.tolist()[0]])))
+                    for timestep, val in ts_dict.items():
+                            np_val = array(val)
+                            shape = np_val.shape
+                            n = 1
+                            shape_str = []
+                            for x in shape:
+                                n = n * x
+                                shape_str.append(str(x))
+                            one_dimensional_val = np_val.reshape(1, n)
+                            ts_file.write("%s,%s,%s,%s\n"%
+                                        ( resource_name,
+                                        timestep,
+                                        ' '.join(shape_str),
+                                        ','.join([str(x) for x in one_dimensional_val.tolist()[0]])))
 
-                        ts_file.close()
+                    ts_file.close()
 
-                        value = file_name
+                    value = file_name
 
                 metadata = json.loads(rs.value.metadata)
 

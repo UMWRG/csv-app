@@ -243,7 +243,7 @@
             </attribute>
             <attribute>
                 <name>urBenefits</name>
-                <dimension/>
+                <dimension>Monetary value</dimension>
                 <is_var>Y</is_var>
             </attribute>
             <attribute>
