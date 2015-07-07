@@ -1170,7 +1170,7 @@ class ImportCSV(object):
                         dataset_metadata = {}
 
                     if units is not None:
-                        if units[i] is not None and len(units[i].strip()) > 0: 
+                        if units[i] is not None and len(units[i].strip()) > 0 and units[i].strip() != '-':
                             dimension = attr.get('dimen')
                             if dimension is None:
                                 log.debug("Dimension for unit %s is null. ", units[i])
@@ -1327,6 +1327,8 @@ class ImportCSV(object):
             scal = self.create_scalar(value, restriction_dict)
             dataset['value'] = scal
         except ValueError:
+            #Check if it's an array or timeseries by first seeing if the value points
+            #to a valid file.
             value = value.replace('\\', '/')
             try:
                 filedata = []
@@ -1341,18 +1343,25 @@ class ImportCSV(object):
                             self.file_dict[full_file_path] = filedata
                     else:
                         filedata = self.file_dict[full_file_path]
-
+                    
+                    #Look for column descriptors on the first line of the array and timeseries files
                     value_header = filedata[0].replace(' ', '')
                     if value_header.startswith('arraydescription,') or value_header.startswith(','):
+
                         arr_struct = filedata[0].strip().replace(' ', '').replace(',,', '')
+                        
                         arr_struct = arr_struct.split(',')
                         arr_struct = "|".join(arr_struct)
+                        #Set the value header back to its original format (with spaces)
+                        value_header = filedata[0]
                         filedata = filedata[1:]
                     elif value_header.startswith('timeseriesdescription') or value_header.startswith(','):
+      
                         arr_struct = filedata[0].strip().replace(' ', '').replace(',,', '')
 
                         arr_struct = arr_struct.split(',')
                         arr_struct = "|".join(arr_struct[3:])
+                        #Set the value header back to its original format (with spaces)
                         value_header = filedata[0]
                         filedata = filedata[1:]
                     else:
