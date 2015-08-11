@@ -32,14 +32,19 @@ Basic usage::
 Options
 ~~~~~~~
 
-====================== ====== ============ =======================================
+====================== ====== ============ =============================================
 Option                 Short  Parameter    Description
-====================== ====== ============ =======================================
+====================== ====== ============ =============================================
 ``--help``             ``-h``              show help message and exit.
-``--network``          ``-t`` NETWORK      Specify the file containing network
+``--network_id``       ``-t`` NETWORK      Specify the file containing network
                                            information. If no file is specified, a
                                            new network will be created using
                                            default values.
+``--scenario_id``      ``-s`` SCENARIO     The scenario to be exported. If not specified
+                                           all the scenarios in the network will be
+                                           exported.
+``--output_folder``    ``-o`` OUTPUT       The folder where the exported network
+                                           is to be put. Defaults to Desktop.
 ``--timezone``         ``-z`` TIMEZONE     Specify a timezone as a string
                                            following the Area/Loctation pattern
                                            (e.g.  Europe/London). This timezone
@@ -52,7 +57,7 @@ Option                 Short  Parameter    Description
 ``--session-id``       ``-c`` SESSION-ID   Session ID used by the callig software.
                                            If left empty, the plugin will attempt
                                            to log in itself.
-====================== ====== ============ =======================================
+====================== ====== ============ =============================================
 
 
 File structure
@@ -80,13 +85,6 @@ The following network file will be exported:
 
     Add any other information here...
 
-TODO
-----
-
-- Implement updating of existing scenario.
-
-API docs
-~~~~~~~~
 """
 
 import argparse as ap
@@ -140,39 +138,42 @@ class ExportCSV(object):
     def call(self, func, args={}):
         return self.connection.call(func, args)
 
-    def export(self, project_id, network_id, scenario_id):
+    def export(self, network_id, scenario_id, output_folder):
+
+        """
+            Export a network (and possibly a scenario) to a folder. If the
+            scenario and output folders are not specified, all the scenarios
+            will be exported and the output location will be the desktop.
+        """
+
         write_output("Retrieving Network") 
         write_progress(2, self.num_steps) 
         if network_id is not None:
             #The network ID can be specified to get the network...
             try:
-                try:
-                    network_id = int(network_id)
-                    x = time.time()
-                    network = self.call('get_network', {'network_id':network_id})
-                    log.info("Network retrieved in %s", time.time()-x)
-
-                except Exception:
-                    #...or the network name can be specified, but with the project ID.
-                    project_id = project_id
-                    network_name = str(network_id)
-                    network = self.call('get_network_by_name', 
-                                                {'project_id':project_id,
-                                                 'network_name':network_name})
+                network_id = int(network_id)
+                x = time.time()
+                network = self.call('get_network', {'network_id':network_id})
+                log.info("Network retrieved in %s", time.time()-x)
             except:
                 raise HydraPluginError("Network %s not found."%network_id)
-
         else:
             raise HydraPluginError("A network ID must be specified!")
 
-        network_dir = "network_%s"%(network.id)
+        if output_folder is None:
+            log.info("No output folder specified. Defaulting to desktop.")
+            output_folder = os.path.expanduser("~/Desktop")
+        elif not os.path.exists(output_folder):
+            raise HydraPluginError("%s does not exist"%output_folder)
+
+        network_dir = os.path.join(output_folder, "network_%s"%(network.id))
 
         if not os.path.exists(network_dir):
             os.mkdir(network_dir)
         else:
             logging.info("%s already exists", network_dir)
             for export_num in range(100):
-                new_network_dir = "%s(%s)"%(network_dir,export_num)
+                new_network_dir = os.path.join(output_folder, "%s(%s)"%(network_dir,export_num))
                 if not os.path.exists(new_network_dir):
                     logging.info("exporting to %s", new_network_dir)
                     os.mkdir(new_network_dir)
@@ -201,6 +202,10 @@ class ExportCSV(object):
         self.files.append(network_dir)
 
     def export_network(self, network, scenario):
+        """
+            Write the output files based on the given network and scenario.
+        """
+
         write_output("Exporting network")
         write_progress(3, self.num_steps) 
         log.info("\n************NETWORK****************")
@@ -674,15 +679,16 @@ Written by Stephen Knox <s.knox@ucl.ac.uk>
 (c) Copyright 2014, University of Manchester.
         """, epilog="For more information visit www.hydraplatform.org",
         formatter_class=ap.RawDescriptionHelpFormatter)
-    parser.add_argument('-p', '--project',
-                        help='''Specify the ID of the project. Only necessary
-                        if the network_id is unknown
-                        ''')
-    parser.add_argument('-t', '--network',
+    parser.add_argument('-t', '--network-id',
                         help='''Specify the network_id of the network to be exported.
                         If the network_id is not known, specify the network name. In
                         this case, a project ID must also be provided''')
-    parser.add_argument('-s', '--scenario',
+    parser.add_argument('-s', '--scenario-id',
+                        help='''Specify the ID of the scenario to be exported. If no
+                        scenario is specified, all scenarios in the network will be
+                        exported.
+                        ''')
+    parser.add_argument('-o', '--output-folder',
                         help='''Specify the ID of the scenario to be exported. If no
                         scenario is specified, all scenarios in the network will be
                         exported.
@@ -714,7 +720,7 @@ if __name__ == '__main__':
         if args.timezone is not None:
             csv.timezone = pytz.timezone(args.timezone)
     
-        csv.export(args.project, args.network, args.scenario)
+        csv.export(args.network_id, args.scenario_id, args.output_folder)
         message = "Export complete"
     except HydraPluginError as e:
         message="An error has occurred"
@@ -726,7 +732,7 @@ if __name__ == '__main__':
         errors = [e]
 
     xml_response = PluginLib.create_xml_response('ExportCSV',
-                                                 args.network,
+                                                 args.network_id,
                                                  [],
                                                  csv.errors,
                                                  csv.warnings,

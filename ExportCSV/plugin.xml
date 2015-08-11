@@ -11,22 +11,32 @@
     <largeicon>icon32.png</largeicon>
     <mandatory_args>
         <arg>
-            <name>network</name>
+            <name>Network</name>
             <switch>-t</switch>
             <multiple>N</multiple>
-            <argtype>string</argtype>
+            <argtype>network</argtype>
             <help>The ID of the network to be exported</help>
         </arg>
     </mandatory_args>
    <non_mandatory_args>
        <arg>
-           <name>scenario</name>
+           <name>Scenario</name>
            <switch>-s</switch>
            <multiple>N</multiple>
-           <argtype>string</argtype>
+           <argtype>scenario</argtype>
            <help>Specify the ID of the scenario to be exported. If no
                  scenario is specified, all scenarios in the network will be
                  exported.
+            </help>
+        </arg>
+       <arg>
+           <name>Output Folder</name>
+           <switch>-o</switch>
+           <multiple>N</multiple>
+           <argtype>folder</argtype>
+           <help>
+               The folder where the set of csv files will be exported to.
+               If not specified, will default to the Desktop.
             </help>
         </arg>
         <arg>
