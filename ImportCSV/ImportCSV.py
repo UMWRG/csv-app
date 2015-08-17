@@ -221,6 +221,8 @@ from numpy import array, reshape
 
 import json
 
+from HydraLib import config
+
 log = logging.getLogger(__name__)
 
 __location__ = os.path.split(sys.argv[0])[0]
@@ -1373,6 +1375,12 @@ class ImportCSV(object):
                     #name from the start of the line
                     data = []
                     for l in filedata:
+                        #If a seasonal timeseries is specified using XXXX, then convert
+                        #it to use '9999' as this allows valid datetime objects to be
+                        #constructed
+                        seasonal_key = config.get('DEFAULT', 'seasonal_key', 9999)
+                        l = l.replace('XXXX', seasonal_key)
+                        
                         l_resource_name = l.split(',',1)[0].strip()
                         if l_resource_name == resource_name:
                             data.append(l[l.find(',')+1:])
@@ -1454,7 +1462,9 @@ class ImportCSV(object):
         date = data[0].split(',', 1)[0].strip()
         timeformat = hydra_dateutil.guess_timefmt(date)
         seasonal = False
-        if 'XXXX' in timeformat:
+
+        seasonal_key = config.get('DEFAULT', 'seasonal_key', 9999)
+        if 'XXXX' in timeformat or seasonal_key in timeformat:
             seasonal = True
         
         ts_values = {}
