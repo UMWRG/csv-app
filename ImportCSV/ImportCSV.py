@@ -211,17 +211,15 @@ import pytz
 
 from HydraLib import PluginLib
 from HydraLib.PluginLib import JsonConnection, write_progress, write_output, validate_plugin_xml, RequestError, validate_template
-from HydraLib import util, hydra_dateutil
 
 from HydraLib.units import validate_resource_attributes
 
-from HydraLib.HydraException import HydraPluginError,HydraError
+from HydraLib.HydraException import HydraPluginError
 
-from numpy import array, reshape
+from csv_util import get_file_data, check_header, parse_unit
+from rules import RuleReader
 
-import json
-
-from HydraLib import config
+from data import create_dataset
 
 log = logging.getLogger(__name__)
 
@@ -239,11 +237,18 @@ class ImportCSV(object):
         self.Network  = None
         self.NetworkSummary  = None
         self.Scenario = None
-        self.scenario_names = []
         self.Nodes    = dict()
         self.Links    = dict()
         self.Groups   = dict()
         self.Attributes = dict()
+        self.Rules      = dict()
+
+        #Store the names of the input files here. Taken from the network file.
+        self.node_args = []
+        self.link_args = []
+        self.group_args = []
+        self.groupmember_args = []
+        self.rule_args = []
 
         #This stores all the types in the template
         #so that node, link and group types can be validated
@@ -289,13 +294,7 @@ class ImportCSV(object):
 
         self.ignorelines = ['', '\n', '\r']
 
-    def parse_unit(self, unit):
-        try:
-            float(unit[0])
-            factor, unit = unit.split(' ', 1)
-            return unit, float(factor)
-        except ValueError:
-            return unit, 1.0
+
 
     def get_dimensions(self):
         units = {}
@@ -304,81 +303,6 @@ class ImportCSV(object):
             for unit_name in dimension['units']:
                 units[unit_name] = dimension['name']
         return units
-
-    def validate_value(self, value, restriction_dict):
-        if restriction_dict is None or restriction_dict == {}:
-            return
-
-        try:
-            util.validate_value(restriction_dict, value)
-        except HydraError, e:
-            log.exception(e)
-            raise HydraPluginError(e.message)
-
-    def get_file_data(self, file):
-        """
-            Taking a csv file as an argument,
-            return an array where each element is a line in the csv.
-        """
-        file_data=None
-        if file == None:
-            log.warn("No file specified")
-            return None
-        log.info("Reading file data from: %s", os.path.realpath(file))
-        self.basepath = os.path.dirname(os.path.realpath(file))
-        with open(file, mode='r') as csv_file:
-            file_data = csv_file.read().split('\n')
-            if len(file_data) == 0:
-                log.warn("File contains no data")
-
-        new_file_data = []
-        bad_lines = []
-        for i, line in enumerate(file_data):
-            line = line.strip()
-			
-			# Ignore comments            
-            if len(line) == 0 or line[0] == '#':
-                continue
-            try:
-                line = ''.join([x if ord(x) < 128 else ' ' for x in line])
-                line.decode('utf-8')
-                new_file_data.append(line)
-            except UnicodeDecodeError, e:
-                #If there are unknown characters in this line, save the line
-                #and the column in the line where the bad character has occurred.
-                bad_lines.append((i+1, e.start))
-
-        #Complain about the lines that the bad characters are on.
-        if len(bad_lines) > 0:
-            lines = [a[0] for a in bad_lines]
-            raise HydraPluginError("Lines %s, in %s contain non ascii characters"%(lines, file))
-
-        return new_file_data
-
-    def check_header(self, file, header):
-        """
-            Check for common mistakes in headers:
-            Duplicate columns
-            Empty columns
-        """
-        if type(header) == str:
-            header = header.split(',')
-
-        for i, h in enumerate(header):
-            if h.strip() == '':
-                raise HydraPluginError("Malformed Header in %s: Column(s) %s is empty"%(file, i))
-
-        individual_headings = []
-        dupe_headings       = []
-        for k in header:
-            if k not in individual_headings:
-                individual_headings.append(k)
-            else:
-                dupe_headings.append(k)
-        if len(dupe_headings) > 0:
-            raise HydraPluginError("Malformed Header in file %s: Duplicate columns: %s"%
-                                   (file , dupe_headings))
-
 
     def create_project(self, ID=None, network_id=None):
         if ID is not None:
@@ -439,7 +363,10 @@ class ImportCSV(object):
     def create_network(self, file=None, network_id=None):
 
         if file is not None:
-            net_data = self.get_file_data(file)
+
+            self.basepath = os.path.dirname(os.path.realpath(file))
+            
+            net_data = get_file_data(file)
 
             try:
                 file_parts = file.split(".")
@@ -452,7 +379,7 @@ class ImportCSV(object):
                 metadata = {}
 
             keys = net_data[0].split(',')
-            self.check_header(file, keys)
+            check_header(file, keys)
             if net_data[1].lower().startswith('unit'):
                 units = net_data[1].split(',')
                 data_idx = 2
@@ -469,9 +396,13 @@ class ImportCSV(object):
             # Description, attributes,...).
             field_idx = {'id': 0,
                          'name': 1,
-                         'description': 2,
+                         'description': -1,
                          'projection':3,
-                         'type': None,
+                         'type': 2,
+                         'nodes':3,
+                         'links':4,
+                         'groups':5,
+                         'rules':5,
                          }
             # If the file does not follow the standard, we can at least try to
             # guess what is stored where.
@@ -482,6 +413,13 @@ class ImportCSV(object):
 
             if field_idx['type'] is not None:
                 self.networktype = data[field_idx['type']].strip()
+        
+            #Identify the node, link and group files to import
+            #Remove trailing white space and trailing ';', which can cause issues.
+            self.node_args  = data[field_idx['nodes']].strip().strip(';').split(';')
+            self.link_args  = data[field_idx['links']].strip().strip(';').split(';')
+            self.group_args = data[field_idx['groups']].strip().strip(';').split(';')
+            self.rule_args  = data[field_idx['rules']].strip().strip(';').split(';')
 
             if network_id is not None:
                 # Check if network exists on the server.
@@ -574,9 +512,9 @@ class ImportCSV(object):
 
     def read_metadata(self, filename):
         log.info("Reading metadata from file %s", filename)
-        metadata = self.get_file_data(filename)
+        metadata = get_file_data(filename)
         keys = metadata[0].split(',')
-        self.check_header(filename, keys)
+        check_header(filename, keys)
         data = metadata[1:]
 
         metadata_dict = {}
@@ -625,7 +563,7 @@ class ImportCSV(object):
         return metadata_dict
 
     def read_nodes(self, file):
-        node_data = self.get_file_data(file)
+        node_data = get_file_data(file)
 
         try:
             file_parts = file.split(".")
@@ -640,7 +578,7 @@ class ImportCSV(object):
         self.add_attrs = True
 
         keys  = node_data[0].split(',')
-        self.check_header(file, keys)
+        check_header(file, keys)
 
         #There may or may not be a units line, so we need to account for that.
         if node_data[1].lower().startswith('unit'):
@@ -746,7 +684,7 @@ class ImportCSV(object):
 
 
     def read_links(self, file):
-        link_data = self.get_file_data(file)
+        link_data = get_file_data(file)
 
         try:
             file_parts = file.split(".")
@@ -761,7 +699,7 @@ class ImportCSV(object):
         self.add_attrs = True
 
         keys = link_data[0].split(',')
-        self.check_header(file, keys)
+        check_header(file, keys)
 
         #There may or may not be a units line, so we need to account for that.
         if link_data[1].lower().startswith('unit'):
@@ -868,7 +806,7 @@ class ImportCSV(object):
             The heading of a group file looks like:
             name, attr1, attr2..., description
         """
-        group_data = self.get_file_data(file)
+        group_data = get_file_data(file)
 
         try:
             file_parts = file.split(".")
@@ -883,7 +821,7 @@ class ImportCSV(object):
         self.add_attrs = True
 
         keys  = group_data[0].split(',')
-        self.check_header(file, keys)
+        check_header(file, keys)
 
         #There may or may not be a units line, so we need to account for that.
         if group_data[1].lower().startswith('unit'):
@@ -904,6 +842,7 @@ class ImportCSV(object):
         field_idx = {'name': 0,
                      'description': -1,
                      'type': None,
+                     'members':2,
                      }
 
         attrs = dict()
@@ -924,7 +863,7 @@ class ImportCSV(object):
             except Exception, e:
                 log.exception(e)
                 raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(os.path.split(file)[-1], line_num+3, e))
-            
+           
             self.Groups.update({group['name']: group})
 
     def read_group_line(self, line, attrs, field_idx, metadata, units):
@@ -932,6 +871,9 @@ class ImportCSV(object):
         group_data = line.split(',')
         group_name = group_data[field_idx['name']].strip()
 
+        member_file = group_data[field_idx['members']].strip()
+        if member_file not in self.groupmember_args:
+            self.groupmember_args.append(member_file)
 
         restrictions = {}
 
@@ -986,10 +928,10 @@ class ImportCSV(object):
             member: name of the node, link or group in question.
 
         """
-        member_data = self.get_file_data(file)
+        member_data = get_file_data(file)
 
         keys  = member_data[0].split(',')
-        self.check_header(file, keys)
+        check_header(file, keys)
         #There may or may not be a units line, so we need to account for that.
         if member_data[1].lower().startswith('unit'):
             units = member_data[1].split(',')
@@ -1075,6 +1017,7 @@ class ImportCSV(object):
 
         return item
 
+    
     def create_attribute(self, name, unit=None):
         """
             Create attribute locally. It will get added in bulk later.
@@ -1088,7 +1031,7 @@ class ImportCSV(object):
                 attribute['unit'] = unit.strip()
                 #Dimension is saved in DB.
                 if unit.strip() not in ('-' ,''):
-                    basic_unit, factor = self.parse_unit(unit.strip())
+                    basic_unit, factor = parse_unit(unit.strip())
                     attribute['dimen'] = self.units.get(basic_unit)
 
         except Exception,e:
@@ -1170,7 +1113,9 @@ class ImportCSV(object):
                         dataset_metadata = resource_metadata.get(attrs[i], {})
                     else:
                         dataset_metadata = {}
-
+                        
+                    dataset_unit = None
+                    dataset_dimension = None
                     if units is not None:
                         if units[i] is not None and len(units[i].strip()) > 0 and units[i].strip() != '-':
                             dimension = attr.get('dimen')
@@ -1179,23 +1124,26 @@ class ImportCSV(object):
                         else:
                             dimension = None
 
-                        dataset = self.create_dataset(data[i],
-                                                      res_attr,
-                                                      units[i],
-                                                      dimension,
-                                                      resource['name'],
-                                                      dataset_metadata,
-                                                      restrictions.get(attr['name'], {}).get('restrictions', {})
-                                                     )
-                    else:
-                        dataset = self.create_dataset(data[i],
-                                                      res_attr,
-                                                      None,
-                                                      None,
-                                                      resource['name'],
-                                                      dataset_metadata,
-                                                      restrictions.get(attr['name'], {}).get('restrictions', {})
-                                                     )
+                        dataset_dimension = dimension
+                        dataset_unit      = units[i]
+
+                    try:
+                        dataset = create_dataset(data[i],
+                                                  res_attr,
+                                                  dataset_unit,
+                                                  dataset_dimension,
+                                                  resource['name'],
+                                                  dataset_metadata,
+                                                  restrictions.get(attr['name'], {}).get('restrictions', {}),
+                                             self.expand_filenames,
+                                             self.basepath,
+                                             self.file_dict,
+                                             self.Scenario['name'],
+                                                 self.timezone
+                                                 )
+                    except HydraPluginError, e:
+                        self.warn(e)
+                        self.warnings.extend(e)
 
                     if dataset is not None:
                         self.Scenario['resourcescenarios'].append(dataset)
@@ -1294,297 +1242,7 @@ class ImportCSV(object):
         return warnings
 
 
-    def create_dataset(self, value, resource_attr, unit, dimension, resource_name, metadata, restriction_dict):
 
-        resourcescenario = dict()
-
-        if metadata.get('name'):
-            dataset_name = metadata['name']
-            del(metadata['name'])
-        else:
-            dataset_name = 'Import CSV data'
-        dataset          = dict(
-            id=None,
-            type=None,
-            unit=None,
-            dimension=None,
-            name=dataset_name,
-            value=None,
-            hidden='N',
-            metadata=None,
-        )
-
-        resourcescenario['attr_id'] = resource_attr['attr_id']
-        resourcescenario['resource_attr_id'] = resource_attr['id']
-
-        value = value.strip()
-        if unit is not None:
-            unit = unit.strip()
-            if len(unit) == 0:
-                unit = None
-        arr_struct = None
-        try:
-            float(value)
-            dataset['type'] = 'scalar'
-            scal = self.create_scalar(value, restriction_dict)
-            dataset['value'] = scal
-        except ValueError:
-            #Check if it's an array or timeseries by first seeing if the value points
-            #to a valid file.
-            value = value.replace('\\', '/')
-            try:
-                filedata = []
-                if self.expand_filenames:
-                    full_file_path = os.path.join(self.basepath, value)
-                    if self.file_dict.get(full_file_path) is None:
-                        with open(full_file_path) as f:
-                            filedata = []
-                            for l in f:
-                                l = l.strip().replace('\n', '').replace('\r', '')
-                                filedata.append(l)
-                            self.file_dict[full_file_path] = filedata
-                    else:
-                        filedata = self.file_dict[full_file_path]
-                    
-                    #Look for column descriptors on the first line of the array and timeseries files
-                    value_header = filedata[0].replace(' ', '')
-                    if value_header.startswith('arraydescription,') or value_header.startswith(','):
-
-                        arr_struct = filedata[0].strip().replace(' ', '').replace(',,', '')
-                        
-                        arr_struct = arr_struct.split(',')
-                        arr_struct = "|".join(arr_struct)
-                        #Set the value header back to its original format (with spaces)
-                        value_header = filedata[0]
-                        filedata = filedata[1:]
-                    elif value_header.startswith('timeseriesdescription') or value_header.startswith(','):
-      
-                        arr_struct = filedata[0].strip().replace(' ', '').replace(',,', '')
-
-                        arr_struct = arr_struct.split(',')
-                        arr_struct = "|".join(arr_struct[3:])
-                        #Set the value header back to its original format (with spaces)
-                        value_header = filedata[0]
-                        filedata = filedata[1:]
-                    else:
-                        value_header = None
-
-
-                    #The name of the resource is how to identify the data for it.
-                    #Once this the correct line(s) has been identified, remove the
-                    #name from the start of the line
-                    data = []
-                    for l in filedata:
-                        #If a seasonal timeseries is specified using XXXX, then convert
-                        #it to use '9999' as this allows valid datetime objects to be
-                        #constructed
-                        seasonal_key = config.get('DEFAULT', 'seasonal_key', 9999)
-                        l = l.replace('XXXX', seasonal_key)
-                        
-                        l_resource_name = l.split(',',1)[0].strip()
-                        if l_resource_name == resource_name:
-                            data.append(l[l.find(',')+1:])
-
-                    if len(data) == 0:
-                        log.info('%s: No data found in file %s' %
-                                     (resource_name, value))
-                        self.warnings.append('%s: No data found in file %s' %
-                                             (resource_name, value))
-                        return None
-                    else:
-                        if self.is_timeseries(data):
-                            ts = self.create_timeseries(data, restriction_dict, header=value_header, filename=value)
-                            dataset['type'] = 'timeseries' 
-                            dataset['value'] = ts
-                        else:
-                            dataset['type'] = 'array'
-                            if len(filedata) > 0:
-                                try:
-                                    dataset['value'] = self.create_array(data[0], restriction_dict)
-                                except Exception, e:
-                                    log.exception(e)
-                                    raise HydraPluginError("There is a value "
-                                                           "error in %s. "
-                                                           "Please check value"
-                                                           " %s is correct."%(value, data[0]))
-                            else:
-                                dataset['value'] = None
-                else:
-                    raise IOError
-            except IOError, e:
-                dataset['type'] = 'descriptor'
-                desc = self.create_descriptor(value, restriction_dict)
-                dataset['value'] = desc
-        
-        if unit is not None:
-            dataset['unit'] = unit
-        if dimension is not None:
-            dataset['dimension'] = dimension
-
-        dataset['name'] = self.Scenario['name']
-
-        resourcescenario['value'] = dataset
-
-        m = {}
-
-        if metadata:
-            m = metadata
-        
-        if arr_struct:
-            m['data_struct'] = arr_struct
-
-        m = json.dumps(m)
-
-        dataset['metadata'] = m
-
-        return resourcescenario
-
-    def create_scalar(self, value, restriction_dict={}):
-        self.validate_value(value, restriction_dict)
-        scalar = str(value)
-        return scalar
-
-    def create_descriptor(self, value, restriction_dict={}):
-        self.validate_value(value, restriction_dict)
-        descriptor = value
-        return descriptor
-
-    def create_timeseries(self, data, restriction_dict={}, header=None, filename=""):
-        if len(data) == 0:
-            return None
-        
-        if header is not None:
-            header = header.strip(',')
-            col_headings = header.split(',')
-        else:
-            col_headings = range(len(data[0].split(',')[2:]))
-
-        date = data[0].split(',', 1)[0].strip()
-        timeformat = hydra_dateutil.guess_timefmt(date)
-        seasonal = False
-
-        seasonal_key = config.get('DEFAULT', 'seasonal_key', 9999)
-        if 'XXXX' in timeformat or seasonal_key in timeformat:
-            seasonal = True
-        
-        ts_values = {}
-        for col in col_headings:
-            ts_values[col] = {}
-        ts_times = [] # to check for duplicae timestamps in a timeseries.
-        start_time = None
-        freq       = None
-        prev_time  = None
-        eq_val     = []
-        is_eq_spaced = False
-        timedata = data
-        for line in timedata:
-            if line != '':
-                dataset = line.split(',')
-                tstime = datetime.strptime(dataset[0].strip(), timeformat)
-                tstime = self.timezone.localize(tstime)
-
-                ts_time = hydra_dateutil.date_to_string(tstime, seasonal=seasonal)
-
-                if ts_time in ts_times:
-                    raise HydraPluginError("A duplicate time %s has been found "
-                                           "in %s where the value = %s)"%( ts_time,
-                                                              filename,
-                                                             dataset[2:]))
-                else:
-                    ts_times.append(ts_time)
-
-                value_length = len(dataset[2:])
-                shape = dataset[1].strip()
-                if shape != '':
-                    array_shape = tuple([int(a) for a in
-                                         shape.split(" ")])
-                else:
-                    array_shape = (value_length,)
-
-                ts_val_1d = []
-                for i in range(value_length):
-                    ts_val_1d.append(str(dataset[i + 2].strip()))
-
-                try:
-                    ts_arr = array(ts_val_1d)
-                    ts_arr = reshape(ts_arr, array_shape)
-                except:
-                    raise HydraPluginError("Error converting %s in file %s to an array"%(ts_val_1d, filename))
-
-                ts_value = ts_arr.tolist()
-
-                #Check for whether timeseries is equally spaced.
-                if is_eq_spaced:
-                    eq_val.append(ts_value)
-                    if start_time is None:
-                        start_time = tstime
-                    else:
-                        #Get the time diff as the second time minus the first
-                        if freq is None:
-                            freq = tstime - start_time
-                        else:
-                            #Keep checking on each timestamp whether the spaces between
-                            #times is equal.
-                            if (tstime - prev_time) != freq:
-                                is_eq_spaced = False
-                    prev_time = tstime
-               
-                for i, ts_val in enumerate(ts_value):
-                    idx = col_headings[i]
-                    ts_values[idx][ts_time] = ts_val
-
-        self.validate_value(ts_values, restriction_dict)
-        
-        timeseries = json.dumps(ts_values)
-
-        return timeseries
-
-    def create_array(self, data, restriction_dict={}):
-        #Split the line into a list
-        dataset = data.split(',')
-        #First column is always the array dimensions
-        arr_shape = dataset[0]
-        #The actual data is everything after column 0
-        eval_dataset = []
-        for d in dataset[1:]:
-            try:
-                d = eval(d)
-            except:
-                d = str(d)
-            eval_dataset.append(d)
-            #dataset = [eval(d) for d in dataset[1:]]
-
-        #If the dimensions are not set, we assume the array is 1D
-        if arr_shape != '':
-            array_shape = tuple([int(a) for a in arr_shape.strip().split(" ")])
-        else:
-            array_shape = (len(eval_dataset),)
-
-        #Reshape the array back to its correct dimensions
-        arr = array(eval_dataset)
-        try:
-            arr = reshape(arr, array_shape)
-        except:
-            raise HydraPluginError("You have an error with your array data."
-                                   " Please ensure that the dimension is correct."
-                                   " (array = %s, dimension = %s)" %(arr, array_shape))
-
-        self.validate_value(arr.tolist(), restriction_dict)
-
-        arr = json.dumps(arr.tolist())
-
-        return arr
-
-    def is_timeseries(self, data):
-        try:
-            date = data[0].split(',')[0].strip()
-            timeformat = hydra_dateutil.guess_timefmt(date)
-            if timeformat is None:
-                return False
-            else:
-                return True
-        except:
-            raise HydraPluginError("Unable to parse timeseries %s"%data)
 
     def commit(self):
         log.info("Committing Network")
@@ -1644,25 +1302,11 @@ def commandline_parser():
                         help='''Specify the file containing network
                         information. If no file is specified, a new network
                         will be created using default values.''')
-    parser.add_argument('-n', '--nodes', nargs='+',
-                        help='''One or multiple files containing nodes and
-                        attributes.''')
-    parser.add_argument('-l', '--links', nargs='+',
-                        help='''One or multiple files containing information
-                        on links.''')
     parser.add_argument('-i', '--network_id',
                         help='''The ID of an existing network. If specified,
                         this network will be updated. If not, a new network
                         will be created.
                         on links.''')
-    parser.add_argument('-g', '--groups', nargs='+',
-                        help='''One or multiple files containing information
-                        on groups and their attributes (but not members)''')
-    parser.add_argument('-k', '--groupmembers', nargs='+',
-                        help='''One or multiple files containing information
-                        on the members of groups.
-                        The groups (-g argument) file must be specified if this
-                        argument is specified''')
     parser.add_argument('-m', '--template',
                         help='''Template XML file, needed if node and link
                         types are specified,''')
@@ -1708,73 +1352,83 @@ if __name__ == '__main__':
         if args.timezone is not None:
             csv.timezone = pytz.timezone(args.timezone)
 
-        if args.nodes is not None:
-            # Validation
+        if args.template is not None:
+            try:
+                if args.template == '':
+                    raise Exception("The template name is empty.")
+                csv.Template = validate_template(args.template, csv.connection)
+            except Exception, e:
+                log.exception(e)
+                raise HydraPluginError("An error has occurred with the template. (%s)"%(e))
 
-            if args.template is not None:
-                try:
-                    if args.template == '':
-                        raise Exception("The template name is empty.")
-                    csv.Template = validate_template(args.template, csv.connection)
-                except Exception, e:
-                    log.exception(e)
-                    raise HydraPluginError("An error has occurred with the template. (%s)"%(e))
+        # Create project and network only when there is actual data to
+        # import.
+        write_progress(2,csv.num_steps)
+        csv.create_project(ID=args.project, network_id=args.network_id)
+        csv.create_scenario(name=args.scenario)
+        csv.create_network(file=args.network, network_id=args.network_id)
+        
+        write_progress(3,csv.num_steps)
+        for nodefile in csv.node_args:
+            write_output("Reading Node file %s" % nodefile)
+            csv.read_nodes(nodefile)
 
-            # Create project and network only when there is actual data to
-            # import.
-            write_progress(2,csv.num_steps)
-            csv.create_project(ID=args.project, network_id=args.network_id)
-            csv.create_scenario(name=args.scenario)
-            csv.create_network(file=args.network, network_id=args.network_id)
-
-            write_progress(3,csv.num_steps)
-            for nodefile in args.nodes:
-                write_output("Reading Node file %s" % nodefile)
-                csv.read_nodes(nodefile)
-
-            write_progress(4,csv.num_steps)
-            if args.links is not None:
-                for linkfile in args.links:
-                    write_output("Reading Link file %s" % linkfile)
-                    csv.read_links(linkfile)
-
-            write_progress(5,csv.num_steps)
-            if args.groups is not None:
-                for groupfile in args.groups:
-                    write_output("Reading Group file %s"% groupfile)
-                    csv.read_groups(groupfile)
-
-            write_progress(6,csv.num_steps)
-            if args.groupmembers is not None:
-                write_output("Reading Group Members")
-                if args.groups is None:
-                    raise HydraPluginError("Cannot specify a group member "
-                                           "file without a matching group file.")
-                for groupmemberfile in args.groupmembers:
-                    csv.read_group_members(groupmemberfile)
-
-            write_progress(7,csv.num_steps)
-            write_output("Saving network")
-            csv.commit()
-            if csv.NetworkSummary.get('scenarios') is not None:
-                scen_ids = [s['id'] for s in csv.NetworkSummary['scenarios']]
-
-            network_id = csv.NetworkSummary['id']
-
-            write_progress(8,csv.num_steps)
-            write_output("Saving types")
-            if args.template is not None:
-                try:
-                    warnings = csv.set_resource_types(args.template)
-                    csv.warnings.extend(warnings)
-                except Exception, e:
-                    raise HydraPluginError("An error occurred setting the types from the template. "
-                                           "Error relates to \"%s\" "
-                                           "Please check the template and resource types."%(e.message))
-            write_progress(9,csv.num_steps)
-
+        write_progress(4,csv.num_steps)
+        if len(csv.link_args) > 0:
+            for linkfile in csv.link_args:
+                write_output("Reading Link file %s" % linkfile)
+                csv.read_links(linkfile)
         else:
-            log.info('No nodes found. Nothing imported.')
+            log.warn("No link files found")
+
+        write_progress(5,csv.num_steps)
+        if len(csv.group_args) > 0:
+            for groupfile in csv.group_args:
+                write_output("Reading Group file %s"% groupfile)
+                csv.read_groups(groupfile)
+        else:
+            log.warn("No group files specified.")
+
+        write_progress(6,csv.num_steps)
+        if len(csv.groupmember_args) > 0:
+            write_output("Reading Group Members")
+            for groupmemberfile in csv.groupmember_args:
+                csv.read_group_members(groupmemberfile)
+        else:
+            log.warn("No group member files specified.")
+
+        write_progress(7,csv.num_steps)
+        write_output("Saving network")
+        csv.commit()
+        if csv.NetworkSummary.get('scenarios') is not None:
+            scen_ids = [s['id'] for s in csv.NetworkSummary['scenarios']]
+
+        write_progress(9,csv.num_steps)
+        if len(csv.rule_args) > 0:
+            write_output("Reading Rules")
+            for s in csv.NetworkSummary.get('scenarios'):
+                if s.name == csv.Scenario['name']:
+                    scenario_id = s.id
+                    break
+            #Update all the nodes, links and groups with their newly
+            #created IDs.
+            rule_reader = RuleReader(csv.connection, scenario_id, csv.NetworkSummary, csv.rule_args)
+
+            rule_reader.read_rules()
+
+        network_id = csv.NetworkSummary['id']
+
+        write_progress(9,csv.num_steps)
+        write_output("Saving types")
+        if args.template is not None:
+            try:
+                warnings = csv.set_resource_types(args.template)
+                csv.warnings.extend(warnings)
+            except Exception, e:
+                raise HydraPluginError("An error occurred setting the types from the template. "
+                                       "Error relates to \"%s\" "
+                                       "Please check the template and resource types."%(e.message))
+        write_progress(9,csv.num_steps)
 
 	errors = []
     except HydraPluginError as e:

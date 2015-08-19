@@ -1,4 +1,4 @@
-# Hydro-econ network converted from a hydroplatform project.
-ID    , Name       , Type       , infeasCost , urTotalBenefits , agTotalBenefits , totalCost , totalNetBenefits , Projection , Description
-Units ,            ,            , USD        , USD             , USD             , USD       , USD              ,
-      , hydro-econ , hydro-econ , NULL       , NULL            , NULL            , NULL      , NULL             , EPSG:32611 , Hydro-econ example network.
+# Hydro-econ network converted from a hydroplatform project.,,,,,,,,,,,,,
+ID    , Name       , Type       , Projection ,nodes,links,groups,rules, infeasCost , urTotalBenefits , agTotalBenefits , totalCost , totalNetBenefits , Description
+Units ,            ,            ,,,,,, USD        , USD             , USD             , USD       , USD              ,
+      , hydro-econ , hydro-econ , EPSG:32611 ,hydro-econ_nodes_ag.csv;hydro-econ_nodes_hp.csv;hydro-econ_nodes_sr.csv;hydro-econ_nodes_desal.csv;hydro-econ_nodes_ur.csv;hydro-econ_nodes_WWTP.csv;hydro-econ_nodes_gw.csv;hydro-econ_nodes_jn.csv,hydro-econ_links_costLink.csv;hydro-econ_links_defLink.csv,hydro-econ_groups.csv,hydro-econ_rules.csv, NULL       , NULL            , NULL            , NULL      , NULL             , Hydro-econ example network.
