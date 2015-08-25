@@ -378,7 +378,11 @@ class ImportCSV(object):
                 log.info("No metadata found for node file %s",file)
                 metadata = {}
 
-            keys = net_data[0].split(',')
+            keys = [k.strip() for k in net_data[0].split(',')]
+            #Make a list of all the keys in lowercase so we can perform
+            #checks later on for certain headings.
+            lower_keys = [k.lower() for k in keys]
+
             check_header(file, keys)
             if net_data[1].lower().startswith('unit'):
                 units = net_data[1].split(',')
@@ -402,12 +406,11 @@ class ImportCSV(object):
                          'nodes':3,
                          'links':4,
                          'groups':5,
-                         'rules':5,
+                         'rules':6,
                          }
             # If the file does not follow the standard, we can at least try to
             # guess what is stored where.
             for i, key in enumerate(keys):
-
                 if key.lower().strip() in field_idx.keys():
                     field_idx[key.lower().strip()] = i
 
@@ -417,9 +420,12 @@ class ImportCSV(object):
             #Identify the node, link and group files to import
             #Remove trailing white space and trailing ';', which can cause issues.
             self.node_args  = data[field_idx['nodes']].strip().strip(';').split(';')
-            self.link_args  = data[field_idx['links']].strip().strip(';').split(';')
-            self.group_args = data[field_idx['groups']].strip().strip(';').split(';')
-            self.rule_args  = data[field_idx['rules']].strip().strip(';').split(';')
+            if 'links' in lower_keys: 
+                self.link_args  = data[field_idx['links']].strip().strip(';').split(';')
+            if 'groups' in lower_keys:
+                self.group_args = data[field_idx['groups']].strip().strip(';').split(';')
+            if 'rules' in lower_keys:
+                self.rule_args  = data[field_idx['rules']].strip().strip(';').split(';')
 
             if network_id is not None:
                 # Check if network exists on the server.
@@ -684,6 +690,11 @@ class ImportCSV(object):
 
 
     def read_links(self, file):
+
+        if file == "":
+            self.warnings.append("No links specified")
+            return
+
         link_data = get_file_data(file)
 
         try:
@@ -806,6 +817,11 @@ class ImportCSV(object):
             The heading of a group file looks like:
             name, attr1, attr2..., description
         """
+
+        if file == "":
+            self.warnings.append("No groups specified")
+            return
+
         group_data = get_file_data(file)
 
         try:
@@ -1380,6 +1396,7 @@ if __name__ == '__main__':
                 csv.read_links(linkfile)
         else:
             log.warn("No link files found")
+            csv.warnings.append("No link files found")
 
         write_progress(5,csv.num_steps)
         if len(csv.group_args) > 0:
@@ -1388,6 +1405,7 @@ if __name__ == '__main__':
                 csv.read_groups(groupfile)
         else:
             log.warn("No group files specified.")
+            csv.warnings.append("No group files specified.")
 
         write_progress(6,csv.num_steps)
         if len(csv.groupmember_args) > 0:
@@ -1396,6 +1414,7 @@ if __name__ == '__main__':
                 csv.read_group_members(groupmemberfile)
         else:
             log.warn("No group member files specified.")
+            csv.warnings.append("No group member files specified.")
 
         write_progress(7,csv.num_steps)
         write_output("Saving network")
@@ -1404,7 +1423,7 @@ if __name__ == '__main__':
             scen_ids = [s['id'] for s in csv.NetworkSummary['scenarios']]
 
         write_progress(9,csv.num_steps)
-        if len(csv.rule_args) > 0:
+        if len(csv.rule_args) > 0 and csv.rule_args[0] != "":
             write_output("Reading Rules")
             for s in csv.NetworkSummary.get('scenarios'):
                 if s.name == csv.Scenario['name']:

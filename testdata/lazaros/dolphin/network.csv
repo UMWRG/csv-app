@@ -1,2 +1,2 @@
-name,type,projection,description
-Dolphin interactions,network,,
+name,type,projection,nodes,links,description
+Dolphin interactions,network,,nodes.csv,links.csv,

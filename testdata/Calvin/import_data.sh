@@ -1,2 +1,2 @@
 #!/bin/bash
-python ../../ImportCSV/ImportCSV.py -t Calvin_network.csv -n Calvin_Nodes.csv Calvin_Inflow_Nodes.csv -l Calvin_Links.csv -x -m Template.xml
+python ../../ImportCSV/ImportCSV.py -t Calvin_network.csv -x -m Template.xml

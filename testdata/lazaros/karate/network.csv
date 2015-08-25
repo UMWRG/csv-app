@@ -1,2 +1,2 @@
-name,type,projection,description
-Karate class interactions,network,,
+name,type,projection,nodes,links,description
+Karate class interactions,network,,nodes.csv,links.csv,
