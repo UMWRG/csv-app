@@ -1,0 +1,184 @@
+Basics
+~~~~~~
+
+The plug-in for importing CSV files assumes that you have a collection of files
+ready. You need one or several files for nodes (usually one file per node type)
+and files for links (usually on file per link type). One node file and one link
+file are mandatory, additional files are optional. The plug-in also allows you
+to import network attributes.
+
+Basic usage::
+
+       ImportCSV.py [-h] [-p PROJECT] [-s SCENARIO] [-t NETWORK]
+                    -n NODES [NODES ...] -l LINKS [LINKS ...]
+                    [-r RULES [RULES ...]] [-z TIMEZONE]
+                    [-g GROUPS] [-k GROUPMEMBERS]
+                    [-t TEMPLATE]
+                    [-u SERVER=URL] [-c SESSION-ID]
+                    [-x]
+
+Options
+~~~~~~~
+
+====================== ====== ============ =======================================
+Option                 Short  Parameter    Description
+====================== ====== ============ =======================================
+``--help``             ``-h``              show help message and exit.
+``--project``          ``-p`` PROJECT      The ID of an existing project. If no
+                                           project is specified or if the ID
+                                           provided does not belong to an existing
+                                           project, a new one will be created.
+``--scenario``         ``-s`` SCENARIO     Specify the name of the scenario
+                                           created by the import function. Every
+                                           import creates a new scenario. If no
+                                           name is provided a default name will be
+                                           assigned.
+``--network``          ``-t`` NETWORK      Specify the file containing network
+                                           information. If no file is specified, a
+                                           new network will be created using
+                                           default values.
+``--network_id``       ``-i`` NETWORK_ID   Specify the ID of the network to be
+                                           updated, if not specified,a new network
+                                           will be created.
+``--nodes``            ``-n`` NODES        One or multiple files containing nodes
+                                           and attributes.
+``--links``            ``-l`` LINKS        One or multiple files containing
+                                           information on links.
+``--groups``           ``-g`` GROUPS       A file or list of files containing
+                                           group name, description,
+                                           attributes and data.
+``--groupmembers``     ``-k`` MEMBERS      A file or list of files containing
+                                           group members.
+``--template``         ``-m`` TEMPLATE     XML file defining the types for the
+                                           network. Required if types are set.
+``--rules``            ``-l`` RULES        File(s) containing rules or constraints
+                                           as mathematical expressions.
+``--timezone``         ``-z`` TIMEZONE     Specify a timezone as a string
+                                           following the Area/Loctation pattern
+                                           (e.g.  Europe/London). This timezone
+                                           will be used for all timeseries data
+                                           that is imported. If you don't specify
+                                           a timezone, it defaults to UTC.
+``--expand-filenames`` ``-x``              If the import function encounters
+                                           something that looks like a filename,
+                                           it tries to read the file.
+``--server-url``       ``-u`` SERVER-URL   Url of the server the plugin will
+                                           connect to.
+                                           Defaults to localhost.
+``--session-id``       ``-c`` SESSION-ID   Session ID used by the callig software.
+                                           If left empty, the plugin will attempt
+                                           to log in itself.
+====================== ====== ============ =======================================
+
+
+File structure
+~~~~~~~~~~~~~~
+
+In the node and link file a minimum of information has to be provided in order
+to be able to import a complete network. Optionally the files can define any
+number of attributes for nodes and links.
+
+For nodes a valid file looks like this::
+
+    Name , x, y, type, attribute_1, attribute_2, ..., attribute_n, description
+    Units,  ,  ,     ,           m,    m^3 s^-1, ...,           -,
+    node1, 2, 1, irr ,         4.0,      3421.9, ...,  Crop: corn, Irrigation 1
+    node2, 2, 3, irr ,         2.4,       988.4, ...,  Crop: rice, Irrigation 2
+
+For links, the following is a valid file::
+
+    Name ,       from,       to, type, attre_1, ...,  attre_n, description
+    Units,           ,         ,     ,       m, ..., m^2 s^-1,
+    link1,      node1,    node2, tran,     453, ...,     0.34, Water transfer
+
+It is optional to supply a network file. If you decide to do so, it needs to
+follow this structure::
+
+    # A test network created as a set of CSV files
+    ID, Name            , type, attribute_1, ..., Description
+    Units,              ,     ,            ,    ,
+    1 , My first network, net , test       ,    , Network created from CSV files
+
+
+Constraint groups come in 2 files.
+The first file defines the name, description and attributes of a file and looks like this::
+
+    Name  , attribute_1, attribute_2..., Description
+    Units , hm^3       , m             ,
+    stor  , totalCap   , maxSize       , Storage nodes
+    ...   , ...        , ...           , ...
+
+The second file defines the members of the groups.
+The group name, the type of the member (node, link or another group) and the name
+of that other member are needed::
+
+    Name  , Type  , Member
+    stor  , NODE  , node1
+    stor  , NODE  , node2
+    stor  , LINK  , link1
+
+Metadata can also be included in separate files, which are **named the same
+as the node/link file, but with _metadata at the end.**
+
+For example:
+    nodes.csv becomes nodes_metadata.csv
+    network.csv becomes network_metadata.csv
+    my_urban_links.csv becomes my_urban_links_metadata.csv
+
+
+Metadata files are structured as follows:
+    
+ Name  , attribute_1             , attribute_2             , attribute_3
+ link1 , (key1:val1) (key2:val2) , (key3:val3) (key4:val4) , (key5:val5)
+
+In this case, key1 and key2 are metadata items for attribute 1 and so on.
+The deliminator for the key-val can be ';' or ':'. Note that all key-val
+pairs are contained within '(...)', with a space between each one. This way
+you can have several metadata items per attribute.
+
+Lines starting with the ``#`` character are ignored.
+
+.. note::
+
+   If you specify a header line using the keywords ``name``, ``x``, ``y`` and
+   ``description`` (``name``, ``from``, ``to`` and ``description`` for links)
+   the order of the columns does not matter. If you don't specify these
+   keywords, the plug-in will assume that the first column specifies the name,
+   the second X, the third Y and the last the description (name, from, to and
+   description for links).
+
+.. note::
+
+    The ``type`` column is optional.
+
+Please also consider the following:
+
+- A link references to start and end node by name. This also implies that the\
+  node names defined in the file need to be unique.
+- The description should be in the last column. This will lead to more readable\
+  files, since the description is usually free form text.
+- If you specify more than one file containing nodes, common attributes (i.e.\
+  with the same name) will be considered the same. This results in a unique\
+  attribute set for nodes. The same applies for links.
+- An attribute to a node or link is only added if there is a value for that\
+  specific attribute in the line specifying a node (or link). If an attribute\
+  should be added as a variable, you need to enter ``NULL``.
+- If you use a tmplate during import, missing attributes will be added to each\
+  node or link according to its type.
+
+TODO
+----
+
+- Implement updating of existing scenario.
+
+Building a windows executable
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ - Use pyinstaller (pip install pyisntaller) to build a windows executable.
+ - cd to the $PATH_TO_HYDRA/HydraPlugins/CSVPlugin/trunk
+ - pyinstaller -F ImportCSV.py
+ - If you want more compression (a smaller exe), install upx and run pyinstaller -F --upx-dir=/path/to/upx/dir ExportCSV.py
+ - An executable file will appear in the dist folder
+
+API docs
+~~~~~~~~
+

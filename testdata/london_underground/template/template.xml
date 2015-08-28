@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <template_definition>
-    <template_name>Template for the London Underground</template_name>
+    <template_name>london_underground</template_name>
     <resources>
         <resource>
             <type>NETWORK</type>
