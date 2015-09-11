@@ -217,7 +217,8 @@ from HydraLib.units import validate_resource_attributes
 
 from HydraLib.HydraException import HydraPluginError,HydraError
 
-from numpy import array, reshape
+import numpy as np
+import pandas as pd
 
 import json
 
@@ -247,7 +248,7 @@ class ImportCSV(object):
 
         #This stores all the types in the template
         #so that node, link and group types can be validated
-        self.Templates      = dict()
+        self.Template      = dict()
 
         #These are used to keep track of whether
         #duplicate names have been specified in the files.
@@ -311,7 +312,7 @@ class ImportCSV(object):
 
         try:
             util.validate_value(restriction_dict, value)
-        except HydraError, e:
+        except Exception, e:
             log.exception(e)
             raise HydraPluginError(e.message)
 
@@ -726,14 +727,14 @@ class ImportCSV(object):
         if field_idx['type'] is not None:
             node_type = linedata[field_idx['type']].strip()
             node['type'] = node_type
-
-            if len(self.Templates):
-                if node_type not in self.Templates['resources'].get('NODE', {}).keys():
+            
+            if len(self.Template):
+                if node_type not in self.Template['resources'].get('NODE', {}).keys():
                     raise HydraPluginError(
                         "Node type %s not specified in the template."%
                         (node_type))
             
-                restrictions = self.Templates['resources']['NODE'][node_type]['attributes']
+                restrictions = self.Template['resources']['NODE'][node_type]['attributes']
             if node_type not in self.nodetype_dict.keys():
                 self.nodetype_dict.update({node_type: (nodename,)})
             else:
@@ -847,13 +848,13 @@ class ImportCSV(object):
         if field_idx['type'] is not None:
             link_type = linedata[field_idx['type']].strip()
             link['type'] = link_type
-            if len(self.Templates):
-                if link_type not in self.Templates['resources'].get('LINK', {}).keys():
+            if len(self.Template):
+                if link_type not in self.Template['resources'].get('LINK', {}).keys():
                     raise HydraPluginError(
                         "Link type %s not specified in the template."
                         %(link_type))
             
-                restrictions = self.Templates['resources']['LINK'][link_type]['attributes']
+                restrictions = self.Template['resources']['LINK'][link_type]['attributes']
             if link_type not in self.linktype_dict.keys():
                 self.linktype_dict.update({link_type: (linkname,)})
             else:
@@ -956,12 +957,12 @@ class ImportCSV(object):
             group_type = group_data[field_idx['type']].strip()
             group['type'] = group_type
 
-            if len(self.Templates):
-                if group_type not in self.Templates['resources'].get('GROUP', {}).keys():
+            if len(self.Template):
+                if group_type not in self.Template['resources'].get('GROUP', {}).keys():
                     raise HydraPluginError(
                         "Group type %s not specified in the template."
                         %(group_type))
-                restrictions = self.Templates['resources']['GROUP'][group_type]['attributes']
+                restrictions = self.Template['resources']['GROUP'][group_type]['attributes']
 
             if group_type not in self.grouptype_dict.keys():
                 self.grouptype_dict.update({group_type: (group_name,)})
@@ -1178,7 +1179,7 @@ class ImportCSV(object):
                                 log.debug("Dimension for unit %s is null. ", units[i])
                         else:
                             dimension = None
-
+                        
                         dataset = self.create_dataset(data[i],
                                                       res_attr,
                                                       units[i],
@@ -1200,8 +1201,8 @@ class ImportCSV(object):
                     if dataset is not None:
                         self.Scenario['resourcescenarios'].append(dataset)
         errors = [] 
-        if len(self.Templates):
-            errors = validate_resource_attributes(resource, self.Attributes, self.Templates)
+        if len(self.Template):
+            errors = validate_resource_attributes(resource, self.Attributes, self.Template)
         #resource.attributes = res_attr_array
 
         if len(errors) > 0:
@@ -1457,7 +1458,7 @@ class ImportCSV(object):
             header = header.strip(',')
             col_headings = header.split(',')
         else:
-            col_headings = range(len(data[0].split(',')[2:]))
+            col_headings =[str(idx) for idx in range(len(data[0].split(',')[2:]))]
 
         date = data[0].split(',', 1)[0].strip()
         timeformat = hydra_dateutil.guess_timefmt(date)
@@ -1471,71 +1472,56 @@ class ImportCSV(object):
         for col in col_headings:
             ts_values[col] = {}
         ts_times = [] # to check for duplicae timestamps in a timeseries.
-        start_time = None
-        freq       = None
-        prev_time  = None
-        eq_val     = []
-        is_eq_spaced = False
         timedata = data
         for line in timedata:
-            if line != '':
-                dataset = line.split(',')
-                tstime = datetime.strptime(dataset[0].strip(), timeformat)
-                tstime = self.timezone.localize(tstime)
+            
+            if line == '' or line[0] == '#':
+                continue
 
-                ts_time = hydra_dateutil.date_to_string(tstime, seasonal=seasonal)
+            dataset = line.split(',')
+            tstime = datetime.strptime(dataset[0].strip(), timeformat)
+            tstime = self.timezone.localize(tstime)
 
-                if ts_time in ts_times:
-                    raise HydraPluginError("A duplicate time %s has been found "
-                                           "in %s where the value = %s)"%( ts_time,
-                                                              filename,
-                                                             dataset[2:]))
-                else:
-                    ts_times.append(ts_time)
+            ts_time = hydra_dateutil.date_to_string(tstime, seasonal=seasonal)
 
-                value_length = len(dataset[2:])
-                shape = dataset[1].strip()
-                if shape != '':
-                    array_shape = tuple([int(a) for a in
-                                         shape.split(" ")])
-                else:
-                    array_shape = (value_length,)
+            if ts_time in ts_times:
+                raise HydraPluginError("A duplicate time %s has been found "
+                                       "in %s where the value = %s)"%( ts_time,
+                                                          filename,
+                                                         dataset[2:]))
+            else:
+                ts_times.append(ts_time)
 
-                ts_val_1d = []
-                for i in range(value_length):
-                    ts_val_1d.append(str(dataset[i + 2].strip()))
+            value_length = len(dataset[2:])
+            shape = dataset[1].strip()
+            if shape != '':
+                array_shape = tuple([int(a) for a in
+                                     shape.split(" ")])
+            else:
+                array_shape = (value_length,)
 
-                try:
-                    ts_arr = array(ts_val_1d)
-                    ts_arr = reshape(ts_arr, array_shape)
-                except:
-                    raise HydraPluginError("Error converting %s in file %s to an array"%(ts_val_1d, filename))
+            ts_val_1d = []
+            for i in range(value_length):
+                ts_val_1d.append(str(dataset[i + 2].strip()))
 
-                ts_value = ts_arr.tolist()
+            try:
+                ts_arr = np.array(ts_val_1d)
+                ts_arr = np.reshape(ts_arr, array_shape)
+            except:
+                raise HydraPluginError("Error converting %s in file %s to an array"%(ts_val_1d, filename))
 
-                #Check for whether timeseries is equally spaced.
-                if is_eq_spaced:
-                    eq_val.append(ts_value)
-                    if start_time is None:
-                        start_time = tstime
-                    else:
-                        #Get the time diff as the second time minus the first
-                        if freq is None:
-                            freq = tstime - start_time
-                        else:
-                            #Keep checking on each timestamp whether the spaces between
-                            #times is equal.
-                            if (tstime - prev_time) != freq:
-                                is_eq_spaced = False
-                    prev_time = tstime
-               
-                for i, ts_val in enumerate(ts_value):
-                    idx = col_headings[i]
-                    ts_values[idx][ts_time] = ts_val
+            ts_value = ts_arr.tolist()
 
-        self.validate_value(ts_values, restriction_dict)
+            for i, ts_val in enumerate(ts_value):
+                idx = col_headings[i]
+                ts_values[idx][ts_time] = ts_val
         
+
+
         timeseries = json.dumps(ts_values)
+
+        self.validate_value(pd.read_json(timeseries), restriction_dict)
+        
 
         return timeseries
 
@@ -1561,9 +1547,9 @@ class ImportCSV(object):
             array_shape = (len(eval_dataset),)
 
         #Reshape the array back to its correct dimensions
-        arr = array(eval_dataset)
+        arr = np.array(eval_dataset)
         try:
-            arr = reshape(arr, array_shape)
+            arr = np.reshape(arr, array_shape)
         except:
             raise HydraPluginError("You have an error with your array data."
                                    " Please ensure that the dimension is correct."
