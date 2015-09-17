@@ -1,0 +1,2 @@
+ID,Name,Type,Projection,Nodes,Links,Groups,Description
+,London Underground,London Underground,EPSG:4326,nodes.csv,,,The London underground map

@@ -1,0 +1,5 @@
+Name       ,Type,Resource,Text,Description
+Node rule 1,Node,Ag1,if x == y: do something,My first rule
+Node rule 2,Node,J1,if x == y: do something,My second rule
+Node rule 3,Node,Ag2,if x == y: do something,My third rule
+Link rule 1,Link,SR1_J1,if x == y: do something,My fourth rule

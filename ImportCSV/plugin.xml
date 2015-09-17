@@ -11,20 +11,13 @@
     <largeicon>icon32.png</largeicon>
     <mandatory_args>
         <arg>
-            <name>nodes</name>
-            <switch>-n</switch>
-            <multiple>Y</multiple>
+            <name>network</name>
+            <switch>-t</switch>
+            <multiple>N</multiple>
             <argtype>file</argtype>
-            <help>One or multiple files containing nodes and
-                        attributes.</help>
-        </arg>
-        <arg>
-            <name>links</name>
-            <switch>-l</switch>
-            <multiple>Y</multiple>
-            <argtype>file</argtype>
-            <help>One or multiple files containing information
-                        on links.</help>
+            <help>Network file containing network ingormatioon such as name and 
+                x, y projection as well as the locaiton of the node, link and group files.
+            </help>
         </arg>
     </mandatory_args>
    <non_mandatory_args>
@@ -58,15 +51,6 @@
            </help>
         </arg>
         <arg>
-           <name>network</name>
-           <switch>-t</switch>
-           <multiple>N</multiple>
-           <argtype>string</argtype>
-           <help>Specify the file containing network
-                        information. If no file is specified, a new network
-                        will be created using default values.</help>
-        </arg>
-        <arg>
            <name>timezone</name>
            <switch>-z</switch>
            <multiple>N</multiple>
@@ -76,22 +60,6 @@
                         timezone will be used for all timeseries data that is
                         imported. If you don't specify a timezone, it defaults
                         to UTC.</help>
-        </arg>
-        <arg>
-            <name>groups</name>
-            <switch>-g</switch>
-            <multiple>Y</multiple>
-            <argtype>file</argtype>
-            <help>One or multiple files containing information
-                        on groups.</help>
-        </arg>
-        <arg>
-            <name>group_members</name>
-            <switch>-k</switch>
-            <multiple>Y</multiple>
-            <argtype>file</argtype>
-            <help>One or multiple files containing information on the members of the
-            groups specified in the -g argument.</help>
         </arg>
         <arg>
             <name>template</name>
