@@ -14,7 +14,7 @@
             <name>network</name>
             <switch>-t</switch>
             <multiple>N</multiple>
-            <argtype>file</argtype>
+            <argtype filter="*.csv">file</argtype>
             <help>Network file containing network ingormatioon such as name and 
                 x, y projection as well as the locaiton of the node, link and group files.
             </help>
