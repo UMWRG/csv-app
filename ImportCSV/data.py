@@ -106,7 +106,7 @@ def create_dataset(value,
                     #If a seasonal timeseries is specified using XXXX, then convert
                     #it to use '9999' as this allows valid datetime objects to be
                     #constructed
-                    seasonal_key = config.get('DEFAULT', 'seasonal_key', 9999)
+                    seasonal_key = config.get('DEFAULT', 'seasonal_key', '9999')
                     l = l.replace('XXXX', seasonal_key)
                     
                     l_resource_name = l.split(',',1)[0].strip()
