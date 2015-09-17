@@ -202,7 +202,7 @@ def create_timeseries(data, restriction_dict={}, header=None, filename="", timez
     timeformat = hydra_dateutil.guess_timefmt(date)
     seasonal = False
 
-    seasonal_key = config.get('DEFAULT', 'seasonal_key', 9999)
+    seasonal_key = config.get('DEFAULT', 'seasonal_key', '9999')
     if 'XXXX' in timeformat or seasonal_key in timeformat:
         seasonal = True
     
