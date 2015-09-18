@@ -973,12 +973,12 @@ class ImportCSV(object):
                                                   self.Scenario['name'],
                                                   self.timezone
                                                 )
+                        if dataset is not None:
+                            self.Scenario['resourcescenarios'].append(dataset)
                     except HydraPluginError, e:
                         log.warn(e)
                         self.warnings.extend(e)
 
-                    if dataset is not None:
-                        self.Scenario['resourcescenarios'].append(dataset)
         errors = [] 
         if len(self.Template):
             errors = validate_resource_attributes(resource, self.Attributes, self.Template)
