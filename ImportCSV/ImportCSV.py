@@ -1182,7 +1182,11 @@ def run():
             try:
                 if args.template == '':
                     raise Exception("The template name is empty.")
-                csv.Template = validate_template(args.template, csv.connection)
+                csv.Template, warnings, template_errors = validate_template(args.template, csv.connection)
+                csv.warnings.extend(warnings)
+                if len(template_errors) > 0:
+                    errors.extend(template_errors)
+                    raise Exception("")
             except Exception, e:
                 log.exception(e)
                 raise HydraPluginError("An error has occurred with the template. (%s)"%(e))
@@ -1259,9 +1263,9 @@ def run():
                                        "Please check the template and resource types."%(e.message))
         write_progress(9,csv.num_steps)
 
-	errors = []
     except HydraPluginError as e:
-        errors = [e.message]
+        if len(errors) == 0:
+            errors = [e.message]
         log.exception(e)
     except Exception, e:
         log.exception(e)
