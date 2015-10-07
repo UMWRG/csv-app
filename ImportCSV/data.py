@@ -72,7 +72,7 @@ def create_dataset(value,
         unit = unit.strip()
         if len(unit) == 0:
             unit = None
-    arr_struct = None
+    data_columns = None
     try:
         float(value)
         dataset['type'] = 'scalar'
@@ -119,11 +119,11 @@ def create_dataset(value,
                                          (resource_name, value))
                 else:
                     if is_timeseries(data):
-                        value_header = get_value_header(filedata)
+                        data_columns = get_data_columns(filedata)
                         
                         ts = create_timeseries( data,
                                                 restriction_dict=restriction_dict,
-                                                header=value_header,
+                                                data_columns=data_columns,
                                                 filename=value,
                                                 timezone=timezone)
                        
@@ -162,9 +162,9 @@ def create_dataset(value,
 
     if metadata:
         m = metadata
-    
-    if arr_struct:
-        m['data_struct'] = arr_struct
+
+    if data_columns:
+        m['data_struct'] = '|'.join(data_columns)
 
     m = json.dumps(m)
 
@@ -188,16 +188,15 @@ def create_descriptor(value, restriction_dict={}):
     descriptor = value
     return descriptor
 
-def create_timeseries(data, restriction_dict={}, header=None, filename="", timezone=pytz.utc):
+def create_timeseries(data, restriction_dict={}, data_columns=None, filename="", timezone=pytz.utc):
     if len(data) == 0:
         return None
     
-    if header is not None:
-        header = header.strip(',')
-        col_headings = header.split(',')
+    if data_columns is not None:
+        col_headings = data_columns
     else:
         col_headings =[str(idx) for idx in range(len(data[0].split(',')[2:]))]
-
+    
     date = data[0].split(',', 1)[0].strip()
     timeformat = hydra_dateutil.guess_timefmt(date)
     seasonal = False
@@ -253,8 +252,6 @@ def create_timeseries(data, restriction_dict={}, header=None, filename="", timez
         for i, ts_val in enumerate(ts_value):
             idx = col_headings[i]
             ts_values[idx][ts_time] = ts_val
-    
-
 
     timeseries = json.dumps(ts_values)
 
@@ -317,30 +314,26 @@ def is_timeseries(data):
     except:
         raise HydraPluginError("Unable to parse timeseries %s"%data)
 
-def get_value_header(filedata):
+def get_data_columns(filedata):
     """
         Look for column descriptors on the first line of the array and timeseries files
     """
-    value_header = filedata[0].replace(' ', '')
-    if value_header.startswith('arraydescription,') or value_header.startswith(','):
-
-        arr_struct = filedata[0].strip().replace(' ', '').replace(',,', '')
+    data_columns = None
+    header = filedata[0]
+    compressed_header = header.replace(' ', '').lower()
+    #Has a header been specified?
+    if compressed_header.startswith('arraydescription') or \
+        compressed_header.startswith('timeseriesdescription') or \
+        compressed_header.startswith(','):
         
-        arr_struct = arr_struct.split(',')
-        arr_struct = "|".join(arr_struct)
-        #Set the value header back to its original format (with spaces)
-        value_header = filedata[0]
-        filedata = filedata[1:]
-    elif value_header.startswith('timeseriesdescription') or value_header.startswith(','):
-
-        arr_struct = filedata[0].strip().replace(' ', '').replace(',,', '')
-
-        arr_struct = arr_struct.split(',')
-        arr_struct = "|".join(arr_struct[3:])
-        #Set the value header back to its original format (with spaces)
-        value_header = filedata[0]
-        filedata = filedata[1:]
+        #Get rid of the first column, which is the 'arraydescription' bit
+        header_columns = header.split(',')[1:]
+        data_columns = []
+        #Now get rid of the ',,' or ', ,', leaving just the columns.
+        for h in header_columns:
+            if h.strip() != "":
+                data_columns.append(h)
     else:
-        value_header = None
+        data_columns = None
 
-    return value_header
+    return data_columns
