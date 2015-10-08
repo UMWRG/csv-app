@@ -242,7 +242,9 @@ class ImportCSV(object):
             if 'groups' in lower_keys:
                 self.group_args = data[field_idx['groups']].strip().strip(';').split(';')
             if 'rules' in lower_keys:
-                self.rule_args  = [os.path.join(self.basepath, f) for f in data[field_idx['rules']].strip().strip(';').split(';')]
+                rules  = data[field_idx['rules']].strip().strip(';')
+                if rules != "":
+                    self.rule_args = [os.path.join(self.basepath, f) for f in rules.split(';')]
 
             if network_id is not None:
                 # Check if network exists on the server.
