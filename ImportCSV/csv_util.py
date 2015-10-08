@@ -14,7 +14,7 @@ def get_file_data(file):
     if file == None:
         log.warn("No file specified")
         return None
-   
+
     file = os.path.realpath(file)
     
     log.info("Reading file data from: %s", file)

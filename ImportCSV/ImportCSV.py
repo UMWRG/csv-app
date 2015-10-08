@@ -242,7 +242,7 @@ class ImportCSV(object):
             if 'groups' in lower_keys:
                 self.group_args = data[field_idx['groups']].strip().strip(';').split(';')
             if 'rules' in lower_keys:
-                self.rule_args  = data[field_idx['rules']].strip().strip(';').split(';')
+                self.rule_args  = [os.path.join(self.basepath, f) for f in data[field_idx['rules']].strip().strip(';').split(';')]
 
             if network_id is not None:
                 # Check if network exists on the server.
@@ -1229,7 +1229,7 @@ def run():
         else:
             log.warn("No group member files specified.")
             csv.warnings.append("No group member files specified.")
-
+        
         write_progress(7,csv.num_steps)
         write_output("Saving network")
         csv.commit()
@@ -1243,8 +1243,7 @@ def run():
                 if s.name == csv.Scenario['name']:
                     scenario_id = s.id
                     break
-            #Update all the nodes, links and groups with their newly
-            #created IDs.
+
             rule_reader = RuleReader(csv.connection, scenario_id, csv.NetworkSummary, csv.rule_args)
 
             rule_reader.read_rules()

@@ -64,7 +64,6 @@ class RuleReader(object):
             ...
         """
 
-
         rule_data = get_file_data(file)
 
         keys  = rule_data[0].split(',')
