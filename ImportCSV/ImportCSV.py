@@ -89,6 +89,10 @@ class ImportCSV(object):
         self.grouptype_dict = dict()
         self.networktype = ''
 
+        self.start_time = None
+        self.end_time   = None
+        self.timestep   = None
+
         self.connection = JsonConnection(url)
         if session_id is not None:
             log.info("Using existing session %s", session_id)
@@ -176,6 +180,9 @@ class ImportCSV(object):
             'Default scenario created by the CSV import plug-in.'
         self.Scenario['id'] = -1
         self.Scenario['resourcescenarios'] = []
+        self.Scenario['start_time'] = self.start_time
+        self.Scenario['end_time']   = self.end_time
+        self.Scenario['time_step']   = self.timestep
 
     def create_network(self, file=None, network_id=None):
 
@@ -198,7 +205,7 @@ class ImportCSV(object):
             keys = [k.strip() for k in net_data[0].split(',')]
             #Make a list of all the keys in lowercase so we can perform
             #checks later on for certain headings.
-            lower_keys = [k.lower() for k in keys]
+            lower_keys = [k.lower().replace(" ", "") for k in keys]
 
             check_header(file, keys)
             if net_data[1].lower().startswith('unit'):
@@ -224,6 +231,9 @@ class ImportCSV(object):
                          'links':4,
                          'groups':5,
                          'rules':6,
+                         'starttime':7,
+                         'endtime':8,
+                         'timestep':9
                          }
             # If the file does not follow the standard, we can at least try to
             # guess what is stored where.
@@ -245,6 +255,13 @@ class ImportCSV(object):
                 rules  = data[field_idx['rules']].strip().strip(';')
                 if rules != "":
                     self.rule_args = [os.path.join(self.basepath, f) for f in rules.split(';')]
+
+            if 'starttime' in lower_keys:
+                self.Scenario['start_time'] = data[field_idx['starttime']].strip()
+            if 'endtime' in lower_keys:
+                self.Scenario['end_time'] = data[field_idx['endtime']].strip()
+            if 'timestep' in lower_keys:
+                self.Scenario['time_step'] = data[field_idx['timestep']].strip()
 
             if network_id is not None:
                 # Check if network exists on the server.
