@@ -903,7 +903,7 @@ class ImportCSV(object):
                     attribute = self.create_attribute(attrs[i], units[i])
                 else:
                     attribute = self.create_attribute(attrs[i])
-                self.Attributes.update({attrs[i]: attribute})
+                self.Attributes[attrs[i]] =  attribute
             attributes.append(attribute)
 
         # Add all attributes. If they exist already, we retrieve the real id.
@@ -975,8 +975,13 @@ class ImportCSV(object):
                                                   self.Scenario['name'],
                                                   self.timezone
                                                 )
+
+                        #This is not saved in the DB. It's used for validation in validate_resource_attributes.
+                        res_attr['data_type'] = dataset['value']['type']
+
                         if dataset is not None:
                             self.Scenario['resourcescenarios'].append(dataset)
+
                     except HydraPluginError, e:
                         log.warn(e)
                         self.warnings.extend(e)
