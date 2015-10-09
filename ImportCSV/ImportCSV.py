@@ -33,7 +33,7 @@ from HydraLib.units import validate_resource_attributes
 
 from HydraLib.HydraException import HydraPluginError
 
-from csv_util import get_file_data, check_header, parse_unit
+from csv_util import get_file_data, check_header, parse_unit, get_scenario_times
 from rules import RuleReader
 
 from data import create_dataset
@@ -992,6 +992,13 @@ class ImportCSV(object):
                                                   self.Scenario['name'],
                                                   self.timezone
                                                 )
+                        #Extrapolate the scenario start time, end time and time step from the first
+                        #timeseries we find
+                        if dataset['value']['type'] == 'timeseries' and self.Scenario.get('start_time') is None:
+                            start_time, end_time, time_step = get_scenario_times(dataset)
+                            self.Scenario['start_time'] = start_time
+                            self.Scenario['end_time']   = end_time
+                            self.Scenario['time_step']   = time_step
 
                         #This is not saved in the DB. It's used for validation in validate_resource_attributes.
                         res_attr['data_type'] = dataset['value']['type']

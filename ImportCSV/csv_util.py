@@ -2,6 +2,9 @@ from HydraLib.HydraException import HydraPluginError, HydraError
 from HydraLib import util
 import os
 import logging
+from HydraLib.hydra_dateutil import get_datetime
+import json
+from dateutil.relativedelta import relativedelta
 log = logging.getLogger(__name__)
 
 
@@ -89,3 +92,24 @@ def parse_unit(unit):
         return unit, float(factor)
     except ValueError:
         return unit, 1.0
+
+def get_scenario_times(dataset):
+    """
+        Given a timeseries, get the start_time, end_time and time step of a scenario
+    """
+    ts = json.loads(dataset['value']['value'])
+    times = sorted(ts[ts.keys()[0]].keys())
+
+    start_time = get_datetime(times[0])
+    second_time = get_datetime(times[1])
+    time_step   = ""
+    diff = second_time - start_time
+    end_time   = get_datetime(times[-1])
+    
+    rd = relativedelta(second_time, start_time).__dict__
+    time_order = ['years', 'months', 'days', 'hours', 'minutes', 'seconds', 'microseconds']
+    for time_unit in time_order:
+        if rd[time_unit] > 0:
+            time_step = "%s %s" % (rd[time_unit], time_unit)
+
+    return str(start_time), str(end_time), time_step
