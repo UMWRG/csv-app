@@ -231,9 +231,9 @@ class ImportCSV(object):
                          'links':4,
                          'groups':5,
                          'rules':6,
-                         'starttime':7,
-                         'endtime':8,
-                         'timestep':9
+                         'starttime':None,
+                         'endtime':None,
+                         'timestep':None
                          }
             # If the file does not follow the standard, we can at least try to
             # guess what is stored where.
@@ -332,6 +332,8 @@ class ImportCSV(object):
             for i, key in enumerate(keys):
                 if i not in field_idx.values():
                     attrs.update({i: key.strip()})
+
+            log.info("Adding data to network.")
 
             if len(attrs.keys()) > 0:
                 self.Network = self.add_data(self.Network, attrs, data, metadata, units=units)
