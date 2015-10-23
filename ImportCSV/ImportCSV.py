@@ -238,8 +238,9 @@ class ImportCSV(object):
             # If the file does not follow the standard, we can at least try to
             # guess what is stored where.
             for i, key in enumerate(keys):
-                if key.lower().strip() in field_idx.keys():
-                    field_idx[key.lower().strip()] = i
+                col_heading = key.lower().strip().replace(" ", "")
+                if col_heading in field_idx.keys():
+                    field_idx[col_heading] = i
 
             if field_idx['type'] is not None:
                 self.networktype = data[field_idx['type']].strip()

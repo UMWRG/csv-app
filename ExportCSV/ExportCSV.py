@@ -295,7 +295,7 @@ class ExportCSV(object):
         if scenario.get('start_time') is not None and \
             scenario.get('end_time') is not None and\
             scenario.get('time_step') is not None:
-            network_heading   = "ID, Name, Type, Nodes, Links, Groups, Rules, start time, end time, time step %s, Description\n" % (network_attributes_string)
+            network_heading   = "ID, Name, Type, Nodes, Links, Groups, Rules, starttime, endtime, timestep %s, Description\n" % (network_attributes_string)
             network_data['starttime'] = scenario.start_time
             network_data['endtime']   = scenario.end_time
             network_data['timestep'] = scenario.time_step
