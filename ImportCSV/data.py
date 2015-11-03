@@ -26,6 +26,13 @@ from HydraLib.HydraException import HydraPluginError
 from HydraLib import config, hydra_dateutil
 from csv_util import validate_value
 import pytz
+import re
+
+global seasonal_key
+seasonal_key = None
+
+global time_formats
+time_formats = {}
 
 log = logging.getLogger(__name__)
 
@@ -45,7 +52,12 @@ def create_dataset(value,
 
     resourcescenario = dict()
 
-    
+   
+
+    global seasonal_key
+    if seasonal_key is None:
+        seasonal_key = config.get('DEFAULT', 'seasonal_key', '9999')
+
     if metadata.get('name'):
         dataset_name = metadata['name']
         del(metadata['name'])
@@ -67,9 +79,9 @@ def create_dataset(value,
     resourcescenario['attr_id'] = resource_attr['attr_id']
     resourcescenario['resource_attr_id'] = resource_attr['id']
 
-    value = value.strip()
+    value = value
     if unit is not None:
-        unit = unit.strip()
+        unit = unit
         if len(unit) == 0:
             unit = None
     data_columns = None
@@ -90,7 +102,10 @@ def create_dataset(value,
                     with open(full_file_path) as f:
                         filedata = []
                         for l in f:
-                            l = l.strip().replace('\n', '').replace('\r', '')
+                            l = re.sub('\s*,\s*', ',', l)
+                            l = re.sub('^ *', '', l)
+                            l = re.sub(' *$', '', l)
+                            l = l.replace('\n', '').replace('\r', '').split(',')
                             filedata.append(l)
                         file_dict[full_file_path] = filedata
                 else:
@@ -103,15 +118,11 @@ def create_dataset(value,
                 #name from the start of the line
                 data = []
                 for l in filedata:
-                    #If a seasonal timeseries is specified using XXXX, then convert
-                    #it to use '9999' as this allows valid datetime objects to be
-                    #constructed
-                    seasonal_key = config.get('DEFAULT', 'seasonal_key', '9999')
-                    l = l.replace('XXXX', seasonal_key)
-                    
-                    l_resource_name = l.split(',',1)[0].strip()
+
+                    l_resource_name = l[0]
                     if l_resource_name == resource_name:
-                        data.append(l[l.find(',')+1:])
+                        data.append(l[1:])
+
                 if len(data) == 0:
                     log.info('%s: No data found in file %s' %
                                  (resource_name, value))
@@ -120,7 +131,7 @@ def create_dataset(value,
                 else:
                     if is_timeseries(data):
                         data_columns = get_data_columns(filedata)
-                        
+                         
                         ts = create_timeseries( data,
                                                 restriction_dict=restriction_dict,
                                                 data_columns=data_columns,
@@ -195,13 +206,17 @@ def create_timeseries(data, restriction_dict={}, data_columns=None, filename="",
     if data_columns is not None:
         col_headings = data_columns
     else:
-        col_headings =[str(idx) for idx in range(len(data[0].split(',')[2:]))]
+        col_headings =[str(idx) for idx in range(len(data[0][2:]))]
     
-    date = data[0].split(',', 1)[0].strip()
-    timeformat = hydra_dateutil.guess_timefmt(date)
-    seasonal = False
+    date = data[0][0]
+    global time_formats
+    timeformat = time_formats.get(date)
+    if timeformat is None:
+        timeformat = hydra_dateutil.guess_timefmt(date)
+        time_formats[date] = timeformat
 
-    seasonal_key = config.get('DEFAULT', 'seasonal_key', '9999')
+    seasonal = False
+    
     if 'XXXX' in timeformat or seasonal_key in timeformat:
         seasonal = True
     
@@ -210,13 +225,12 @@ def create_timeseries(data, restriction_dict={}, data_columns=None, filename="",
         ts_values[col] = {}
     ts_times = [] # to check for duplicae timestamps in a timeseries.
     timedata = data
-    for line in timedata:
+    for dataset in timedata:
         
-        if line == '' or line[0] == '#':
+        if len(dataset) == 0 or dataset[0] == '#':
             continue
 
-        dataset = line.split(',')
-        tstime = datetime.strptime(dataset[0].strip(), timeformat)
+        tstime = datetime.strptime(dataset[0], timeformat)
         tstime = timezone.localize(tstime)
 
         ts_time = hydra_dateutil.date_to_string(tstime, seasonal=seasonal)
@@ -230,7 +244,7 @@ def create_timeseries(data, restriction_dict={}, data_columns=None, filename="",
             ts_times.append(ts_time)
 
         value_length = len(dataset[2:])
-        shape = dataset[1].strip()
+        shape = dataset[1]
         if shape != '':
             array_shape = tuple([int(a) for a in
                                  shape.split(" ")])
@@ -239,7 +253,7 @@ def create_timeseries(data, restriction_dict={}, data_columns=None, filename="",
 
         ts_val_1d = []
         for i in range(value_length):
-            ts_val_1d.append(str(dataset[i + 2].strip()))
+            ts_val_1d.append(str(dataset[i + 2]))
 
         try:
             ts_arr = np.array(ts_val_1d)
@@ -260,12 +274,10 @@ def create_timeseries(data, restriction_dict={}, data_columns=None, filename="",
 
     return timeseries
 
-def create_array(data, restriction_dict={}):
+def create_array(dataset, restriction_dict={}):
     """
         Create a (multi-dimensional) array from csv data
     """
-    #Split the line into a list
-    dataset = data.split(',')
     #First column is always the array dimensions
     arr_shape = dataset[0]
     #The actual data is everything after column 0
@@ -280,7 +292,7 @@ def create_array(data, restriction_dict={}):
 
     #If the dimensions are not set, we assume the array is 1D
     if arr_shape != '':
-        array_shape = tuple([int(a) for a in arr_shape.strip().split(" ")])
+        array_shape = tuple([int(a) for a in arr_shape.split(" ")])
     else:
         array_shape = (len(eval_dataset),)
 
@@ -305,8 +317,14 @@ def is_timeseries(data):
     date format. If that fails, it's not a time series.
     """
     try:
-        date = data[0].split(',')[0].strip()
-        timeformat = hydra_dateutil.guess_timefmt(date)
+        date = data[0][0]
+
+        global time_formats
+        timeformat = time_formats.get(date)
+        if timeformat is None:
+            timeformat = hydra_dateutil.guess_timefmt(date)
+            time_formats[date] = timeformat
+
         if timeformat is None:
             return False
         else:
@@ -320,18 +338,18 @@ def get_data_columns(filedata):
     """
     data_columns = None
     header = filedata[0]
-    compressed_header = header.replace(' ', '').lower()
+    compressed_header = header[0].replace(' ', '').lower()
     #Has a header been specified?
     if compressed_header.startswith('arraydescription') or \
         compressed_header.startswith('timeseriesdescription') or \
         compressed_header.startswith(','):
         
         #Get rid of the first column, which is the 'arraydescription' bit
-        header_columns = header.split(',')[1:]
+        header_columns = header[1:]
         data_columns = []
         #Now get rid of the ',,' or ', ,', leaving just the columns.
         for h in header_columns:
-            if h.strip() != "":
+            if h != "":
                 data_columns.append(h)
     else:
         data_columns = None

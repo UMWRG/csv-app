@@ -185,6 +185,7 @@ class ImportCSV(object):
         self.Scenario['time_step']   = self.timestep
 
     def create_network(self, file=None, network_id=None):
+        log.info("Reading network data.")
 
         if file is not None:
 
@@ -239,7 +240,7 @@ class ImportCSV(object):
             # guess what is stored where.
             for i, key in enumerate(keys):
                 col_heading = key.lower().strip().replace(" ", "")
-                if col_heading in field_idx.keys():
+                if col_heading in field_idx:
                     field_idx[col_heading] = i
 
             if field_idx['type'] is not None:
@@ -336,7 +337,7 @@ class ImportCSV(object):
 
             log.info("Adding data to network.")
 
-            if len(attrs.keys()) > 0:
+            if len(attrs) > 0:
                 self.Network = self.add_data(self.Network, attrs, data, metadata, units=units)
 
         else:
@@ -408,7 +409,11 @@ class ImportCSV(object):
         return metadata_dict
 
     def read_nodes(self, file):
+        log.info("Reading Nodes")
+        
         node_data = get_file_data(os.path.join(self.basepath, file))
+
+        log.info("Node data retrieved")
 
         try:
             file_parts = file.split(".")
@@ -448,7 +453,7 @@ class ImportCSV(object):
         attrs = dict()
         for i, key in enumerate(keys):
 
-            if key.lower().strip() in field_idx.keys():
+            if key.lower().strip() in field_idx:
                 field_idx[key.lower().strip()] = i
             else:
                 attrs.update({i: key.strip()})
@@ -478,7 +483,7 @@ class ImportCSV(object):
         else:
             self.node_names.append(nodename)
 
-        if nodename in self.Nodes.keys():
+        if nodename in self.Nodes:
             node = self.Nodes[nodename]
             log.debug('Node %s exists.' % nodename)
         else:
@@ -511,13 +516,13 @@ class ImportCSV(object):
             node['type'] = node_type
             
             if len(self.Template):
-                if node_type not in self.Template['resources'].get('NODE', {}).keys():
+                if node_type not in self.Template['resources'].get('NODE', {}):
                     raise HydraPluginError(
                         "Node type %s not specified in the template."%
                         (node_type))
             
                 restrictions = self.Template['resources']['NODE'][node_type]['attributes']
-            if node_type not in self.nodetype_dict.keys():
+            if node_type not in self.nodetype_dict:
                 self.nodetype_dict.update({node_type: (nodename,)})
             else:
                 self.nodetype_dict[node_type] += (nodename,)
@@ -529,6 +534,8 @@ class ImportCSV(object):
 
 
     def read_links(self, file):
+
+        log.info("Reading Links")
 
         if file == "":
             self.warnings.append("No links specified")
@@ -574,7 +581,7 @@ class ImportCSV(object):
         # Guess parameter position:
         attrs = dict()
         for i, key in enumerate(keys):
-            if key.lower().strip() in field_idx.keys():
+            if key.lower().strip() in field_idx:
                 field_idx[key.lower().strip()] = i
             else:
                 attrs.update({i: key.strip()})
@@ -604,7 +611,7 @@ class ImportCSV(object):
         else:
             self.link_names.append(linkname)
 
-        if linkname in self.Links.keys():
+        if linkname in self.Links:
             link = self.Links[linkname]
             log.debug('Link %s exists.' % linkname)
         else:
@@ -636,13 +643,13 @@ class ImportCSV(object):
             link_type = linedata[field_idx['type']].strip()
             link['type'] = link_type
             if len(self.Template):
-                if link_type not in self.Template['resources'].get('LINK', {}).keys():
+                if link_type not in self.Template['resources'].get('LINK', {}):
                     raise HydraPluginError(
                         "Link type %s not specified in the template."
                         %(link_type))
             
                 restrictions = self.Template['resources']['LINK'][link_type]['attributes']
-            if link_type not in self.linktype_dict.keys():
+            if link_type not in self.linktype_dict:
                 self.linktype_dict.update({link_type: (linkname,)})
             else:
                 self.linktype_dict[link_type] += (linkname,)
@@ -703,7 +710,7 @@ class ImportCSV(object):
         attrs = dict()
         # Guess parameter position:
         for i, key in enumerate(keys):
-            if key.lower().strip() in field_idx.keys():
+            if key.lower().strip() in field_idx:
                 field_idx[key.lower().strip()] = i
             else:
                 attrs.update({i: key.strip()})
@@ -737,7 +744,7 @@ class ImportCSV(object):
         else:
             self.group_names.append(group_name)
 
-        if group_name in self.Groups.keys():
+        if group_name in self.Groups:
             group = self.Groups[group_name]
             log.debug('Group %s exists.' % group_name)
         else:
@@ -754,7 +761,7 @@ class ImportCSV(object):
             group['type'] = group_type
 
             if len(self.Template):
-                if group_type not in self.Template['resources'].get('GROUP', {}).keys():
+                if group_type not in self.Template['resources'].get('GROUP', {}):
                     raise HydraPluginError(
                         "Group type %s not specified in the template."
                         %(group_type))
@@ -909,8 +916,8 @@ class ImportCSV(object):
         for res_attr in resource['attributes']:
             resource_attrs.update({res_attr.attr_id: res_attr})
 
-        for i in attrs.keys():
-            if attrs[i] in self.Attributes.keys():
+        for i in attrs:
+            if attrs[i] in self.Attributes:
                 attribute = self.Attributes[attrs[i]]
                 if units is not None:
                     if attribute.get('unit', '') != units[i]:
@@ -938,10 +945,10 @@ class ImportCSV(object):
                 self.Attributes[attr['name']]['id'] = attr['id']
 
         # Add data to each attribute
-        for i in attrs.keys():
+        for i in attrs:
             attr = self.Attributes[attrs[i]]
             # Attribute might already exist for resource, use it if it does
-            if attr['id'] in resource_attrs.keys():
+            if attr['id'] in resource_attrs:
                 res_attr = resource_attrs[attr['id']]
             else:
                 res_attr = dict(
@@ -1033,19 +1040,19 @@ class ImportCSV(object):
         type_ids = dict()
         warnings = []
 
-        for type_name in self.nodetype_dict.keys():
+        for type_name in self.nodetype_dict:
             for tmpltype in template.get('types', []):
                 if tmpltype['name'] == type_name:
                     type_ids.update({tmpltype['name']: tmpltype['id']})
                     break
 
-        for type_name in self.linktype_dict.keys():
+        for type_name in self.linktype_dict:
             for tmpltype in template.get('types', []):
                 if tmpltype['name'] == type_name:
                     type_ids.update({tmpltype['name']: tmpltype['id']})
                     break
 
-        for type_name in self.grouptype_dict.keys():
+        for type_name in self.grouptype_dict:
             for tmpltype in template.get('types', []):
                 if tmpltype['name'] == type_name:
                     type_ids.update({tmpltype['name']: tmpltype['id']})
@@ -1236,12 +1243,14 @@ def run():
         for nodefile in csv.node_args:
             write_output("Reading Node file %s" % nodefile)
             csv.read_nodes(nodefile)
+            log.info("Finished reading nodes")
 
         write_progress(4,csv.num_steps)
         if len(csv.link_args) > 0:
             for linkfile in csv.link_args:
                 write_output("Reading Link file %s" % linkfile)
                 csv.read_links(linkfile)
+                log.info("Finished reading links")
         else:
             log.warn("No link files found")
             csv.warnings.append("No link files found")
@@ -1251,6 +1260,7 @@ def run():
             for groupfile in csv.group_args:
                 write_output("Reading Group file %s"% groupfile)
                 csv.read_groups(groupfile)
+                log.info("Finished reading groups")
         else:
             log.warn("No group files specified.")
             csv.warnings.append("No group files specified.")

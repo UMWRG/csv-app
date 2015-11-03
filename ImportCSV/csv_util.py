@@ -5,6 +5,7 @@ import logging
 from HydraLib.hydra_dateutil import get_datetime
 import json
 from dateutil.relativedelta import relativedelta
+import re
 log = logging.getLogger(__name__)
 
 
@@ -23,7 +24,10 @@ def get_file_data(file):
     log.info("Reading file data from: %s", file)
 
     with open(file, mode='r') as csv_file:
-        file_data = csv_file.read().split('\n')
+
+        raw_file_data = csv_file.read()
+        file_data = re.sub(' *, *', ',', raw_file_data)
+        file_data = file_data.split('\n')
         if len(file_data) == 0:
             log.warn("File contains no data")
 
