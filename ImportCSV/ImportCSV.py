@@ -1,20 +1,20 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# (c) Copyright 2013, 2014, 2015 University of Manchester\
-#\
-# ImportCSV is free software: you can redistribute it and/or modify\
-# it under the terms of the GNU General Public License as published by\
-# the Free Software Foundation, either version 3 of the License, or\
-# (at your option) any later version.\
-#\
-# ImportCSV is distributed in the hope that it will be useful,\
-# but WITHOUT ANY WARRANTY; without even the implied warranty of\
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\
-# GNU General Public License for more details.\
-# \
-# You should have received a copy of the GNU General Public License\
-# along with ImportCSV.  If not, see <http://www.gnu.org/licenses/>\
+# (c) Copyright 2013, 2014,2015 University of Manchester
 #
+# ImportCSV is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# ImportCSV is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with ImportCSV.  If not, see <http://www.gnu.org/licenses/>
+#
+
+
 
 """A Hydra plug-in for importing CSV files.
 
@@ -272,7 +272,7 @@ class ImportCSV(object):
                             self.connection.call('get_network', {'network_id':int(network_id), 'include_data':'N', 'summary':'N'})
 
                     if self.Scenario['name'] in [s['name'] for s in self.Network['scenarios']]:
-                        raise HydraPluginError("Network already has a scenario called %s. Chooses another scenario name for this network."%(self.Scenario['name'],))
+                        raise HydraPluginError("Network already has a scenario called %s. Choose another scenario name for this network."%(self.Scenario['name'],))
 
                     # Assign name and description in case anything has changed
                     self.Network['name'] = data[field_idx['name']].strip()
