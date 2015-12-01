@@ -221,17 +221,20 @@ class ImportCSV(object):
                 for i, unit in enumerate(units):
                     units[i] = unit.strip()
 
+            #A projection may not be specified, so we need to account for this
+            projection = None
+
             # We assume a standard order of the network information (Name,
             # Description, attributes,...).
             field_idx = {'id': 0,
                          'name': 1,
                          'description': -1,
-                         'projection':3,
                          'type': 2,
                          'nodes':3,
                          'links':4,
                          'groups':5,
                          'rules':6,
+                         'projection':None,
                          'starttime':None,
                          'endtime':None,
                          'timestep':None
@@ -258,6 +261,9 @@ class ImportCSV(object):
                 if rules != "":
                     self.rule_args = [os.path.join(self.basepath, f) for f in rules.split(';')]
 
+            if 'projection' in lower_keys:
+                projection = data[field_idx['projection']].strip()
+
             if 'starttime' in lower_keys:
                 self.Scenario['start_time'] = data[field_idx['starttime']].strip()
             if 'endtime' in lower_keys:
@@ -278,8 +284,7 @@ class ImportCSV(object):
                     self.Network['name'] = data[field_idx['name']].strip()
                     self.Network['description'] = \
                         data[field_idx['description']].strip()
-                    self.Network['projection'] = \
-                        data[field_idx['projection']].strip()
+                    self.Network['projection'] = projection 
                     self.update_network_flag = True
                     log.info('Loading existing network (ID=%s)' % network_id)
                     # load existing nodes
@@ -319,7 +324,7 @@ class ImportCSV(object):
                     name = network_name,
                     description = \
                     data[field_idx['description']].strip(),
-                    projection = data[field_idx['projection']].strip(),
+                    projection = projection,
                     nodes = [],
                     links = [],
                     scenarios = [],
