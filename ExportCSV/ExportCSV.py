@@ -230,8 +230,9 @@ class ExportCSV(object):
         network_attr_units = []
         for attr_id, attr_name in network_attributes.items():
             network_attr_units.append(self.get_attr_unit(scenario, attr_id, attr_name))
+        
 
-        network_units_heading  = "Units,,,,,,,,,,,%s\n"%(','.join(network_attr_units))
+        network_units_heading  = "Units,,,,,,,,,,%s\n"%(','.join(network_attr_units))
 
         values = ["" for attr_id in network_attributes.keys()]
         metadata_placeholder = ["" for attr_id in network_attributes.keys()]
@@ -588,7 +589,7 @@ class ExportCSV(object):
 
         warnings = []
         if len(data) == 0:
-            return
+            return warnings
 
         metadata_entries = []
         for m in data:
@@ -684,8 +685,8 @@ class ExportCSV(object):
         r_attr_id = resource_attr.id
         metadata = ()
 
-        if resource_attr.attr_is_var == 'Y':
-            return 'NULL', ''
+        #if resource_attr.attr_is_var == 'Y':
+        #    return 'NULL', ''
 
         for rs in scenario.resourcescenarios:
             if rs.resource_attr_id == r_attr_id:
@@ -731,6 +732,11 @@ class ExportCSV(object):
 
                 elif rs.value.type == 'timeseries':
                     value = json.loads(rs.value.value)
+
+                    if value is None or value == {}:
+                        log.debug("Not exporting %s from resource %s as it is empty", attr_name, resource_name)
+                        continue
+
                     col_names = value.keys()
                     file_name = "timeseries_%s_%s.csv"%(resource_attr.ref_key, attr_name)
                     file_loc = os.path.join(scenario.target_dir, file_name)
@@ -740,7 +746,11 @@ class ExportCSV(object):
                         ts_file      = open(file_loc, 'w')
 
                         ts_file.write(",,,%s\n"%','.join(col_names))
-
+                    if not value:
+                        log.critical(attr_name)
+                        log.critical(resource_name)
+                        log.critical(resource_attr)
+                        log.critical(value)
                     timestamps = value[col_names[0]].keys()
                     ts_dict = {}
                     for t in timestamps:
