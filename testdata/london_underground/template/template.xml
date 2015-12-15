@@ -1,6 +1,109 @@
 <?xml version="1.0"?>
 <template_definition>
     <template_name>london_underground</template_name>
+    <layout>	    
+        <item>
+            <name>grouping</name>
+            <value>			    
+			    <name>london_underground</name>
+				<description>London Underground</description>
+				<categories>
+				    <category>
+						<name>Stations</name>
+						<description>Stations</description>
+						<displayname>Stations</displayname>
+                        <groups>
+                                <group>
+                                    <name>Station</name>
+                                    <description>Station</description>
+                                    <displayname>Station</displayname>
+                                    <image>images\sign16.png</image>
+                                </group>
+                        </groups>
+                    </category>
+                    <category>
+						<name>Lines</name>
+						<description>Lines</description>
+						<displayname>Lines</displayname>
+                        <groups>
+                                <group>
+                                    <name>District</name>
+                                    <description>District</description>
+                                    <displayname>District</displayname>
+                                    <image>images\green_line.png</image>
+                                </group>
+                                <group>
+                                    <name>Overground</name>
+                                    <description>Overground</description>
+                                    <displayname>Overground</displayname>
+                                    <image>images\orange_line.png</image>
+                                </group>
+                                <group>
+                                    <name>Piccadilly</name>
+                                    <description>Piccadilly</description>
+                                    <displayname>Piccadilly</displayname>
+                                    <image>images\navy_line.png</image>
+                                </group>
+                                <group>
+                                    <name>Metropolitan</name>
+                                    <description>Piccadilly</description>
+                                    <displayname>Piccadilly</displayname>
+                                    <image>images\purple_line.png</image>
+                                </group>
+                                <group>
+                                    <name>Hammersmith and City</name>
+                                    <description>Hammersmith and City</description>
+                                    <displayname>Hammersmith and City</displayname>
+                                    <image>images\pink_line.png</image>
+                                </group>
+                                <group>
+                                    <name>Circle</name>
+                                    <description>Circle</description>
+                                    <displayname>Circle</displayname>
+                                    <image>images\yellow_line.png</image>
+                                </group>
+                                <group>
+                                    <name>Northern</name>
+                                    <description>Northern</description>
+                                    <displayname>Northern</displayname>
+                                    <image>images\black_line.png</image>
+                                </group>
+                                <group>
+                                    <name>Central</name>
+                                    <description>Central</description>
+                                    <displayname>Central</displayname>
+                                    <image>images\red_line.png</image>
+                                </group>
+                                <group>
+                                    <name>Jubilee</name>
+                                    <description>Jubilee</description>
+                                    <displayname>Jubilee</displayname>
+                                    <image>images\grey_line.png</image>
+                                </group>
+                                <group>
+                                    <name>Bakerloo</name>
+                                    <description>Bakerloo</description>
+                                    <displayname>Bakerloo</displayname>
+                                    <image>images\brown_line.png</image>
+                                </group>
+                                <group>
+                                    <name>Victoria</name>
+                                    <description>Bakerloo</description>
+                                    <displayname>Bakerloo</displayname>
+                                    <image>images\blue_line.png</image>
+                                </group>
+                                <group>
+                                    <name>District</name>
+                                    <description>District</description>
+                                    <displayname>District</displayname>
+                                    <image>images\green_line.png</image>
+                                </group>
+                            </groups>
+				    </category>	
+				</categories>
+            </value>
+        </item>
+    </layout>
     <resources>
         <resource>
             <type>NETWORK</type>
@@ -12,7 +115,11 @@
 			<layout>
 				<item>
 					<name>image</name>
-                    <value>sign16.png</value>
+                    <value>images\sign16.png</value>
+				</item>
+				<item>
+					<name>group</name>
+                    <value>Station</value>
 				</item>
             </layout>
             <attribute>
@@ -29,7 +136,7 @@
             </attribute>
             <attribute>
                 <name>Step Free</name>
-                <dimension/>
+                <dimension></dimension>
                 <is_var>N</is_var>
                 <data_type>descriptor</data_type>
             </attribute>
@@ -39,9 +146,13 @@
             <name>District</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>green</value>
+					<name>image</name>
+					<value>images\green_line.png</value>
                 </item>
+				<item>
+					<name>group</name>
+                    <value>District</value>
+				</item>
             </layout>
         </resource>
         <resource>
@@ -49,9 +160,13 @@
             <name>Overground</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>orange</value>
+					<name>image</name>
+					<value>images\orange_line.png</value>
                 </item>
+				<item>
+					<name>group</name>
+                    <value>Overground</value>
+				</item>
             </layout>
         </resource>
         <resource>
@@ -59,9 +174,13 @@
             <name>Piccadilly</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>navy</value>
+					<name>image</name>
+					<value>images\navy_line.png</value>
                 </item>
+				<item>
+					<name>group</name>
+                    <value>Piccadilly</value>
+				</item>
             </layout>
         </resource>
         <resource>
@@ -69,9 +188,13 @@
             <name>Metropolitan</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>purple</value>
+					<name>image</name>
+					<value>images\purple_line.png</value>
                 </item>
+				<item>
+					<name>group</name>
+                    <value>Metropolitan</value>
+				</item>
             </layout>
         </resource>
         <resource>
@@ -79,9 +202,13 @@
             <name>Hammersmith and City</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>pink</value>
+					<name>image</name>
+					<value>images\pink_line.png</value>
                 </item>
+				<item>
+					<name>group</name>
+                    <value>Hammersmith and City</value>
+				</item>
             </layout>
         </resource>
         <resource>
@@ -89,9 +216,13 @@
             <name>Circle</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>yellow</value>
+					<name>image</name>
+					<value>images\yellow_line.png</value>
                 </item>
+				<item>
+					<name>group</name>
+                    <value>Circle</value>
+				</item>
             </layout>
         </resource>
         <resource>
@@ -99,9 +230,13 @@
             <name>Northern</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>black</value>
+					<name>image</name>
+					<value>images\black_line.png</value>
                 </item>
+				<item>
+					<name>group</name>
+                    <value>Northern</value>
+				</item>
             </layout>
         </resource>
         <resource>
@@ -109,9 +244,13 @@
             <name>Central</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>red</value>
+					<name>image</name>
+					<value>images\red_line.png</value>
                 </item>
+				<item>
+					<name>group</name>
+                    <value>Central</value>
+				</item>
             </layout>
         </resource>
         <resource>
@@ -119,9 +258,13 @@
             <name>Jubilee</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>grey</value>
+					<name>image</name>
+					<value>images\grey_line.png</value>
                 </item>
+				<item>
+					<name>group</name>
+                    <value>Jubilee</value>
+				</item>
             </layout>
         </resource>
         <resource>
@@ -129,9 +272,13 @@
             <name>Bakerloo</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>brown</value>
+					<name>image</name>
+					<value>images\brown_line.png</value>
                 </item>
+				<item>
+					<name>group</name>
+                    <value>Bakerloo</value>
+				</item>
             </layout>
         </resource>
         <resource>
@@ -139,9 +286,13 @@
             <name>Victoria</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>blue</value>
+					<name>image</name>
+					<value>images\blue_line.png</value>
                 </item>
+				<item>
+					<name>group</name>
+                    <value>Victoria</value>
+				</item>
             </layout>
         </resource>
         <resource>
@@ -149,8 +300,8 @@
             <name>District</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>green</value>
+					<name>image</name>
+					<value>images\green_line.png</value>
                 </item>
             </layout>
         </resource>
@@ -159,8 +310,8 @@
             <name>Overground</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>orange</value>
+					<name>image</name>
+					<value>images\orange_line.png</value>
                 </item>
             </layout>
         </resource>
@@ -169,8 +320,8 @@
             <name>Piccadilly</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>navy</value>
+					<name>image</name>
+					<value>images\navy_line.png</value>
                 </item>
             </layout>
         </resource>
@@ -179,8 +330,8 @@
             <name>Metropolitan</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>purple</value>
+					<name>image</name>
+					<value>images\purple_line.png</value>
                 </item>
             </layout>
         </resource>
@@ -189,8 +340,8 @@
             <name>Hammersmith and City</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>pink</value>
+					<name>image</name>
+					<value>images\pink_line.png</value>
                 </item>
             </layout>
         </resource>
@@ -199,8 +350,8 @@
             <name>Circle</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>yellow</value>
+					<name>image</name>
+					<value>images\yellow_line.png</value>
                 </item>
             </layout>
         </resource>
@@ -209,8 +360,8 @@
             <name>Northern</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>black</value>
+					<name>image</name>
+					<value>images\black_line.png</value>
                 </item>
             </layout>
         </resource>
@@ -219,8 +370,8 @@
             <name>Central</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>red</value>
+					<name>image</name>
+					<value>images\red_line.png</value>
                 </item>
             </layout>
         </resource>
@@ -229,8 +380,8 @@
             <name>Jubilee</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>grey</value>
+					<name>image</name>
+					<value>images\grey_line.png</value>
                 </item>
             </layout>
         </resource>
@@ -239,8 +390,8 @@
             <name>Bakerloo</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>brown</value>
+					<name>image</name>
+					<value>images\brown_line.png</value>
                 </item>
             </layout>
         </resource>
@@ -249,8 +400,8 @@
             <name>Victoria</name>
 			<layout>
 				<item>
-					<name>color</name>
-					<value>blue</value>
+					<name>image</name>
+					<value>images\blue_line.png</value>
                 </item>
             </layout>
         </resource>
