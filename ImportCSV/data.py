@@ -338,7 +338,7 @@ def get_data_columns(filedata):
     """
     data_columns = None
     header = filedata[0]
-    compressed_header = header[0].replace(' ', '').lower()
+    compressed_header = ','.join(header).replace(' ', '').lower()
     #Has a header been specified?
     if compressed_header.startswith('arraydescription') or \
         compressed_header.startswith('timeseriesdescription') or \
