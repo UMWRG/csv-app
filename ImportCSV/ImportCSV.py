@@ -96,7 +96,7 @@ class ImportCSV(object):
         self.connection = JsonConnection(url)
         if session_id is not None:
             log.info("Using existing session %s", session_id)
-            self.connection.session_id=session_id
+            self.connection.sessionid=session_id
         else:
             self.connection.login()
 
