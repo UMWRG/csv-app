@@ -7,8 +7,6 @@ includes = ["encodings.utf_8",
             "lxml.etree",
             "ConfigParser",
             "suds",
-            "HydraLib",
-            "HydraLib.util",
             "numpy",
             ]
 

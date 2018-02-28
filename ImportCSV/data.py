@@ -14,19 +14,21 @@
 # along with ImportCSV.  If not, see <http://www.gnu.org/licenses/>
 #
 
-
-import logging
 import os
-from datetime import datetime
+import logging
 import json
+import re
+from datetime import datetime
+
+import pytz
 import numpy as np
 import pandas as pd
-from HydraLib.HydraException import HydraPluginError
 
-from HydraLib import config, hydra_dateutil
+from hydra_base.exceptions import HydraPluginError
+from hydra_base.util import config, hydra_dateutil
+
 from csv_util import validate_value
-import pytz
-import re
+
 
 global seasonal_key
 seasonal_key = None
@@ -51,8 +53,6 @@ def create_dataset(value,
                   ):
 
     resourcescenario = dict()
-
-   
 
     global seasonal_key
     if seasonal_key is None:
@@ -131,14 +131,14 @@ def create_dataset(value,
                 else:
                     if is_timeseries(data):
                         data_columns = get_data_columns(filedata)
-                         
+
                         ts = create_timeseries( data,
                                                 restriction_dict=restriction_dict,
                                                 data_columns=data_columns,
                                                 filename=value,
                                                 timezone=timezone)
-                       
-                        dataset['type'] = 'timeseries' 
+
+                        dataset['type'] = 'timeseries'
                         dataset['value'] = ts
                     else:
                         dataset['type'] = 'array'
@@ -159,7 +159,7 @@ def create_dataset(value,
             dataset['type'] = 'descriptor'
             desc = create_descriptor(value, restriction_dict)
             dataset['value'] = desc
-    
+
     if unit is not None:
         dataset['unit'] = unit
     if dimension is not None:
@@ -202,12 +202,12 @@ def create_descriptor(value, restriction_dict={}):
 def create_timeseries(data, restriction_dict={}, data_columns=None, filename="", timezone=pytz.utc):
     if len(data) == 0:
         return None
-    
+
     if data_columns is not None:
         col_headings = data_columns
     else:
         col_headings =[str(idx) for idx in range(len(data[0][2:]))]
-    
+
     date = data[0][0]
     global time_formats
     timeformat = time_formats.get(date)
@@ -216,17 +216,17 @@ def create_timeseries(data, restriction_dict={}, data_columns=None, filename="",
         time_formats[date] = timeformat
 
     seasonal = False
-    
+
     if 'XXXX' in timeformat or seasonal_key in timeformat:
         seasonal = True
-    
+
     ts_values = {}
     for col in col_headings:
         ts_values[col] = {}
     ts_times = [] # to check for duplicae timestamps in a timeseries.
     timedata = data
     for dataset in timedata:
-        
+
         if len(dataset) == 0 or dataset[0] == '#':
             continue
 
@@ -270,7 +270,7 @@ def create_timeseries(data, restriction_dict={}, data_columns=None, filename="",
     timeseries = json.dumps(ts_values)
 
     validate_value(pd.read_json(timeseries), restriction_dict)
-    
+
 
     return timeseries
 
@@ -313,8 +313,8 @@ def create_array(dataset, restriction_dict={}):
 
 def is_timeseries(data):
     """
-    Check whether a piece of data is a timeseries by trying to guess its
-    date format. If that fails, it's not a time series.
+        Check whether a piece of data is a timeseries by trying to guess its
+        date format. If that fails, it's not a time series.
     """
     try:
         date = data[0][0]
@@ -343,7 +343,7 @@ def get_data_columns(filedata):
     if compressed_header.startswith('arraydescription') or \
         compressed_header.startswith('timeseriesdescription') or \
         compressed_header.startswith(','):
-        
+
         #Get rid of the first column, which is the 'arraydescription' bit
         header_columns = header[1:]
         data_columns = []

@@ -17,26 +17,31 @@
 #
 
 
-
-"""A Hydra plug-in for exporting a hydra network to CSV files.
-
+"""
+    A Hydra plug-in for exporting a hydra network to CSV files.
 """
 
-import argparse as ap
-import logging
-import pytz
-
-from HydraLib import PluginLib
-from HydraLib.PluginLib import JsonConnection
-from HydraLib.HydraException import HydraPluginError
-from HydraLib.PluginLib import write_progress, write_output, validate_plugin_xml
-import time
-from numpy import array
 import os, sys
 import json
+import time
+import argparse as ap
+import logging
+
+import pytz
+from numpy import array
+
+from hydra_client.plugin import JsonConnection
+from hydra_client.output import write_progress, \
+                                write_output, \
+                                validate_plugin_xml, \
+                                create_xml_response
+
+from hydra_base.exceptions import HydraPluginError
+
 log = logging.getLogger(__name__)
 
 __location__ = os.path.split(sys.argv[0])[0]
+
 
 class ExportCSV(object):
     """
@@ -64,14 +69,16 @@ class ExportCSV(object):
         if not all_attributes:
             raise HydraPluginError("An error has occurred. Please check that the "
                                    "network and all attributes are available.")
-        
+
         for attr in all_attributes:
             self.attributes[attr.id] = attr.name
 
         self.num_steps = 7
 
+
     def call(self, func, args={}):
         return self.connection.call(func, args)
+
 
     def export(self, network_id, scenario_id, output_folder):
 
@@ -81,8 +88,8 @@ class ExportCSV(object):
             will be exported and the output location will be the desktop.
         """
 
-        write_output("Retrieving Network") 
-        write_progress(2, self.num_steps) 
+        write_output("Retrieving Network")
+        write_progress(2, self.num_steps)
         if network_id is not None:
             #The network ID can be specified to get the network...
             try:
@@ -121,7 +128,7 @@ class ExportCSV(object):
             raise HydraPluginError("Network %s has no scenarios!"%(network))
 
         if scenario_id is not None:
-            write_progress(3, self.num_steps) 
+            write_progress(3, self.num_steps)
             for scenario in network.scenarios:
                 if int(scenario.id) == int(scenario_id):
                     log.info("Exporting Scenario %s"%(scenario.name))
@@ -136,6 +143,7 @@ class ExportCSV(object):
                 self.export_network(network, scenario)
 
         self.files.append(network_dir)
+
 
     def export_network(self, network, scenario):
         """
@@ -163,7 +171,7 @@ class ExportCSV(object):
         network_attr_units = []
         for attr_id, attr_name in network_attributes.items():
             network_attr_units.append(self.get_attr_unit(scenario, attr_id, attr_name))
-        
+
 
         network_units_heading  = "Units,,,,,,,,,,%s\n"%(','.join(network_attr_units))
 
@@ -198,7 +206,7 @@ class ExportCSV(object):
 
         }
 
-        write_progress(4, self.num_steps) 
+        write_progress(4, self.num_steps)
         node_map = dict()
         if network.nodes:
             node_map = self.export_nodes(scenario, network.nodes)
@@ -206,27 +214,27 @@ class ExportCSV(object):
         else:
             log.warning("Network has no nodes!")
 
-        write_progress(5, self.num_steps) 
+        write_progress(5, self.num_steps)
         link_map = dict()
         if network.links:
             link_map = self.export_links(scenario, network.links, node_map)
             network_data['links'] = "links.csv"
         else:
             log.warning("Network has no links!")
-        
-        write_progress(6, self.num_steps) 
+
+        write_progress(6, self.num_steps)
         group_map = dict()
         if network.resourcegroups:
             group_map = self.export_resourcegroups(scenario, network.resourcegroups, node_map, link_map)
             network_data['groups'] = "groups.csv"
         else:
             log.warning("Network has no resourcegroups.")
-        
-        write_progress(7, self.num_steps) 
+
+        write_progress(7, self.num_steps)
         rules = self.export_rules(scenario, node_map, link_map, group_map)
         if len(rules) > 0:
             network_data['rules'] = "rules.csv"
-        
+
         network_entry = "%(id)s,%(name)s,%(type)s,%(nodes)s,%(links)s,%(groups)s,%(rules)s%(values)s,%(description)s\n"%network_data
 
         if scenario.get('start_time') is not None and \
@@ -249,10 +257,11 @@ class ExportCSV(object):
         network_file.write(network_heading)
         network_file.write(network_units_heading)
         network_file.write(network_entry)
-        
+
         log.info("Network export complete")
-        
+
         log.info("networks written to file: %s", network_file.name)
+
 
     def export_nodes(self, scenario, nodes):
         write_output("Exporting nodes.")
@@ -265,7 +274,7 @@ class ExportCSV(object):
         #For simplicity, export to a single node & link file.
         #We assume here that fewer files is simpler.
         node_file = open(os.path.join(scenario.target_dir, "nodes.csv"), 'w')
- 
+
         node_attributes = self.get_resource_attributes(nodes)
 
         node_attributes_string = ""
@@ -296,7 +305,7 @@ class ExportCSV(object):
                     idx = node_attributes.keys().index(r_attr.attr_id)
                     values[idx] = value
                     metadata_placeholder[idx] = metadata
-            
+
             if node.types is not None and len(node.types) > 0:
                 node_type = node.types[0]['name']
             else:
@@ -324,8 +333,9 @@ class ExportCSV(object):
         node_file.writelines(node_entries)
 
         log.info("Nodes written to file: %s", node_file.name)
-        
+
         return id_name_map
+
 
     def export_links(self, scenario, links, node_map):
         write_output("Exporting links.")
@@ -399,6 +409,7 @@ class ExportCSV(object):
         log.info("Links written to file: %s", link_file.name)
         return id_name_map
 
+
     def export_resourcegroups(self, scenario, resourcegroups, node_map, link_map):
         """
             Export resource groups into two files.
@@ -469,6 +480,7 @@ class ExportCSV(object):
 
         return id_name_map
 
+
     def export_rules(self, scenario, node_map, link_map, group_map):
         """
             Export rules, which are chunks of text associated with resources and a scenario.
@@ -518,6 +530,7 @@ class ExportCSV(object):
 
         return rule_entries
 
+
     def write_metadata(self, target_file, header, data):
 
         warnings = []
@@ -551,8 +564,9 @@ class ExportCSV(object):
             metadata_file = open(target_file, 'w')
             metadata_file.write(header)
             metadata_file.writelines(metadata_entries)
-        
+
         return warnings
+
 
     def export_resourcegroupitems(self, scenario, group_map, node_map, link_map):
         """
@@ -596,6 +610,7 @@ class ExportCSV(object):
                         attributes[r_attr.attr_id] = attr_name
         return attributes
 
+
     def get_attr_unit(self, scenario, attr_id, attr_name=None):
         """
             Returns the unit of a given resource attribute within a scenario
@@ -609,6 +624,7 @@ class ExportCSV(object):
         log.warning("Unit not found in scenario '%s' for attr: %s", scenario.name, attr_name)
 
         return ''
+
 
     def get_attr_value(self, scenario, resource_attr, attr_name, resource_name):
         """
@@ -633,7 +649,7 @@ class ExportCSV(object):
                         arr_file      = open(file_loc, 'a')
                     else:
                         arr_file      = open(file_loc, 'w')
-                        
+
                         if rs.value.metadata is not None:
                             for k, v in json.loads(rs.value.metadata).items():
                                 if k == 'data_struct':
@@ -718,6 +734,7 @@ class ExportCSV(object):
 
         return ('', '')
 
+
 def commandline_parser():
     parser = ap.ArgumentParser(
         description="""Export a network in Hydra to a set of CSV files.
@@ -760,14 +777,14 @@ if __name__ == '__main__':
     parser = commandline_parser()
     args = parser.parse_args()
     csv = ExportCSV(url=args.server_url, session_id=args.session_id)
-    try:      
-        write_progress(1, csv.num_steps) 
+    try:
+        write_progress(1, csv.num_steps)
         validate_plugin_xml(os.path.join(__location__, 'plugin.xml'))
 
 
         if args.timezone is not None:
             csv.timezone = pytz.timezone(args.timezone)
-    
+
         csv.export(args.network_id, args.scenario_id, args.output_folder)
         message = "Export complete"
     except HydraPluginError as e:
@@ -779,11 +796,11 @@ if __name__ == '__main__':
         log.exception(e)
         errors = [e]
 
-    xml_response = PluginLib.create_xml_response('ExportCSV',
-                                                 args.network_id,
-                                                 [],
-                                                 csv.errors,
-                                                 csv.warnings,
-                                                 message,
-                                                 csv.files)
+    xml_response = create_xml_response('ExportCSV',
+                                       args.network_id,
+                                       [],
+                                       csv.errors,
+                                       csv.warnings,
+                                       message,
+                                       csv.files)
     print xml_response
