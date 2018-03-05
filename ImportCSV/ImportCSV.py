@@ -15,9 +15,8 @@
 #
 
 
-
-"""A Hydra plug-in for importing CSV files.
-
+"""
+    A Hydra plug-in for importing CSV files.
 """
 
 import argparse as ap
@@ -26,21 +25,29 @@ import os, sys
 from datetime import datetime
 import pytz
 
-from HydraLib import PluginLib
-from HydraLib.PluginLib import JsonConnection, write_progress, write_output, validate_plugin_xml, RequestError, validate_template
+from hydra_client.plugin import JsonConnection
+from hydra_client.connection import RequestError
+from hydra_client.resources import temp_ids
+from hydra_client.output import write_progress, \
+                                write_output, \
+                                validate_plugin_xml, \
+                                create_xml_response
 
-from HydraLib.units import validate_resource_attributes
+from hydra_base.lib.units import validate_resource_attributes
+from hydra_base.exceptions import HydraPluginError
 
-from HydraLib.HydraException import HydraPluginError
+from csv_util import get_file_data, \
+                     check_header, \
+                     parse_unit, \
+                     get_scenario_times
 
-from csv_util import get_file_data, check_header, parse_unit, get_scenario_times
 from rules import RuleReader
-
 from data import create_dataset
 
 log = logging.getLogger(__name__)
 
 __location__ = os.path.split(sys.argv[0])[0]
+
 
 class ImportCSV(object):
     """
@@ -100,10 +107,10 @@ class ImportCSV(object):
         else:
             self.connection.login()
 
-        self.node_id  = PluginLib.temp_ids()
-        self.link_id  = PluginLib.temp_ids()
-        self.group_id = PluginLib.temp_ids()
-        self.attr_id  = PluginLib.temp_ids()
+        self.node_id  = temp_ids()
+        self.link_id  = temp_ids()
+        self.group_id = temp_ids()
+        self.attr_id  = temp_ids()
 
         self.units = self.get_dimensions()
 
@@ -166,7 +173,7 @@ class ImportCSV(object):
             status = 'A',
         )
         self.Project = self.connection.call('add_project', {'project':self.Project})
-        self.Project['networks']=[]
+        self.Project['networks'] = []
 
     def create_scenario(self, name=None):
 
@@ -182,7 +189,7 @@ class ImportCSV(object):
         self.Scenario['resourcescenarios'] = []
         self.Scenario['start_time'] = self.start_time
         self.Scenario['end_time']   = self.end_time
-        self.Scenario['time_step']   = self.timestep
+        self.Scenario['time_step']  = self.timestep
 
     def create_network(self, file=None, network_id=None):
         log.info("Reading network data.")
@@ -190,7 +197,7 @@ class ImportCSV(object):
         if file is not None:
 
             self.basepath = os.path.dirname(os.path.realpath(file))
-            
+
             net_data = get_file_data(file)
 
             try:
@@ -230,14 +237,14 @@ class ImportCSV(object):
                          'name': 1,
                          'description': -1,
                          'type': 2,
-                         'nodes':3,
-                         'links':4,
-                         'groups':5,
-                         'rules':6,
-                         'projection':None,
-                         'starttime':None,
-                         'endtime':None,
-                         'timestep':None
+                         'nodes': 3,
+                         'links': 4,
+                         'groups': 5,
+                         'rules': 6,
+                         'projection': None,
+                         'starttime': None,
+                         'endtime': None,
+                         'timestep': None
                          }
             # If the file does not follow the standard, we can at least try to
             # guess what is stored where.
@@ -248,11 +255,11 @@ class ImportCSV(object):
 
             if field_idx['type'] is not None:
                 self.networktype = data[field_idx['type']].strip()
-        
+
             #Identify the node, link and group files to import
             #Remove trailing white space and trailing ';', which can cause issues.
             self.node_args  = data[field_idx['nodes']].strip().strip(';').split(';')
-            if 'links' in lower_keys: 
+            if 'links' in lower_keys:
                 self.link_args  = data[field_idx['links']].strip().strip(';').split(';')
             if 'groups' in lower_keys:
                 self.group_args = data[field_idx['groups']].strip().strip(';').split(';')
@@ -284,7 +291,7 @@ class ImportCSV(object):
                     self.Network['name'] = data[field_idx['name']].strip()
                     self.Network['description'] = \
                         data[field_idx['description']].strip()
-                    self.Network['projection'] = projection 
+                    self.Network['projection'] = projection
                     self.update_network_flag = True
                     log.info('Loading existing network (ID=%s)' % network_id)
                     # load existing nodes
@@ -415,7 +422,7 @@ class ImportCSV(object):
 
     def read_nodes(self, file):
         log.info("Reading Nodes")
-        
+
         node_data = get_file_data(os.path.join(self.basepath, file))
 
         log.info("Node data retrieved")
@@ -482,7 +489,7 @@ class ImportCSV(object):
         nodename = linedata[field_idx['name']].strip()
 
         restrictions = {}
-        
+
         if nodename in self.node_names:
             raise HydraPluginError("Duplicate Node name: %s"%(nodename))
         else:
@@ -519,13 +526,13 @@ class ImportCSV(object):
         if field_idx['type'] is not None:
             node_type = linedata[field_idx['type']].strip()
             node['type'] = node_type
-            
+
             if len(self.Template):
                 if node_type not in self.Template['resources'].get('NODE', {}):
                     raise HydraPluginError(
                         "Node type %s not specified in the template."%
                         (node_type))
-            
+
                 restrictions = self.Template['resources']['NODE'][node_type]['attributes']
             if node_type not in self.nodetype_dict:
                 self.nodetype_dict.update({node_type: (nodename,)})
@@ -574,7 +581,7 @@ class ImportCSV(object):
             units = None
             data_idx = 1
 
-        # Get all the lines after the units line 
+        # Get all the lines after the units line
         data = link_data[data_idx:]
 
         field_idx = {'name': 0,
@@ -620,12 +627,11 @@ class ImportCSV(object):
             link = self.Links[linkname]
             log.debug('Link %s exists.' % linkname)
         else:
-            link = dict(
-                id = self.link_id.next(),
-                name = linkname,
-                description = linedata[field_idx['description']].strip(),
-                attributes = [], 
-            )
+            link = dict( id = self.link_id.next(),
+                         name = linkname,
+                         description = linedata[field_idx['description']].strip(),
+                         attributes = []
+                       )
 
         try:
             fromnode = self.Nodes[linedata[field_idx['from']].strip()]
@@ -652,7 +658,7 @@ class ImportCSV(object):
                     raise HydraPluginError(
                         "Link type %s not specified in the template."
                         %(link_type))
-            
+
                 restrictions = self.Template['resources']['LINK'][link_type]['attributes']
             if link_type not in self.linktype_dict:
                 self.linktype_dict.update({link_type: (linkname,)})
@@ -660,7 +666,7 @@ class ImportCSV(object):
                 self.linktype_dict[link_type] += (linkname,)
         if len(attrs) > 0:
             link = self.add_data(link, attrs, linedata, metadata, units=units, restrictions=restrictions)
-        
+
         return link
 
     def read_groups(self, file):
@@ -725,12 +731,12 @@ class ImportCSV(object):
             #skip any empty lines
             if line.strip() in self.ignorelines:
                 continue
-            try: 
+            try:
                 group = self.read_group_line(line, attrs, field_idx, metadata, units)
             except Exception, e:
                 log.exception(e)
                 raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(os.path.split(file)[-1], line_num+3, e))
-           
+
             self.Groups.update({group['name']: group})
 
     def read_group_line(self, line, attrs, field_idx, metadata, units):
@@ -785,7 +791,6 @@ class ImportCSV(object):
 
 
     def read_group_members(self, file):
-
         """
             The heading of a group file looks like:
             name, type, member.
@@ -810,7 +815,7 @@ class ImportCSV(object):
             units = None
             data_idx = 1
 
-        # Get all the lines after the units line 
+        # Get all the lines after the units line
         data = member_data[data_idx:]
 
         field_idx = {}
@@ -883,7 +888,7 @@ class ImportCSV(object):
         )
 
         return item
-    
+
     def create_attribute(self, name, unit=None):
         """
             Create attribute locally. It will get added in bulk later.
@@ -979,7 +984,7 @@ class ImportCSV(object):
                         dataset_metadata = resource_metadata.get(attrs[i], {})
                     else:
                         dataset_metadata = {}
-                        
+
                     dataset_unit = None
                     dataset_dimension = None
                     if units is not None:
@@ -1025,7 +1030,7 @@ class ImportCSV(object):
                         log.warn(e)
                         self.warnings.extend(e)
 
-        errors = [] 
+        errors = []
         if len(self.Template):
             errors = validate_resource_attributes(resource, self.Attributes, self.Template)
         #resource.attributes = res_attr_array
@@ -1148,9 +1153,7 @@ class ImportCSV(object):
         """
         scen_ids = [s['id'] for s in self.NetworkSummary['scenarios']]
 
-        xml_response = PluginLib.create_xml_response('ImportCSV',
-                                                     self.Network['id'],
-                                                     scen_ids)
+        xml_response = create_xml_response('ImportCSV', self.Network['id'], scen_ids)
 
         print xml_response
 
@@ -1158,7 +1161,7 @@ def commandline_parser():
     parser = ap.ArgumentParser(
         description="""Import a network saved in a set of CSV files into Hydra.
 
-        Written by Philipp Meier <philipp@diemeiers.ch> and 
+        Written by Philipp Meier <philipp@diemeiers.ch> and
         Stephen Knox <stephen.knox@manchester.ac.uk>
         (c) Copyright 2013, University of Manchester.
 
@@ -1243,7 +1246,7 @@ def run():
         csv.create_project(ID=args.project, network_id=args.network_id)
         csv.create_scenario(name=args.scenario)
         csv.create_network(file=args.network, network_id=args.network_id)
-        
+
         write_progress(3,csv.num_steps)
         for nodefile in csv.node_args:
             write_output("Reading Node file %s" % nodefile)
@@ -1278,7 +1281,7 @@ def run():
         else:
             log.warn("No group member files specified.")
             csv.warnings.append("No group member files specified.")
-        
+
         write_progress(7,csv.num_steps)
         write_output("Saving network")
         csv.commit()
@@ -1319,13 +1322,13 @@ def run():
         log.exception(e)
         errors = [e]
 
-    xml_response = PluginLib.create_xml_response('ImportCSV',
-                                                 network_id,
-                                                 scen_ids,
-                                                 errors,
-                                                 csv.warnings,
-                                                 csv.message,
-                                                 csv.files)
+    xml_response = create_xml_response('ImportCSV',
+                                       network_id,
+                                       scen_ids,
+                                       errors,
+                                       csv.warnings,
+                                       csv.message,
+                                       csv.files)
 
     print xml_response
 

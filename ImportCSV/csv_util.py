@@ -14,16 +14,17 @@
 # along with ImportCSV.  If not, see <http://www.gnu.org/licenses/>
 #
 
-
-
-from HydraLib.HydraException import HydraPluginError, HydraError
-from HydraLib import util
 import os
 import logging
-from HydraLib.hydra_dateutil import get_datetime
 import json
-from dateutil.relativedelta import relativedelta
 import re
+
+
+from hydra_base.exceptions import HydraPluginError, HydraError
+from hydra_base import util
+from hydra_base.util.hydra_dateutil import get_datetime
+from dateutil.relativedelta import relativedelta
+
 log = logging.getLogger(__name__)
 
 
@@ -38,7 +39,7 @@ def get_file_data(file):
         return None
 
     file = os.path.realpath(file)
-    
+
     log.info("Reading file data from: %s", file)
 
     with open(file, mode='r') as csv_file:
@@ -53,8 +54,8 @@ def get_file_data(file):
     bad_lines = []
     for i, line in enumerate(file_data):
         line = line.strip()
-        
-        # Ignore comments            
+
+        # Ignore comments
         if len(line) == 0 or line[0] == '#':
             continue
         try:
@@ -127,7 +128,7 @@ def get_scenario_times(dataset):
     time_step   = ""
     diff = second_time - start_time
     end_time   = get_datetime(times[-1])
-    
+
     rd = relativedelta(second_time, start_time).__dict__
     time_order = ['years', 'months', 'days', 'hours', 'minutes', 'seconds', 'microseconds']
     for time_unit in time_order:

@@ -16,15 +16,17 @@
 # along with HydraPlatform.  If not, see <http://www.gnu.org/licenses/>
 #
 
-
-
-from HydraLib.HydraException import HydraPluginError
-from csv_util import get_file_data, check_header
-import logging
-log = logging.getLogger(__name__)
 import os
+import logging
+
+from hydra_base.exceptions import HydraPluginError
+from csv_util import get_file_data, check_header
+
+log = logging.getLogger(__name__)
+
+
 class RuleReader(object):
-    
+
     ignorelines = ['', '\n', '\r']
 
     def __init__(self, connection, scenario_id, network, rule_files):
@@ -79,8 +81,8 @@ class RuleReader(object):
         field_idx = {'name': 0,
                      'type': 1,
                      'resource': 2,
-                     'text':3,
-                     'description':4,
+                     'text': 3,
+                     'description': 4,
                      }
 
 
@@ -89,12 +91,12 @@ class RuleReader(object):
             #skip any empty lines
             if line.strip() in self.ignorelines:
                 continue
-            try: 
+            try:
                 rule = self.read_rule_line(line, field_idx)
             except Exception, e:
                 log.exception(e)
                 raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(os.path.split(file)[-1], line_num+3, e))
-           
+
             self.Rules[rule['name']] = rule
 
         rules = self.connection.call("add_rules", {'scenario_id':self.scenario_id, 'rule_list':self.Rules.values()})
@@ -130,14 +132,13 @@ class RuleReader(object):
             except KeyError:
                 raise HydraPluginError("Rule error: Unknown %s named %s. Please check the name is correct."%(ref_key.lower(), ref_name))
 
-        rule = dict(
-            id          = rule_id,
-            name        = rule_name,
-            description = rule_data[field_idx['description']].strip(),
-            text        = rule_data[field_idx['text']].strip(),
-            ref_key     = ref_key, 
-            ref_id      = ref_id 
-        )
+        rule = dict(id          = rule_id,
+                    name        = rule_name,
+                    description = rule_data[field_idx['description']].strip(),
+                    text        = rule_data[field_idx['text']].strip(),
+                    ref_key     = ref_key,
+                    ref_id      = ref_id
+                   )
 
         return rule
 

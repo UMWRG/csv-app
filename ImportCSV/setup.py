@@ -18,7 +18,7 @@ setup(
     license = "GPLv3",
     keywords = "water hydraplatform",
     long_description=read('README'),
-    install_requires = ["pytz", "HydraLib"],
+    install_requires = ["pytz", "hydra_client"],
     classifiers=[
                     'Programming Language :: Python',
                     'Programming Language :: Python :: Implementation :: PyPy',
