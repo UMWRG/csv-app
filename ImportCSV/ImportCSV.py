@@ -100,7 +100,7 @@ class ImportCSV(object):
         self.start_time = None
         self.end_time   = None
         self.timestep   = None
-        
+
         if url is not None:
             self.connection = RemoteJSONConnection(url)
             if session_id is not None:
@@ -108,7 +108,7 @@ class ImportCSV(object):
                 self.connection.sessionid=session_id
         else:
             self.connection = JSONConnection()
-        
+
         self.connection.login()
 
         self.node_id  = temp_ids()
@@ -130,10 +130,11 @@ class ImportCSV(object):
 
     def get_dimensions(self):
         units = {}
-        dimensions = self.connection.get_all_dimensions()
-        for dimension_name, unit_names in dimensions.items():
-            for unit_name in unit_names:
-                units[unit_name] = dimension_name
+        dimensions = self.connection.get_dimensions()
+        for dimension in dimensions:
+            for unit in dimension.units:
+                units[unit.abbreviation] = unit
+                unit.dimension = dimension
         return units
 
     def create_project(self, ID=None, network_id=None):
@@ -142,7 +143,7 @@ class ImportCSV(object):
                 ID = int(ID)
                 try:
                     self.Project = self.connection.get_project(project_id=ID)
-                    networks = self.connection.get_networks(project_id=ID, 
+                    networks = self.connection.get_networks(project_id=ID,
                                                             include_data='N')
                     self.Project['networks'] = networks
                     log.info('Loading existing project (ID=%s)' % ID)
@@ -350,7 +351,7 @@ class ImportCSV(object):
             for i, key in enumerate(keys):
                 if i not in field_idx.values():
                     attrs[i]=key.strip()
-            
+
             log.info("Adding data to network.")
 
             if len(attrs) > 0:
@@ -456,7 +457,7 @@ class ImportCSV(object):
         else:
             units = None
             data_idx = 1
-        # Get all the lines after the units line. 
+        # Get all the lines after the units line.
         data = node_data[data_idx:]
 
         field_idx = {'name': 0,
@@ -907,7 +908,7 @@ class ImportCSV(object):
                 #Dimension is saved in DB.
                 if unit.strip() not in ('-' ,''):
                     basic_unit, factor = parse_unit(unit.strip())
-                    attribute['dimension'] = self.units.get(basic_unit)
+                    attribute['dimension_id'] = self.units.get(basic_unit).id
 
         except Exception as e:
             raise HydraPluginError("Invalid attribute %s %s: error was: %s"%(name,unit,e))
@@ -955,7 +956,7 @@ class ImportCSV(object):
             self.add_attrs = False
             for attr in added_attributes:
                 self.Attributes[attr['name'].lower()]['id'] = attr['id']
-        
+
         # Add data to each attribute
         for i in attrs:
             attr = self.Attributes[attrs[i].lower()]
@@ -987,24 +988,21 @@ class ImportCSV(object):
                     else:
                         dataset_metadata = {}
 
-                    dataset_unit = None
-                    dataset_dimension = None
+                    unit_id = None
                     if units is not None:
                         if units[i] is not None and len(units[i].strip()) > 0 and units[i].strip() != '-':
-                            dimension = attr.get('dimension')
+                            dimension = attr.get('dimension_id')
                             if dimension is None:
                                 log.debug("Dimension for unit %s is null. ", units[i])
                         else:
                             dimension = None
 
-                        dataset_dimension = dimension
-                        dataset_unit      = units[i]
+                        unit_id      = self.units[i].id
 
                     try:
                         dataset = create_dataset(data[i],
                                                   res_attr,
-                                                  dataset_unit,
-                                                  dataset_dimension,
+                                                  unit_id,
                                                   resource['name'],
                                                   dataset_metadata,
                                                   restrictions.get(attr['name'], {}).get('restrictions', {}),
@@ -1044,7 +1042,7 @@ class ImportCSV(object):
 
     def set_resource_types(self):
         log.info("Setting resource types based on %s." % self.template_id)
-        
+
         if self.template_id is not None:
             template = self.connection.get_template(template_id=self.template_id)
         else:

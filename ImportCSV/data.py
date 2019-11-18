@@ -40,8 +40,7 @@ log = logging.getLogger(__name__)
 
 def create_dataset(value,
                    resource_attr,
-                   unit,
-                   dimension,
+                   unit_id,
                    resource_name,
                    metadata,
                    restriction_dict,
@@ -68,8 +67,7 @@ def create_dataset(value,
     dataset          = dict(
         id=None,
         type=None,
-        unit=None,
-        dimension=None,
+        unit_id=None,
         name=dataset_name,
         value=None,
         hidden='N',
@@ -80,10 +78,6 @@ def create_dataset(value,
     resourcescenario['resource_attr_id'] = resource_attr['id']
 
     value = value
-    if unit is not None:
-        unit = unit
-        if len(unit) == 0:
-            unit = None
     data_columns = None
     try:
         float(value)
@@ -160,10 +154,8 @@ def create_dataset(value,
             desc = create_descriptor(value, restriction_dict)
             dataset['value'] = desc
 
-    if unit is not None:
-        dataset['unit'] = unit
-    if dimension is not None:
-        dataset['dimension'] = dimension
+    if unit_id is not None:
+        dataset['unit_id'] = unit_id
 
     dataset['name'] = default_name
 
