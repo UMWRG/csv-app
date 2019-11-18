@@ -145,7 +145,7 @@ def create_dataset(value,
                         if len(filedata) > 0:
                             try:
                                 dataset['value'] = create_array(data[0], restriction_dict)
-                            except Exception, e:
+                            except Exception as e:
                                 log.exception(e)
                                 raise HydraPluginError("There is a value "
                                                        "error in %s. "
@@ -155,7 +155,7 @@ def create_dataset(value,
                             dataset['value'] = None
             else:
                 raise IOError
-        except IOError, e:
+        except IOError as e:
             dataset['type'] = 'descriptor'
             desc = create_descriptor(value, restriction_dict)
             dataset['value'] = desc
@@ -167,7 +167,7 @@ def create_dataset(value,
 
     dataset['name'] = default_name
 
-    resourcescenario['value'] = dataset
+    resourcescenario['dataset'] = dataset
 
     m = {}
 

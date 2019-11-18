@@ -60,9 +60,8 @@ def get_file_data(file):
             continue
         try:
             line = ''.join([x if ord(x) < 128 else ' ' for x in line])
-            line.decode('utf-8')
             new_file_data.append(line)
-        except UnicodeDecodeError, e:
+        except UnicodeDecodeError as e:
             #If there are unknown characters in this line, save the line
             #and the column in the line where the bad character has occurred.
             bad_lines.append((i+1, e.start))
@@ -104,7 +103,7 @@ def validate_value(value, restriction_dict):
 
     try:
         util.validate_value(restriction_dict, value)
-    except HydraError, e:
+    except HydraError as e:
         log.exception(e)
         raise HydraPluginError(e.message)
 

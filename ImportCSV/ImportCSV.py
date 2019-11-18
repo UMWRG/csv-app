@@ -25,14 +25,15 @@ import os, sys
 from datetime import datetime
 import pytz
 
-from hydra_client.plugin import JsonConnection
-from hydra_client.connection import RequestError
+from hydra_client.connection import JSONConnection, RemoteJSONConnection
+from hydra_client.exception import RequestError
 from hydra_client.resources import temp_ids
 from hydra_client.output import write_progress, \
                                 write_output, \
                                 validate_plugin_xml, \
                                 create_xml_response
 
+from hydra_base.lib.objects import JSONObject
 from hydra_base.lib.units import validate_resource_attributes
 from hydra_base.exceptions import HydraPluginError
 
@@ -99,13 +100,16 @@ class ImportCSV(object):
         self.start_time = None
         self.end_time   = None
         self.timestep   = None
-
-        self.connection = JsonConnection(url)
-        if session_id is not None:
-            log.info("Using existing session %s", session_id)
-            self.connection.sessionid=session_id
+        
+        if url is not None:
+            self.connection = RemoteJSONConnection(url)
+            if session_id is not None:
+                log.info("Using existing session %s", session_id)
+                self.connection.sessionid=session_id
         else:
-            self.connection.login()
+            self.connection = JSONConnection()
+        
+        self.connection.login()
 
         self.node_id  = temp_ids()
         self.link_id  = temp_ids()
@@ -126,10 +130,10 @@ class ImportCSV(object):
 
     def get_dimensions(self):
         units = {}
-        dimensions = self.connection.call('get_all_dimensions', {})
-        for dimension in dimensions:
-            for unit_name in dimension['units']:
-                units[unit_name] = dimension['name']
+        dimensions = self.connection.get_all_dimensions()
+        for dimension_name, unit_names in dimensions.items():
+            for unit_name in unit_names:
+                units[unit_name] = dimension_name
         return units
 
     def create_project(self, ID=None, network_id=None):
@@ -137,9 +141,9 @@ class ImportCSV(object):
             try:
                 ID = int(ID)
                 try:
-                    self.Project = self.connection.call('get_project', {'project_id':ID})
-                    networks = self.connection.call('get_networks', {'project_id':ID,
-                                                                     'include_data':'N'})
+                    self.Project = self.connection.get_project(project_id=ID)
+                    networks = self.connection.get_networks(project_id=ID, 
+                                                            include_data='N')
                     self.Project['networks'] = networks
                     log.info('Loading existing project (ID=%s)' % ID)
                     return
@@ -154,7 +158,7 @@ class ImportCSV(object):
             try:
                 network_id = int(network_id)
                 try:
-                    self.Project = self.connection.call('get_network_project', {'network_id':network_id})
+                    self.Project = self.connection.get_network_project(network_id=network_id)
                     log.info('Loading existing project with network ID(ID=%s)' % network_id)
                     return
                 except RequestError:
@@ -165,14 +169,14 @@ class ImportCSV(object):
                 self.warnings.append(
                     'Project ID not valid. Creating new project')
 
-        self.Project = dict(
+        self.Project = JSONObject(dict(
             name = "CSV import at %s" % (datetime.now()),
             description = \
             "Project created by the %s plug-in, %s." % \
                 (self.__class__.__name__, datetime.now()),
             status = 'A',
-        )
-        self.Project = self.connection.call('add_project', {'project':self.Project})
+        ))
+        self.Project = self.connection.add_project(project=self.Project)
         self.Project['networks'] = []
 
     def create_scenario(self, name=None):
@@ -282,7 +286,7 @@ class ImportCSV(object):
                 # Check if network exists on the server.
                 try:
                     self.Network = \
-                            self.connection.call('get_network', {'network_id':int(network_id), 'include_data':'N', 'summary':'N'})
+                            self.connection.get_network(network_id=int(network_id), include_data='N', summary='N')
 
                     if self.Scenario['name'] in [s['name'] for s in self.Network['scenarios']]:
                         raise HydraPluginError("Network already has a scenario called %s. Choose another scenario name for this network."%(self.Scenario['name'],))
@@ -326,7 +330,7 @@ class ImportCSV(object):
                         raise HydraPluginError("Project %s already has a network called %s"%(self.Project['name'], network_name))
 
                 # Create a new network
-                self.Network = dict(
+                self.Network = JSONObject(dict(
                     project_id = self.Project['id'],
                     name = network_name,
                     description = \
@@ -338,15 +342,15 @@ class ImportCSV(object):
                     resourcegroups = [],
                     attributes = [],
                     type=data[field_idx['type']].strip(),
-                )
+                ))
 
             # Everything that is not name or description is an attribute
             attrs = dict()
 
             for i, key in enumerate(keys):
                 if i not in field_idx.values():
-                    attrs.update({i: key.strip()})
-
+                    attrs[i]=key.strip()
+            
             log.info("Adding data to network.")
 
             if len(attrs) > 0:
@@ -381,7 +385,7 @@ class ImportCSV(object):
                 data_line = data_line.replace('\r', '')
                 split_data = data_line.split(',')
                 metadata_dict[split_data[0].strip()] = self.get_metadata_as_dict(keys[1:], split_data[1:])
-            except Exception, e:
+            except Exception as e:
                 raise HydraPluginError("Malformed metadata for %s, line %s of %s"%(e.message, line_num+2, filename))
         return metadata_dict
 
@@ -413,7 +417,7 @@ class ImportCSV(object):
                             key = 'name'
                         val = keyval[1].strip()
                         metadata_dict[attr.strip()][key] = val
-            except Exception, e:
+            except Exception as e:
                 log.critical(e)
                 log.critical("Make sure the CSV file is formatted correctly.")
                 raise Exception(attr)
@@ -478,7 +482,7 @@ class ImportCSV(object):
 
             try:
                 node = self.read_node_line(line, attrs, field_idx, metadata, units)
-            except Exception, e:
+            except Exception as e:
                 log.exception(e)
                 raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(os.path.split(file)[-1], line_num+3, e))
 
@@ -500,7 +504,7 @@ class ImportCSV(object):
             log.debug('Node %s exists.' % nodename)
         else:
             node = dict(
-                id = self.node_id.next(),
+                id = self.node_id.__next__(),
                 name = nodename,
                 description = linedata[field_idx['description']].strip(),
                 attributes = [],
@@ -605,7 +609,7 @@ class ImportCSV(object):
 
             try:
                 link = self.read_link_line(line, attrs, field_idx, metadata, units)
-            except Exception, e:
+            except Exception as e:
                 log.exception(e)
                 raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(os.path.split(file)[-1], line_num+3, e))
 
@@ -627,7 +631,7 @@ class ImportCSV(object):
             link = self.Links[linkname]
             log.debug('Link %s exists.' % linkname)
         else:
-            link = dict( id = self.link_id.next(),
+            link = dict( id = self.link_id.__next__(),
                          name = linkname,
                          description = linedata[field_idx['description']].strip(),
                          attributes = []
@@ -733,7 +737,7 @@ class ImportCSV(object):
                 continue
             try:
                 group = self.read_group_line(line, attrs, field_idx, metadata, units)
-            except Exception, e:
+            except Exception as e:
                 log.exception(e)
                 raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(os.path.split(file)[-1], line_num+3, e))
 
@@ -760,7 +764,7 @@ class ImportCSV(object):
             log.debug('Group %s exists.' % group_name)
         else:
             group = dict(
-                id = self.group_id.next(),
+                id = self.group_id.__next__(),
                 name = group_name,
                 description = group_data[field_idx['description']].strip(),
                 attributes = [],
@@ -840,7 +844,7 @@ class ImportCSV(object):
                 item = self.read_group_member_line(line, field_idx, type_map)
                 if item is None:
                     continue
-            except Exception, e:
+            except Exception as e:
                 log.exception(e)
                 raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(os.path.split(file)[-1], line_num+3, e))
 
@@ -894,18 +898,18 @@ class ImportCSV(object):
             Create attribute locally. It will get added in bulk later.
         """
         try:
-            attribute = dict(
+            attribute = JSONObject(dict(
                 name = name.strip(),
-            )
+            ))
             if unit is not None and len(unit.strip()) > 0:
                 #Unit added to attribute definition for validation only. Not saved in DB
                 attribute['unit'] = unit.strip()
                 #Dimension is saved in DB.
                 if unit.strip() not in ('-' ,''):
                     basic_unit, factor = parse_unit(unit.strip())
-                    attribute['dimen'] = self.units.get(basic_unit)
+                    attribute['dimension'] = self.units.get(basic_unit)
 
-        except Exception,e:
+        except Exception as e:
             raise HydraPluginError("Invalid attribute %s %s: error was: %s"%(name,unit,e))
 
         return attribute
@@ -927,20 +931,19 @@ class ImportCSV(object):
             resource_attrs.update({res_attr.attr_id: res_attr})
 
         for i in attrs:
-            if attrs[i] in self.Attributes:
-                attribute = self.Attributes[attrs[i]]
+            if attrs[i].lower() in self.Attributes:
+                attribute = self.Attributes[attrs[i].lower()]
                 if units is not None:
                     if attribute.get('unit', '') != units[i]:
                         raise HydraPluginError("Mismatch of units for attribute %s."
                               " Elsewhere units are defined with unit %s, but here units "
                               "are %s"%(attrs[i], attribute.get('unit'), units[i]))
-                #attribute = self.create_attribute(attrs[i])
             else:
                 if units is not None:
                     attribute = self.create_attribute(attrs[i], units[i])
                 else:
                     attribute = self.create_attribute(attrs[i])
-                self.Attributes[attrs[i]] =  attribute
+                self.Attributes[attrs[i].lower()] =  attribute
             attributes.append(attribute)
 
         # Add all attributes. If they exist already, we retrieve the real id.
@@ -948,31 +951,30 @@ class ImportCSV(object):
         # add_attrs flag).
 
         if self.add_attrs:
-            log.info(attributes)
-            attributes = self.connection.call('add_attributes', {'attrs':attributes})
+            added_attributes = self.connection.add_attributes(attrs=attributes)
             self.add_attrs = False
-            for attr in attributes:
-                self.Attributes[attr['name']]['id'] = attr['id']
-
+            for attr in added_attributes:
+                self.Attributes[attr['name'].lower()]['id'] = attr['id']
+        
         # Add data to each attribute
         for i in attrs:
-            attr = self.Attributes[attrs[i]]
+            attr = self.Attributes[attrs[i].lower()]
             # Attribute might already exist for resource, use it if it does
             if attr['id'] in resource_attrs:
                 res_attr = resource_attrs[attr['id']]
             else:
-                res_attr = dict(
-                    id = self.attr_id.next(),
+                res_attr = JSONObject(dict(
+                    id = self.attr_id.__next__(),
                     attr_id = attr['id'],
                     attr_is_var = 'N',
-                )
+                ))
             # create dataset and assign to attribute (if not empty)
             if len(data[i].strip()) > 0:
 
                 resource['attributes'].append(res_attr)
 
                 if data[i].strip() in ('NULL',
-                                       'I AM NOT A NUMBER! I AM A FREE MAN!'):
+                                'I AM NOT A NUMBER! I AM A FREE MAN!'):
 
                     res_attr['attr_is_var'] = 'Y'
 
@@ -989,7 +991,7 @@ class ImportCSV(object):
                     dataset_dimension = None
                     if units is not None:
                         if units[i] is not None and len(units[i].strip()) > 0 and units[i].strip() != '-':
-                            dimension = attr.get('dimen')
+                            dimension = attr.get('dimension')
                             if dimension is None:
                                 log.debug("Dimension for unit %s is null. ", units[i])
                         else:
@@ -1014,19 +1016,19 @@ class ImportCSV(object):
                                                 )
                         #Extrapolate the scenario start time, end time and time step from the first
                         #timeseries we find
-                        if dataset['value']['type'] == 'timeseries' and self.Scenario.get('start_time') is None:
+                        if dataset['dataset']['type'] == 'timeseries' and self.Scenario.get('start_time') is None:
                             start_time, end_time, time_step = get_scenario_times(dataset)
                             self.Scenario['start_time'] = start_time
                             self.Scenario['end_time']   = end_time
                             self.Scenario['time_step']   = time_step
 
                         #This is not saved in the DB. It's used for validation in validate_resource_attributes.
-                        res_attr['data_type'] = dataset['value']['type']
+                        res_attr['data_type'] = dataset['dataset']['type']
 
                         if dataset is not None:
                             self.Scenario['resourcescenarios'].append(dataset)
 
-                    except HydraPluginError, e:
+                    except HydraPluginError as e:
                         log.warn(e)
                         self.warnings.extend(e)
 
@@ -1040,37 +1042,38 @@ class ImportCSV(object):
 
         return resource
 
-    def set_resource_types(self, template_file):
-        log.info("Setting resource types based on %s." % template_file)
-        with open(template_file) as f:
-            xml_template = f.read()
-
-        template = self.connection.call('upload_template_xml', {'template_xml':xml_template})
+    def set_resource_types(self):
+        log.info("Setting resource types based on %s." % self.template_id)
+        
+        if self.template_id is not None:
+            template = self.connection.get_template(template_id=self.template_id)
+        else:
+            raise HydraPluginError("No template specified. Please supply a template")
 
         type_ids = dict()
         warnings = []
 
         for type_name in self.nodetype_dict:
-            for tmpltype in template.get('types', []):
+            for tmpltype in template.get('templatetypes', []):
                 if tmpltype['name'] == type_name:
-                    type_ids.update({tmpltype['name']: tmpltype['id']})
+                    type_ids[tmpltype['name']] = tmpltype['id']
                     break
 
         for type_name in self.linktype_dict:
-            for tmpltype in template.get('types', []):
+            for tmpltype in template.get('templatetypes', []):
                 if tmpltype['name'] == type_name:
-                    type_ids.update({tmpltype['name']: tmpltype['id']})
+                    type_ids[tmpltype['name']] = tmpltype['id']
                     break
 
         for type_name in self.grouptype_dict:
-            for tmpltype in template.get('types', []):
+            for tmpltype in template.get('templatetypes', []):
                 if tmpltype['name'] == type_name:
-                    type_ids.update({tmpltype['name']: tmpltype['id']})
+                    type_ids[tmpltype['name']] = tmpltype['id']
                     break
 
-        for tmpltype in template.get('types', []):
+        for tmpltype in template.get('templatetypes', []):
             if tmpltype['name'] == self.networktype:
-                type_ids.update({tmpltype['name']: tmpltype['id']})
+                type_ids[tmpltype['name']] = tmpltype['id']
                 break
 
         args = []
@@ -1078,11 +1081,11 @@ class ImportCSV(object):
         if self.networktype == '':
             warnings.append("No network type specified")
         elif type_ids.get(self.networktype):
-            args.append(dict(
+            args.append(JSONObject(dict(
                 ref_key = 'NETWORK',
                 ref_id  = self.NetworkSummary['id'],
                 type_id = type_ids[self.networktype],
-            ))
+            )))
         else:
             warnings.append("Network type %s not found"%(self.networktype))
 
@@ -1090,11 +1093,11 @@ class ImportCSV(object):
             for node in self.NetworkSummary['nodes']:
                 for typename, node_name_list in self.nodetype_dict.items():
                     if type_ids[typename] and node['name'] in node_name_list:
-                        args.append(dict(
+                        args.append(JSONObject(dict(
                             ref_key = 'NODE',
                             ref_id  = node['id'],
                             type_id = type_ids[typename],
-                        ))
+                        )))
         else:
             warnings.append("No nodes found when setting template types")
 
@@ -1102,11 +1105,11 @@ class ImportCSV(object):
             for link in self.NetworkSummary['links']:
                 for typename, link_name_list in self.linktype_dict.items():
                     if type_ids[typename] and link['name'] in link_name_list:
-                        args.append(dict(
+                        args.append(JSONObject(dict(
                             ref_key = 'LINK',
                             ref_id  = link['id'],
                             type_id = type_ids[typename],
-                        ))
+                        )))
         else:
            warnings.append("No links found when setting template types")
 
@@ -1114,14 +1117,16 @@ class ImportCSV(object):
             for group in self.NetworkSummary['resourcegroups']:
                 for typename, group_name_list in self.grouptype_dict.items():
                     if type_ids[typename] and group['name'] in group_name_list:
-                        args.append(dict(
+                        args.append(JSONObject(dict(
                             ref_key = 'GROUP',
                             ref_id  = group['id'],
                             type_id = type_ids[typename],
-                        ))
+                        )))
         else:
            warnings.append("No resourcegroups found when setting template types")
-        self.connection.call('assign_types_to_resources', {'resource_types':args})
+
+        self.connection.assign_types_to_resources(resource_types=args)
+
         return warnings
 
     def commit(self):
@@ -1136,11 +1141,11 @@ class ImportCSV(object):
         log.info("Network created for sending")
 
         if self.update_network_flag:
-            self.NetworkSummary = self.connection.call('update_network', {'net':self.Network})
+            self.NetworkSummary = self.connection.update_network(network=JSONObject(self.Network))
             log.info("Network %s updated.", self.Network['id'])
         else:
             log.info("Adding Network")
-            self.NetworkSummary = self.connection.call('add_network', {'net':self.Network})
+            self.NetworkSummary = self.connection.add_network(network=JSONObject(self.Network))
             log.info("Network created with %s nodes and %s links. Network ID is %s",
                      len(self.NetworkSummary['nodes']),
                      len(self.NetworkSummary['links']),
@@ -1155,7 +1160,7 @@ class ImportCSV(object):
 
         xml_response = create_xml_response('ImportCSV', self.Network['id'], scen_ids)
 
-        print xml_response
+        print(xml_response)
 
 def commandline_parser():
     parser = ap.ArgumentParser(
@@ -1227,19 +1232,6 @@ def run():
         if args.timezone is not None:
             csv.timezone = pytz.timezone(args.timezone)
 
-        if args.template is not None:
-            try:
-                if args.template == '':
-                    raise Exception("The template name is empty.")
-                csv.Template, warnings, template_errors = validate_template(args.template, csv.connection)
-                csv.warnings.extend(warnings)
-                if len(template_errors) > 0:
-                    errors.extend(template_errors)
-                    raise Exception("")
-            except Exception, e:
-                log.exception(e)
-                raise HydraPluginError("An error has occurred with the template. (%s)"%(e))
-
         # Create project and network only when there is actual data to
         # import.
         write_progress(2,csv.num_steps)
@@ -1304,11 +1296,14 @@ def run():
 
         write_progress(9,csv.num_steps)
         write_output("Saving types")
-        if args.template is not None:
+        if args.template is None:
+            raise HydraPluginError("No template specified. Please specify a template ID")
+        else:
+            csv.template_id = args.template
             try:
-                warnings = csv.set_resource_types(args.template)
+                warnings = csv.set_resource_types()
                 csv.warnings.extend(warnings)
-            except Exception, e:
+            except Exception as e:
                 raise HydraPluginError("An error occurred setting the types from the template. "
                                        "Error relates to \"%s\" "
                                        "Please check the template and resource types."%(e.message))
@@ -1318,7 +1313,7 @@ def run():
         if len(errors) == 0:
             errors = [e.message]
         log.exception(e)
-    except Exception, e:
+    except Exception as e:
         log.exception(e)
         errors = [e]
 
@@ -1330,7 +1325,7 @@ def run():
                                        csv.message,
                                        csv.files)
 
-    print xml_response
+    print(xml_response)
 
 if __name__ == '__main__':
     run()

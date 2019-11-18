@@ -93,7 +93,7 @@ class RuleReader(object):
                 continue
             try:
                 rule = self.read_rule_line(line, field_idx)
-            except Exception, e:
+            except Exception as e:
                 log.exception(e)
                 raise HydraPluginError("An error has occurred in file %s at line %s: %s"%(os.path.split(file)[-1], line_num+3, e))
 
