@@ -908,7 +908,7 @@ class ImportCSV(object):
                 #Dimension is saved in DB.
                 if unit.strip() not in ('-' ,''):
                     basic_unit, factor = parse_unit(unit.strip())
-                    attribute['dimension_id'] = self.units.get(basic_unit).id
+                    attribute['dimension_id'] = self.units.get(basic_unit).dimension.id
 
         except Exception as e:
             raise HydraPluginError("Invalid attribute %s %s: error was: %s"%(name,unit,e))
