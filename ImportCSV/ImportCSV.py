@@ -997,7 +997,7 @@ class ImportCSV(object):
                         else:
                             dimension = None
 
-                        unit_id      = self.units[i].id
+                        unit_id      = self.units[units[i]].id
 
                     try:
                         dataset = create_dataset(data[i],
