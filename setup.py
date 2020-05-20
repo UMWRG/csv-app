@@ -1,18 +1,15 @@
-import sys
-from cx_Freeze import setup, Executable
+#!/usr/bin/env python
+from setuptools import setup, find_packages
 
-includes = ["encodings.utf_8",
-            "encodings.ascii",
-            "lxml._elementpath",
-            "lxml.etree",
-            "ConfigParser",
-            "suds",
-            "numpy",
-            ]
-
-setup(name="Hydra CSV plug-in",
-      version="0.1",
-      description="Hydra plug-in to import and export CSV files",
-      executables=[Executable("ImportCSV.py"), Executable("ExportCSV.py")],
-      options={"build_exe": {"includes": includes}}
-      )
+setup(
+    name='hydra-csv',
+    version='0.2',
+    description="Hydra plug-in to import and export CSV files",
+    packages=find_packages(),
+    package_data={},
+    include_package_data=True,
+    entry_points='''
+    [console_scripts]
+    hydra-csv=hydra_csv.cli:start_cli
+    ''',
+)

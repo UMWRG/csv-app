@@ -20,7 +20,7 @@ import os
 import logging
 
 from hydra_base.exceptions import HydraPluginError
-from csv_util import get_file_data, check_header
+from .csv_util import get_file_data, check_header
 
 log = logging.getLogger(__name__)
 
@@ -32,24 +32,24 @@ class RuleReader(object):
     def __init__(self, connection, scenario_id, network, rule_files):
         self.connection = connection
         self.scenario_id = scenario_id
-        self.Rules      = {}
+        self.Rules = {}
         self.get_existing_rules()
         self.rule_files = rule_files
 
 
         self.Groups = {}
-        self.Links  = {}
-        self.Nodes  = {}
-        for n in network.get('nodes'):
+        self.Links = {}
+        self.Nodes = {}
+        for n in network.get('nodes', {}):
             self.Nodes[n.name] = n.id
-        for l in network.get('links'):
+        for l in network.get('links', {}):
             self.Links[l.name] = l.id
-        for g in network.get('resourcegroups'):
+        for g in network.get('resourcegroups', {}):
             self.Groups[g.name] = g.id
 
 
     def get_existing_rules(self):
-        rules = self.connection.call('get_rules', {'scenario_id':self.scenario_id})
+        rules = self.connection.call('get_scenario_rules', {'scenario_id':self.scenario_id})
         for r in rules:
             self.Rules[r.id] = r
 
@@ -79,10 +79,11 @@ class RuleReader(object):
         #Indicates what the mandatory columns are and where
         #we expect to see them.
         field_idx = {'name': 0,
-                     'type': 1,
-                     'resource': 2,
+                     'resourcetype': 1,
+                     'resourcename': 2,
                      'text': 3,
                      'description': 4,
+                     'format': 5
                      }
 
 
@@ -99,7 +100,7 @@ class RuleReader(object):
 
             self.Rules[rule['name']] = rule
 
-        rules = self.connection.call("add_rules", {'scenario_id':self.scenario_id, 'rule_list':self.Rules.values()})
+        rules = self.connection.call("add_rules", list(self.Rules.values()))
 
         return rules
 
@@ -110,6 +111,8 @@ class RuleReader(object):
 
         rule_data = line.split(',')
         rule_name = rule_data[field_idx['name']].strip()
+        rule_description = rule_data[field_idx['description']].strip()
+        rule_format = rule_data[field_idx['format']].strip()
 
         #Check if the rule already exists.
         if rule_name in self.Rules:
@@ -117,8 +120,8 @@ class RuleReader(object):
             rule_id = rule.id
             log.debug('rule %s exists.' % rule_name)
         else:
-            ref_key = rule_data[field_idx['type']].strip().upper()
-            ref_name = rule_data[field_idx['resource']].strip()
+            ref_key = rule_data[field_idx['resourcetype']].strip().upper()
+            ref_name = rule_data[field_idx['resourcename']].strip()
             rule_id=None
             try:
                 if ref_key == 'NODE':
@@ -130,15 +133,17 @@ class RuleReader(object):
                 else:
                     log.critical("Unknown reference type %s. Carrying on"%ref_key)
             except KeyError:
-                raise HydraPluginError("Rule error: Unknown %s named %s. Please check the name is correct."%(ref_key.lower(), ref_name))
+                raise HydraPluginError("Rule error: Unknown %s named %s. "
+                                       "Please check the name is correct."
+                                       %(ref_key.lower(), ref_name))
 
-        rule = dict(id          = rule_id,
-                    name        = rule_name,
-                    description = rule_data[field_idx['description']].strip(),
-                    text        = rule_data[field_idx['text']].strip(),
-                    ref_key     = ref_key,
-                    ref_id      = ref_id
+        rule = dict(id=rule_id,
+                    name=rule_name,
+                    description=rule_description,
+                    value=rule_data[field_idx['text']].strip(),
+                    ref_key=ref_key,
+                    ref_id=ref_id,
+                    format=rule_format
                    )
 
         return rule
-

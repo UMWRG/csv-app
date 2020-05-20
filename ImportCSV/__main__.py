@@ -1,2 +1,0 @@
-import ImportCSV
-ImportCSV.run()

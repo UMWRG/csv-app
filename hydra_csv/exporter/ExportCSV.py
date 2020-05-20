@@ -30,7 +30,6 @@ import logging
 import pytz
 from numpy import array
 
-from hydra_client.plugin import JsonConnection
 from hydra_client.output import write_progress, \
                                 write_output, \
                                 validate_plugin_xml, \
@@ -43,7 +42,7 @@ log = logging.getLogger(__name__)
 __location__ = os.path.split(sys.argv[0])[0]
 
 
-class ExportCSV(object):
+class CSVExporter(object):
     """
     """
 
@@ -51,20 +50,15 @@ class ExportCSV(object):
     Scenario = None
     timezone = pytz.utc
 
-    def __init__(self, url=None, session_id=None):
+    def __init__(self, client):
 
         self.errors = []
         self.warnings = []
         self.files    = []
 
-        self.connection = JsonConnection(url)
-        if session_id is not None:
-            log.info("Using existing session %s", session_id)
-            self.connection.session_id=session_id
-        else:
-            self.connection.login()
+        self.client = client
 
-        all_attributes = self.call('get_all_attributes')
+        all_attributes = self.client.get_attributes()
         self.attributes = {}
         if not all_attributes:
             raise HydraPluginError("An error has occurred. Please check that the "
@@ -76,8 +70,11 @@ class ExportCSV(object):
         self.num_steps = 7
 
 
-    def call(self, func, args={}):
-        return self.connection.call(func, args)
+    def call(self, func, args=None):
+        if args is None:
+            return self.client.call(func)
+        else:
+            return self.client.call(func, args)
 
 
     def export(self, network_id, scenario_id, output_folder):
@@ -95,7 +92,7 @@ class ExportCSV(object):
             try:
                 network_id = int(network_id)
                 x = time.time()
-                network = self.call('get_network', {'network_id':network_id})
+                network = self.client.get_network(network_id)
                 log.info("Network retrieved in %s", time.time()-x)
             except:
                 raise HydraPluginError("Network %s not found."%network_id)
@@ -182,7 +179,7 @@ class ExportCSV(object):
             for r_attr in network.attributes:
                 attr_name = network_attributes[r_attr.attr_id]
                 value, metadata = self.get_attr_value(scenario, r_attr, attr_name, network.name)
-                idx = network_attributes.keys().index(r_attr.attr_id)
+                idx = list(network_attributes.keys()).index(r_attr.attr_id)
                 values[idx] = value
                 metadata_placeholder[idx] = metadata
 
@@ -302,7 +299,7 @@ class ExportCSV(object):
                 for r_attr in node.attributes:
                     attr_name = node_attributes[r_attr.attr_id]
                     value, metadata = self.get_attr_value(scenario, r_attr, attr_name, node.name)
-                    idx = node_attributes.keys().index(r_attr.attr_id)
+                    idx = list(node_attributes.keys()).index(r_attr.attr_id)
                     values[idx] = value
                     metadata_placeholder[idx] = metadata
 
@@ -377,8 +374,9 @@ class ExportCSV(object):
                 for r_attr in link.attributes:
                     attr_name = link_attributes[r_attr.attr_id]
                     value, metadata = self.get_attr_value(scenario, r_attr, attr_name, link.name)
-                    values[link_attributes.keys().index(r_attr.attr_id)] = value
-                    metadata_placeholder[link_attributes.keys().index(r_attr.attr_id)] = metadata
+                    idx = list(link_attributes.keys()).index(r_attr.attr_id)
+                    values[idx] = value
+                    metadata_placeholder[idx] = metadata
 
             if link.types is not None and len(link.types) > 0:
                 link_type = link.types[0]['name']
@@ -446,8 +444,9 @@ class ExportCSV(object):
                 for r_attr in group.attributes:
                     attr_name = group_attributes[r_attr.attr_id]
                     value, metadata = self.get_attr_value(scenario, r_attr, attr_name, group.name)
-                    values[group_attributes.keys().index(r_attr.attr_id)] = value
-                    metadata_placeholder[group_attributes.keys().index(r_attr.attr_id)] = metadata
+                    idx = list(group_attributes.keys()).index(r_attr.attr_id)
+                    values[idx] = value
+                    metadata_placeholder[idx] = metadata
 
             if group.types is not None and len(group.types) > 0:
                 group_type = group.types[0]['name']
@@ -466,8 +465,8 @@ class ExportCSV(object):
                 metadata_entries.append((group.name, metadata_placeholder))
 
         warnings = self.write_metadata(os.path.join(scenario.target_dir, 'groups_metadata.csv'),
-                            metadata_heading,
-                            metadata_entries)
+                                       metadata_heading,
+                                       metadata_entries)
 
         self.warnings.extend(warnings)
 
@@ -493,7 +492,7 @@ class ExportCSV(object):
         write_output("Exporting rules.")
         log.info("\n************RULES****************")
 
-        rules = self.call('get_rules', {'scenario_id':scenario.id})
+        rules = self.client.get_network_rules(scenario.network_id)
 
         if rules in (None, '') or len(rules) == 0:
             return []
@@ -503,22 +502,23 @@ class ExportCSV(object):
         #We assume here that fewer files is simpler.
         rule_file = open(os.path.join(scenario.target_dir, "rules.csv"), 'w')
 
-        rule_heading       = "Name, Type, Resource, Text, Description\n"
+        rule_heading = "Name, Type, Resource, Text, Description, Format\n"
 
         for rule in rules:
             if rule.ref_key == 'NODE':
-                resource = node_map[rule.ref_id]
+                resource = node_map[rule.node_id]
             elif rule.ref_key == 'LINK':
-                resource = link_map[rule.ref_id]
+                resource = link_map[rule.link_id]
             elif rule.ref_key == 'GROUP':
-                resource = group_map[rule.ref_id]
+                resource = group_map[rule.group_id]
 
-            rule_entry = "%(name)s, %(type)s, %(resource)s, %(text)s, %(description)s\n"%{
-                    "name"        : rule.name,
-                    "type"        : rule.ref_key,
-                    "resource"    : resource,
-                    "text"        : rule.text,
-                    "description" : rule.description,
+            rule_entry = "%(name)s, %(resourcetype)s, %(resourcename)s, %(text)s, %(description)s, %(format)s\n"%{
+                "name" : rule.name,
+                "resourcetype" : rule.ref_key,
+                "resourcename" : resource,
+                "text" : rule.text,
+                "description" : rule.description,
+                "format" : rule.format,
             }
 
             rule_entries.append(rule_entry)
@@ -556,9 +556,9 @@ class ExportCSV(object):
                 }
                 metadata_entries.append(metadata_entry)
 
-            except Exception, e:
+            except Exception as e:
                 log.exception(e)
-                warnings.append("Unable to export metadata %s"%m)
+                warnings.append(f"Unable to export metadata {m}")
 
         if len(metadata_entries) > 0:
             metadata_file = open(target_file, 'w')
@@ -580,11 +580,11 @@ class ExportCSV(object):
             group_name = group_map[group_member.group_id]
             member_type = group_member.ref_key
             if member_type == 'LINK':
-                member_name = link_map[group_member.ref_id]
+                member_name = link_map[group_member.link_id]
             elif member_type == 'NODE':
-                member_name = node_map[group_member.ref_id]
+                member_name = node_map[group_member.node_id]
             elif member_type == 'GROUP':
-                member_name = group_map[group_member.ref_id]
+                member_name = group_map[group_member.group_id]
             else:
                 raise HydraPluginError('Unrecognised group member type: %s'%(member_type))
 
@@ -791,7 +791,7 @@ if __name__ == '__main__':
         message="An error has occurred"
         errors = [e.message]
         log.exception(e)
-    except Exception, e:
+    except Exception as e:
         message="An error has occurred"
         log.exception(e)
         errors = [e]
@@ -803,4 +803,4 @@ if __name__ == '__main__':
                                        csv.warnings,
                                        message,
                                        csv.files)
-    print xml_response
+    print(xml_response)

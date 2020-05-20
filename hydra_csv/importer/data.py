@@ -27,7 +27,7 @@ import pandas as pd
 from hydra_base.exceptions import HydraPluginError
 from hydra_base.util import config, hydra_dateutil
 
-from csv_util import validate_value
+from .csv_util import validate_value
 
 
 global seasonal_key
@@ -64,7 +64,7 @@ def create_dataset(value,
         dataset_name = 'Import CSV data'
 
 
-    dataset          = dict(
+    dataset = dict(
         id=None,
         type=None,
         unit_id=None,
