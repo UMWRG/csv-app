@@ -31,13 +31,11 @@ import pytz
 from numpy import array
 
 from hydra_client.output import write_progress, \
-                                write_output, \
-                                validate_plugin_xml, \
-                                create_xml_response
+                                write_output
 
 from hydra_base.exceptions import HydraPluginError
 
-log = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
 
 __location__ = os.path.split(sys.argv[0])[0]
 
@@ -83,16 +81,16 @@ class CSVExporter(object):
             #The network ID can be specified to get the network...
             try:
                 network_id = int(network_id)
-                x = time.time()
+                st_time = time.time()
                 network = self.client.get_network(network_id)
-                log.info("Network retrieved in %s", time.time()-x)
+                LOG.info("Network retrieved in %s", time.time()-st_time)
             except:
                 raise HydraPluginError("Network %s not found."%network_id)
         else:
             raise HydraPluginError("A network ID must be specified!")
 
         if output_folder is None:
-            log.info("No output folder specified. Defaulting to desktop.")
+            LOG.info("No output folder specified. Defaulting to desktop.")
             output_folder = os.path.expanduser("~/Desktop")
         elif not os.path.exists(output_folder):
             raise HydraPluginError("Output folder %s does not exist"%output_folder)
@@ -120,15 +118,15 @@ class CSVExporter(object):
             write_progress(3, self.num_steps)
             for scenario in network.scenarios:
                 if int(scenario.id) == int(scenario_id):
-                    log.info("Exporting Scenario %s"%(scenario.name))
+                    LOG.info("Exporting Scenario %s",scenario.name)
                     self.export_network(network, scenario)
                     break
             else:
-                raise HydraPluginError("No scenario with ID %s found"%(args.scenario))
+                raise HydraPluginError("No scenario with ID %s found"%(scenario_id))
         else:
-            log.info("No Scenario specified, exporting them all!")
+            LOG.info("No Scenario specified, exporting them all!")
             for scenario in network.scenarios:
-                log.info("Exporting Scenario %s"%(scenario.name))
+                LOG.info("Exporting Scenario %s",scenario.name)
                 self.export_network(network, scenario)
 
         self.files.append(network_dir)
@@ -140,7 +138,7 @@ class CSVExporter(object):
         """
 
         write_output("Exporting network")
-        log.info("\n************NETWORK****************")
+        LOG.info("\n************NETWORK****************")
         scenario.target_dir = os.path.join(network.network_dir, scenario.name.replace(' ', '_'))
 
         if not os.path.exists(scenario.target_dir):
@@ -164,8 +162,8 @@ class CSVExporter(object):
 
         network_units_heading = "Units,,,,,,,,,,%s\n"%(','.join(network_attr_units))
 
-        values = ["" for attr_id in network_attributes.keys()]
-        metadata_placeholder = ["" for attr_id in network_attributes.keys()]
+        values = ["" for attr_id in network_attributes]
+        metadata_placeholder = ["" for attr_id in network_attributes]
 
         if network.attributes is not None:
             for r_attr in network.attributes:
@@ -201,7 +199,7 @@ class CSVExporter(object):
             node_map = self.export_nodes(scenario, network.nodes)
             network_data['nodes'] = "nodes.csv"
         else:
-            log.warning("Network has no nodes!")
+            LOG.warning("Network has no nodes!")
 
         write_progress(5, self.num_steps)
         link_map = dict()
@@ -209,7 +207,7 @@ class CSVExporter(object):
             link_map = self.export_links(scenario, network.links, node_map)
             network_data['links'] = "links.csv"
         else:
-            log.warning("Network has no links!")
+            LOG.warning("Network has no links!")
 
         write_progress(6, self.num_steps)
         group_map = dict()
@@ -217,7 +215,7 @@ class CSVExporter(object):
             group_map = self.export_resourcegroups(scenario, network.resourcegroups, node_map, link_map)
             network_data['groups'] = "groups.csv"
         else:
-            log.warning("Network has no resourcegroups.")
+            LOG.warning("Network has no resourcegroups.")
 
         write_progress(7, self.num_steps)
         rules = self.export_rules(scenario, node_map, link_map, group_map)
@@ -236,9 +234,10 @@ class CSVExporter(object):
             network_entry = "%(id)s,%(name)s,%(type)s,%(nodes)s,%(links)s,%(groups)s,%(rules)s,%(starttime)s,%(endtime)s,%(timestep)s%(values)s,%(description)s\n"%network_data
 
 
-        log.info("Exporting network metadata")
+        LOG.info("Exporting network metadata")
         if metadata_placeholder.count("") != len(metadata_placeholder):
-            warnings = self.write_metadata(os.path.join(scenario.target_dir, 'network_metadata.csv'),
+            warnings = self.write_metadata(os.path.join(scenario.target_dir,
+                                           'network_metadata.csv'),
                                            metadata_heading,
                                            [(network.name, metadata_placeholder)])
             self.warnings.extend(warnings)
@@ -247,14 +246,14 @@ class CSVExporter(object):
         network_file.write(network_units_heading)
         network_file.write(network_entry)
 
-        log.info("Network export complete")
+        LOG.info("Network export complete")
 
-        log.info("networks written to file: %s", network_file.name)
+        LOG.info("networks written to file: %s", network_file.name)
 
 
     def export_nodes(self, scenario, nodes):
         write_output("Exporting nodes.")
-        log.info("\n************NODES****************")
+        LOG.info("\n************NODES****************")
 
         #return this so that the link export can easily access
         #the names of the links.
@@ -321,14 +320,14 @@ class CSVExporter(object):
         node_file.write(node_units_heading)
         node_file.writelines(node_entries)
 
-        log.info("Nodes written to file: %s", node_file.name)
+        LOG.info("Nodes written to file: %s", node_file.name)
 
         return id_name_map
 
 
     def export_links(self, scenario, links, node_map):
         write_output("Exporting links.")
-        log.info("\n************LINKS****************")
+        LOG.info("\n************LINKS****************")
 
         #return this so that the group export can easily access
         #the names of the links.
@@ -396,7 +395,7 @@ class CSVExporter(object):
         link_file.write(link_heading)
         link_file.write(link_units_heading)
         link_file.writelines(link_entries)
-        log.info("Links written to file: %s", link_file.name)
+        LOG.info("Links written to file: %s", link_file.name)
         return id_name_map
 
 
@@ -406,7 +405,7 @@ class CSVExporter(object):
             1:groups.csv defining the group name, description and any attributes.
             2:group_members.csv defining the contents of each group for this scenario
         """
-        log.info("\n************RESOURCE GROUPS****************")
+        LOG.info("\n************RESOURCE GROUPS****************")
         write_output("Exporting groups.")
 
         group_file = open(os.path.join(scenario.target_dir, "groups.csv"), 'w')
@@ -421,7 +420,7 @@ class CSVExporter(object):
             group_attr_units.append(self.get_attr_unit(scenario, attr_id, attr_name))
 
         group_heading = "Name, Type, Members %s, description\n" % (group_attributes_string)
-        group_units_heading  = "Units,,,%s\n"%(','.join(group_attr_units) if group_attr_units else ',')
+        group_units_heading = "Units,,,%s\n"%(','.join(group_attr_units) if group_attr_units else ',')
         metadata_heading = "Name %s\n"%(group_attributes_string)
 
         group_entries = []
@@ -430,8 +429,8 @@ class CSVExporter(object):
         for group in resourcegroups:
             id_name_map[group.id] = group.name
 
-            values = ["" for attr_id in group_attributes.keys()]
-            metadata_placeholder = ["" for attr_id in group_attributes.keys()]
+            values = ["" for attr_id in group_attributes]
+            metadata_placeholder = ["" for attr_id in group_attributes]
             if group.attributes is not None:
                 for r_attr in group.attributes:
                     attr_name = group_attributes[r_attr.attr_id]
@@ -465,7 +464,7 @@ class CSVExporter(object):
         group_file.write(group_heading)
         group_file.write(group_units_heading)
         group_file.writelines(group_entries)
-        log.info("groups written to file: %s", group_file.name)
+        LOG.info("groups written to file: %s", group_file.name)
 
         self.export_resourcegroupitems(scenario, id_name_map, node_map, link_map)
 
@@ -482,7 +481,7 @@ class CSVExporter(object):
         """
 
         write_output("Exporting rules.")
-        log.info("\n************RULES****************")
+        LOG.info("\n************RULES****************")
 
         rules = self.client.get_network_rules(scenario.network_id)
 
@@ -518,7 +517,7 @@ class CSVExporter(object):
         rule_file.write(rule_heading)
         rule_file.writelines(rule_entries)
 
-        log.info("Rules written to file: %s", rule_file.name)
+        LOG.info("Rules written to file: %s", rule_file.name)
 
         return rule_entries
 
@@ -549,7 +548,7 @@ class CSVExporter(object):
                 metadata_entries.append(metadata_entry)
 
             except Exception as e:
-                log.exception(e)
+                LOG.exception(e)
                 warnings.append(f"Unable to export metadata {m}")
 
         if len(metadata_entries) > 0:
@@ -613,7 +612,7 @@ class CSVExporter(object):
                 if rs.value.unit is not None:
                     return rs.value.unit
 
-        log.warning("Unit not found in scenario '%s' for attr: %s", scenario.name, attr_name)
+        LOG.warning("Unit not found in scenario '%s' for attr: %s", scenario.name, attr_name)
 
         return ''
 
@@ -638,9 +637,9 @@ class CSVExporter(object):
                     file_name = "array_%s_%s.csv"%(resource_attr.ref_key, attr_name)
                     file_loc = os.path.join(scenario.target_dir, file_name)
                     if os.path.exists(file_loc):
-                        arr_file      = open(file_loc, 'a')
+                        arr_file = open(file_loc, 'a')
                     else:
-                        arr_file      = open(file_loc, 'w')
+                        arr_file = open(file_loc, 'w')
 
                         if rs.value.metadata is not None:
                             for k, v in json.loads(rs.value.metadata).items():
@@ -658,12 +657,9 @@ class CSVExporter(object):
                         n = n * x
                         shape_str.append(str(x))
                     one_dimensional_val = np_val.reshape(1, n)
-                    arr_file.write("%s,%s,%s\n"%
-                                   (
-                                       resource_name,
-                                       ' '.join(shape_str),
-                                       ','.join([str(x) for x in one_dimensional_val.tolist()[0]]))
-                                    )
+                    arr_file.write("%s,%s,%s\n" % (resource_name,
+                                   ' '.join(shape_str),
+                                   ','.join([str(x) for x in one_dimensional_val.tolist()[0]])))
 
                     arr_file.close()
                     value = file_name
@@ -675,7 +671,7 @@ class CSVExporter(object):
                     value = json.loads(rs.value.value)
 
                     if value is None or value == {}:
-                        log.debug("Not exporting %s from resource %s as it is empty",
+                        LOG.debug("Not exporting %s from resource %s as it is empty",
                                   attr_name, resource_name)
                         continue
 
@@ -689,14 +685,14 @@ class CSVExporter(object):
 
                         ts_file.write(",,,%s\n"%','.join(col_names))
                     if not value:
-                        log.critical(attr_name)
-                        log.critical(resource_name)
-                        log.critical(resource_attr)
-                        log.critical(value)
+                        LOG.critical(attr_name)
+                        LOG.critical(resource_name)
+                        LOG.critical(resource_attr)
+                        LOG.critical(value)
                     timestamps = value[col_names[0]].keys()
                     ts_dict = {}
-                    for t in timestamps:
-                        ts_dict[t] = []
+                    for timestamp in timestamps:
+                        ts_dict[timestamp] = []
 
                     for col, ts in value.items():
                         for timestep, val in ts.items():
@@ -720,6 +716,9 @@ class CSVExporter(object):
                     ts_file.close()
 
                     value = file_name
+                else:
+                    #TODO, we should have a standard way of getting values.
+                    value = str(rs.value.value)
 
                 metadata = json.loads(rs.value.metadata)
 
