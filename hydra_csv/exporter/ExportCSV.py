@@ -21,19 +21,22 @@
     A Hydra plug-in for exporting a hydra network to CSV files.
 """
 
-import os, sys
+import os
+import sys
 import json
 import time
-import argparse as ap
 import logging
 
 import pytz
-from numpy import array
 
 from hydra_client.output import write_progress, \
                                 write_output
 
+from hydra_base.lib.objects import JSONObject
+
 from hydra_base.exceptions import HydraPluginError
+
+from . import data
 
 LOG = logging.getLogger(__name__)
 
@@ -61,6 +64,12 @@ class CSVExporter(object):
         if not all_attributes:
             raise HydraPluginError("An error has occurred. Please check that the "
                                    "network and all attributes are available.")
+
+        #This is a mapping from a resource attribute ID to a resource scenario
+        #object in a scenario for quick lookup. ex:
+        #self.rs_reverse_lookup[scenario_id][resource_attr_id] = rs
+        self.rs_reverse_lookup = {}
+
 
         for attr in all_attributes:
             self.attributes[attr.id] = attr.name
@@ -119,7 +128,9 @@ class CSVExporter(object):
             for scenario in network.scenarios:
                 if int(scenario.id) == int(scenario_id):
                     LOG.info("Exporting Scenario %s",scenario.name)
-                    self.export_network(network, scenario)
+                    scenario_with_data = self.get_scenario(scenario.id)
+                    LOG.info("Scenario retrieved. Starting export")
+                    self.export_network(network, scenario_with_data)
                     break
             else:
                 raise HydraPluginError("No scenario with ID %s found"%(scenario_id))
@@ -127,9 +138,23 @@ class CSVExporter(object):
             LOG.info("No Scenario specified, exporting them all!")
             for scenario in network.scenarios:
                 LOG.info("Exporting Scenario %s",scenario.name)
-                self.export_network(network, scenario)
+                scenario_with_data = self.get_scenario(scenario.id)
+                self.export_network(network, scenario_with_data)
 
         self.files.append(network_dir)
+
+    def get_scenario(self, scenario_id):
+        cache_filepath = os.path.join('/tmp', f'scenario_{scenario_id}.json')
+        if os.path.exists(cache_filepath):
+            LOG.info('GETTING SCENARIO FROM CACHE')
+            with open(cache_filepath, 'r') as cache_file:
+                scenario = JSONObject(json.load(cache_file))
+        else:
+            LOG.info('No scenario cache file found. Getting from Hydra.')
+            scenario = self.client.get_scenario(scenario_id)
+            with open(cache_filepath, 'w') as cache_file:
+                json.dump(scenario, cache_file)
+        return scenario
 
 
     def export_network(self, network, scenario):
@@ -237,7 +262,7 @@ class CSVExporter(object):
         LOG.info("Exporting network metadata")
         if metadata_placeholder.count("") != len(metadata_placeholder):
             warnings = self.write_metadata(os.path.join(scenario.target_dir,
-                                           'network_metadata.csv'),
+                                                        'network_metadata.csv'),
                                            metadata_heading,
                                            [(network.name, metadata_placeholder)])
             self.warnings.extend(warnings)
@@ -616,112 +641,42 @@ class CSVExporter(object):
 
         return ''
 
+    def make_rs_lookup(self, scenario):
+        """
+            Create a lookup table to avoid having to loop over the resource
+            scenarios loads of times.
+
+            Here we're relying on the fact that a resource attribute IDs are
+            unique within a scenario i.e., the link scenarios to datasets through
+            resource scenarios.
+
+            Only do this once.
+        """
+        if self.rs_reverse_lookup.get(scenario.id) is None:
+            self.rs_reverse_lookup[scenario.id] = {}
+            for rscen in scenario.resourcescenarios:
+                self.rs_reverse_lookup[scenario.id][rscen.resource_attr_id] = rscen
 
     def get_attr_value(self, scenario, resource_attr, attr_name, resource_name):
         """
             Returns the value of a given resource attribute within a scenario
         """
 
-        r_attr_id = resource_attr.id
-        metadata = ()
+        metadata = {}
+        value = ''
 
-        #if resource_attr.attr_is_var == 'Y':
-        #    return 'NULL', ''
+        self.make_rs_lookup(scenario)
 
-        for rs in scenario.resourcescenarios:
-            if rs.resource_attr_id == r_attr_id:
-                if rs.value.type.lower() == 'descriptor':
-                    value = str(rs.value.value)
-                elif rs.value.type.lower() == 'array':
-                    value = rs.value.value
-                    file_name = "array_%s_%s.csv"%(resource_attr.ref_key, attr_name)
-                    file_loc = os.path.join(scenario.target_dir, file_name)
-                    if os.path.exists(file_loc):
-                        arr_file = open(file_loc, 'a')
-                    else:
-                        arr_file = open(file_loc, 'w')
+        rs = self.rs_reverse_lookup[scenario.id].get(resource_attr.id)
 
-                        if rs.value.metadata is not None:
-                            for k, v in json.loads(rs.value.metadata).items():
-                                if k == 'data_struct':
-                                    arr_desc = ",".join(v.split('|'))
-                                    arr_file.write("array , ,%s\n"%arr_desc)
+        if rs is not None and rs.dataset is not None and rs.dataset.type is not None:
+            value, metadata = data.process_dataset(rs.dataset,
+                                                   attr_name,
+                                                   resource_name,
+                                                   resource_attr.ref_key,
+                                                   scenario.target_dir)
 
-                    arr_val = json.loads(value)
+        if rs and rs.dataset and rs.dataset.metadata:
+            metadata = rs.dataset.metadata
 
-                    np_val = array(eval(repr(arr_val)))
-                    shape = np_val.shape
-                    n = 1
-                    shape_str = []
-                    for x in shape:
-                        n = n * x
-                        shape_str.append(str(x))
-                    one_dimensional_val = np_val.reshape(1, n)
-                    arr_file.write("%s,%s,%s\n" % (resource_name,
-                                   ' '.join(shape_str),
-                                   ','.join([str(x) for x in one_dimensional_val.tolist()[0]])))
-
-                    arr_file.close()
-                    value = file_name
-                elif rs.value.type.lower() == 'scalar':
-
-                    value = json.loads(rs.value.value)
-
-                elif rs.value.type.lower() == 'timeseries':
-                    value = json.loads(rs.value.value)
-
-                    if value is None or value == {}:
-                        LOG.debug("Not exporting %s from resource %s as it is empty",
-                                  attr_name, resource_name)
-                        continue
-
-                    col_names = value.keys()
-                    file_name = "timeseries_%s_%s.csv"%(resource_attr.ref_key, attr_name)
-                    file_loc = os.path.join(scenario.target_dir, file_name)
-                    if os.path.exists(file_loc):
-                        ts_file = open(file_loc, 'a')
-                    else:
-                        ts_file = open(file_loc, 'w')
-
-                        ts_file.write(",,,%s\n"%','.join(col_names))
-                    if not value:
-                        LOG.critical(attr_name)
-                        LOG.critical(resource_name)
-                        LOG.critical(resource_attr)
-                        LOG.critical(value)
-                    timestamps = value[col_names[0]].keys()
-                    ts_dict = {}
-                    for timestamp in timestamps:
-                        ts_dict[timestamp] = []
-
-                    for col, ts in value.items():
-                        for timestep, val in ts.items():
-                            ts_dict[timestep].append(val)
-
-                    for timestep, val in ts_dict.items():
-                        np_val = array(val)
-                        shape = np_val.shape
-                        n = 1
-                        shape_str = []
-                        for x in shape:
-                            n = n * x
-                            shape_str.append(str(x))
-                        one_dimensional_val = np_val.reshape(1, n)
-                        ts_file.write("%s,%s,%s,%s\n"%
-                                      (resource_name,
-                                       timestep,
-                                       ' '.join(shape_str),
-                                       ','.join([str(x) for x in one_dimensional_val.tolist()[0]])))
-
-                    ts_file.close()
-
-                    value = file_name
-                else:
-                    #TODO, we should have a standard way of getting values.
-                    value = str(rs.value.value)
-
-                metadata = json.loads(rs.value.metadata)
-
-                return (str(value), metadata)
-
-        return ('', '')
+        return (str(value), metadata)
