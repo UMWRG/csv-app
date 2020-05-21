@@ -54,7 +54,7 @@ class CSVExporter(object):
 
         self.errors = []
         self.warnings = []
-        self.files    = []
+        self.files = []
 
         self.client = client
 
@@ -68,14 +68,6 @@ class CSVExporter(object):
             self.attributes[attr.id] = attr.name
 
         self.num_steps = 7
-
-
-    def call(self, func, args=None):
-        if args is None:
-            return self.client.call(func)
-        else:
-            return self.client.call(func, args)
-
 
     def export(self, network_id, scenario_id, output_folder):
 
@@ -112,7 +104,7 @@ class CSVExporter(object):
         else:
             logging.info("%s already exists", network_dir)
             for export_num in range(100):
-                new_network_dir = os.path.join(output_folder, "%s(%s)"%(network_dir,export_num))
+                new_network_dir = os.path.join(output_folder, "%s(%s)"%(network_dir, export_num))
                 if not os.path.exists(new_network_dir):
                     logging.info("exporting to %s", new_network_dir)
                     os.mkdir(new_network_dir)
@@ -162,15 +154,15 @@ class CSVExporter(object):
         if len(network_attributes) > 0:
             network_attributes_string = ',%s'%(','.join(network_attributes.values()))
 
-        network_heading   = "ID, Name, Type, Nodes, Links, Groups, Rules%s, Description\n" % (network_attributes_string)
-        metadata_heading   = "Name %s\n"%(network_attributes_string)
+        network_heading = "ID, Name, Type, Nodes, Links, Groups, Rules%s, Description\n" % (network_attributes_string)
+        metadata_heading = "Name %s\n"%(network_attributes_string)
 
         network_attr_units = []
         for attr_id, attr_name in network_attributes.items():
             network_attr_units.append(self.get_attr_unit(scenario, attr_id, attr_name))
 
 
-        network_units_heading  = "Units,,,,,,,,,,%s\n"%(','.join(network_attr_units))
+        network_units_heading = "Units,,,,,,,,,,%s\n"%(','.join(network_attr_units))
 
         values = ["" for attr_id in network_attributes.keys()]
         metadata_placeholder = ["" for attr_id in network_attributes.keys()]
@@ -237,9 +229,9 @@ class CSVExporter(object):
         if scenario.get('start_time') is not None and \
             scenario.get('end_time') is not None and\
             scenario.get('time_step') is not None:
-            network_heading   = "ID, Name, Type, Nodes, Links, Groups, Rules, starttime, endtime, timestep %s, Description\n" % (network_attributes_string)
+            network_heading = "ID, Name, Type, Nodes, Links, Groups, Rules, starttime, endtime, timestep %s, Description\n" % (network_attributes_string)
             network_data['starttime'] = scenario.start_time
-            network_data['endtime']   = scenario.end_time
+            network_data['endtime'] = scenario.end_time
             network_data['timestep'] = scenario.time_step
             network_entry = "%(id)s,%(name)s,%(type)s,%(nodes)s,%(links)s,%(groups)s,%(rules)s,%(starttime)s,%(endtime)s,%(timestep)s%(values)s,%(description)s\n"%network_data
 
@@ -247,8 +239,8 @@ class CSVExporter(object):
         log.info("Exporting network metadata")
         if metadata_placeholder.count("") != len(metadata_placeholder):
             warnings = self.write_metadata(os.path.join(scenario.target_dir, 'network_metadata.csv'),
-                                metadata_heading,
-                                [(network.name, metadata_placeholder)])
+                                           metadata_heading,
+                                           [(network.name, metadata_placeholder)])
             self.warnings.extend(warnings)
 
         network_file.write(network_heading)
@@ -278,14 +270,14 @@ class CSVExporter(object):
         if len(node_attributes) > 0:
             node_attributes_string = ',%s'%(','.join(node_attributes.values()))
 
-        node_heading       = "Name, x, y, Type%s, description\n"%(node_attributes_string)
-        metadata_heading   = "Name %s\n"%(node_attributes_string)
+        node_heading = "Name, x, y, Type%s, description\n"%(node_attributes_string)
+        metadata_heading = "Name %s\n"%(node_attributes_string)
 
         node_attr_units = []
         for attr_id, attr_name in node_attributes.items():
             node_attr_units.append(self.get_attr_unit(scenario, attr_id, attr_name))
 
-        node_units_heading  = "Units,,,,%s\n"%(','.join(node_attr_units) if node_attr_units else ',')
+        node_units_heading = "Units,,,,%s\n"%(','.join(node_attr_units) if node_attr_units else ',')
 
         node_entries = []
         metadata_entries = []
@@ -293,8 +285,8 @@ class CSVExporter(object):
 
             id_name_map[node.id] = node.name
 
-            values = ["" for attr_id in node_attributes.keys()]
-            metadata_placeholder = ["" for attr_id in node_attributes.keys()]
+            values = ["" for attr_id in node_attributes]
+            metadata_placeholder = ["" for attr_id in node_attributes]
             if node.attributes is not None:
                 for r_attr in node.attributes:
                     attr_name = node_attributes[r_attr.attr_id]
@@ -321,8 +313,8 @@ class CSVExporter(object):
                 metadata_entries.append((node.name, metadata_placeholder))
 
         warnings = self.write_metadata(os.path.join(scenario.target_dir, 'nodes_metadata.csv'),
-                            metadata_heading,
-                            metadata_entries)
+                                       metadata_heading,
+                                       metadata_entries)
         self.warnings.extend(warnings)
 
         node_file.write(node_heading)
@@ -352,15 +344,15 @@ class CSVExporter(object):
         if len(link_attributes) > 0:
             link_attributes_string = ',%s'%(','.join(link_attributes.values()))
 
-        link_heading   = "Name, from, to, Type%s, description\n" % (link_attributes_string)
-        metadata_heading   = "Name %s\n"%(link_attributes_string)
+        link_heading = "Name, from, to, Type%s, description\n" % (link_attributes_string)
+        metadata_heading = "Name %s\n"%(link_attributes_string)
 
 
         link_attr_units = []
         for attr_id, attr_name in link_attributes.items():
             link_attr_units.append(self.get_attr_unit(scenario, attr_id, attr_name))
 
-        link_units_heading  = "Units,,,,%s\n"%(','.join(link_attr_units) if link_attr_units else ',')
+        link_units_heading = "Units,,,,%s\n"%(','.join(link_attr_units) if link_attr_units else ',')
 
         link_entries = []
         metadata_entries = []
@@ -397,8 +389,8 @@ class CSVExporter(object):
                 metadata_entries.append((link.name, metadata_placeholder))
 
         warnings = self.write_metadata(os.path.join(scenario.target_dir, 'links_metadata.csv'),
-                            metadata_heading,
-                            metadata_entries)
+                                       metadata_heading,
+                                       metadata_entries)
         self.warnings.extend(warnings)
 
         link_file.write(link_heading)
@@ -428,9 +420,9 @@ class CSVExporter(object):
         for attr_id, attr_name in group_attributes.items():
             group_attr_units.append(self.get_attr_unit(scenario, attr_id, attr_name))
 
-        group_heading   = "Name, Type, Members %s, description\n" % (group_attributes_string)
+        group_heading = "Name, Type, Members %s, description\n" % (group_attributes_string)
         group_units_heading  = "Units,,,%s\n"%(','.join(group_attr_units) if group_attr_units else ',')
-        metadata_heading   = "Name %s\n"%(group_attributes_string)
+        metadata_heading = "Name %s\n"%(group_attributes_string)
 
         group_entries = []
         metadata_entries = []
@@ -574,8 +566,8 @@ class CSVExporter(object):
         """
         group_member_file = open(os.path.join(scenario.target_dir, "group_members.csv"), 'w')
 
-        group_member_heading   = "Name, Type, Member\n"
-        group_member_entries   = []
+        group_member_heading = "Name, Type, Member\n"
+        group_member_entries = []
         for group_member in scenario.resourcegroupitems:
             group_name = group_map[group_member.group_id]
             member_type = group_member.ref_key
@@ -639,9 +631,9 @@ class CSVExporter(object):
 
         for rs in scenario.resourcescenarios:
             if rs.resource_attr_id == r_attr_id:
-                if rs.value.type == 'descriptor':
+                if rs.value.type.lower() == 'descriptor':
                     value = str(rs.value.value)
-                elif rs.value.type == 'array':
+                elif rs.value.type.lower() == 'array':
                     value = rs.value.value
                     file_name = "array_%s_%s.csv"%(resource_attr.ref_key, attr_name)
                     file_loc = os.path.join(scenario.target_dir, file_name)
@@ -667,32 +659,33 @@ class CSVExporter(object):
                         shape_str.append(str(x))
                     one_dimensional_val = np_val.reshape(1, n)
                     arr_file.write("%s,%s,%s\n"%
-                                (
-                                    resource_name,
-                                    ' '.join(shape_str),
-                                    ','.join([str(x) for x in one_dimensional_val.tolist()[0]]))
-                                 )
+                                   (
+                                       resource_name,
+                                       ' '.join(shape_str),
+                                       ','.join([str(x) for x in one_dimensional_val.tolist()[0]]))
+                                    )
 
                     arr_file.close()
                     value = file_name
-                elif rs.value.type == 'scalar':
+                elif rs.value.type.lower() == 'scalar':
 
                     value = json.loads(rs.value.value)
 
-                elif rs.value.type == 'timeseries':
+                elif rs.value.type.lower() == 'timeseries':
                     value = json.loads(rs.value.value)
 
                     if value is None or value == {}:
-                        log.debug("Not exporting %s from resource %s as it is empty", attr_name, resource_name)
+                        log.debug("Not exporting %s from resource %s as it is empty",
+                                  attr_name, resource_name)
                         continue
 
                     col_names = value.keys()
                     file_name = "timeseries_%s_%s.csv"%(resource_attr.ref_key, attr_name)
                     file_loc = os.path.join(scenario.target_dir, file_name)
                     if os.path.exists(file_loc):
-                        ts_file      = open(file_loc, 'a')
+                        ts_file = open(file_loc, 'a')
                     else:
-                        ts_file      = open(file_loc, 'w')
+                        ts_file = open(file_loc, 'w')
 
                         ts_file.write(",,,%s\n"%','.join(col_names))
                     if not value:
@@ -710,19 +703,19 @@ class CSVExporter(object):
                             ts_dict[timestep].append(val)
 
                     for timestep, val in ts_dict.items():
-                            np_val = array(val)
-                            shape = np_val.shape
-                            n = 1
-                            shape_str = []
-                            for x in shape:
-                                n = n * x
-                                shape_str.append(str(x))
-                            one_dimensional_val = np_val.reshape(1, n)
-                            ts_file.write("%s,%s,%s,%s\n"%
-                                        ( resource_name,
-                                        timestep,
-                                        ' '.join(shape_str),
-                                        ','.join([str(x) for x in one_dimensional_val.tolist()[0]])))
+                        np_val = array(val)
+                        shape = np_val.shape
+                        n = 1
+                        shape_str = []
+                        for x in shape:
+                            n = n * x
+                            shape_str.append(str(x))
+                        one_dimensional_val = np_val.reshape(1, n)
+                        ts_file.write("%s,%s,%s,%s\n"%
+                                      (resource_name,
+                                       timestep,
+                                       ' '.join(shape_str),
+                                       ','.join([str(x) for x in one_dimensional_val.tolist()[0]])))
 
                     ts_file.close()
 
@@ -733,74 +726,3 @@ class CSVExporter(object):
                 return (str(value), metadata)
 
         return ('', '')
-
-
-def commandline_parser():
-    parser = ap.ArgumentParser(
-        description="""Export a network in Hydra to a set of CSV files.
-
-Written by Stephen Knox <s.knox@ucl.ac.uk>
-(c) Copyright 2013, University College London.
-(c) Copyright 2014, University of Manchester.
-        """, epilog="For more information visit www.hydraplatform.org",
-        formatter_class=ap.RawDescriptionHelpFormatter)
-    parser.add_argument('-t', '--network-id',
-                        help='''Specify the network_id of the network to be exported.
-                        If the network_id is not known, specify the network name. In
-                        this case, a project ID must also be provided''')
-    parser.add_argument('-s', '--scenario-id',
-                        help='''Specify the ID of the scenario to be exported. If no
-                        scenario is specified, all scenarios in the network will be
-                        exported.
-                        ''')
-    parser.add_argument('-o', '--output-folder',
-                        help='''Specify the ID of the scenario to be exported. If no
-                        scenario is specified, all scenarios in the network will be
-                        exported.
-                        ''')
-    parser.add_argument('-z', '--timezone',
-                        help='''Specify a timezone as a string following the
-                        Area/Location pattern (e.g. Europe/London). This
-                        timezone will be used for all timeseries data that is
-                        imported. If you don't specify a timezone, it defaults
-                        to UTC.''')
-    parser.add_argument('-u', '--server-url',
-                        help='''Specify the URL of the server to which this
-                        plug-in connects.''')
-    parser.add_argument('-c', '--session_id',
-                        help='''Session ID. If this does not exist, a login will be
-                        attempted based on details in config.''')
-    return parser
-
-
-if __name__ == '__main__':
-    parser = commandline_parser()
-    args = parser.parse_args()
-    csv = ExportCSV(url=args.server_url, session_id=args.session_id)
-    try:
-        write_progress(1, csv.num_steps)
-        validate_plugin_xml(os.path.join(__location__, 'plugin.xml'))
-
-
-        if args.timezone is not None:
-            csv.timezone = pytz.timezone(args.timezone)
-
-        csv.export(args.network_id, args.scenario_id, args.output_folder)
-        message = "Export complete"
-    except HydraPluginError as e:
-        message="An error has occurred"
-        errors = [e.message]
-        log.exception(e)
-    except Exception as e:
-        message="An error has occurred"
-        log.exception(e)
-        errors = [e]
-
-    xml_response = create_xml_response('ExportCSV',
-                                       args.network_id,
-                                       [],
-                                       csv.errors,
-                                       csv.warnings,
-                                       message,
-                                       csv.files)
-    print(xml_response)
