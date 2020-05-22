@@ -76,6 +76,8 @@ class CSVExporter(object):
 
         self.num_steps = 7
 
+        self.data_processor = None
+
     def export(self, network_id, scenario_id, output_folder):
 
         """
@@ -168,6 +170,8 @@ class CSVExporter(object):
 
         if not os.path.exists(scenario.target_dir):
             os.mkdir(scenario.target_dir)
+
+        self.data_processor = data.DataProcessor(target_dir=scenario.target_dir)
 
         network_file = open(os.path.join(scenario.target_dir, "network.csv"), 'w')
 
@@ -670,11 +674,10 @@ class CSVExporter(object):
         rs = self.rs_reverse_lookup[scenario.id].get(resource_attr.id)
 
         if rs is not None and rs.dataset is not None and rs.dataset.type is not None:
-            value, metadata = data.process_dataset(rs.dataset,
-                                                   attr_name,
-                                                   resource_name,
-                                                   resource_attr.ref_key,
-                                                   scenario.target_dir)
+            value, metadata = self.data_processor.process_dataset(rs.dataset,
+                                                                  attr_name,
+                                                                  resource_name,
+                                                                  resource_attr.ref_key)
 
         if rs and rs.dataset and rs.dataset.metadata:
             metadata = rs.dataset.metadata
