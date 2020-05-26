@@ -93,3 +93,23 @@ def export_csv(obj, data_dir, network_id, scenario_id, user_id):
 
 
     click.echo(f'Successfully exported Network ID: {network_id}, Scenario ID: {scenario_id}')
+
+@hydra_app(category='import-template', name='Import Template')
+@cli.command(name='import-template', context_settings=dict(
+    ignore_unknown_options=True,
+    allow_extra_args=True))
+@click.pass_obj
+@click.option('--filename', '-f', type=click.Path(file_okay=True, dir_okay=False, exists=True))
+@click.option('-u', '--user-id', type=int, default=None)
+def import_template(obj, filename, user_id, *args):
+
+    """ Import a Hydra network from CSV files """
+    click.echo(f'Beginning import of "{filename}"!')
+
+    client = get_logged_in_client(obj, user_id=user_id)
+
+    with open(filename, 'r') as xmlfile:
+        content = '\n'.join(xmlfile.readlines())
+        template = client.import_template_xml(content)
+
+    click.echo(f'Successfully imported "{filename}"! Template ID: {template.id}')
