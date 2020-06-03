@@ -6,12 +6,16 @@ import os
 import json
 import logging
 from numpy import array
+import pandas as pd
 
 LOG = logging.getLogger(__name__)
 
 class DataProcessor(object):
     def __init__(self, target_dir):
         self.target_dir = target_dir
+
+        #keeps track of the ordering of column names
+        self.col_names = {}
 
     def process_dataset(self, dataset, attribute_name, resource_name,
                         resource_ref_key):
@@ -109,10 +113,19 @@ class DataProcessor(object):
         file_loc = os.path.join(self.target_dir, file_name)
         if os.path.exists(file_loc):
             ts_file = open(file_loc, 'a')
+            if self.col_names[file_name] != col_names:
+                #rearrange the dataframe to match
+                new_df = {}
+                for colname in self.col_names[file_name]:
+                    new_df[colname] = value[colname]
+                value = new_df
         else:
             ts_file = open(file_loc, 'w')
 
             ts_file.write("name,index,shape,%s\n"%','.join(col_names))
+
+            self.col_names[file_name] = col_names
+
 
         timestamps = value[col_names[0]].keys()
         ts_dict = {}
