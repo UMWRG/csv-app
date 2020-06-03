@@ -29,6 +29,8 @@ from hydra_base.util import config, hydra_dateutil
 
 from .csv_util import validate_value
 
+import hydra_pywr_common
+
 
 global seasonal_key
 seasonal_key = None
@@ -46,7 +48,7 @@ def create_dataset(value,
                    restriction_dict,
                    expand_filenames,
                    basepath,
-                   file_dict,
+                   file_dict, #stores files in memory to avoid re-reading them
                    default_name,
                    timezone,
                   ):
@@ -63,7 +65,6 @@ def create_dataset(value,
     else:
         dataset_name = 'Import CSV data'
 
-
     dataset = dict(
         id=None,
         type=None,
@@ -77,7 +78,6 @@ def create_dataset(value,
     resourcescenario['attr_id'] = resource_attr['attr_id']
     resourcescenario['resource_attr_id'] = resource_attr['id']
 
-    value = value
     data_columns = None
     try:
         float(value)
@@ -87,72 +87,23 @@ def create_dataset(value,
     except ValueError:
         #Check if it's an array or timeseries by first seeing if the value points
         #to a valid file.
-        value = value.replace('\\', '/')
-        try:
-            filedata = []
-            if expand_filenames:
-                full_file_path = os.path.join(basepath, value)
-                if file_dict.get(full_file_path) is None:
-                    with open(full_file_path) as f:
-                        filedata = []
-                        for l in f:
-                            l = re.sub('\s*,\s*', ',', l)
-                            l = re.sub('^ *', '', l)
-                            l = re.sub(' *$', '', l)
-                            l = l.replace('\n', '').replace('\r', '').split(',')
-                            filedata.append(l)
-                        file_dict[full_file_path] = filedata
-                else:
-                    filedata = file_dict[full_file_path]
+        if expand_filenames:
+            value = value.replace('\\', os.sep)
+            full_file_path = os.path.join(basepath, value)
+            if os.path.exists(full_file_path):
+                data_type, file_value = get_data_from_file(full_file_path,
+                                                           resource_name,
+                                                           restriction_dict,
+                                                           timezone,
+                                                           file_dict)
+                dataset['type'] = data_type
+                dataset['value'] = file_value
 
-
-
-                #The name of the resource is how to identify the data for it.
-                #Once this the correct line(s) has been identified, remove the
-                #name from the start of the line
-                data = []
-                for l in filedata:
-
-                    l_resource_name = l[0]
-                    if l_resource_name == resource_name:
-                        data.append(l[1:])
-
-                if len(data) == 0:
-                    log.info('%s: No data found in file %s' %
-                                 (resource_name, value))
-                    raise HydraPluginError('%s: No data found in file %s' %
-                                         (resource_name, value))
-                else:
-                    if is_timeseries(data):
-                        data_columns = get_data_columns(filedata)
-
-                        ts = create_timeseries( data,
-                                                restriction_dict=restriction_dict,
-                                                data_columns=data_columns,
-                                                filename=value,
-                                                timezone=timezone)
-
-                        dataset['type'] = 'timeseries'
-                        dataset['value'] = ts
-                    else:
-                        dataset['type'] = 'array'
-                        if len(filedata) > 0:
-                            try:
-                                dataset['value'] = create_array(data[0], restriction_dict)
-                            except Exception as e:
-                                log.exception(e)
-                                raise HydraPluginError("There is a value "
-                                                       "error in %s. "
-                                                       "Please check value"
-                                                       " %s is correct."%(value, data[0]))
-                        else:
-                            dataset['value'] = None
-            else:
-                raise IOError
-        except IOError as e:
-            dataset['type'] = 'descriptor'
-            desc = create_descriptor(value, restriction_dict)
-            dataset['value'] = desc
+    if dataset['value'] is None:
+        #still null, so default to descriptor
+        dataset['type'] = 'descriptor'
+        desc = create_descriptor(value, restriction_dict)
+        dataset['value'] = desc
 
     if unit_id is not None:
         dataset['unit_id'] = unit_id
@@ -161,19 +112,101 @@ def create_dataset(value,
 
     resourcescenario['dataset'] = dataset
 
-    m = {}
-
-    if metadata:
-        m = metadata
-
     if data_columns:
-        m['data_struct'] = '|'.join(data_columns)
+        metadata['data_struct'] = '|'.join(data_columns)
 
-    m = json.dumps(m)
-
-    dataset['metadata'] = m
+    dataset['metadata'] = json.dumps(metadata)
 
     return resourcescenario
+
+def _get_nd_array(numpyarray, shape):
+    #Numpy arrays have int64 values, which are not JSON compatible,
+    #so we iterate through the array to convert any int64 values to floats
+    array_with_floats = []
+    if isinstance(numpyarray[0], np.ndarray) and len(numpyarray) == 1:
+        numpyarray = numpyarray[0]
+
+    for a in numpyarray:
+        if isinstance(a, np.int64):
+            array_with_floats.append(float(a))
+        else:
+            array_with_floats.append(a)
+    np_array_with_floats = np.reshape(array_with_floats, shape)
+    value = json.dumps(np_array_with_floats.tolist())
+
+    return value
+
+def _get_shape_as_list(df_shape):
+    """
+    get a shape in the form '1 2' or '1.0 2.0' and return [1, 2]
+    """
+    #Here we assume that ALL the values for a particular node have the
+    #same shape, so we just pick the first one.
+    shape_array = df_shape.values[0].split(" ")
+    #now make the values integers
+    shape_array = [int(float(i)) for i in shape_array]
+
+    return shape_array
+
+def get_data_from_file(filepath, resource_name, restriction_dict, timezone, file_dict):
+    value = None
+    data_type = None
+    #First check if it's an unknown value (a json file)
+    if is_unknown_value(filepath):
+        data_type, value = read_json_data(filepath, resource_name=None, attr_name=None)
+    else:
+        #avoid constantly re-opening the same csv file
+        if file_dict.get(filepath) is not None:
+            df = file_dict['filepath']
+            #remove whitespace from the index
+        else:
+            df = pd.read_csv(filepath, index_col=0, skipinitialspace=True, parse_dates=True, comment='#')
+            file_dict['filepath'] = df
+            df.index = [i.strip() if isinstance(i, str) else i for i in df.index ]
+
+        #Get all the rows wwhere the index is the resource name
+        resource_df = df.loc[resource_name]
+
+        #If pandas makeds the value a series, convert it back into a dataframe
+        if isinstance(resource_df, pd.Series):
+            resource_df = resource_df.to_frame().T
+
+        if 'index' in resource_df.columns:
+            resource_df = resource_df.set_index(['index'])
+
+        #shape is used to allow csv to store multi-dimensional arrays
+        df_shape = resource_df.get('shape').astype(str)
+        shape_array = None
+        if df_shape is not None:
+            shape_array = _get_shape_as_list(df_shape)
+            del resource_df['shape']
+
+        if 'index' not in resource_df.columns and resource_df.index.name != 'index':
+            data_type = 'array'
+            if df_shape is not None:
+                value = _get_nd_array(resource_df.values, shape_array)
+
+        #todo, figure out how to reshape the data here...
+        elif isinstance(resource_df.index, pd.DatetimeIndex) or 'XXXX' in resource_df.index[0]:
+            if 'XXXX' in resource_df.index[0]:
+                resource_df.index = [i.replace('XXXX', '9999') for i in resource_df.index]
+            data_type = 'timeseries'
+        else:
+            data_type = 'dataframe'
+            #try to turn the index into an int-based index instead of decimal if possible
+            try:
+                resource_df.index = resource_df.astype(int)
+            except:
+                pass
+
+        if value is None:
+            value = resource_df.to_json()
+
+
+        validate_value(value, restriction_dict)
+
+    return data_type, value
+
 
 def create_scalar(value, restriction_dict={}):
     """
@@ -191,14 +224,15 @@ def create_descriptor(value, restriction_dict={}):
     descriptor = value
     return descriptor
 
-def create_timeseries(data, restriction_dict={}, data_columns=None, filename="", timezone=pytz.utc):
+def create_timeseries(data, restriction_dict={}, data_columns=None,
+                      filename="", timezone=pytz.utc):
     if len(data) == 0:
         return None
 
     if data_columns is not None:
         col_headings = data_columns
     else:
-        col_headings =[str(idx) for idx in range(len(data[0][2:]))]
+        col_headings = [str(idx) for idx in range(len(data[0][2:]))]
 
     date = data[0][0]
     global time_formats
@@ -229,9 +263,9 @@ def create_timeseries(data, restriction_dict={}, data_columns=None, filename="",
 
         if ts_time in ts_times:
             raise HydraPluginError("A duplicate time %s has been found "
-                                   "in %s where the value = %s)"%( ts_time,
-                                                      filename,
-                                                     dataset[2:]))
+                                   "in %s where the value = %s)"%(ts_time,
+                                                                  filename,
+                                                                  dataset[2:]))
         else:
             ts_times.append(ts_time)
 
@@ -347,3 +381,56 @@ def get_data_columns(filedata):
         data_columns = None
 
     return data_columns
+
+def is_unknown_value(filepath):
+    """
+        Check if this refers to a file which contains some 'unknown data'. That is
+        to say, check it is a JSON file.
+    """
+    #TODO: Make this more robust but not by loading the json for EVERY file???
+    return filepath.endswith('.json')
+
+def read_json_data(filepath, resource_name=None, attr_name=None):
+    """
+        Read the data from a given json file. If a resource name and resource type
+        are provided, it assumes data for multiple nodes are contained in the file
+        and uses {resource_name}<>{resource_key} to access the data for the correct resource.
+        If they are None (the default) then it assumes there is only data for 1 resource, and
+        accesses the data at index [0]
+        Args:
+            filename: The FULL path to the data file
+            resource_name: Node / Link / Group / Network Name
+            attr_name: The name of the attribute
+        Returns:
+            A dataset with a data type as specified in the json, and the data value
+            as speficied in the json
+        Raises:
+            HydraPluginError if the file or data cannot be found.
+    """
+    if not os.path.exists(filepath):
+        raise HydraPluginError(f"Unable to read JSON file. File {filepath} does not exist.")
+
+    filename = filepath.split(os.sep)[-1]
+
+    json_data = {}
+    with open(filepath, 'r') as json_file:
+        json_data = json.load(json_file)
+
+    if len(json_data) == 0:
+        raise HydraPluginError(f"No data found in file {filename}")
+
+    hydra_data_type = None
+    value_json = None
+    #By default just get the first value in the file
+    data_to_process = list(json_data.values())[0]
+    #if we have a resource and attribute name, look for that specific data
+    if resource_name is not None and attr_name is not None:
+        data_to_process = json_data.get(f'{resource_name}<>{attr_name}')
+        if data_to_process is None:
+            raise HydraPluginError(f"Unable to get the data for "
+                                   f"{resource_name}<>{attr_name} in file {filename}")
+
+    hydra_data_type = data_to_process.get('data_type')
+    value_json = data_to_process.get('data')
+
+    return hydra_data_type, json.dumps(value_json)

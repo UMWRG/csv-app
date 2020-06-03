@@ -181,7 +181,7 @@ class CSVExporter(object):
         if len(network_attributes) > 0:
             network_attributes_string = ',%s'%(','.join(network_attributes.values()))
 
-        network_heading = "ID, Name, Type, Nodes, Links, Groups, Rules%s, Description\n" % (network_attributes_string)
+        network_heading = "ID, Name, Type, Projection, Nodes, Links, Groups, Rules%s, Description\n" % (network_attributes_string)
         metadata_heading = "Name %s\n"%(network_attributes_string)
 
         network_attr_units = []
@@ -189,7 +189,7 @@ class CSVExporter(object):
             network_attr_units.append(self.get_attr_unit(scenario, attr_id, attr_name))
 
 
-        network_units_heading = "Units,,,,,,,,,,%s\n"%(','.join(network_attr_units))
+        network_units_heading = "Units,,,,,,,,,,,%s\n"%(','.join(network_attr_units))
 
         values = ["" for attr_id in network_attributes]
         metadata_placeholder = ["" for attr_id in network_attributes]
@@ -213,6 +213,7 @@ class CSVExporter(object):
             "id"          : network.id,
             "name"        : network.name,
             "type"        : net_type,
+            "projection"  : network.projection,
             "nodes"       : "",
             "links"       : "",
             "groups"      : "",
@@ -251,7 +252,7 @@ class CSVExporter(object):
         if len(rules) > 0:
             network_data['rules'] = "rules.csv"
 
-        network_entry = "%(id)s,%(name)s,%(type)s,%(nodes)s,%(links)s,%(groups)s,%(rules)s%(values)s,%(description)s\n"%network_data
+        network_entry = "%(id)s,%(name)s,%(type)s,%(projection)s,%(nodes)s,%(links)s,%(groups)s,%(rules)s%(values)s,%(description)s\n"%network_data
 
         if scenario.get('start_time') is not None and \
             scenario.get('end_time') is not None and\
@@ -260,7 +261,7 @@ class CSVExporter(object):
             network_data['starttime'] = scenario.start_time
             network_data['endtime'] = scenario.end_time
             network_data['timestep'] = scenario.time_step
-            network_entry = "%(id)s,%(name)s,%(type)s,%(nodes)s,%(links)s,%(groups)s,%(rules)s,%(starttime)s,%(endtime)s,%(timestep)s%(values)s,%(description)s\n"%network_data
+            network_entry = "%(id)s,%(name)s,%(type)s,%(projection)s,%(nodes)s,%(links)s,%(groups)s,%(rules)s,%(starttime)s,%(endtime)s,%(timestep)s%(values)s,%(description)s\n"%network_data
 
 
         LOG.info("Exporting network metadata")

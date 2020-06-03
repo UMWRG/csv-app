@@ -115,12 +115,15 @@ def parse_unit(unit):
     except ValueError:
         return unit, 1.0
 
-def get_scenario_times(dataset):
+def get_scenario_times(rs):
     """
         Given a timeseries, get the start_time, end_time and time step of a scenario
     """
-    ts = json.loads(dataset['value']['value'])
-    times = sorted(ts[ts.keys()[0]].keys())
+    ts = json.loads(rs['dataset']['value'])
+    times = list(list(ts.values())[0].keys())
+
+    if '9999' in times[0] or 'XXXX' in times[0]:
+        return '', '', ''
 
     start_time = get_datetime(times[0])
     second_time = get_datetime(times[1])

@@ -112,7 +112,7 @@ class DataProcessor(object):
         else:
             ts_file = open(file_loc, 'w')
 
-            ts_file.write(",,,%s\n"%','.join(col_names))
+            ts_file.write("name,index,shape,%s\n"%','.join(col_names))
 
         timestamps = value[col_names[0]].keys()
         ts_dict = {}

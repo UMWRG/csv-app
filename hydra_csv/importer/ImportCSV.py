@@ -121,7 +121,7 @@ class CSVImporter(object):
                     scenario_name=None,
                     ignore_filenames=False):
 
-        self.expand_filenames = ignore_filenames
+        self.expand_filenames = ignore_filenames is False
 
         scen_ids = []
         errors = []
@@ -134,7 +134,9 @@ class CSVImporter(object):
             write_progress(2, self.num_steps)
             self.create_project(ID=project_id, network_id=network_id)
             self.create_scenario(name=scenario_name)
-            self.create_network(file=filename, network_id=network_id)
+            self.create_network(file=filename,
+                                network_id=network_id,
+                                template_id=template_id)
 
             write_progress(3,self.num_steps)
             for nodefile in self.node_args:
@@ -294,7 +296,7 @@ class CSVImporter(object):
         self.Scenario['end_time']   = self.end_time
         self.Scenario['time_step']  = self.timestep
 
-    def create_network(self, file=None, network_id=None):
+    def create_network(self, file=None, network_id=None, template_id=None):
         log.info("Reading network data.")
 
         if file is not None:
@@ -358,16 +360,22 @@ class CSVImporter(object):
 
             if field_idx['type'] is not None:
                 self.networktype = data[field_idx['type']].strip()
+                if template_id is None:
+                    raise HydraPluginError(f"A type of '{self.networktype}' is "
+                                           "specified on the network,"
+                                           " but no template ID specified. "
+                                           "Please Specify a template.")
+
 
             #Identify the node, link and group files to import
             #Remove trailing white space and trailing ';', which can cause issues.
-            self.node_args  = data[field_idx['nodes']].strip().strip(';').split(';')
+            self.node_args = data[field_idx['nodes']].strip().strip(';').split(';')
             if 'links' in lower_keys:
-                self.link_args  = data[field_idx['links']].strip().strip(';').split(';')
+                self.link_args = data[field_idx['links']].strip().strip(';').split(';')
             if 'groups' in lower_keys:
                 self.group_args = data[field_idx['groups']].strip().strip(';').split(';')
             if 'rules' in lower_keys:
-                rules  = data[field_idx['rules']].strip().strip(';')
+                rules = data[field_idx['rules']].strip().strip(';')
                 if rules != "":
                     self.rule_args = [os.path.join(self.basepath, f) for f in rules.split(';')]
 
