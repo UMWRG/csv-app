@@ -187,7 +187,9 @@ def get_data_from_file(filepath, resource_name, restriction_dict, timezone, file
                 value = _get_nd_array(resource_df.values, shape_array)
 
         #todo, figure out how to reshape the data here...
-        elif isinstance(resource_df.index, pd.DatetimeIndex) or 'XXXX' in resource_df.index[0]:
+        elif isinstance(resource_df.index, pd.DatetimeIndex) or \
+            'XXXX' in str(resource_df.index[0]):
+            
             if 'XXXX' in resource_df.index[0]:
                 resource_df.index = [i.replace('XXXX', '9999') for i in resource_df.index]
             data_type = 'timeseries'
