@@ -109,8 +109,17 @@ class DataProcessor(object):
                       attr_name, resource_name)
 
         col_names = list(value.keys())
+
+        relative_data_path = os.path.join('data', f'{resource_ref_key}')
+        full_data_path = os.path.join(self.target_dir, relative_data_path)
+        if not os.path.exists(full_data_path):
+            os.makedirs(full_data_path)
+
         file_name = "%s_%s_%s.csv"%(data_type, resource_ref_key, attr_name)
-        file_loc = os.path.join(self.target_dir, file_name)
+
+        relative_filepath = os.path.join(relative_data_path, file_name)
+
+        file_loc = os.path.join(self.target_dir, relative_filepath)
         if os.path.exists(file_loc):
             ts_file = open(file_loc, 'a')
             if self.col_names[file_name] != col_names:
@@ -146,7 +155,7 @@ class DataProcessor(object):
 
         ts_file.close()
 
-        return file_name
+        return relative_filepath
 
     def process_unknown_value(self, value, attr_name, resource_name,
                               resource_ref_key, data_type):
