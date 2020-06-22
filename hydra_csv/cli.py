@@ -1,14 +1,21 @@
 import click
 import json
 import os
-from hydra_client.connection import JSONConnection
+from hydra_client.connection import JSONConnection, RemoteJSONConnection
 from hydra_client.click import hydra_app, make_plugins, write_plugins
 from .importer import CSVImporter
 from .exporter import CSVExporter
 
 
-def get_client(hostname, **kwargs):
-    return JSONConnection(app_name='Hydra CSV App', db_url=hostname, **kwargs)
+def get_client(hostname, session_id=None, **kwargs):
+    if hostname is not None and hostname.startswith('http'):
+        return RemoteJSONConnection(app_name='Hydra CSV App',
+                                    url=hostname,
+                                    session_id=session_id)
+    else:
+        return JSONConnection(app_name='Hydra CSV App',
+                              db_url=hostname,
+                              **kwargs)
 
 
 def get_logged_in_client(context, user_id=None):

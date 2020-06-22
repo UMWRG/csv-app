@@ -93,7 +93,7 @@ class CSVExporter(object):
             try:
                 network_id = int(network_id)
                 st_time = time.time()
-                network = self.client.get_network(network_id)
+                network = self.client.get_network(network_id=network_id)
                 LOG.info("Network retrieved in %s", time.time()-st_time)
             except:
                 raise HydraPluginError("Network %s not found."%network_id)
@@ -130,7 +130,7 @@ class CSVExporter(object):
             for scenario in network.scenarios:
                 if int(scenario.id) == int(scenario_id):
                     LOG.info("Exporting Scenario %s",scenario.name)
-                    scenario_with_data = self.get_scenario(scenario.id)
+                    scenario_with_data = self.get_scenario(scenario_id=scenario.id)
                     LOG.info("Scenario retrieved. Starting export")
                     self.export_network(network, scenario_with_data)
                     break
@@ -140,7 +140,7 @@ class CSVExporter(object):
             LOG.info("No Scenario specified, exporting them all!")
             for scenario in network.scenarios:
                 LOG.info("Exporting Scenario %s",scenario.name)
-                scenario_with_data = self.get_scenario(scenario.id)
+                scenario_with_data = self.get_scenario(scenario_id=scenario.id)
                 self.export_network(network, scenario_with_data)
 
         self.files.append(network_dir)
@@ -153,7 +153,7 @@ class CSVExporter(object):
                 scenario = JSONObject(json.load(cache_file))
         else:
             LOG.info('No scenario cache file found. Getting from Hydra.')
-            scenario = self.client.get_scenario(scenario_id)
+            scenario = self.client.get_scenario(scenario_id=scenario_id)
             with open(cache_filepath, 'w') as cache_file:
                 json.dump(scenario, cache_file)
         return scenario
@@ -513,7 +513,7 @@ class CSVExporter(object):
         write_output("Exporting rules.")
         LOG.info("\n************RULES****************")
 
-        rules = self.client.get_network_rules(scenario.network_id)
+        rules = self.client.get_network_rules(network_id=scenario.network_id)
 
         if rules in (None, '') or len(rules) == 0:
             return []
