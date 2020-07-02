@@ -1249,11 +1249,11 @@ class CSVImporter(object):
         log.info("Network created for sending")
 
         if self.update_network_flag:
-            self.NetworkSummary = self.client.update_network(network=JSONObject(self.Network))
+            self.NetworkSummary = self.client.update_network(net =JSONObject(self.Network))
             log.info("Network %s updated.", self.Network['id'])
         else:
             log.info("Adding Network")
-            self.NetworkSummary = self.client.add_network(network=JSONObject(self.Network))
+            self.NetworkSummary = self.client.add_network(net=JSONObject(self.Network))
             log.info("Network created with %s nodes and %s links. Network ID is %s",
                      len(self.NetworkSummary['nodes']),
                      len(self.NetworkSummary['links']),
