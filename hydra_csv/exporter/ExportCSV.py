@@ -93,7 +93,7 @@ class CSVExporter(object):
             try:
                 network_id = int(network_id)
                 st_time = time.time()
-                network = self.client.get_network(network_id=network_id)
+                network = self.client.get_network(network_id=network_id, include_attributes='Y')
                 LOG.info("Network retrieved in %s", time.time()-st_time)
             except:
                 raise HydraPluginError("Network %s not found."%network_id)
@@ -153,7 +153,7 @@ class CSVExporter(object):
                 scenario = JSONObject(json.load(cache_file))
         else:
             LOG.info('No scenario cache file found. Getting from Hydra.')
-            scenario = self.client.get_scenario(scenario_id=scenario_id)
+            scenario = self.client.get_scenario(scenario_id=scenario_id, include_data='Y')
             with open(cache_filepath, 'w') as cache_file:
                 json.dump(scenario, cache_file)
         return scenario
