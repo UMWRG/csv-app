@@ -202,6 +202,7 @@ class CSVExporter(object):
                 values[idx] = value
                 metadata_placeholder[idx] = metadata
 
+
         if network.types is not None and len(network.types) > 0:
             net_type = network.types[0]['name']
         else:
@@ -568,6 +569,9 @@ class CSVExporter(object):
                         metadata_vals.append("")
                     else:
                         metadata_text = []
+                        # If metadata_dict is a string, convert to a dict
+                        if isinstance(metadata_dict, str):
+                            metadata_dict = json.loads(metadata_dict)
                         for k, v in metadata_dict.items():
                             metadata_text.append("(%s;%s)"%(k,v))
                         metadata_vals.append("".join(metadata_text))
