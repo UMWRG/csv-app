@@ -55,7 +55,7 @@ def cli(obj, username, password, hostname, session):
 @click.option('--template-id', '-t', type=int)
 @click.option('-u', '--user-id', type=int, default=None)
 @click.option('-n', '--network-id', type=int)
-@click.option('-s', '--scenario-name', type=int, default=None)
+@click.option('-s', '--scenario-name', type=str, default=None)
 @click.option('--timezone', '-z', type=str, default=None)
 @click.option('--ignore-filenames', default=False)
 def import_csv(obj, filename, project_id, template_id, user_id,
