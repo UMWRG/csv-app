@@ -78,7 +78,7 @@ class CSVExporter(object):
 
         self.data_processor = None
 
-    def export(self, network_id, scenario_id, output_folder):
+    def export(self, network_id, scenario_id, output_folder, include_results):
 
         """
             Export a network (and possibly a scenario) to a folder. If the
@@ -93,7 +93,7 @@ class CSVExporter(object):
             try:
                 network_id = int(network_id)
                 st_time = time.time()
-                network = self.client.get_network(network_id=network_id, include_attributes='Y')
+                network = self.client.get_network(network_id=network_id, include_attributes='Y', include_results='N')
                 LOG.info("Network retrieved in %s", time.time()-st_time)
             except:
                 raise HydraPluginError("Network %s not found."%network_id)
@@ -201,6 +201,7 @@ class CSVExporter(object):
                 idx = list(network_attributes.keys()).index(r_attr.attr_id)
                 values[idx] = value
                 metadata_placeholder[idx] = metadata
+
 
         if network.types is not None and len(network.types) > 0:
             net_type = network.types[0]['name']
@@ -568,6 +569,9 @@ class CSVExporter(object):
                         metadata_vals.append("")
                     else:
                         metadata_text = []
+                        # If metadata_dict is a string, convert to a dict
+                        if isinstance(metadata_dict, str):
+                            metadata_dict = json.loads(metadata_dict)
                         for k, v in metadata_dict.items():
                             metadata_text.append("(%s;%s)"%(k,v))
                         metadata_vals.append("".join(metadata_text))

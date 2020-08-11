@@ -55,7 +55,7 @@ def cli(obj, username, password, hostname, session):
 @click.option('--template-id', '-t', type=int)
 @click.option('-u', '--user-id', type=int, default=None)
 @click.option('-n', '--network-id', type=int)
-@click.option('-s', '--scenario-name', type=int, default=None)
+@click.option('-s', '--scenario-name', type=str, default=None)
 @click.option('--timezone', '-z', type=str, default=None)
 @click.option('--ignore-filenames', default=False)
 def import_csv(obj, filename, project_id, template_id, user_id,
@@ -83,20 +83,30 @@ def import_csv(obj, filename, project_id, template_id, user_id,
     ignore_unknown_options=True,
     allow_extra_args=True))
 @click.pass_obj
-@click.option('--data-dir', default='/tmp')
+@click.option('-d', '--data-dir', type=click.Path(exists=False), envvar='EXPORT_PATH', default=None)
 @click.option('-n', '--network-id', type=int, default=None)
 @click.option('-s', '--scenario-id', type=int, default=None)
 @click.option('-u', '--user-id', type=int, default=None)
-def export_csv(obj, data_dir, network_id, scenario_id, user_id):
+@click.option('--include-results', is_flag=True)
+def export_csv(obj, data_dir, network_id, scenario_id, user_id, include_results):
     """ Export a Hydra to CSV files. """
     client = get_logged_in_client(obj, user_id=user_id)
 
     exporter = CSVExporter(client)
 
-    if data_dir is None:
+    if not data_dir or data_dir is None:
         data_dir = os.path.join('/tmp', str(network_id))
+        try:
+            os.mkdir(data_dir)
+        except FileExistsError:
+            pass
 
-    exporter.export(network_id, scenario_id, data_dir)
+    if include_results:
+        include_results = 'Y'
+    else:
+        include_results = 'N'
+
+    exporter.export(network_id, scenario_id, data_dir, include_results)
 
 
     click.echo(f'Successfully exported Network ID: {network_id}, Scenario ID: {scenario_id}')
