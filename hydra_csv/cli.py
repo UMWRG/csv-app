@@ -88,7 +88,8 @@ def import_csv(obj, filename, project_id, template_id, user_id,
 @click.option('-s', '--scenario-id', type=int, default=None)
 @click.option('-u', '--user-id', type=int, default=None)
 @click.option('--include-results', is_flag=True)
-def export_csv(obj, data_dir, network_id, scenario_id, user_id, include_results):
+@click.option('--use-cache', is_flag=True)
+def export_csv(obj, data_dir, network_id, scenario_id, user_id, include_results, use_cache):
     """ Export a Hydra to CSV files. """
     client = get_logged_in_client(obj, user_id=user_id)
 
@@ -106,7 +107,7 @@ def export_csv(obj, data_dir, network_id, scenario_id, user_id, include_results)
     else:
         include_results = 'N'
 
-    exporter.export(network_id, scenario_id, data_dir, include_results)
+    exporter.export(network_id, scenario_id, data_dir, include_results, use_cache)
 
 
     click.echo(f'Successfully exported Network ID: {network_id}, Scenario ID: {scenario_id}')

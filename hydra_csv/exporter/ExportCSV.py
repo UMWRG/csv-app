@@ -78,7 +78,7 @@ class CSVExporter(object):
 
         self.data_processor = None
 
-    def export(self, network_id, scenario_id, output_folder, include_results):
+    def export(self, network_id, scenario_id, output_folder, include_results, use_cache):
 
         """
             Export a network (and possibly a scenario) to a folder. If the
@@ -93,7 +93,7 @@ class CSVExporter(object):
             try:
                 network_id = int(network_id)
                 st_time = time.time()
-                network = self.client.get_network(network_id=network_id, include_attributes='Y', include_results='N')
+                network = self.client.get_network(network_id=network_id, include_attributes='Y', include_data='N')
                 LOG.info("Network retrieved in %s", time.time()-st_time)
             except:
                 raise HydraPluginError("Network %s not found."%network_id)
@@ -130,7 +130,9 @@ class CSVExporter(object):
             for scenario in network.scenarios:
                 if int(scenario.id) == int(scenario_id):
                     LOG.info("Exporting Scenario %s",scenario.name)
-                    scenario_with_data = self.get_scenario(scenario_id=scenario.id)
+                    scenario_with_data = self.get_scenario(scenario_id=scenario.id, include_results=include_results, use_cache=use_cache)
+                    LOG.critical(len(scenario_with_data.resourcescenarios))
+
                     LOG.info("Scenario retrieved. Starting export")
                     self.export_network(network, scenario_with_data)
                     break
@@ -141,19 +143,23 @@ class CSVExporter(object):
             for scenario in network.scenarios:
                 LOG.info("Exporting Scenario %s",scenario.name)
                 scenario_with_data = self.get_scenario(scenario_id=scenario.id)
+                LOG.critical(len(scenario_with_data.resourcescenarios))
                 self.export_network(network, scenario_with_data)
 
         self.files.append(network_dir)
 
-    def get_scenario(self, scenario_id):
+    def get_scenario(self, scenario_id, include_results, use_cache):
         cache_filepath = os.path.join('/tmp', f'scenario_{scenario_id}.json')
-        if os.path.exists(cache_filepath):
+        if use_cache is True and os.path.exists(cache_filepath):
             LOG.info('GETTING SCENARIO FROM CACHE')
             with open(cache_filepath, 'r') as cache_file:
                 scenario = JSONObject(json.load(cache_file))
         else:
             LOG.info('No scenario cache file found. Getting from Hydra.')
-            scenario = self.client.get_scenario(scenario_id=scenario_id, include_data='Y')
+            scenario = self.client.get_scenario(scenario_id=scenario_id,
+                                                include_data='Y',
+                                                include_results=include_results)
+
             with open(cache_filepath, 'w') as cache_file:
                 json.dump(scenario, cache_file)
         return scenario
