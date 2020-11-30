@@ -26,7 +26,7 @@ import sys
 import json
 import time
 import logging
-
+import tempfile
 import pytz
 
 from hydra_client.output import write_progress, \
@@ -149,7 +149,7 @@ class CSVExporter(object):
         self.files.append(network_dir)
 
     def get_scenario(self, scenario_id, include_results, use_cache):
-        cache_filepath = os.path.join('/tmp', f'scenario_{scenario_id}.json')
+        cache_filepath = os.path.join(tempfile.gettempdir(), f'scenario_{scenario_id}.json')
         if use_cache is True and os.path.exists(cache_filepath):
             LOG.info('GETTING SCENARIO FROM CACHE')
             with open(cache_filepath, 'r') as cache_file:
